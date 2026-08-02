@@ -49,8 +49,6 @@ Appropriate for **letters** (`EnvelopeLetter` — break seal / unfold). Strong i
 | Trace the Constellation | Dedication / “us” |
 | Polaroid Lift | Memory / photographs |
 
-Concept art: [`docs/artifacts/birthday-direction-review/concepts/index.html`](../artifacts/birthday-direction-review/concepts/index.html).
-
 ---
 
 ## Milestone plan

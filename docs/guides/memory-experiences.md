@@ -20,7 +20,7 @@ Primary path is **React Three Fiber** (`SnowGlobeScene`), not CSS. CSS `SnowGlob
 | `snow-globe-paris` | Landmark proof — CC-BY Eiffel GLB under amber light |
 | `snow-globe-tree` | Parameterisation proof — Kenney CC0 tree, cool mood |
 
-GLBs live in `apps/memories-web/public/models/snow-globe/` (see `packages/experiences/ATTRIBUTIONS.md`). Visual review artifacts: `docs/artifacts/snow-globe-definitive/`.
+GLBs live in `apps/memories-web/public/models/snow-globe/` (see `packages/experiences/ATTRIBUTIONS.md`).
 
 ## Architecture
 

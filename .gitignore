@@ -28,3 +28,9 @@ playwright-report/
 apps/telemetry/data/
 data/*.sqlite
 *.sqlite
+
+# Local scratch / capture junk
+tmp/
+.tmp/
+tmp-assets/
+.bin/

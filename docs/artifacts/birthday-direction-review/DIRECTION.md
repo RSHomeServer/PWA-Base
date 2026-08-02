@@ -135,11 +135,7 @@ These five should **define** the Birthday application:
 
 ## Deliverable 5 — Concept prototypes
 
-Rough interactive gallery (10 stages):
-
-`docs/artifacts/birthday-direction-review/concepts/index.html`
-
-Open locally in any browser. These are **concept art**, not production components. They exist to compare ritual clarity side-by-side.
+Rough interactive gallery (10 stages) was used during the 2026-07 review to compare ritual clarity side-by-side. The gallery HTML has been removed from the repository; the ranked intent below remains the durable record.
 
 Captured intent per prototype: lantern, candle, letter, constellation trace, polaroid, ribbon, rain wipe, string lights, pressed flower, match.
 
@@ -233,8 +229,7 @@ Only after that lands: implement **Single Candle Wish** or strengthen **Wax Seal
 
 ## Concept Gallery
 
-Open [`concepts/index.html`](./concepts/index.html) in a browser.  
-Artifacts root: `docs/artifacts/birthday-direction-review/`.
+The interactive concept gallery was retired with obsolete review screenshots. This document is the retained creative-direction record.
 
 ---
 
