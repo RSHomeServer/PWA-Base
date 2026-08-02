@@ -1,0 +1,41 @@
+{
+  "name": "@platform/catalog",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Registered site catalog — the only package that depends on site implementations",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "import": "./src/index.ts",
+      "default": "./src/index.ts"
+    },
+    "./loaders": {
+      "types": "./src/loaders.ts",
+      "import": "./src/loaders.ts",
+      "default": "./src/loaders.ts"
+    }
+  },
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "test:unit": "vitest run"
+  },
+  "dependencies": {
+    "@platform/site-birthday": "workspace:*",
+    "@platform/site-browser-lab": "workspace:*",
+    "@platform/site-components": "workspace:*",
+    "@platform/site-dashboard": "workspace:*",
+    "@platform/site-docs": "workspace:*",
+    "@platform/site-memories": "workspace:*",
+    "@platform/site-registry": "workspace:*",
+    "@platform/site-stats": "workspace:*",
+    "@platform/site-viz": "workspace:*"
+  },
+  "devDependencies": {
+    "@platform/config": "workspace:*",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
+  }
+}

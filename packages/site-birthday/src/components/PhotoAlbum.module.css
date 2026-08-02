@@ -1,0 +1,124 @@
+.root {
+  width: min(48rem, 100%);
+  margin: 0 auto;
+  padding: clamp(5.5rem, 12vh, 7rem) clamp(1.25rem, 4vw, 2.5rem) 2.5rem;
+  display: grid;
+  gap: 1.25rem;
+  justify-items: center;
+}
+
+.empty {
+  color: var(--bd-highlight);
+}
+
+.album {
+  position: relative;
+  width: min(100%, 34rem);
+  display: grid;
+  grid-template-columns: 0.7rem 1fr;
+  border-radius: 0.35rem 0.85rem 0.85rem 0.35rem;
+  overflow: hidden;
+  box-shadow: 0 22px 48px rgba(0, 0, 0, 0.45);
+}
+
+.spine {
+  background: linear-gradient(180deg, #7a4a28, #4a2a14);
+}
+
+.page {
+  background:
+    linear-gradient(180deg, #f4efe4, #e8dfd0);
+  padding: clamp(1rem, 3vw, 1.5rem);
+  min-height: min(70vh, 28rem);
+  transition: transform 0.28s var(--bd-ease-ballet, ease), opacity 0.28s ease;
+  transform-origin: left center;
+}
+
+.pageTurn {
+  opacity: 0.35;
+  transform: perspective(900px) rotateY(-12deg);
+}
+
+.frame {
+  margin: 0;
+  display: grid;
+  gap: 0.85rem;
+}
+
+.image {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 0.2rem;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.5),
+    0 10px 24px rgba(70, 45, 20, 0.22);
+  background: #d8cfc0;
+}
+
+.captionBlock {
+  display: grid;
+  gap: 0.25rem;
+  color: #4a3424;
+  font-family: var(--bd-font-body);
+}
+
+.photoTitle {
+  font-family: var(--bd-font-display);
+  font-size: 1.35rem;
+}
+
+.caption {
+  font-style: italic;
+  font-size: 1.05rem;
+  line-height: 1.4;
+  color: #6a5040;
+}
+
+.date,
+.format {
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  color: #8a6a52;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.navBtn {
+  appearance: none;
+  border: 1px solid rgba(255, 210, 150, 0.3);
+  border-radius: 999px;
+  padding: 0.55rem 1.1rem;
+  background: color-mix(in srgb, var(--bd-navy-soft) 70%, transparent);
+  color: var(--bd-ivory);
+  font-family: var(--bd-font-body);
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+.navBtn:hover {
+  border-color: rgba(255, 210, 150, 0.55);
+}
+
+.counter {
+  color: color-mix(in srgb, var(--bd-highlight) 70%, transparent);
+  font-size: 0.95rem;
+  min-width: 4rem;
+  text-align: center;
+}
+
+.attribution {
+  margin: 0;
+  font-size: 0.78rem;
+  color: color-mix(in srgb, var(--bd-highlight) 45%, transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page {
+    transition: none;
+  }
+}

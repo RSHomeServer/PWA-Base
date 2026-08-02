@@ -1,0 +1,39 @@
+.overview {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: var(--space-5);
+  align-items: center;
+  padding: var(--space-4) var(--space-5);
+  margin-bottom: var(--space-5);
+  border: 1px solid var(--lab-border);
+  border-radius: var(--radius-lg);
+  background: var(--lab-bg-deep);
+}
+
+@media (max-width: 48rem) {
+  .overview {
+    grid-template-columns: 1fr;
+  }
+}
+
+.meterWrap {
+  min-width: 16rem;
+}
+
+.persistRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.persistLabel {
+  margin: 0 0 var(--space-1);
+  font-size: var(--font-size-xs);
+  color: var(--lab-muted);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr));
+  gap: var(--space-5);
+}

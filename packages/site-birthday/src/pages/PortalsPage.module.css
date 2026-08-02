@@ -1,0 +1,73 @@
+.page {
+  min-height: 100%;
+  padding: clamp(1.25rem, 4vw, 2.5rem) clamp(1.25rem, 5vw, 3rem) 3rem;
+  background:
+    radial-gradient(ellipse 70% 40% at 50% -8%, var(--bd-navy-soft), transparent 55%),
+    linear-gradient(180deg, var(--bd-navy-mid), var(--bd-navy) 50%, var(--bd-navy-deep));
+  color: var(--bd-highlight);
+  font-family: var(--bd-font-body);
+}
+
+.loadRow {
+  max-width: 36rem;
+  margin-bottom: clamp(1.25rem, 3vw, 2rem);
+}
+
+.hero {
+  max-width: 40rem;
+  margin-bottom: clamp(1.5rem, 4vw, 2.5rem);
+}
+
+.eyebrow {
+  margin: 0 0 0.45rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--bd-gold) 75%, transparent);
+}
+
+.title {
+  margin: 0;
+  font-family: var(--bd-font-display);
+  font-size: clamp(2.1rem, 5vw, 3rem);
+  font-weight: 500;
+  line-height: 1.08;
+  color: var(--bd-ivory);
+}
+
+.subtitle {
+  margin: 0.75rem 0 0;
+  font-size: clamp(1.05rem, 2.2vw, 1.2rem);
+  line-height: 1.4;
+  color: color-mix(in srgb, var(--bd-highlight) 74%, transparent);
+}
+
+.grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(11.5rem, 1fr));
+  gap: 1.1rem;
+  max-width: 56rem;
+}
+
+.footer {
+  margin-top: clamp(2rem, 5vw, 3rem);
+}
+
+.link {
+  font-size: 0.95rem;
+  color: color-mix(in srgb, var(--bd-gold) 85%, transparent);
+  text-decoration: none;
+  border-bottom: 1px solid color-mix(in srgb, var(--bd-gold) 35%, transparent);
+}
+
+.link:hover {
+  color: var(--bd-gold-bright);
+}
+
+.link:focus-visible {
+  outline: 2px solid var(--bd-accent);
+  outline-offset: 3px;
+}

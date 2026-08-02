@@ -1,0 +1,35 @@
+.layout {
+  display: grid;
+  grid-template-columns: minmax(220px, 340px) 1fr;
+  gap: var(--space-6);
+  align-items: start;
+}
+
+@media (max-width: 64rem) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.gauges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-5);
+  justify-content: center;
+  padding: var(--space-5);
+  border: 1px solid var(--lab-border);
+  border-radius: var(--radius-lg);
+  background: var(--lab-bg-deep);
+}
+
+.statsColumn {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.badgeRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}

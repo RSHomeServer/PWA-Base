@@ -1,0 +1,12 @@
+---
+description: Follow root CURSOR.md; report SoT is telemetry RunCompletionSummary
+alwaysApply: true
+---
+
+# Engineering contract
+
+Follow root **`CURSOR.md`** for execution, validation, DoD, developer actions, and task lifecycle.
+
+Completion reports: use structured `RunCompletionSummary` — canonical shape in `apps/telemetry/src/types.ts`, section registry/validation in `apps/telemetry/src/completion-report-contract.ts`. Prefer `PUT /telemetry/api/tasks/:id/completion-summary`. Do not redefine report sections in prompts. Human guide: `docs/guides/run-report-standard.md`.
+
+When UI changes: capture artifacts (`pnpm capture:artifacts`) and describe them in Visual Validation. Markdown is export-only.

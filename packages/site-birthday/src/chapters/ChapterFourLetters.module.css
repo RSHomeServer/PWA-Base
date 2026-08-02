@@ -1,0 +1,18 @@
+.scene {
+  background: linear-gradient(180deg, transparent 0%, rgba(7, 17, 28, 0.5) 50%, transparent 100%);
+}
+
+.desk {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: clamp(1.5rem, 3vw, 2.75rem);
+  max-width: 48rem;
+  margin: 0 auto;
+}
+
+.slot {
+  flex: 1 1 14rem;
+  max-width: 18rem;
+  transform: rotate(var(--offset, 0deg));
+}

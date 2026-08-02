@@ -1,0 +1,40 @@
+# Dependencies and build artifacts
+node_modules
+**/node_modules
+dist
+**/dist
+build
+**/build
+coverage
+
+# Git and editor
+.git
+.gitignore
+.vscode
+.idea
+*.swp
+*.swo
+
+# Environment and secrets
+.env
+.env.*
+
+# Tooling caches
+.turbo
+.eslintcache
+**/*.tsbuildinfo
+
+# Tests (not needed in the runtime image build)
+e2e
+**/__tests__
+**/*.test.*
+**/*.spec.*
+
+# Docker context (avoid recursive copies)
+Dockerfile
+docker-compose.yml
+compose.yaml
+.dockerignore
+
+# Misc
+.DS_Store

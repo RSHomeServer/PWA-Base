@@ -1,0 +1,448 @@
+.stage {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: min(68vh, 40rem);
+  padding: 2.5rem 1rem 3rem;
+  perspective: 1400px;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse 50% 40% at 50% 28%, color-mix(in srgb, var(--mx-brass) 18%, transparent), transparent 65%),
+    radial-gradient(ellipse 70% 50% at 50% 100%, rgba(0, 0, 0, 0.55), transparent 60%),
+    linear-gradient(165deg, #140f0c, #1c1510 50%, #100c0a);
+}
+
+.spotlight {
+  position: absolute;
+  top: 6%;
+  left: 50%;
+  width: 55%;
+  height: 42%;
+  transform: translateX(-50%);
+  background: radial-gradient(ellipse, rgba(255, 220, 170, 0.16), transparent 70%);
+  filter: blur(22px);
+  pointer-events: none;
+}
+
+.tableGlow {
+  position: absolute;
+  bottom: 8%;
+  left: 50%;
+  width: 40%;
+  height: 12%;
+  transform: translateX(-50%);
+  background: radial-gradient(ellipse, rgba(180, 120, 60, 0.22), transparent 70%);
+  filter: blur(18px);
+  pointer-events: none;
+}
+
+.box {
+  position: relative;
+  width: min(23rem, 88vw);
+  transform-style: preserve-3d;
+  transform: rotateX(8deg) rotateY(-6deg);
+  filter: drop-shadow(0 36px 52px rgba(0, 0, 0, 0.58));
+}
+
+.box::before {
+  content: "";
+  position: absolute;
+  inset: 0.2rem -0.35rem 1.1rem auto;
+  width: 0.4rem;
+  border-radius: 0 0.3rem 0.3rem 0;
+  background: linear-gradient(180deg, #3a281c, #1e140e);
+  transform: translateZ(-8px);
+  opacity: 0.85;
+  pointer-events: none;
+}
+
+.key {
+  position: absolute;
+  right: -2rem;
+  top: 48%;
+  z-index: 6;
+  transform-origin: left center;
+}
+
+.key[data-winding="true"] {
+  animation: mx-key-wind 0.7s var(--mx-ease-out, cubic-bezier(0.22, 1, 0.36, 1));
+}
+
+@keyframes mx-key-wind {
+  0% {
+    transform: rotate(0deg);
+  }
+  40% {
+    transform: rotate(120deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.keyStem {
+  display: block;
+  width: 2.1rem;
+  height: 0.32rem;
+  background: linear-gradient(90deg, #e8d09a, var(--mx-brass), #7a5a30);
+  border-radius: 2px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.45);
+}
+
+.keyBow {
+  position: absolute;
+  right: -0.7rem;
+  top: 50%;
+  width: 1.15rem;
+  height: 1.15rem;
+  transform: translateY(-50%);
+  border: 3px solid #d4b87a;
+  border-radius: 50%;
+  box-shadow:
+    inset 0 0 0 2px #8a6a38,
+    0 2px 4px rgba(0, 0, 0, 0.35);
+}
+
+.keyBit {
+  position: absolute;
+  left: -0.15rem;
+  top: 50%;
+  width: 0.35rem;
+  height: 0.55rem;
+  transform: translateY(-30%);
+  background: linear-gradient(180deg, #d4b87a, #8a6a38);
+  border-radius: 1px;
+  clip-path: polygon(0 0, 100% 15%, 100% 85%, 0 100%, 40% 70%, 40% 30%);
+}
+
+.lid {
+  position: relative;
+  z-index: 3;
+  transform-origin: bottom center;
+  transform-style: preserve-3d;
+  transition: transform 980ms cubic-bezier(0.22, 0.61, 0.36, 1);
+  margin-bottom: -1px;
+}
+
+.stage[data-open="true"] .lid {
+  transform: rotateX(-98deg) translateY(0.2rem);
+}
+
+.lidInner {
+  position: relative;
+  height: 5rem;
+  border-radius: 0.75rem 0.75rem 0.12rem 0.12rem;
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='80' height='80' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E"),
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 5px,
+      rgba(0, 0, 0, 0.045) 5px,
+      rgba(0, 0, 0, 0.045) 6px
+    ),
+    linear-gradient(165deg, #6e4e36, var(--mx-wood) 45%, #3a281c);
+  background-blend-mode: soft-light, normal, normal;
+  border: 1px solid color-mix(in srgb, var(--mx-brass) 42%, transparent);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.16),
+    inset 0 -10px 22px rgba(0, 0, 0, 0.28),
+    0 6px 0 -1px #2a1c14;
+  display: grid;
+  place-items: center;
+  backface-visibility: hidden;
+}
+
+.lidLining {
+  position: absolute;
+  inset: 0;
+  border-radius: 0.75rem 0.75rem 0.12rem 0.12rem;
+  background:
+    radial-gradient(ellipse at 50% 40%, #7a3048, #2a1018 70%);
+  transform: rotateX(180deg) translateZ(1px);
+  backface-visibility: hidden;
+  box-shadow:
+    inset 0 0 30px rgba(0, 0, 0, 0.45),
+    0 8px 16px rgba(0, 0, 0, 0.35);
+  border: 1px solid color-mix(in srgb, var(--mx-brass) 25%, transparent);
+}
+
+.lidInlay {
+  position: absolute;
+  inset: 0.55rem 1.1rem;
+  border: 1px solid color-mix(in srgb, var(--mx-brass) 38%, transparent);
+  border-radius: 0.35rem;
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.hingeLeft,
+.hingeRight {
+  position: absolute;
+  bottom: -0.18rem;
+  width: 1rem;
+  height: 0.42rem;
+  border-radius: 3px;
+  background: linear-gradient(180deg, #e8d09a, #8a6a38);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.45);
+  z-index: 2;
+}
+
+.hingeLeft {
+  left: 16%;
+}
+.hingeRight {
+  right: 16%;
+}
+
+.plaque {
+  position: relative;
+  z-index: 1;
+  font-family: var(--mx-font-display);
+  font-size: 1.05rem;
+  letter-spacing: 0.05em;
+  color: color-mix(in srgb, var(--mx-brass) 92%, white);
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.55);
+}
+
+.body {
+  position: relative;
+  z-index: 2;
+  margin-top: -1px;
+  border-radius: 0.12rem 0.12rem 0.6rem 0.6rem;
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='80' height='80' filter='url(%23n)' opacity='0.35'/%3E%3C/svg%3E"),
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 5px,
+      rgba(0, 0, 0, 0.035) 5px,
+      rgba(0, 0, 0, 0.035) 6px
+    ),
+    linear-gradient(180deg, #4a3224, var(--mx-wood) 40%, #2a1c14);
+  background-blend-mode: soft-light, normal, normal;
+  border: 1px solid color-mix(in srgb, var(--mx-brass) 34%, transparent);
+  border-top: none;
+  padding: 0.85rem 0.85rem 0.75rem;
+  box-shadow: inset 0 14px 30px rgba(0, 0, 0, 0.38);
+}
+
+.velvet {
+  position: relative;
+  min-height: 13rem;
+  border-radius: 0.45rem;
+  background:
+    radial-gradient(ellipse at 50% 28%, color-mix(in srgb, var(--mx-accent) 40%, #5a2030), transparent 55%),
+    linear-gradient(180deg, #5a2030, #220c14 72%);
+  box-shadow:
+    inset 0 0 48px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 180, 180, 0.1);
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  padding-bottom: 1.2rem;
+}
+
+.platformRing {
+  position: absolute;
+  width: 7.2rem;
+  height: 7.2rem;
+  border-radius: 50%;
+  border: 1px solid rgba(212, 184, 122, 0.22);
+  box-shadow: 0 0 24px rgba(0, 0, 0, 0.35);
+  top: 52%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.platform {
+  position: relative;
+  width: 6.2rem;
+  height: 6.2rem;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 38% 32%, #f0dca8, var(--mx-brass) 42%, #6a4a28 78%);
+  box-shadow:
+    0 10px 24px rgba(0, 0, 0, 0.5),
+    inset 0 2px 5px rgba(255, 255, 255, 0.3),
+    inset 0 -5px 10px rgba(0, 0, 0, 0.28);
+  display: grid;
+  place-items: end center;
+  padding-bottom: 0.2rem;
+  z-index: 2;
+}
+
+.platform[data-turning="true"] {
+  animation: mx-platform-spin 3.8s linear 1;
+}
+
+@keyframes mx-platform-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.platformTop {
+  position: absolute;
+  inset: 14%;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  pointer-events: none;
+}
+
+.figurineWrap {
+  position: relative;
+  z-index: 3;
+  transform-origin: 50% 100%;
+  filter: drop-shadow(0 6px 8px rgba(0, 0, 0, 0.45));
+}
+
+.platform[data-turning="true"] .figurineWrap {
+  /* counter-rotate so the figure stays readable while the brass disc turns */
+  animation: mx-figurine-counter 3.8s linear 1;
+}
+
+@keyframes mx-figurine-counter {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+.figurineSvg {
+  display: block;
+  width: 4.2rem;
+  height: auto;
+}
+
+.mechanism {
+  position: absolute;
+  right: 0.75rem;
+  bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.28rem;
+  opacity: 0.7;
+  z-index: 1;
+}
+
+.gear {
+  width: 0.95rem;
+  height: 0.95rem;
+  border-radius: 50%;
+  background: repeating-conic-gradient(from 0deg, #c4a15a 0 12deg, #6a4a28 12deg 24deg);
+  box-shadow: inset 0 0 0 2px #8a6a38;
+}
+
+.gear[data-small="true"] {
+  width: 0.6rem;
+  height: 0.6rem;
+}
+
+.gear[data-spin="true"] {
+  animation: mx-gear 1.2s linear infinite;
+}
+
+.gear[data-small="true"][data-spin="true"] {
+  animation-direction: reverse;
+  animation-duration: 0.9s;
+}
+
+@keyframes mx-gear {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.cylinder {
+  width: 1.25rem;
+  height: 0.45rem;
+  border-radius: 2px;
+  background: linear-gradient(180deg, #d4b87a, #8a6a38);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25);
+}
+
+.cylinder[data-spin="true"] {
+  animation: mx-cyl 0.6s linear infinite;
+}
+
+@keyframes mx-cyl {
+  50% {
+    filter: brightness(1.15);
+  }
+}
+
+.notes {
+  margin: 0.7rem 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.25rem;
+  text-align: center;
+  font-size: 0.78rem;
+  color: color-mix(in srgb, var(--mx-paper) 72%, transparent);
+}
+
+.baseRail {
+  height: 0.5rem;
+  margin-top: 0.15rem;
+  border-radius: 0 0 0.35rem 0.35rem;
+  background: linear-gradient(90deg, #2a1c14, #4a3224, #2a1c14);
+  border: 1px solid color-mix(in srgb, var(--mx-brass) 28%, transparent);
+}
+
+.feet {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 0.85rem;
+  margin-top: 0.18rem;
+}
+
+.feet span {
+  width: 0.58rem;
+  height: 0.48rem;
+  border-radius: 0 0 0.22rem 0.22rem;
+  background: linear-gradient(180deg, var(--mx-brass), #6a4a28);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.38);
+}
+
+.action {
+  appearance: none;
+  border: 1px solid color-mix(in srgb, var(--mx-brass) 55%, transparent);
+  background: color-mix(in srgb, var(--mx-wood) 55%, transparent);
+  color: var(--mx-paper);
+  border-radius: 999px;
+  padding: 0.55rem 1rem;
+  font: inherit;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.action:hover {
+  border-color: var(--mx-brass);
+  background: color-mix(in srgb, var(--mx-brass) 18%, transparent);
+}
+
+.action:focus-visible {
+  outline: 2px solid var(--mx-brass);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .platform[data-turning="true"],
+  .platform[data-turning="true"] .figurineWrap,
+  .key[data-winding="true"],
+  .gear[data-spin="true"],
+  .cylinder[data-spin="true"] {
+    animation: none;
+  }
+  .stage[data-open="true"] .lid {
+    transition: none;
+  }
+}

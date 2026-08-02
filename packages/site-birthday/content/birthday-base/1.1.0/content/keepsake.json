@@ -1,0 +1,362 @@
+{
+  "schemaVersion": 1,
+  "recipientName": "[Name]",
+  "gifterName": "[Your name]",
+  "storyBegan": "2005-06-21",
+  "occasionDate": "2026-06-21",
+  "design": {
+    "entryRitual": "cinematic"
+  },
+  "chapters": {
+    "hello": {
+      "kicker": "For",
+      "title": "[Name]",
+      "script": "with love,",
+      "signature": "[Your name]",
+      "invitation": "Before you scroll — sit with this a moment. Let your eyes adjust to the dark. There are stars here, and they've been waiting for you.",
+      "scrollCue": "Begin"
+    },
+    "story": {
+      "eyebrow": "Chapter II",
+      "title": "The Story So Far",
+      "letterHeading": "How it began",
+      "paragraphs": [
+        "Replace this with how your story began — a first meeting, a memory of them as a child, the moment you knew they mattered.",
+        "Add a second paragraph here: a texture of a season together, an ordinary Tuesday that became extraordinary in hindsight.",
+        "Close with what they mean to you now, in this chapter — write it the way you'd say it out loud, quietly, at 2am."
+      ],
+      "waypoints": [
+        {
+          "year": "Year 1",
+          "label": "First light",
+          "note": "A tiny footprint, a world unfolding."
+        },
+        {
+          "year": "Year 7",
+          "label": "Wonder years",
+          "note": "Questions without end, laughter in every room."
+        },
+        {
+          "year": "Year 13",
+          "label": "Becoming",
+          "note": "Quiet courage, loud dreams, a voice finding its shape."
+        },
+        {
+          "year": "Year 18",
+          "label": "Threshold",
+          "note": "Standing at the edge of everything, ready."
+        },
+        {
+          "year": "Now",
+          "label": "This chapter",
+          "note": "Not an ending — a luminous beginning."
+        }
+      ]
+    },
+    "moments": {
+      "eyebrow": "Chapter III",
+      "title": "Twenty-One Moments",
+      "moments": [
+        {
+          "number": 1,
+          "caption": "Replace with a memory for moment 1.",
+          "src": "",
+          "noteUnder": "The first page always feels like beginning again."
+        },
+        {
+          "number": 2,
+          "caption": "Replace with a memory for moment 2.",
+          "src": ""
+        },
+        {
+          "number": 3,
+          "caption": "Replace with a memory for moment 3.",
+          "src": ""
+        },
+        {
+          "number": 4,
+          "caption": "Replace with a memory for moment 4.",
+          "src": ""
+        },
+        {
+          "number": 5,
+          "caption": "Replace with a memory for moment 5.",
+          "src": ""
+        },
+        {
+          "number": 6,
+          "caption": "Replace with a memory for moment 6.",
+          "src": ""
+        },
+        {
+          "number": 7,
+          "caption": "Replace with a memory for moment 7.",
+          "src": "",
+          "noteUnder": "Lift me — there is a quiet joke underneath."
+        },
+        {
+          "number": 8,
+          "caption": "Replace with a memory for moment 8.",
+          "src": ""
+        },
+        {
+          "number": 9,
+          "caption": "Replace with a memory for moment 9.",
+          "src": ""
+        },
+        {
+          "number": 10,
+          "caption": "Replace with a memory for moment 10.",
+          "src": ""
+        },
+        {
+          "number": 11,
+          "caption": "Replace with a memory for moment 11.",
+          "src": ""
+        },
+        {
+          "number": 12,
+          "caption": "Replace with a memory for moment 12.",
+          "src": ""
+        },
+        {
+          "number": 13,
+          "caption": "Replace with a memory for moment 13.",
+          "src": ""
+        },
+        {
+          "number": 14,
+          "caption": "Replace with a memory for moment 14.",
+          "src": ""
+        },
+        {
+          "number": 15,
+          "caption": "Replace with a memory for moment 15.",
+          "src": ""
+        },
+        {
+          "number": 16,
+          "caption": "Replace with a memory for moment 16.",
+          "src": ""
+        },
+        {
+          "number": 17,
+          "caption": "Replace with a memory for moment 17.",
+          "src": ""
+        },
+        {
+          "number": 18,
+          "caption": "Replace with a memory for moment 18.",
+          "src": ""
+        },
+        {
+          "number": 19,
+          "caption": "Replace with a memory for moment 19.",
+          "src": ""
+        },
+        {
+          "number": 20,
+          "caption": "Replace with a memory for moment 20.",
+          "src": ""
+        },
+        {
+          "number": 21,
+          "caption": "Replace with a memory for moment 21.",
+          "src": ""
+        }
+      ]
+    },
+    "letters": {
+      "eyebrow": "Chapter IV",
+      "title": "Letters Never Sent",
+      "letters": [
+        {
+          "id": "open-now",
+          "seal": "Open now",
+          "title": "For the day you read this",
+          "body": [
+            "Dearest [Name],",
+            "Replace this paragraph with what you want them to read the moment they open this. Be specific, be tender, be exactly yourself.",
+            "With all my love,\n[Your name]"
+          ]
+        },
+        {
+          "id": "hard-day",
+          "seal": "Open on a hard day",
+          "title": "For when things feel heavy",
+          "body": [
+            "Hey, it's me.",
+            "Replace this with words of comfort for a rough day — a reminder of their strength, or a memory that always makes them smile.",
+            "Always in your corner,\n[Your name]"
+          ]
+        },
+        {
+          "id": "proud",
+          "seal": "Open when you're proud of yourself",
+          "title": "For a win, big or small",
+          "body": [
+            "Look at you.",
+            "Replace this with a celebration of who they're becoming — proof that you've been paying attention all along.",
+            "So proud of you,\n[Your name]"
+          ]
+        },
+        {
+          "id": "someday",
+          "seal": "Open somewhere new",
+          "title": "For the next adventure",
+          "body": [
+            "Wherever you're reading this—",
+            "Replace this with a note for a future trip, a new city, a leap you hope they take.",
+            "Wishing I were there with you,\n[Your name]"
+          ]
+        }
+      ]
+    },
+    "love": {
+      "eyebrow": "Chapter V",
+      "title": "Everything I Love About You",
+      "reasons": [
+        "Replace with reason one — something specific, not generic.",
+        "Replace with reason two.",
+        "Replace with reason three.",
+        "Replace with reason four.",
+        "Replace with reason five.",
+        "Replace with reason six.",
+        "Replace with reason seven."
+      ],
+      "favouriteSongs": [
+        {
+          "title": "Replace with song title",
+          "artist": "Replace with artist"
+        },
+        {
+          "title": "Replace with song title",
+          "artist": "Replace with artist"
+        },
+        {
+          "title": "Replace with song title",
+          "artist": "Replace with artist"
+        }
+      ],
+      "favouritePlaces": [
+        "Replace with a favourite place",
+        "Replace with a favourite place",
+        "Replace with a favourite place"
+      ]
+    },
+    "future": {
+      "eyebrow": "Chapter VI",
+      "title": "Our Future",
+      "promises": [
+        {
+          "title": "Somewhere new",
+          "note": "Replace with a trip you want to take together."
+        },
+        {
+          "title": "Something brave",
+          "note": "Replace with a promise — a leap you want to see them take."
+        },
+        {
+          "title": "Something quiet",
+          "note": "Replace with a small, ordinary future you're looking forward to."
+        },
+        {
+          "title": "Something big",
+          "note": "Replace with a dream you have for their next year."
+        }
+      ],
+      "lanternWishes": [
+        "I hope today was gentle with you.",
+        "I hope you always know how loved you are.",
+        "I hope this made you smile, even just a little.",
+        "I hope you never stop believing in yourself.",
+        "I hope your patients know how lucky they are to have you.",
+        "I hope you always dance like nobody's watching.",
+        "I hope you keep making the world kinder.",
+        "I hope your bed is always warm and your heart even warmer.",
+        "I hope every birthday feels this special.",
+        "I hope one day we'll watch these lanterns together.",
+        "I hope you never forget how proud I am of you.",
+        "I hope every difficult day ends with a little peace.",
+        "I hope your dreams stay bigger than your fears.",
+        "I hope you always make time to laugh.",
+        "I hope you always have a reason to look up at the stars.",
+        "I hope we keep collecting little memories together.",
+        "I hope this reminds you that I'm always cheering you on.",
+        "Home is wherever we're together.",
+        "I hope you always feel safe, seen and loved.",
+        "This lantern carries a little piece of my heart to you."
+      ]
+    },
+    "until": {
+      "eyebrow": "Chapter VII",
+      "title": "Until The Next Adventure",
+      "videoTitle": "A message for you",
+      "videoNote": "Replace with a video — recorded just for them, saved for last.",
+      "videoSrc": "",
+      "letter": {
+        "salutation": "Dearest [Name],",
+        "paragraphs": [
+          "This is the part I kept for last — replace it with whatever you most want them to carry with them after they close this page.",
+          "Add a second paragraph: gratitude, a wish, a truth you've never quite said out loud.",
+          "However you end it, let it sound like you."
+        ],
+        "signoff": "With everything,",
+        "signature": "[Your name]"
+      },
+      "closing": "The stars will keep. Come back whenever you need to remember."
+    }
+  },
+  "constellation": {
+    "name": "The one who stayed",
+    "meaning": "Replace with a memory this shape brings to mind.",
+    "stars": [
+      {
+        "id": "star-1",
+        "x": 32,
+        "y": 26
+      },
+      {
+        "id": "star-2",
+        "x": 44,
+        "y": 16
+      },
+      {
+        "id": "star-3",
+        "x": 58,
+        "y": 24
+      },
+      {
+        "id": "star-4",
+        "x": 50,
+        "y": 40
+      },
+      {
+        "id": "star-5",
+        "x": 34,
+        "y": 48
+      },
+      {
+        "id": "star-6",
+        "x": 22,
+        "y": 36
+      }
+    ],
+    "order": [
+      "star-2",
+      "star-1",
+      "star-6",
+      "star-5",
+      "star-4",
+      "star-3",
+      "star-2"
+    ]
+  },
+  "easterEggs": {
+    "konami": "You found the golden sequence — some things are worth the long way round.",
+    "tripleClickSignature": "Hidden wish: may this next year shimmer with grace you haven't yet imagined.",
+    "hiddenWord": "You read closely. That's rare, and it's one of the things worth loving.",
+    "allLanternsReleased": "Every wish is on its way. Look up, every now and then."
+  },
+  "hiddenWord": "always"
+}

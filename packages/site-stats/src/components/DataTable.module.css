@@ -1,0 +1,80 @@
+.wrapper {
+  overflow-x: auto;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--font-size-sm);
+  font-variant-numeric: tabular-nums;
+}
+
+.caption {
+  caption-side: top;
+  text-align: left;
+  color: var(--color-muted);
+  font-size: var(--font-size-xs);
+  padding: var(--space-3) var(--space-4);
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-muted-background);
+}
+
+.table th,
+.table td {
+  border-bottom: 1px solid var(--color-border);
+  padding: 0;
+}
+
+.table tbody tr:last-child td,
+.table tbody tr:last-child th {
+  border-bottom: none;
+}
+
+.table tbody tr:nth-child(even) td {
+  background: color-mix(in srgb, var(--color-muted-background) 40%, transparent);
+}
+
+.headerInput,
+.cellInput {
+  width: 100%;
+  border: none;
+  background: transparent;
+  padding: var(--space-2-5) var(--space-3);
+  font: inherit;
+  color: inherit;
+}
+
+.headerInput {
+  font-weight: var(--font-weight-semibold);
+  background: var(--color-muted-background);
+}
+
+.cellInput:focus-visible,
+.headerInput:focus-visible {
+  outline: var(--focus-ring-width) solid var(--color-focus-ring);
+  outline-offset: calc(-1 * var(--focus-ring-offset));
+}
+
+.rowActions {
+  display: flex;
+  gap: var(--space-2);
+  margin-top: var(--space-3);
+}
+
+.actionButton {
+  font: inherit;
+  font-size: var(--font-size-sm);
+  padding: var(--space-1-5) var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-secondary);
+  color: var(--color-secondary-foreground);
+  cursor: pointer;
+  transition: background var(--motion-duration-fast) var(--motion-easing-standard);
+}
+
+.actionButton:hover {
+  background: var(--color-secondary-hover);
+}

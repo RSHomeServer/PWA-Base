@@ -1,0 +1,54 @@
+.wrapper {
+  width: 100%;
+}
+
+.chart {
+  display: block;
+  width: 100%;
+  height: auto;
+  min-height: 16rem;
+}
+
+.axis {
+  stroke: var(--color-border-strong);
+  stroke-width: 1;
+}
+
+.bar {
+  fill: var(--color-accent, var(--color-primary));
+  opacity: 0.88;
+  transition: opacity var(--motion-duration-fast) var(--motion-easing-standard);
+}
+
+.bar:hover {
+  opacity: 1;
+}
+
+.whisker {
+  stroke: var(--color-foreground);
+  stroke-width: 1.5;
+}
+
+.point {
+  fill: var(--color-accent, var(--color-primary));
+  opacity: 0.85;
+}
+
+.regressionLine {
+  stroke: var(--color-accent, var(--color-primary));
+  stroke-width: 2;
+  stroke-dasharray: 6 4;
+  opacity: 0.75;
+}
+
+.label,
+.valueLabel {
+  fill: var(--color-muted);
+  font-size: 12px;
+  font-family: var(--font-family-sans);
+}
+
+.valueLabel {
+  fill: var(--color-foreground);
+  font-weight: var(--font-weight-medium);
+}

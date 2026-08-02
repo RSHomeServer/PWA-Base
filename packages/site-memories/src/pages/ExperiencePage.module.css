@@ -1,0 +1,35 @@
+.wrap {
+  min-height: 100%;
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: center;
+  padding: 0.65rem clamp(1rem, 3vw, 2rem);
+  background: color-mix(in srgb, #120e0c 92%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, #c4a15a 25%, transparent);
+  color: #f3e6d4;
+  font-size: 0.88rem;
+}
+
+.nav a {
+  color: #c4a15a;
+  text-decoration: none;
+}
+
+.nav a:hover {
+  text-decoration: underline;
+}
+
+.missing {
+  padding: 2rem;
+  color: #f3e6d4;
+  background: #120e0c;
+  min-height: 100%;
+}
+
+.missing a {
+  color: #c4a15a;
+}

@@ -1,0 +1,67 @@
+{
+  "schemaVersion": 2,
+  "overview": "Built an internal Constellation Alignment Tool gated by platform Development Mode (detectPlatformRuntimeMode). When development is enabled, /moment opens a split preview + editor that reuses production ConstellationRenderer and resolveConstellation — no duplicated drawing pipeline. Operators can add multiple constellation instances, switch catalog definitions and artwork, edit transform/artwork/vertices/draw-order/graph-edges live, toggle display overlays, and Copy Configuration JSON for pasting back into constellation JSON files. Production mode (PLATFORM_RUNTIME_MODE=production) continues to render FindUsMoment only with no editor chrome. Validated with typecheck, eslint, unit tests (11), memories-web build, and docker deploy; visual capture under docs/artifacts/moments/find-us/alignment-tool/.",
+  "executiveSummary": "Alignment is now a Development Mode authoring surface on the shared production renderer. Geometry, artwork, and draw paths can be tuned with sliders/tables and exported via clipboard — without changing the production Moment when Development Mode is off.",
+  "userVisibleChanges": [
+    "Development Mode: /moment shows the Constellation Alignment Tool (preview + panel)",
+    "Production Mode: /moment remains Find Us with no editor UI"
+  ],
+  "architectureChanges": [
+    "MomentPage gates on detectPlatformRuntimeMode() from @platform/runtime",
+    "ConstellationAlignmentTool composes ConstellationRenderer + resolveConstellation for live drafts",
+    "AlignmentOverlay adds dev-only guides (UIDs, centres, bbox, draw-order indices) without reimplementing stars/artwork",
+    "Catalog helpers: cloneConstellation, listConstellationIds; exportConstellationConfig for pasteable JSON"
+  ],
+  "filesModified": [
+    {
+      "area": "Alignment tool",
+      "files": [
+        "packages/site-memories/src/moments/alignment/ConstellationAlignmentTool.tsx",
+        "packages/site-memories/src/moments/alignment/ConstellationSection.tsx",
+        "packages/site-memories/src/moments/alignment/AlignmentOverlay.tsx",
+        "packages/site-memories/src/moments/alignment/SliderField.tsx",
+        "packages/site-memories/src/moments/alignment/model.ts",
+        "packages/site-memories/src/moments/alignment/AlignmentTool.module.css",
+        "packages/site-memories/src/moments/alignment/alignment.test.ts",
+        "packages/site-memories/src/moments/alignment/index.ts"
+      ]
+    },
+    {
+      "area": "Wiring / catalog",
+      "files": [
+        "packages/site-memories/src/pages/MomentPage.tsx",
+        "packages/site-memories/src/moments/constellations/index.ts",
+        "packages/site-memories/package.json",
+        "packages/site-memories/src/vite-env.d.ts"
+      ]
+    },
+    {
+      "area": "Artifacts",
+      "files": ["docs/artifacts/moments/find-us/alignment-tool/"]
+    }
+  ],
+  "configurationChanges": [
+    "site-memories depends on @platform/runtime for Development Mode detection",
+    "Docker default PLATFORM_RUNTIME_MODE=development exposes the tool; set production to restore Find Us on /moment"
+  ],
+  "testingPerformed": [
+    { "check": "typecheck", "status": "pass", "detail": "@platform/site-memories tsc --noEmit" },
+    { "check": "eslint", "status": "pass", "detail": "moments + MomentPage max-warnings 0" },
+    { "check": "unit tests", "status": "pass", "detail": "11 tests (transform + alignment model)" },
+    { "check": "build memories-web", "status": "pass", "detail": "vite production build" },
+    { "check": "deploy memories-web", "status": "pass", "detail": "docker compose up -d --build memories-web" },
+    { "check": "visual", "status": "pass", "detail": "Browser capture of alignment tool with Leo preview + panel" }
+  ],
+  "knownLimitations": [
+    "Development Mode is build/runtime env (PLATFORM_RUNTIME_MODE), not a live preference toggle — switching requires rebuild/redeploy",
+    "In Development Mode /moment is the tool, not the Find Us ritual (by design for this gate)",
+    "Catalog registration still requires a code import for new constellation JSON files",
+    "Artwork catalog is a small static map; new assets need a catalog entry",
+    "No drag handles (intentional); no persistence beyond clipboard"
+  ],
+  "recommendedNextMilestone": "Use the alignment tool to refine Leo/Sag artwork registration and Sag Euler drawOrder, paste configs back into constellation JSON, then restore Find Us ritual validation under PLATFORM_RUNTIME_MODE=production before visual polish.",
+  "filesChanged": 12,
+  "testsPassed": true,
+  "gitCommit": null,
+  "source": "structured"
+}

@@ -1,0 +1,106 @@
+{
+  "schemaVersion": 2,
+  "overview": "Refactored Find Us into a declarative Constellation Object model so geometry, artwork, draw order, and effects live in data — not in the renderer. Leo and Sagittarius moved to packages/site-memories/src/moments/constellations/*.json; FindUsMoment loads them by id and ConstellationRenderer consumes only ResolvedConstellation (no Leo/Sag special-cases). Baseline star coordinates, artwork frames, timings, and interaction were preserved from the Leo polish / Sagittarius polish-2 configs. Edge drawing keeps prior behaviour: valid pencil drawOrder (Leo Euler path with closing revisit) draws along drawSegments; Sagittarius discovery order falls back to completed graphEdges. Validated with typecheck, eslint, unit tests, memories-web build, docker compose rebuild, and smoke screenshots under docs/artifacts/moments/find-us/constellation-object/. Configuration tables exported in TABLES.md.",
+  "executiveSummary": "Constellations are now reusable configuration objects. The renderer is constellation-agnostic; Leo and Sagittarius are data only. Future constellations (or user-authored ones) can be added by editing JSON without touching rendering code.",
+  "userVisibleChanges": [
+    "No intentional UX redesign — same discovery ritual, timings, and artwork",
+    "Leo and Sagittarius continue to render from the same baseline geometry and palettes"
+  ],
+  "architectureChanges": [
+    "Introduced ConstellationObject / ResolvedConstellation types with vertices, graphEdges, drawOrder, artwork, transform, palette, specialEffects",
+    "resolveConstellation applies constellation transform to vertices and artwork; activationOrder and drawSegments derived from drawOrder",
+    "ConstellationRenderer is identity-agnostic; FindUsMoment orchestrates moment phases only",
+    "Moment shell find-us.config.json references constellationIds instead of embedded star graphs",
+    "Edge source selection: pencil-valid drawSegments vs graphEdges fallback preserves Leo sketchPath vs Sag graph behaviour"
+  ],
+  "filesModified": [
+    {
+      "area": "Constellation model",
+      "files": [
+        "packages/site-memories/src/moments/constellation/types.ts",
+        "packages/site-memories/src/moments/constellation/transform.ts",
+        "packages/site-memories/src/moments/constellation/ConstellationRenderer.tsx",
+        "packages/site-memories/src/moments/constellation/index.ts",
+        "packages/site-memories/src/moments/constellation/transform.test.ts"
+      ]
+    },
+    {
+      "area": "Constellation data",
+      "files": [
+        "packages/site-memories/src/moments/constellations/leo.json",
+        "packages/site-memories/src/moments/constellations/sagittarius.json",
+        "packages/site-memories/src/moments/constellations/index.ts",
+        "packages/site-memories/src/moments/find-us.config.json"
+      ]
+    },
+    {
+      "area": "Moment UI",
+      "files": [
+        "packages/site-memories/src/moments/FindUsMoment.tsx",
+        "packages/site-memories/src/moments/types.ts"
+      ]
+    },
+    {
+      "area": "Package / tests",
+      "files": [
+        "packages/site-memories/package.json",
+        "packages/site-memories/vitest.config.ts",
+        "packages/site-memories/tsconfig.json"
+      ]
+    },
+    {
+      "area": "Artifacts",
+      "files": [
+        "docs/artifacts/moments/find-us/constellation-object/"
+      ]
+    }
+  ],
+  "configurationChanges": [
+    "Leo and Sagittarius fully declared as Constellation Objects (vertices, edges, drawOrder, artwork, transform)",
+    "find-us.config.json reduced to moment shell + constellationIds: [leo, sagittarius]"
+  ],
+  "testingPerformed": [
+    {
+      "check": "typecheck (@platform/site-memories)",
+      "status": "pass",
+      "detail": "tsc --noEmit"
+    },
+    {
+      "check": "eslint moments/",
+      "status": "pass",
+      "detail": "max-warnings 0"
+    },
+    {
+      "check": "unit tests",
+      "status": "pass",
+      "detail": "vitest: transform + catalog baseline (6 tests)"
+    },
+    {
+      "check": "build memories-web",
+      "status": "pass",
+      "detail": "tsc -b && vite build"
+    },
+    {
+      "check": "deploy memories-web",
+      "status": "pass",
+      "detail": "docker compose up -d --build memories-web"
+    },
+    {
+      "check": "visual smoke",
+      "status": "pass",
+      "detail": "opening + Leo active/mid screenshots under constellation-object/"
+    }
+  ],
+  "knownLimitations": [
+    "specialEffects are typed and class-hooked but visually unimplemented (empty arrays)",
+    "Sagittarius drawOrder is discovery order, not a full Euler pencil path — graphEdges fallback required",
+    "Moment fragments remain on constellation objects (Moment UX coupled to catalog entries)",
+    "Constellation transform rotation is applied to points/artwork but label text is not glyph-rotated",
+    "No authoring UI yet for custom user constellations"
+  ],
+  "recommendedNextMilestone": "Implement specialEffects rendering (brighterGlow, pulse, etc.) and/or author an Euler pencil drawOrder for Sagittarius — both should be config-only changes. Optionally add a third constellation via JSON to prove the catalog path end-to-end before the paper/letter Moment.",
+  "filesChanged": 15,
+  "testsPassed": true,
+  "gitCommit": null,
+  "source": "structured"
+}

@@ -1,0 +1,29 @@
+.hud {
+  font-variant-numeric: tabular-nums;
+}
+
+.energyPanel {
+  position: absolute;
+  top: var(--space-3);
+  right: var(--space-3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-md);
+  background: rgb(6 8 16 / 0.72);
+  backdrop-filter: blur(6px);
+}
+
+.energyLabel {
+  font-size: var(--font-size-xs, 0.75rem);
+  color: rgb(255 255 255 / 0.75);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.energyCanvas {
+  width: 220px;
+  height: 64px;
+  display: block;
+}

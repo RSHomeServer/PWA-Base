@@ -1,0 +1,39 @@
+.gate {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 2rem 1.5rem;
+  max-width: 36rem;
+  margin: 0 auto;
+  color: #f5f0e8;
+  background:
+    radial-gradient(900px 400px at 20% 0%, rgba(180, 140, 80, 0.18), transparent),
+    #0c0a09;
+  font-family: "Source Serif 4", Georgia, serif;
+}
+
+.title {
+  margin: 0;
+  font-size: 1.75rem;
+  font-weight: 600;
+}
+
+.body {
+  margin: 0;
+  line-height: 1.5;
+  opacity: 0.9;
+}
+
+.hint {
+  margin: 0;
+  font-size: 0.9rem;
+  opacity: 0.7;
+  font-family: ui-sans-serif, system-ui, sans-serif;
+}
+
+.hint code {
+  font-size: 0.85em;
+}

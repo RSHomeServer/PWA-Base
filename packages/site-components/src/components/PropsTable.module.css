@@ -1,0 +1,33 @@
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--font-size-sm);
+}
+
+.table th,
+.table td {
+  padding: var(--space-2) var(--space-3);
+  text-align: left;
+  border-bottom: 1px solid var(--color-border);
+  vertical-align: top;
+}
+
+.table th {
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-muted);
+  width: 8rem;
+}
+
+.table code {
+  font-family: var(--font-family-mono);
+  font-size: 0.9em;
+}
+
+.table tr:last-child td,
+.table tr:last-child th {
+  border-bottom: none;
+}
+
+.default {
+  color: var(--color-muted);
+}

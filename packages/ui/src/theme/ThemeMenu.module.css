@@ -1,0 +1,84 @@
+.wrap {
+  position: relative;
+  display: inline-flex;
+}
+
+.trigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+  border: var(--border-width-1) solid var(--color-border-subtle);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  color: var(--color-muted-foreground);
+  cursor: pointer;
+}
+
+.trigger:hover,
+.wrap:focus-within .trigger {
+  color: var(--color-foreground);
+  border-color: color-mix(in srgb, var(--color-accent) 35%, var(--color-border-subtle));
+}
+
+.trigger:focus-visible {
+  outline: var(--focus-ring-width) solid var(--color-focus-ring);
+  outline-offset: var(--focus-ring-offset);
+}
+
+.menu {
+  display: none;
+  position: absolute;
+  top: calc(100% + 0.25rem);
+  inset-inline-end: 0;
+  min-width: 9.5rem;
+  padding: var(--space-1);
+  margin: 0;
+  list-style: none;
+  background: var(--color-surface);
+  border: var(--border-width-1) solid var(--color-border-subtle);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  z-index: calc(var(--z-sticky) + 5);
+}
+
+.wrap:hover .menu,
+.wrap:focus-within .menu {
+  display: grid;
+  gap: var(--space-0-5);
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  width: 100%;
+  padding: var(--space-2) var(--space-2-5);
+  border: none;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--color-muted-foreground);
+  font: inherit;
+  font-size: var(--font-size-sm);
+  cursor: pointer;
+  text-align: start;
+}
+
+.item:hover {
+  background: var(--color-muted-background);
+  color: var(--color-foreground);
+}
+
+.itemActive {
+  background: var(--color-accent-muted);
+  color: var(--color-accent);
+  font-weight: var(--font-weight-semibold);
+}
+
+.icon {
+  width: 0.875rem;
+  height: 0.875rem;
+  flex-shrink: 0;
+}

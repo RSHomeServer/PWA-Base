@@ -1,0 +1,27 @@
+{
+  "name": "@platform/config",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Shared TypeScript, ESLint, and Prettier baselines for the platform monorepo",
+  "type": "module",
+  "exports": {
+    "./eslint": "./eslint.config.js",
+    "./prettier": "./prettier.config.js",
+    "./tsconfig.base.json": "./tsconfig.base.json",
+    "./tsconfig.react.json": "./tsconfig.react.json",
+    "./tsconfig.node.json": "./tsconfig.node.json",
+    "./vite-app-version": {
+      "types": "./vite-app-version.d.ts",
+      "default": "./vite-app-version.js"
+    }
+  },
+  "devDependencies": {
+    "@eslint/js": "catalog:",
+    "eslint": "catalog:",
+    "eslint-plugin-react-hooks": "catalog:",
+    "eslint-plugin-react-refresh": "catalog:",
+    "globals": "catalog:",
+    "prettier": "catalog:",
+    "typescript-eslint": "catalog:"
+  }
+}

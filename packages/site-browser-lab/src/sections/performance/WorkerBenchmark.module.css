@@ -1,0 +1,25 @@
+.stage {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1-5);
+  padding: var(--space-3);
+}
+
+.canvas {
+  display: block;
+  width: 100%;
+  height: 6.5rem;
+}
+
+.caption {
+  margin: 0;
+  font-size: var(--font-size-2xs, 0.6875rem);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--lab-muted);
+  text-align: center;
+}
+
+.unsupported {
+  padding: var(--space-3) var(--space-4);
+}

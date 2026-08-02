@@ -1,0 +1,147 @@
+.page {
+  min-height: calc(100dvh - 4.5rem);
+  display: grid;
+  grid-template-rows: auto 1fr;
+  background:
+    radial-gradient(ellipse 80% 50% at 50% 0%, #2a2218 0%, transparent 55%),
+    linear-gradient(180deg, #1a1612 0%, #12100e 45%, #0c0a08 100%);
+  color: var(--bd-ivory, #faf5eb);
+  font-family: var(--bd-font-body, "EB Garamond", Georgia, serif);
+}
+
+.header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem 1.5rem;
+  padding: 1rem clamp(1rem, 3vw, 2rem) 0.5rem;
+}
+
+.intro {
+  max-width: 28rem;
+  text-align: right;
+}
+
+.eyebrow {
+  margin: 0;
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--bd-gold, #d9b75f) 75%, transparent);
+}
+
+.title {
+  margin: 0.25rem 0 0;
+  font-family: var(--bd-font-display, "Fraunces", Georgia, serif);
+  font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+  font-weight: 500;
+  color: var(--bd-ivory, #faf5eb);
+}
+
+.subtitle {
+  margin: 0.35rem 0 0;
+  font-size: 1rem;
+  color: color-mix(in srgb, var(--bd-ivory, #faf5eb) 65%, transparent);
+}
+
+.shelfScene {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 1.5rem clamp(1rem, 3vw, 2.5rem) 2.75rem;
+  min-height: 0;
+}
+
+.board {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(7.5rem, 1fr));
+  gap: clamp(1rem, 2.5vw, 2rem);
+  align-items: end;
+  justify-items: center;
+  width: min(100%, 64rem);
+  padding: 0 1.75rem 0;
+}
+
+.slot {
+  width: 100%;
+  max-width: 10.5rem;
+  min-width: 0;
+}
+
+.ledge {
+  position: relative;
+  z-index: 1;
+  flex: 0 0 auto;
+  width: min(100%, 68rem);
+  height: 1.15rem;
+  margin-top: 0.15rem;
+  border-radius: 0.15rem 0.15rem 0.35rem 0.35rem;
+  background:
+    linear-gradient(180deg, #c4a574 0%, #9a7850 42%, #6e5438 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 230, 190, 0.35),
+    inset 0 -2px 0 rgba(40, 24, 12, 0.35),
+    0 10px 28px rgba(0, 0, 0, 0.45);
+}
+
+.ledge::before {
+  content: "";
+  position: absolute;
+  left: 4%;
+  right: 4%;
+  top: -0.35rem;
+  height: 0.4rem;
+  border-radius: 0.1rem;
+  background: linear-gradient(180deg, #d4b888, #a88858);
+  box-shadow: inset 0 1px 0 rgba(255, 240, 210, 0.4);
+}
+
+.wallShadow {
+  position: absolute;
+  inset: auto 8% 1.6rem;
+  height: 3rem;
+  z-index: 0;
+  background: radial-gradient(
+    ellipse 70% 100% at 50% 0%,
+    rgba(0, 0, 0, 0.35),
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+@media (max-width: 960px) {
+  .board {
+    grid-template-columns: repeat(3, minmax(7rem, 1fr));
+    width: min(100%, 40rem);
+    gap: 1.15rem;
+  }
+
+  .ledge {
+    width: min(100%, 44rem);
+  }
+}
+
+@media (max-width: 640px) {
+  .header {
+    flex-direction: column;
+  }
+
+  .intro {
+    text-align: left;
+  }
+
+  .board {
+    grid-template-columns: repeat(2, minmax(7rem, 1fr));
+    gap: 1rem;
+    width: min(100%, 24rem);
+  }
+
+  .ledge {
+    width: min(100%, 26rem);
+  }
+}

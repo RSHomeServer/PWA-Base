@@ -1,0 +1,46 @@
+/**
+ * Art direction: "Cabinet of Keepsakes"
+ * Warm walnut, soft brass, milk glass, ivory paper, amber light.
+ * Scoped under .mx so platform chrome tokens remain intact.
+ */
+
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,650;9..144,700&family=Literata:opsz,wght@7..72,400;7..72,500;7..72,600&display=swap");
+
+.mx {
+  --mx-font-display: "Fraunces", "Times New Roman", serif;
+  --mx-font-body: "Literata", "Georgia", serif;
+  --mx-wood: #4a3124;
+  --mx-brass: #c4a15a;
+  --mx-glass: #d9e7ef;
+  --mx-paper: #f3e6d4;
+  --mx-accent: #c47a4a;
+  --mx-atmosphere: #1a1520;
+  --mx-ink: #2a211c;
+  --mx-muted: color-mix(in srgb, var(--mx-ink) 62%, transparent);
+  --mx-ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --mx-ease-soft: cubic-bezier(0.4, 0, 0.2, 1);
+  --mx-dur-fast: 220ms;
+  --mx-dur-med: 520ms;
+  --mx-dur-slow: 980ms;
+
+  color: var(--mx-ink);
+  font-family: var(--mx-font-body);
+}
+
+.mx h1,
+.mx h2,
+.mx h3 {
+  font-family: var(--mx-font-display);
+  font-weight: 650;
+  letter-spacing: -0.02em;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mx *,
+  .mx *::before,
+  .mx *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

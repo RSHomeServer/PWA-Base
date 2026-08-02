@@ -1,0 +1,185 @@
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  overflow: hidden;
+  background: radial-gradient(
+    ellipse 80% 60% at 50% 40%,
+    transparent 0%,
+    rgba(4, 10, 18, 0.35) 100%
+  );
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+  max-width: 42rem;
+  margin-inline: auto;
+  padding: 6rem 1.5rem;
+  text-align: center;
+}
+
+.constellationSection {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  height: 100vh;
+  overflow: hidden;
+  background: #000;
+}
+
+.constellationStage {
+  position: absolute;
+  inset: 0;
+}
+
+.kicker {
+  margin: 0 0 1rem;
+  font-family: var(--bd-font-body);
+  font-size: 0.85rem;
+  font-style: italic;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(145, 183, 255, 0.55);
+  opacity: 0;
+  animation: settle 1s ease-out forwards;
+  animation-delay: 0.35s;
+}
+
+.title {
+  margin: 0 0 0.5rem;
+  font-family: var(--bd-font-display);
+  font-weight: 500;
+  font-size: clamp(3.2rem, 11vw, 7rem);
+  line-height: 1;
+  color: var(--bd-ivory);
+  text-shadow: 0 0 48px rgba(199, 232, 255, 0.12);
+}
+
+.letter {
+  display: inline-block;
+  opacity: 0;
+  filter: blur(6px);
+  transform: translateY(0.5em);
+  animation: inkSettle 0.7s cubic-bezier(0.2, 0.6, 0.2, 1) forwards;
+  animation-delay: calc(0.55s + var(--i, 0) * 0.055s);
+}
+
+.scriptLine {
+  margin: 0.5rem 0 1.75rem;
+  font-size: clamp(1.6rem, 3.4vw, 2.3rem);
+}
+
+.scriptWipe {
+  display: inline-block;
+  font-family: var(--bd-font-script);
+  color: var(--bd-gold-bright);
+  clip-path: inset(0 100% 0 0);
+  animation: wipe 1.3s cubic-bezier(0.3, 0.6, 0.2, 1) forwards;
+  animation-delay: 1.4s;
+}
+
+.invitation {
+  margin: 0 auto 2.5rem;
+  max-width: 32rem;
+  font-family: var(--bd-font-body);
+  font-size: clamp(1rem, 1.3vw, 1.15rem);
+  line-height: 1.85;
+  color: rgba(250, 245, 235, 0.58);
+  opacity: 0;
+  animation: settle 1.2s ease-out forwards;
+  animation-delay: 1.9s;
+}
+
+.signature {
+  display: inline-block;
+  margin: 0 0 3.5rem;
+  padding: 0.2rem 0.4rem;
+  font-family: var(--bd-font-script);
+  font-size: 1.3rem;
+  color: rgba(217, 183, 95, 0.7);
+  cursor: default;
+  opacity: 0;
+  animation: settle 1s ease-out forwards;
+  animation-delay: 2.2s;
+}
+
+.scrollCue {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  opacity: 0;
+  animation: settle 1s ease-out forwards;
+  animation-delay: 2.5s;
+}
+
+.scrollLine {
+  width: 1px;
+  height: 2.5rem;
+  background: linear-gradient(180deg, var(--bd-accent), transparent);
+  animation: pulseLine 2.4s ease-in-out infinite;
+  animation-delay: 2.8s;
+}
+
+.scrollLabel {
+  font-family: var(--bd-font-body);
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(145, 183, 255, 0.45);
+}
+
+@keyframes inkSettle {
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0);
+  }
+}
+
+@keyframes wipe {
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes settle {
+  from {
+    opacity: 0;
+    transform: translateY(0.6rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulseLine {
+  0%,
+  100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.85;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .kicker,
+  .letter,
+  .scriptWipe,
+  .invitation,
+  .signature,
+  .scrollCue,
+  .scrollLine {
+    animation: none;
+    opacity: 1;
+    filter: none;
+    transform: none;
+    clip-path: inset(0 0 0 0);
+  }
+}

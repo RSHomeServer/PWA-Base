@@ -1,0 +1,166 @@
+.stage {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  perspective: 1400px;
+}
+
+.camera {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform-origin: 50% 42%;
+  transform: scale(1.12) rotate(0deg);
+  transition: none;
+}
+
+.pullback .camera {
+  animation: keepsakePullback 5.2s var(--bd-ease-ballet, cubic-bezier(0.22, 0.61, 0.36, 1))
+    forwards;
+}
+
+.settled .camera {
+  transform: scale(1) rotate(-1.2deg) translate3d(0, 1.5vh, 0);
+}
+
+.skyDepth {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+  overflow: hidden;
+  transform: translateZ(0);
+  isolation: isolate;
+}
+
+.skyInteractive {
+  pointer-events: auto;
+  z-index: 0;
+}
+
+.contentLayer {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  opacity: 0;
+  transform: translateY(12px);
+  pointer-events: none;
+  transition:
+    opacity 1.4s var(--bd-ease-ballet, ease),
+    transform 1.4s var(--bd-ease-ballet, ease);
+}
+
+.contentLayer > * {
+  pointer-events: auto;
+}
+
+.pullback .contentLayer,
+.settled .contentLayer {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 1.8s;
+}
+
+.settled .contentLayer {
+  transition-delay: 0s;
+}
+
+/* Soft circular falloff — first hint of being inside glass, not a full globe yet. */
+.glassHint {
+  position: absolute;
+  inset: -8%;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0;
+  background:
+    radial-gradient(
+      circle at 50% 45%,
+      transparent 0%,
+      transparent 42%,
+      rgba(250, 245, 235, 0.03) 58%,
+      rgba(7, 17, 28, 0.45) 78%,
+      rgba(4, 10, 18, 0.72) 100%
+    );
+  transition: opacity 2.4s var(--bd-ease-ballet, ease);
+}
+
+.pullback .glassHint,
+.settled .glassHint {
+  opacity: 1;
+}
+
+.whisper {
+  position: absolute;
+  inset-inline: 0;
+  bottom: clamp(1.5rem, 6vh, 3rem);
+  z-index: 3;
+  margin: 0;
+  text-align: center;
+  font-family: var(--bd-font-body);
+  font-size: 0.95rem;
+  font-style: italic;
+  color: rgba(250, 245, 235, 0.45);
+  letter-spacing: 0.02em;
+  animation: whisperFade 1.2s ease 0.4s both;
+}
+
+.settled .whisper {
+  opacity: 0;
+  pointer-events: none;
+}
+
+@keyframes keepsakePullback {
+  0% {
+    transform: scale(1.14) rotate(0deg) translate3d(0, 0, 0);
+  }
+  55% {
+    transform: scale(1.04) rotate(-2.4deg) translate3d(0.4vw, 0.8vh, 0);
+  }
+  100% {
+    transform: scale(1) rotate(-1.2deg) translate3d(0, 1.5vh, 0);
+  }
+}
+
+@keyframes whisperFade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .camera,
+  .pullback .camera,
+  .contentLayer,
+  .glassHint,
+  .whisper {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .camera {
+    transform: none;
+  }
+
+  .contentLayer {
+    opacity: 1;
+    transform: none;
+  }
+
+  .glassHint {
+    opacity: 0.55;
+  }
+
+  .whisper {
+    display: none;
+  }
+}

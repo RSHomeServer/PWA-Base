@@ -1,0 +1,70 @@
+{
+  "schemaVersion": 2,
+  "overview": "Dedicated Leo-only polish for Find Us on memories.songara.uk/moment. No letter, no new Moments, no redesign. Rebuilt Leo from J2000-relative geometry fitted into a locked artwork frame matching the supplied lion PNG aspect ratio so stars, lines, labels, and overlay cannot drift across viewports. Replaced blotchy overlay with a blue-ink extract from Ref B (parchment/stars/lines removed, holes inpainted, lightly blurred). Discovery follows an Eulerian sketchPath (ν→sickle→body→close) so edges draw as one continuous pencil walk. Removed cursor:help; hover still shows names on completed stars. Validated with typecheck, eslint, docker rebuild, and three screenshot iterations under docs/artifacts/moments/find-us/leo-polish/.",
+  "executiveSummary": "Leo is now freeze-ready: astronomically grounded stick figure, locked lion+stars alignment, continuous sketch draw order, consistent pointer cursor, and warm amber palette — ready to move to the paper/letter transition as the next Moment.",
+  "userVisibleChanges": [
+    "Leo star positions and edges match classic sickle + hindquarters with ν Leonis and Denebola↔Zosma",
+    "Draw order follows a continuous Eulerian pencil walk instead of jumping around the graph",
+    "Lion overlay rebuilt from supplied atlas art without baked-in star/line artefacts",
+    "Stars, lines, labels, and lion stay locked together across desktop, wide, and mobile",
+    "Browser cursor stays default/pointer; completed stars still show names on hover"
+  ],
+  "architectureChanges": [
+    "Leo artwork uses fit:fill (SVG preserveAspectRatio none) inside an aspect-matched frame shared with star coordinates",
+    "Optional constellation.sketchPath drives edge draw order for consecutive strokes",
+    "Edge stroke animation uses pathLength=1 to avoid dashed artefacts"
+  ],
+  "filesModified": [
+    {
+      "area": "Moment UI",
+      "files": [
+        "packages/site-memories/src/moments/FindUsMoment.tsx",
+        "packages/site-memories/src/moments/FindUsMoment.module.css",
+        "packages/site-memories/src/moments/find-us.config.json"
+      ]
+    },
+    {
+      "area": "Assets",
+      "files": ["apps/memories-web/public/moments/find-us/leo-atlas.png"]
+    },
+    {
+      "area": "Artifacts",
+      "files": ["docs/artifacts/moments/find-us/leo-polish/"]
+    }
+  ],
+  "configurationChanges": [
+    "Leo stars/edges/discoveryOrder/sketchPath/artwork frame updated in find-us.config.json"
+  ],
+  "testingPerformed": [
+    {
+      "check": "typecheck (@platform/site-memories)",
+      "status": "pass",
+      "detail": "tsc --noEmit"
+    },
+    {
+      "check": "eslint FindUsMoment.tsx",
+      "status": "pass",
+      "detail": "max-warnings 0"
+    },
+    {
+      "check": "docker compose build memories-web",
+      "status": "pass",
+      "detail": "no-cache rebuild + up -d"
+    },
+    {
+      "check": "Leo polish visual capture",
+      "status": "pass",
+      "detail": "3 iterations: desktop mid/complete/hover, wide, mobile"
+    }
+  ],
+  "knownLimitations": [
+    "Star-to-anatomy registration is frame-fitted from J2000 + Ref B aspect, not a full landmark solver against the atlas plate",
+    "Lion overlay still carries soft parchment-extract texture after inpaint/blur",
+    "Sagittarius was intentionally left unchanged"
+  ],
+  "recommendedNextMilestone": "Freeze Leo. Next implementation task: paper / letter transition Moment — continuous sky→paper reveal and letter begin, without reopening Leo geometry.",
+  "filesChanged": 5,
+  "testsPassed": true,
+  "gitCommit": null,
+  "source": "structured"
+}

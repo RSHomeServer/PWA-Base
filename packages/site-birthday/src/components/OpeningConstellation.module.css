@@ -1,0 +1,81 @@
+.stage {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.echo {
+  width: 6rem;
+  height: 3.6rem;
+  margin: 0 auto 1.5rem;
+  pointer-events: none;
+}
+
+.svg {
+  width: min(46rem, 90vw);
+  height: auto;
+  overflow: visible;
+}
+
+.star {
+  fill: var(--bd-highlight);
+  opacity: 0;
+  animation: starAppear 0.8s ease-out forwards;
+  animation-delay: calc(0.6s + var(--i, 0) * 0.22s);
+  filter: drop-shadow(0 0 2px rgba(199, 232, 255, 0.75));
+}
+
+.starEcho {
+  fill: var(--bd-highlight);
+  opacity: 0.8;
+}
+
+.line {
+  stroke-dasharray: 260;
+  stroke-dashoffset: 260;
+  opacity: 0;
+  animation: lineDraw 2.6s ease-in-out forwards;
+  animation-delay: 2.4s;
+  filter: drop-shadow(0 0 3px rgba(145, 183, 255, 0.55));
+}
+
+.lineEcho {
+  opacity: 0.5;
+}
+
+@keyframes starAppear {
+  from {
+    opacity: 0;
+    r: 0.2;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes lineDraw {
+  0% {
+    opacity: 0;
+    stroke-dashoffset: 260;
+  }
+  4% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.85;
+    stroke-dashoffset: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .star,
+  .line {
+    animation: none;
+    opacity: 1;
+    stroke-dashoffset: 0;
+  }
+}

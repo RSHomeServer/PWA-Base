@@ -1,0 +1,121 @@
+.globeButton {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  padding: 0;
+  cursor: pointer;
+  display: grid;
+  justify-items: center;
+  gap: 0.85rem;
+  font: inherit;
+  width: 100%;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.globeButton:hover {
+  transform: translateY(-4px) scale(1.02);
+}
+
+.globeButton:hover .glass {
+  outline: 1px solid rgba(255, 210, 100, 0.35);
+  box-shadow:
+    inset 0 -18px 36px rgba(0, 0, 0, 0.45),
+    0 0 20px rgba(255, 200, 80, 0.18),
+    0 12px 32px rgba(0, 0, 0, 0.45);
+}
+
+.globeButton:active {
+  transform: translateY(-1px) scale(0.98);
+  transition-duration: 0.08s;
+}
+
+.globeButton:focus-visible {
+  outline: 2px solid var(--bd-accent, #91b7ff);
+  outline-offset: 6px;
+  border-radius: 0.5rem;
+}
+
+.selected .glass {
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--bd-gold, #d9b75f) 55%, transparent);
+}
+
+.globe {
+  width: 100%;
+  display: grid;
+  justify-items: center;
+}
+
+.glass {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  overflow: hidden;
+  /* Match constellation page sky (find-us.config.json). */
+  background:
+    radial-gradient(ellipse 90% 55% at 50% 100%, rgba(40, 55, 75, 0.35), transparent 70%),
+    linear-gradient(180deg, #04080f, #0a1420 48%, #12181f);
+  box-shadow:
+    inset 0 -18px 36px rgba(0, 0, 0, 0.45),
+    0 0 0 1px rgba(199, 232, 255, 0.28),
+    0 0 18px rgba(120, 170, 220, 0.18),
+    0 18px 40px rgba(0, 0, 0, 0.35);
+}
+
+.preview {
+  position: absolute;
+  inset: 8%;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.shine {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.base {
+  width: 62%;
+  margin-top: -0.35rem;
+  display: grid;
+  justify-items: center;
+}
+
+.baseTop {
+  width: 100%;
+  height: 0.55rem;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #c9b48a, #8a734f);
+}
+
+.baseBody {
+  width: 88%;
+  height: 1.35rem;
+  margin-top: -0.15rem;
+  border-radius: 0.2rem 0.2rem 0.55rem 0.55rem;
+  background: linear-gradient(180deg, #a89068, #6e5a3c);
+}
+
+.label {
+  min-width: 11.5rem;
+  padding: 0.42rem 1rem 0.5rem;
+  border-radius: 0.45rem;
+  border: 1px solid rgba(88, 52, 24, 0.55);
+  background: linear-gradient(180deg, #c08951 0%, #a56a3b 45%, #8b562f 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 215, 162, 0.58),
+    inset 0 -1px 0 rgba(95, 56, 27, 0.48),
+    0 0.28rem 0.45rem rgba(20, 10, 6, 0.25);
+  text-align: center;
+  font-family: var(--bd-font-display, Georgia, serif);
+  font-size: 1.02rem;
+  color: #4f2f1a;
+  letter-spacing: 0.02em;
+  text-shadow:
+    0 1px 0 rgba(232, 180, 124, 0.26),
+    0 -1px 0 rgba(66, 37, 17, 0.35);
+}

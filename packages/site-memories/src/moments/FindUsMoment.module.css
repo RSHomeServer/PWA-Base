@@ -1,0 +1,811 @@
+@import url("https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Parisienne&display=swap");
+
+:global(html.moment-immersive) {
+  overflow: hidden;
+}
+
+:global(html.moment-immersive body) {
+  overflow: hidden;
+}
+
+/* Hide platform chrome only — do not blanket-hide every <header>/<nav>
+ * (alignment tool and other in-page headers must remain usable). */
+:global(html.moment-immersive) :global(a[href="#main-content"]),
+:global(html.moment-immersive) :global(button[aria-label="Expand top bar"]),
+:global(html.moment-immersive) :global(button[aria-label="Collapse top bar"]),
+:global(html.moment-immersive) :global(header[aria-label="Platform mega menu"]),
+:global(html.moment-immersive) :global(nav[aria-label="Platform sections"]),
+:global(html.moment-immersive) :global(nav[aria-label="Platform navigation"]) {
+  visibility: hidden !important;
+  pointer-events: none !important;
+  opacity: 0 !important;
+}
+
+.root {
+  position: fixed;
+  inset: 0;
+  z-index: 2147483000;
+  overflow: hidden;
+  background: #000;
+  color: var(--text);
+  font-family: "EB Garamond", Georgia, "Times New Roman", serif;
+  opacity: 0;
+  transition: opacity var(--fade-in) ease;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  display: grid;
+  place-items: center;
+}
+
+.root.skyReady {
+  opacity: 1;
+}
+
+.sky {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 90% 55% at 50% 100%, rgba(40, 55, 75, 0.35), transparent 70%),
+    linear-gradient(180deg, var(--sky-top), var(--sky-mid) 48%, var(--sky-bottom));
+  transition: filter 1.6s ease;
+}
+
+.brighten .sky {
+  filter: brightness(1.1);
+}
+
+.skyStarsFade .sky {
+  opacity: 0.35;
+}
+
+.layout {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  /* 5% | 45% | 48% | 2% — tighter right margin, wider message column */
+  grid-template-columns: 5% 45% 48% 2%;
+  grid-template-rows: 5% 90% 5%;
+  align-items: stretch;
+  justify-items: stretch;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.stageColumn {
+  grid-column: 2;
+  grid-row: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  min-height: 0;
+  width: 100%;
+  height: 100%;
+  container-type: size;
+  container-name: stage-slot;
+}
+
+/* Fit square stage inside the 45×90 slot; keep aspect ratio. */
+.stage {
+  position: relative;
+  z-index: 1;
+  width: min(100cqw, 100cqh);
+  height: min(100cqw, 100cqh);
+  max-width: 100%;
+  max-height: 100%;
+  aspect-ratio: var(--stage-aspect, 1 / 1);
+  overflow: hidden;
+}
+
+.messages {
+  grid-column: 3;
+  grid-row: 2;
+  position: relative;
+  z-index: 5;
+  justify-self: stretch;
+  align-self: stretch;
+  min-width: 0;
+  min-height: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  display: block;
+  padding: 0 0.35rem 0 0.55rem;
+  pointer-events: auto;
+  box-sizing: border-box;
+}
+
+.messagesEmpty {
+  visibility: hidden;
+}
+
+.messagesBand {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.35rem;
+  box-sizing: border-box;
+  min-height: 0;
+}
+
+.messagesBandFilled {
+  justify-content: space-between;
+  gap: 0.35rem;
+}
+
+.messageRow {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.55rem;
+  flex: 0 0 auto;
+  min-width: 0;
+  font-size: clamp(1.1rem, 1.4vw, 1.48rem);
+  cursor: pointer;
+  border-radius: 0.35rem;
+}
+
+.messageRowPending {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.messageRowPending .message {
+  opacity: 0;
+  animation: none;
+}
+
+.messageRowRevealed {
+  visibility: visible;
+}
+
+.messageRow:focus-visible {
+  outline: 1px solid rgba(255, 246, 230, 0.55);
+  outline-offset: 3px;
+}
+
+.messageStar {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 0.92em;
+  height: 0.92em;
+  /* Optical centre with first text line (line-height 1.48) */
+  margin-top: calc((1.48em - 0.92em) / 2 + 0.12em);
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--star-bullet, #f0c78a);
+  border-radius: 50%;
+  line-height: 0;
+  pointer-events: none;
+}
+
+.messageStarSvg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.messageStarSvg line {
+  stroke: currentColor;
+  stroke-width: 1.05;
+  stroke-linecap: round;
+  opacity: 0.9;
+}
+
+.messageStarSvg circle {
+  fill: currentColor;
+  filter: drop-shadow(0 0 2px color-mix(in srgb, currentColor 55%, transparent));
+}
+
+.message {
+  margin: 0;
+  flex: 1 1 auto;
+  min-width: 0;
+  font-family: "EB Garamond", Georgia, serif;
+  font-style: italic;
+  font-size: 1em;
+  line-height: 1.48;
+  color: var(--star-ink, var(--text));
+  text-shadow:
+    0 0 10px rgba(0, 0, 0, 0.55),
+    0 0 18px color-mix(in srgb, var(--star-ink, transparent) 28%, transparent);
+  opacity: 0;
+  animation: fragmentIn var(--fragment-fade) ease forwards;
+  white-space: nowrap;
+}
+
+.dedication {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 12%;
+  margin: 0;
+  text-align: center;
+  font-family: "Parisienne", cursive;
+  font-size: clamp(1.15rem, 2.5vw, 1.7rem);
+  color: rgba(245, 238, 228, 0.88);
+  text-shadow: 0 0 16px rgba(0, 0, 0, 0.55);
+  opacity: 0;
+  animation: fadeIn 1.6s ease forwards;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.resetBtn {
+  position: absolute;
+  top: max(0.85rem, env(safe-area-inset-top));
+  right: max(0.85rem, env(safe-area-inset-right));
+  z-index: 6;
+  border: 0;
+  border-radius: 999px;
+  padding: 0.45rem 0.95rem;
+  background: rgba(18, 24, 34, 0.55);
+  color: rgba(245, 238, 228, 0.82);
+  font-family: "EB Garamond", Georgia, serif;
+  font-size: 0.92rem;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  backdrop-filter: blur(6px);
+}
+
+.resetBtn:hover,
+.resetBtn:focus-visible {
+  color: rgba(255, 250, 242, 0.95);
+  background: rgba(28, 36, 48, 0.72);
+  outline: none;
+}
+
+@keyframes fragmentIn {
+  to {
+    opacity: 1;
+  }
+}
+
+.bgStars {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.bgStar {
+  position: absolute;
+  border-radius: 50%;
+  background: currentColor;
+  box-shadow: 0 0 4px rgba(206, 223, 244, 0.35);
+  animation:
+    twinkleBg var(--bg-twinkle-ms, 5000ms) ease-in-out infinite,
+    pulseBg var(--bg-pulse-ms, 11000ms) ease-in-out infinite;
+  animation-delay: var(--bg-delay, 0ms), var(--bg-delay, 0ms);
+  transform: translate(-50%, -50%);
+}
+
+@keyframes twinkleBg {
+  0%,
+  100% {
+    opacity: var(--bg-op-min, 0.1);
+  }
+  50% {
+    opacity: var(--bg-op-max, 0.32);
+  }
+}
+
+@keyframes pulseBg {
+  0%,
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.03);
+  }
+}
+
+.constellationSvg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  /* Square stage + square viewBox: meet fills 1:1 — same space as % hit targets */
+  display: block;
+}
+
+.atlasArt {
+  pointer-events: none;
+  /* New cut-out stencil is already luminous blue on transparent —
+   * normal blend keeps grain even (screen exaggerated mottling). */
+  mix-blend-mode: normal;
+}
+
+.edge {
+  fill: none;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: drawLine cubic-bezier(0.33, 0, 0.2, 1) forwards;
+  opacity: 0.92;
+  vector-effect: non-scaling-stroke;
+  filter: drop-shadow(0 0 0.45px rgba(224, 184, 120, 0.55));
+}
+
+.restState .edge {
+  stroke-dasharray: none;
+  stroke-dashoffset: 0;
+  animation: none;
+  opacity: 0.88;
+}
+
+@keyframes drawLine {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.constellationLayer {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  /* Visible from first paint unless explicitly hidden (no delayed fade-in). */
+  opacity: 0;
+}
+
+.constellationVisible {
+  opacity: 1;
+  transition: none;
+}
+
+.starSprite {
+  pointer-events: none;
+  /* Avoid CSS transforms on SVG star geometry — they drift off-centre
+   * (the “floating blob”) and snap back when activation state changes. */
+}
+
+.starHaloSoft {
+  opacity: 0.06;
+  filter: blur(0.12px);
+  animation: haloTwinkle var(--twinkle-ms, 5600ms) ease-in-out infinite;
+  animation-delay: var(--twinkle-delay, 0ms);
+}
+
+.starHaloBloom {
+  opacity: 0.025;
+  filter: blur(0.4px);
+  animation: bloomTwinkle var(--twinkle-ms, 5600ms) ease-in-out infinite;
+  animation-delay: var(--twinkle-delay, 0ms);
+}
+
+.starBody {
+  opacity: 0.28;
+  filter:
+    drop-shadow(0 0 0.4px rgba(255, 255, 255, 0.7))
+    drop-shadow(0 0 1.1px var(--glow-soft));
+  animation: bodyTwinkle var(--twinkle-ms, 5600ms) ease-in-out infinite;
+  animation-delay: var(--twinkle-delay, 0ms);
+}
+
+.starCore {
+  opacity: 0.85;
+  filter: drop-shadow(0 0 0.35px rgba(255, 255, 255, 0.9));
+}
+
+.starSpikes {
+  stroke: rgba(255, 255, 255, 0.95);
+  stroke-width: 0.055;
+  stroke-linecap: round;
+  opacity: 0.78;
+  filter: drop-shadow(0 0 0.4px rgba(255, 255, 255, 0.65));
+}
+
+.starSpikesSecondary {
+  stroke: rgba(255, 252, 245, 0.7);
+  stroke-width: 0.032;
+  stroke-linecap: round;
+  opacity: 0.42;
+}
+
+.starSpriteOn .starHaloSoft {
+  opacity: 0.16;
+}
+
+.starSpriteOn .starHaloBloom {
+  opacity: 0.05;
+}
+
+.starSpriteOn .starBody {
+  opacity: 0.82;
+  animation-duration: max(7800ms, var(--twinkle-ms, 5600ms));
+}
+
+.starSpriteOn .starSpikes {
+  opacity: 0.6;
+}
+
+.starSpriteOn .starSpikesSecondary {
+  opacity: 0.32;
+}
+
+.starSpriteActive .starHaloSoft {
+  opacity: 0.2;
+}
+
+.starSpriteActive .starHaloBloom {
+  opacity: 0.07;
+}
+
+.starSpriteActive .starBody {
+  opacity: 0.92;
+}
+
+.starSpriteActive .starSpikes {
+  opacity: 0.9;
+}
+
+.starSpriteActive .starSpikesSecondary {
+  opacity: 0.5;
+}
+
+.starTargetRing {
+  fill: none;
+  stroke: rgba(255, 246, 230, 0.55);
+  stroke-width: 0.12;
+  opacity: 0.85;
+  pointer-events: none;
+}
+
+.regulus .starHaloSoft {
+  opacity: 0.1;
+}
+
+.regulus .starHaloBloom {
+  opacity: 0.045;
+}
+
+.regulus.starSpriteOn .starHaloSoft,
+.regulus.starSpriteActive .starHaloSoft {
+  opacity: 0.3;
+}
+
+.regulus.starSpriteOn .starSpikes,
+.regulus.starSpriteActive .starSpikes {
+  stroke: rgba(255, 236, 240, 0.95);
+}
+
+.regulus .starBody {
+  filter:
+    drop-shadow(0 0 0.7px rgba(255, 248, 246, 0.95))
+    drop-shadow(0 0 2.4px rgba(247, 163, 200, 0.7))
+    drop-shadow(0 0 4px rgba(247, 163, 200, 0.4));
+}
+
+.regulus.starSpriteOn .starHaloBloom,
+.regulus.starSpriteActive .starHaloBloom {
+  opacity: 0.14;
+  animation:
+    bloomTwinkle var(--twinkle-ms, 5600ms) ease-in-out infinite,
+    heartbeat 2800ms ease-in-out infinite;
+  animation-delay: var(--twinkle-delay, 0ms), 0ms;
+}
+
+.rasalas .starSpikes {
+  stroke-width: 0.065;
+}
+
+.denebola .starBody {
+  animation-duration: max(2400ms, calc(var(--twinkle-ms, 5600ms) * 0.55));
+}
+
+.denebola.starSpriteOn .starBody,
+.denebola.starSpriteActive .starBody {
+  animation-duration: max(2400ms, calc(var(--twinkle-ms, 5600ms) * 0.55));
+}
+
+.restState .starSprite .starHaloSoft {
+  opacity: 0.14;
+}
+
+.restState .starSprite .starHaloBloom {
+  opacity: 0.05;
+}
+
+.restState .starSprite .starBody {
+  animation-duration: 10400ms;
+}
+
+.restState .starSprite .starSpikes {
+  opacity: 0.5;
+}
+
+.restState .regulus .starHaloSoft {
+  opacity: 0.2;
+}
+
+.restState .regulus .starSpikes {
+  opacity: 0.55;
+}
+
+@keyframes heartbeat {
+  0%,
+  100% {
+    opacity: 0.1;
+  }
+  35% {
+    opacity: 0.22;
+  }
+  50% {
+    opacity: 0.12;
+  }
+  70% {
+    opacity: 0.2;
+  }
+}
+
+@keyframes haloTwinkle {
+  0%,
+  100% {
+    opacity: 0.18;
+  }
+  50% {
+    opacity: 0.34;
+  }
+}
+
+@keyframes bloomTwinkle {
+  0%,
+  100% {
+    opacity: 0.04;
+  }
+  50% {
+    opacity: 0.1;
+  }
+}
+
+@keyframes bodyTwinkle {
+  0%,
+  100% {
+    opacity: 0.62;
+  }
+  40% {
+    opacity: 0.9;
+  }
+  70% {
+    opacity: 0.72;
+  }
+}
+
+/* Hit targets only — visual stars live in SVG for exact line joins */
+.starBtn {
+  position: absolute;
+  width: 3.4rem;
+  height: 3.4rem;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  cursor: pointer;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.starBtn:focus-visible {
+  box-shadow: 0 0 0 0.9px rgba(240, 220, 190, 0.35);
+}
+
+.starIdle {
+  cursor: default;
+}
+
+.starActive {
+  cursor: pointer;
+  z-index: 3;
+}
+
+.starOn {
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+.starName {
+  position: absolute;
+  transform: translate(0.75rem, -1.2rem);
+  font-family: "EB Garamond", Georgia, serif;
+  font-style: italic;
+  font-size: 0.95rem;
+  letter-spacing: 0.03em;
+  color: var(--tooltip-ink, var(--label));
+  pointer-events: none;
+  white-space: nowrap;
+  text-shadow:
+    0 0 12px rgba(0, 0, 0, 0.75),
+    0 0 16px color-mix(in srgb, var(--tooltip-body, transparent) 35%, transparent);
+  animation: nameIn 0.3s ease;
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.05rem;
+}
+
+.starName strong {
+  font-weight: 500;
+  color: var(--tooltip-ink, var(--label));
+}
+
+.starSubtitle {
+  font-size: 0.8rem;
+  color: color-mix(
+    in srgb,
+    var(--tooltip-ink, rgba(236, 226, 208, 0.95)) 72%,
+    #fff6e8 28%
+  );
+  line-height: 1.2;
+  opacity: 0.95;
+}
+
+@keyframes nameIn {
+  from {
+    opacity: 0;
+    transform: translate(0.75rem, -0.95rem);
+  }
+  to {
+    opacity: 1;
+    transform: translate(0.75rem, -1.2rem);
+  }
+}
+
+.constellationLabel {
+  position: absolute;
+  transform: translate(-50%, 0);
+  margin: 0;
+  font-family: "Parisienne", cursive;
+  font-size: clamp(1.3rem, 2.6vw, 1.75rem);
+  letter-spacing: 0.08em;
+  opacity: 0;
+  animation: fadeIn 1.5s ease forwards;
+  pointer-events: none;
+  text-shadow: 0 0 18px rgba(0, 0, 0, 0.55);
+  z-index: 2;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+.opening {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 12%;
+  margin: 0;
+  text-align: center;
+  font-family: "Parisienne", cursive;
+  font-size: clamp(1.35rem, 3.2vw, 1.9rem);
+  color: var(--text-muted);
+  opacity: 0;
+  animation: openingIn var(--opening-fade) ease forwards;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.openingLeaving {
+  animation: openingOut var(--opening-out, 1400ms) ease forwards;
+}
+
+@keyframes openingIn {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes openingOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bgStar,
+  .edge,
+  .opening,
+  .openingLeaving,
+  .message,
+  .constellationLabel,
+  .starHaloSoft,
+  .starHaloBloom,
+  .starBody {
+    animation: none !important;
+  }
+
+  .constellationLayer {
+    transition: none !important;
+  }
+
+  .root {
+    opacity: 1;
+  }
+
+  .opening,
+  .message,
+  .constellationLabel,
+  .constellationVisible {
+    opacity: 1;
+  }
+}
+
+/* Stacked: 5% | 90% | 5% width, 5% | 45% | 45% | 5% height */
+@media (max-width: 900px) {
+  .layout {
+    grid-template-columns: 5% 90% 5%;
+    grid-template-rows: 5% 45% 45% 5%;
+    padding-top: 0;
+    row-gap: 0;
+  }
+
+  .stageColumn {
+    grid-column: 2;
+    grid-row: 2;
+  }
+
+  .stage {
+    width: min(100cqw, 100cqh);
+    height: min(100cqw, 100cqh);
+  }
+
+  .messages {
+    grid-column: 2;
+    grid-row: 3;
+    padding: 0.15rem 0.35rem;
+  }
+
+  .messagesBand {
+    margin-top: 0 !important;
+    height: 100% !important;
+    justify-content: space-between;
+    gap: 0.25rem;
+  }
+
+  .messageRow {
+    font-size: clamp(1rem, 2.5vh, 1.28rem);
+  }
+
+  .message {
+    white-space: normal;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  .message {
+    line-height: 1.4;
+  }
+
+  .messageStar {
+    width: 0.9em;
+    height: 0.9em;
+  }
+
+  .starBtn {
+    width: 2.4rem;
+    height: 2.4rem;
+  }
+}

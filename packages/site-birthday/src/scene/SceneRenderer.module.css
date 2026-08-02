@@ -1,0 +1,487 @@
+.viewport {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
+  background: #1a1612;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+}
+
+.viewport[data-dragging="true"] {
+  cursor: grabbing;
+}
+
+.viewport:active {
+  cursor: grabbing;
+}
+
+.toolbar {
+  position: absolute;
+  z-index: 30;
+  inset: 0.65rem 0.75rem auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  pointer-events: none;
+}
+
+.toolbarMeta {
+  font: 0.68rem/1.2 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  letter-spacing: 0.05em;
+  color: rgba(200, 210, 225, 0.55);
+  max-width: 55%;
+}
+
+.toolbarActions {
+  display: flex;
+  gap: 0.4rem;
+  pointer-events: auto;
+  align-items: center;
+}
+
+.modeToggle {
+  display: inline-flex;
+  gap: 0.25rem;
+  padding: 0.15rem;
+  border-radius: 0.35rem;
+  background: rgba(10, 12, 16, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.hitTargetIdle {
+  fill: rgba(0, 0, 0, 0.001);
+  stroke: none;
+  cursor: default;
+}
+
+.toolBtn {
+  appearance: none;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(20, 24, 32, 0.78);
+  color: rgba(230, 235, 245, 0.9);
+  font: 0.68rem/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  letter-spacing: 0.04em;
+  padding: 0.4rem 0.65rem;
+  border-radius: 0.3rem;
+  cursor: pointer;
+}
+
+.toolBtn:hover {
+  border-color: rgba(255, 255, 255, 0.35);
+  background: rgba(32, 38, 50, 0.9);
+}
+
+.toolBtn[aria-pressed="true"] {
+  border-color: rgba(90, 200, 255, 0.55);
+  color: #b8ecff;
+  background: rgba(30, 50, 70, 0.9);
+}
+
+.toolBtn:focus-visible {
+  outline: 2px solid #91b7ff;
+  outline-offset: 2px;
+}
+
+.inspector {
+  position: absolute;
+  z-index: 28;
+  top: 3.1rem;
+  right: 0.75rem;
+  width: min(14.5rem, calc(100% - 1.5rem));
+  padding: 0.7rem 0.8rem;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 0.4rem;
+  background: rgba(18, 22, 30, 0.9);
+  color: rgba(230, 235, 245, 0.92);
+  pointer-events: auto;
+  backdrop-filter: blur(8px);
+}
+
+.inspectorTitle {
+  margin: 0 0 0.55rem;
+  font: 0.78rem/1.2 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  letter-spacing: 0.04em;
+  font-weight: 700;
+}
+
+.inspectorList {
+  margin: 0;
+  display: grid;
+  gap: 0.35rem;
+}
+
+.inspectorList div {
+  display: grid;
+  grid-template-columns: 6.2rem 1fr;
+  gap: 0.35rem;
+  align-items: baseline;
+}
+
+.inspectorList dt {
+  margin: 0;
+  font: 0.62rem/1.3 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  letter-spacing: 0.04em;
+  color: rgba(170, 185, 205, 0.65);
+  text-transform: uppercase;
+}
+
+.inspectorList dd {
+  margin: 0;
+  font: 0.7rem/1.35 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  color: rgba(230, 235, 245, 0.92);
+  word-break: break-word;
+}
+
+.deleteBtn {
+  appearance: none;
+  margin-top: 0.75rem;
+  width: 100%;
+  border: 1px solid rgba(230, 90, 90, 0.45);
+  background: rgba(60, 24, 28, 0.85);
+  color: #ffc4c4;
+  font: 0.68rem/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  letter-spacing: 0.04em;
+  padding: 0.45rem 0.55rem;
+  border-radius: 0.3rem;
+  cursor: pointer;
+}
+
+.deleteBtn:hover {
+  border-color: rgba(255, 120, 120, 0.7);
+  background: rgba(90, 30, 36, 0.95);
+}
+
+.library {
+  position: absolute;
+  z-index: 28;
+  top: 3.1rem;
+  left: 0.75rem;
+  width: min(15.5rem, calc(100% - 1.5rem));
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 0.4rem;
+  background: rgba(18, 22, 30, 0.92);
+  color: rgba(230, 235, 245, 0.92);
+  pointer-events: auto;
+  backdrop-filter: blur(8px);
+  max-height: calc(100% - 4rem);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.libraryToggle {
+  appearance: none;
+  border: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background: transparent;
+  color: rgba(200, 215, 235, 0.9);
+  font: 0.72rem/1.2 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  letter-spacing: 0.04em;
+  text-align: left;
+  padding: 0.55rem 0.7rem;
+  cursor: pointer;
+}
+
+.libraryToggle:hover {
+  color: #fff;
+}
+
+.libraryBody {
+  overflow: auto;
+  padding: 0.45rem 0.5rem 0.65rem;
+  display: grid;
+  gap: 0.65rem;
+}
+
+.librarySectionTitle {
+  margin: 0 0 0.3rem;
+  font: 0.62rem/1.2 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(160, 180, 205, 0.7);
+}
+
+.libraryList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.25rem;
+}
+
+.libraryItem {
+  appearance: none;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 2.2rem 1fr;
+  gap: 0.45rem;
+  align-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 0.3rem;
+  background: rgba(28, 34, 44, 0.7);
+  color: inherit;
+  padding: 0.3rem 0.4rem;
+  cursor: pointer;
+  text-align: left;
+}
+
+.libraryItem:hover {
+  border-color: rgba(120, 190, 255, 0.35);
+}
+
+.libraryItem[data-active="true"] {
+  border-color: rgba(90, 200, 255, 0.55);
+  background: rgba(30, 50, 70, 0.9);
+}
+
+.libraryThumb {
+  width: 2.2rem;
+  height: 2.2rem;
+  display: grid;
+  place-items: center;
+  border-radius: 0.2rem;
+  background: rgba(10, 12, 16, 0.55);
+  overflow: hidden;
+  font: 0.55rem/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  color: rgba(200, 210, 225, 0.7);
+}
+
+.libraryThumb img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.libraryMeta {
+  display: grid;
+  gap: 0.12rem;
+  min-width: 0;
+}
+
+.libraryName {
+  font: 0.7rem/1.2 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  color: rgba(235, 240, 250, 0.95);
+}
+
+.librarySurfaces {
+  font: 0.58rem/1.25 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  color: rgba(160, 175, 195, 0.65);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.stage {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  transform-origin: center center;
+  will-change: transform;
+}
+
+.stageSmooth {
+  transition: transform 120ms cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.world {
+  position: relative;
+  flex: 0 0 auto;
+}
+
+.canvas {
+  display: block;
+  overflow: visible;
+}
+
+.layerWall,
+.layerFloor,
+.layerArtwork,
+.layerOverlay,
+.layerGuides {
+  pointer-events: none;
+}
+
+.layerHits {
+  pointer-events: auto;
+}
+
+.hitTarget {
+  fill: rgba(0, 0, 0, 0.001);
+  stroke: none;
+  cursor: pointer;
+}
+
+.hitTarget:hover {
+  fill: rgba(120, 200, 255, 0.08);
+}
+
+.wallLeft {
+  fill: #c4b6a4;
+  stroke: rgba(60, 48, 36, 0.35);
+  stroke-width: 1.25;
+}
+
+.wallBack {
+  fill: #d2c4b0;
+  stroke: rgba(60, 48, 36, 0.35);
+  stroke-width: 1.25;
+}
+
+.floorPoly {
+  fill: #8a7460;
+  stroke: rgba(40, 30, 22, 0.45);
+  stroke-width: 1.25;
+}
+
+.artwork {
+  pointer-events: none;
+}
+
+.selectionRing {
+  fill: none;
+  stroke: rgba(120, 220, 255, 0.95);
+  stroke-width: 2;
+  stroke-dasharray: 5 3;
+}
+
+.parentSurfaceHighlight {
+  fill: rgba(90, 160, 220, 0.08);
+  stroke: rgba(140, 200, 255, 0.75);
+  stroke-width: 1.6;
+}
+
+.gridCell {
+  fill: none;
+  stroke: rgba(120, 160, 200, 0.28);
+  stroke-width: 0.65;
+}
+
+.gridCellActive {
+  fill: none;
+  stroke: rgba(140, 190, 230, 0.4);
+  stroke-width: 0.7;
+}
+
+.occupiedCellSelected {
+  fill: rgba(80, 200, 255, 0.28);
+  stroke: rgba(120, 220, 255, 0.95);
+  stroke-width: 1.15;
+}
+
+.previewCellValid {
+  fill: rgba(70, 210, 130, 0.32);
+  stroke: rgba(90, 230, 150, 0.95);
+  stroke-width: 1.2;
+}
+
+.previewCellInvalid {
+  fill: rgba(230, 80, 80, 0.28);
+  stroke: rgba(255, 120, 120, 0.95);
+  stroke-width: 1.2;
+}
+
+.surfaceBounds {
+  fill: rgba(90, 160, 220, 0.05);
+  stroke: rgba(140, 200, 255, 0.65);
+  stroke-width: 1.4;
+}
+
+.surfaceLabel {
+  fill: rgba(160, 200, 255, 0.8);
+  font: 700 9px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  letter-spacing: 0.06em;
+}
+
+.occupiedFootprint {
+  fill: rgba(90, 200, 255, 0.1);
+  stroke: rgba(90, 210, 255, 0.9);
+  stroke-width: 1.4;
+}
+
+.occupiedCell {
+  fill: rgba(50, 180, 230, 0.16);
+  stroke: rgba(90, 210, 255, 0.7);
+  stroke-width: 0.9;
+}
+
+.originDot {
+  fill: #ff5a3c;
+  stroke: rgba(0, 0, 0, 0.5);
+  stroke-width: 1.25;
+}
+
+.originLabel {
+  fill: #ffb4a4;
+  font: 9px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.authorPanel {
+  position: absolute;
+  top: 3.1rem;
+  left: 15.5rem;
+  z-index: 6;
+  width: 15.5rem;
+  max-height: calc(100% - 4rem);
+  overflow: auto;
+  padding: 0.65rem 0.75rem 0.85rem;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(18, 16, 14, 0.92);
+  color: #f2ebe3;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
+}
+
+.authorHeader {
+  margin-bottom: 0.45rem;
+  font: 600 0.78rem/1.2 ui-sans-serif, system-ui, sans-serif;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #d8cfc4;
+}
+
+.authorSection {
+  margin-top: 0.65rem;
+  padding-top: 0.55rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.authorSection h3 {
+  margin: 0 0 0.4rem;
+  font: 600 0.72rem/1.2 ui-sans-serif, system-ui, sans-serif;
+  color: #b9aea2;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.authorField {
+  display: grid;
+  grid-template-columns: 1fr 4.6rem;
+  gap: 0.35rem;
+  align-items: center;
+  margin-bottom: 0.28rem;
+  font: 0.72rem/1.2 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  color: #e8dfd5;
+}
+
+.authorField input[type="number"],
+.authorField select {
+  width: 100%;
+  padding: 0.2rem 0.3rem;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(0, 0, 0, 0.35);
+  color: #fff8f0;
+  font: inherit;
+}
+
+.authorField input[type="checkbox"] {
+  width: 1rem;
+  height: 1rem;
+  justify-self: end;
+}

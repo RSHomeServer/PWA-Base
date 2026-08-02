@@ -1,0 +1,149 @@
+.page {
+  height: 100%;
+  min-height: calc(100dvh - 4.5rem);
+  padding: 0;
+  margin: 0;
+  background: #1a1612;
+  color: var(--bd-highlight);
+  font-family: var(--bd-font-body);
+  overflow: hidden;
+}
+
+.editor {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  height: 100%;
+  min-height: inherit;
+}
+
+.chrome {
+  z-index: 5;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.65rem 1.25rem;
+  padding: 0.45rem 0.9rem;
+  background: rgba(22, 18, 14, 0.94);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.chromeTitle {
+  min-width: 0;
+  flex: 0 1 auto;
+}
+
+.eyebrow {
+  margin: 0;
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--bd-gold) 70%, transparent);
+}
+
+.title {
+  margin: 0.1rem 0 0;
+  font-family: var(--bd-font-display);
+  font-size: clamp(1.05rem, 2.2vw, 1.35rem);
+  font-weight: 500;
+  line-height: 1.1;
+  color: var(--bd-ivory);
+  white-space: nowrap;
+}
+
+.viewportHost {
+  position: relative;
+  min-height: 0;
+  height: 100%;
+}
+
+.experienceNav {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.experienceList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+/* Soften chrome links — room is the hero. */
+.experienceLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 1.85rem;
+  padding: 0.3rem 0.65rem;
+  color: color-mix(in srgb, var(--bd-ivory) 82%, transparent);
+  text-decoration: none;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.25rem;
+  font-family: var(--bd-font-body);
+  font-size: 0.82rem;
+}
+
+.experienceLink:hover {
+  background: color-mix(in srgb, var(--bd-navy-soft) 85%, var(--bd-gold-faint));
+  border-color: color-mix(in srgb, var(--bd-gold) 45%, var(--bd-line));
+}
+
+.experienceLink:focus-visible {
+  outline: 2px solid var(--bd-accent);
+  outline-offset: 2px;
+}
+
+.experienceLinkEmoji {
+  flex: 0 0 auto;
+  font-size: 0.95rem;
+  line-height: 1;
+}
+
+.footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.65rem 1rem;
+  margin-left: auto;
+}
+
+.siteNav {
+  margin-right: 0.25rem;
+}
+
+.link {
+  font-size: 0.8rem;
+  color: color-mix(in srgb, var(--bd-gold) 85%, transparent);
+  text-decoration: none;
+  border-bottom: 1px solid color-mix(in srgb, var(--bd-gold) 35%, transparent);
+}
+
+.link:hover {
+  color: var(--bd-gold-bright);
+}
+
+.linkMuted {
+  font-size: 0.8rem;
+  color: color-mix(in srgb, var(--bd-highlight) 55%, transparent);
+  text-decoration: none;
+  border-bottom: 1px solid color-mix(in srgb, var(--bd-highlight) 22%, transparent);
+}
+
+.link:focus-visible,
+.linkMuted:focus-visible {
+  outline: 2px solid var(--bd-accent);
+  outline-offset: 2px;
+}
+
+@media (max-width: 720px) {
+  .title {
+    white-space: normal;
+  }
+
+  .footer {
+    margin-left: 0;
+  }
+}

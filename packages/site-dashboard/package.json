@@ -1,0 +1,40 @@
+{
+  "name": "@platform/site-dashboard",
+  "version": "0.0.0",
+  "private": true,
+  "description": "AI Development Dashboard — mission control for Cursor autonomous runs",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "import": "./src/index.ts",
+      "default": "./src/index.ts"
+    }
+  },
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "files": [
+    "src"
+  ],
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json"
+  },
+  "dependencies": {
+    "@platform/markdown": "workspace:*",
+    "@platform/site-registry": "workspace:*",
+    "@platform/ui": "workspace:*",
+    "react-router-dom": "catalog:"
+  },
+  "peerDependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@platform/config": "workspace:*",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "typescript": "catalog:"
+  }
+}

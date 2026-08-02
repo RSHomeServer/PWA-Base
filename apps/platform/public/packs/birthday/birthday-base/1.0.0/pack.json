@@ -1,0 +1,12 @@
+{
+  "id": "birthday-base",
+  "version": "1.0.0",
+  "appId": "birthday",
+  "entries": [
+    {
+      "path": "meta/welcome.json",
+      "hash": "sha256:dad5ef617e4732a8186cdfe7ddc6bbe59ce906c47f5ad700bf8ce0922b842ba0",
+      "size": 123
+    }
+  ]
+}

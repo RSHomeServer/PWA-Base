@@ -1,0 +1,101 @@
+{
+  "schemaVersion": 1,
+  "id": "fridge-sunday",
+  "kind": "fridge-door",
+  "title": "Sunday Morning Fridge",
+  "subtitle": "The door that holds a household",
+  "description": "The fridge stays; magnets, tickets, and notes rewrite the story.",
+  "palette": {
+    "wood": "#d7c4a8",
+    "brass": "#b08968",
+    "paper": "#fff8ef",
+    "accent": "#c45c48",
+    "atmosphere": "#f0e6d8"
+  },
+  "lighting": {
+    "mood": "daylight",
+    "intensity": 1
+  },
+  "items": [
+    {
+      "id": "m1",
+      "kind": "magnet",
+      "label": "♥",
+      "color": "#c45c48",
+      "x": 14,
+      "y": 14,
+      "rotationDeg": -10,
+      "body": "Heart magnet — from the seaside stall"
+    },
+    {
+      "id": "m2",
+      "kind": "magnet",
+      "label": "★",
+      "color": "#d4a24a",
+      "x": 78,
+      "y": 58,
+      "rotationDeg": 12,
+      "body": "Gold star — for finishing the puzzle"
+    },
+    {
+      "id": "m3",
+      "kind": "magnet",
+      "label": "A",
+      "color": "#4a7c8c",
+      "x": 86,
+      "y": 22,
+      "rotationDeg": -4,
+      "body": "Alphabet magnet — A for always"
+    },
+    {
+      "id": "p1",
+      "kind": "postcard",
+      "label": "Brighton",
+      "body": "Wish you were here — the pier lights were soft.",
+      "color": "#f2d6b3",
+      "x": 36,
+      "y": 20,
+      "rotationDeg": 5
+    },
+    {
+      "id": "t1",
+      "kind": "ticket",
+      "label": "Cinema",
+      "body": "Row F · Seat 12",
+      "color": "#efe6c9",
+      "x": 68,
+      "y": 14,
+      "rotationDeg": -4
+    },
+    {
+      "id": "n1",
+      "kind": "note",
+      "label": "Milk + eggs",
+      "body": "And the good butter.",
+      "color": "#fff4c8",
+      "x": 22,
+      "y": 46,
+      "rotationDeg": 3
+    },
+    {
+      "id": "r1",
+      "kind": "reminder",
+      "label": "Call Mum",
+      "color": "#dcead8",
+      "x": 58,
+      "y": 42,
+      "rotationDeg": -7
+    },
+    {
+      "id": "d1",
+      "kind": "drawing",
+      "label": "A tiny sun",
+      "body": "Drawn on a Sunday",
+      "color": "#ffe8d2",
+      "x": 42,
+      "y": 72,
+      "rotationDeg": 8
+    }
+  ],
+  "tags": ["family", "demo"]
+}

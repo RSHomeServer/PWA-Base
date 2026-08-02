@@ -1,0 +1,9 @@
+import type { TextareaHTMLAttributes } from "react";
+import styles from "./field.module.css";
+
+export type TextAreaProps = TextareaHTMLAttributes<HTMLTextAreaElement>;
+
+export function TextArea({ className, ...props }: TextAreaProps) {
+  const classes = [styles.textarea, className].filter(Boolean).join(" ");
+  return <textarea className={classes} {...props} />;
+}

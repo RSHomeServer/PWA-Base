@@ -1,0 +1,45 @@
+{
+  "id": "find-us",
+  "openingText": "Some stars are worth following",
+  "colors": {
+    "skyTop": "#04080f",
+    "skyMid": "#0a1420",
+    "skyBottom": "#12181f",
+    "star": "#c8d0dc",
+    "text": "rgba(245, 238, 228, 0.88)",
+    "textMuted": "rgba(199, 210, 225, 0.55)",
+    "label": "rgba(250, 240, 220, 0.9)"
+  },
+  "timings": {
+    "fadeInMs": 2200,
+    "openingTextDelayMs": 1400,
+    "openingTextFadeMs": 1800,
+    "twinkleMinMs": 3200,
+    "twinkleMaxMs": 7800,
+    "pulseMs": 3200,
+    "lineDrawMs": 1350,
+    "fragmentFadeMs": 900,
+    "completePauseMs": 1100,
+    "illustrationFadeInMs": 2200
+  },
+  "glow": {
+    "pulseScale": 1.55,
+    "lineWidth": 0.55
+  },
+  "backgroundStarCount": 100,
+  "stage": {
+    "viewBoxWidth": 100,
+    "viewBoxHeight": 100,
+    "aspectRatio": "1 / 1"
+  },
+  "constellationInstances": [
+    {
+      "definitionId": "leo",
+      "transform": {
+        "centre": { "x": 41.75, "y": 44 },
+        "rotationDeg": 0,
+        "scale": 1.31
+      }
+    }
+  ]
+}

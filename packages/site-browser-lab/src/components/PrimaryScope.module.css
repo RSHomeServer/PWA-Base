@@ -1,0 +1,297 @@
+.scope {
+  position: relative;
+  margin-top: var(--space-8);
+  padding: var(--space-5) var(--space-6) var(--space-4);
+  border: 1px solid var(--lab-border-strong);
+  border-radius: var(--radius-xl, var(--radius-lg));
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 0%, rgba(45, 212, 191, 0.08), transparent 65%),
+    linear-gradient(180deg, rgba(8, 14, 16, 0.98), rgba(2, 4, 4, 0.96));
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.03) inset,
+    0 0 48px rgba(45, 212, 191, 0.06),
+    0 24px 64px rgba(0, 0, 0, 0.55);
+  overflow: hidden;
+  animation: scope-enter 0.85s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s both;
+}
+
+@keyframes scope-enter {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(45, 212, 191, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(45, 212, 191, 0.06) 1px, transparent 1px);
+  background-size: 24px 24px;
+  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.7), transparent 95%);
+  pointer-events: none;
+}
+
+.sweep {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(45, 212, 191, 0.04) 48%,
+    rgba(110, 231, 216, 0.12) 50%,
+    rgba(45, 212, 191, 0.04) 52%,
+    transparent 100%
+  );
+  animation: scope-sweep 4.5s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes scope-sweep {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateX(100%);
+    opacity: 0.3;
+  }
+}
+
+.phosphor {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 50% 40% at 30% 60%,
+    rgba(45, 212, 191, 0.07),
+    transparent 70%
+  );
+  animation: scope-breathe 6s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes scope-breathe {
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+}
+
+.channel {
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-2xs, 0.6875rem);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--lab-teal);
+}
+
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-2xs, 0.6875rem);
+  letter-spacing: 0.06em;
+  color: var(--lab-muted);
+}
+
+.statusDot {
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 50%;
+  background: currentColor;
+  animation: scope-pulse 2.2s ease-in-out infinite;
+}
+
+.status-good {
+  color: var(--lab-teal-bright);
+}
+
+.status-good .statusDot {
+  box-shadow: 0 0 10px rgba(110, 231, 216, 0.8);
+}
+
+.status-warn {
+  color: var(--lab-warn);
+}
+
+.status-bad {
+  color: var(--lab-fail);
+}
+
+.status-pending {
+  color: var(--lab-muted);
+}
+
+@keyframes scope-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+
+.readoutRow {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-5);
+  margin-bottom: var(--space-3);
+}
+
+.fpsReadout {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+}
+
+.fpsValue {
+  font-family: var(--font-family-mono);
+  font-size: clamp(3.5rem, 9vw, 6.5rem);
+  font-weight: var(--font-weight-semibold);
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+  color: var(--lab-teal-bright);
+  text-shadow: 0 0 24px rgba(110, 231, 216, 0.35);
+  transition: color 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.toneWarn .fpsValue {
+  color: var(--lab-warn);
+  text-shadow: 0 0 24px rgba(251, 191, 36, 0.3);
+}
+
+.toneBad .fpsValue {
+  color: var(--lab-fail);
+  text-shadow: 0 0 24px rgba(248, 113, 113, 0.3);
+}
+
+.fpsUnit {
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-lg);
+  letter-spacing: 0.12em;
+  color: var(--lab-muted);
+}
+
+.meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--space-1);
+  min-width: 0;
+}
+
+.metaLine {
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-xs);
+  color: var(--lab-muted-strong);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: min(28rem, 50vw);
+}
+
+.trace {
+  position: relative;
+  min-height: 5.5rem;
+  padding: var(--space-2) 0;
+  border-top: 1px solid rgba(45, 212, 191, 0.15);
+  border-bottom: 1px solid rgba(45, 212, 191, 0.1);
+}
+
+.trace svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.tracePlaceholder {
+  display: block;
+  padding: var(--space-4) 0;
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-xs);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--lab-muted);
+}
+
+.reticle {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(45, 212, 191, 0.25) 20%,
+    rgba(45, 212, 191, 0.25) 80%,
+    transparent
+  );
+  pointer-events: none;
+}
+
+.footer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: var(--space-3);
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-2xs, 0.6875rem);
+  letter-spacing: 0.14em;
+  color: var(--lab-muted);
+}
+
+.footerPulse {
+  width: 0.35rem;
+  height: 0.35rem;
+  border-radius: 50%;
+  background: var(--pulse-color, var(--lab-teal-bright));
+  box-shadow: 0 0 8px var(--pulse-color, var(--lab-teal-bright));
+  animation: scope-pulse 1.4s ease-in-out infinite;
+}
+
+@media (max-width: 48rem) {
+  .readoutRow {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .meta {
+    align-items: flex-start;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scope,
+  .sweep,
+  .phosphor,
+  .statusDot,
+  .footerPulse {
+    animation: none !important;
+  }
+}

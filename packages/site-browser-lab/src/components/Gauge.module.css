@@ -1,0 +1,90 @@
+.gauge {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.svg {
+  position: absolute;
+  inset: 0;
+  transform: rotate(0deg);
+}
+
+.track,
+.value {
+  fill: none;
+  stroke-width: 8;
+  stroke-linecap: round;
+}
+
+.track {
+  stroke: var(--lab-border-strong);
+}
+
+.value {
+  transition: stroke 0.4s ease;
+  filter: drop-shadow(0 0 6px var(--gauge-color, var(--lab-teal)));
+  animation: gauge-glow-pulse 3.2s ease-in-out infinite;
+}
+
+.tick {
+  stroke: var(--lab-border-strong);
+  stroke-width: 1.5;
+  opacity: 0.7;
+}
+
+.typicalMark {
+  fill: var(--lab-bg);
+  stroke: var(--lab-muted-strong);
+  stroke-width: 1.5;
+}
+
+@keyframes gauge-glow-pulse {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 6px var(--gauge-color, var(--lab-teal)));
+  }
+  50% {
+    filter: drop-shadow(0 0 11px var(--gauge-color, var(--lab-teal))) brightness(1.15);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .value {
+    animation: none;
+  }
+}
+
+.readout {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1;
+}
+
+.readoutValue {
+  font-family: var(--font-family-mono);
+  font-size: 1.75rem;
+  font-weight: var(--font-weight-semibold);
+}
+
+.readoutUnit {
+  margin-top: 2px;
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-xs);
+  color: var(--lab-muted);
+  letter-spacing: 0.05em;
+}
+
+.label {
+  position: absolute;
+  bottom: 2px;
+  margin: 0;
+  font-size: var(--font-size-xs);
+  color: var(--lab-muted-strong);
+  text-align: center;
+  letter-spacing: 0.03em;
+}

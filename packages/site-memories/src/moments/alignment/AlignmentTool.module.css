@@ -1,0 +1,363 @@
+.root {
+  position: fixed;
+  inset: 0;
+  z-index: 2147483000;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) min(420px, 42vw);
+  background: #000;
+  color: #e8eef6;
+  font-family: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  font-size: 12px;
+}
+
+.previewPane {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+  container-type: size;
+}
+
+.previewStage {
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08);
+  /* Override FindUsMoment .stage (100vmin / 100vh) — that sizes to the
+     viewport, recenters in this pane, and clips Leo out of view after layout. */
+  width: min(100%, 100cqmin) !important;
+  height: min(100%, 100cqmin) !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+  aspect-ratio: 1 / 1;
+}
+
+@supports not (width: 1cqmin) {
+  .previewStage {
+    width: auto !important;
+    height: auto !important;
+    max-width: 100% !important;
+    max-height: 100% !important;
+  }
+}
+
+.previewLayer {
+  position: absolute;
+  inset: 0;
+}
+
+.overlaySvg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 4;
+}
+
+.drawOrderEdge {
+  stroke: #7dd3fc;
+  stroke-width: 0.45;
+  stroke-dasharray: 1.2 0.8;
+  fill: none;
+}
+
+.drawOrderIndex {
+  fill: #7dd3fc;
+  font-size: 2.2px;
+  font-family: ui-monospace, monospace;
+}
+
+.bbox {
+  fill: none;
+  stroke: rgba(250, 204, 21, 0.65);
+  stroke-width: 0.35;
+  stroke-dasharray: 1 0.7;
+}
+
+.centreArt,
+.centreConst {
+  stroke-width: 0.35;
+}
+
+.centreArt {
+  stroke: #fbbf24;
+  fill: #fbbf24;
+}
+
+.centreConst {
+  stroke: #f472b6;
+  fill: #f472b6;
+}
+
+.centreLabel,
+.uidLabel,
+.nameLabel {
+  font-size: 2px;
+  font-family: ui-monospace, monospace;
+}
+
+.uidLabel {
+  fill: #a7f3d0;
+}
+
+.nameLabel {
+  fill: rgba(226, 232, 240, 0.85);
+  font-size: 1.7px;
+}
+
+.centreLabel {
+  fill: inherit;
+}
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-height: 0;
+  overflow: auto;
+  background: #0f141c;
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 12px 12px 24px;
+}
+
+.panelHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: #0f141c;
+  padding-bottom: 8px;
+}
+
+.title {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.subtitle {
+  margin: 0;
+  color: rgba(200, 210, 225, 0.65);
+  font-size: 11px;
+}
+
+.addBtn {
+  align-self: flex-start;
+  border: 1px solid rgba(125, 211, 252, 0.45);
+  background: rgba(56, 189, 248, 0.12);
+  color: #e0f2fe;
+  border-radius: 6px;
+  padding: 6px 10px;
+  cursor: pointer;
+  font: inherit;
+}
+
+.addBtn:hover {
+  background: rgba(56, 189, 248, 0.22);
+}
+
+.copyStatus {
+  margin: 0;
+  color: #86efac;
+}
+
+.displayOpts {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 8px 10px;
+  margin: 0;
+  display: grid;
+  gap: 4px;
+}
+
+.displayOpts legend {
+  padding: 0 4px;
+  color: rgba(226, 232, 240, 0.8);
+}
+
+.checkRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.sections {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.section {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.03);
+  overflow: hidden;
+}
+
+.sectionHeader {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px;
+  background: rgba(0, 0, 0, 0.25);
+}
+
+.collapseBtn {
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: left;
+}
+
+.sectionId {
+  font-weight: 400;
+  color: rgba(200, 210, 225, 0.55);
+  margin-left: 4px;
+}
+
+.sectionActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.smallBtn,
+.dangerBtn {
+  border-radius: 5px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.06);
+  color: inherit;
+  font: inherit;
+  font-size: 11px;
+  padding: 4px 7px;
+  cursor: pointer;
+}
+
+.dangerBtn {
+  border-color: rgba(248, 113, 113, 0.45);
+  color: #fecaca;
+}
+
+.sectionBody {
+  padding: 8px 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.row2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.field span,
+.sliderLabel {
+  color: rgba(200, 210, 225, 0.7);
+}
+
+.field select,
+.field input,
+.numInput,
+.table input,
+.textarea {
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: #0a0e14;
+  color: #f1f5f9;
+  border-radius: 4px;
+  padding: 4px 6px;
+  font: inherit;
+}
+
+.subhead {
+  margin: 8px 0 2px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.hint {
+  margin: 0 0 4px;
+  color: rgba(200, 210, 225, 0.55);
+  font-size: 11px;
+}
+
+.sliderField {
+  display: grid;
+  grid-template-columns: 72px 1fr 64px;
+  gap: 6px;
+  align-items: center;
+}
+
+.sliderField input[type="range"] {
+  width: 100%;
+}
+
+.tableWrap {
+  overflow: auto;
+  max-height: 220px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 11px;
+}
+
+.table th,
+.table td {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 2px;
+  vertical-align: middle;
+}
+
+.table th {
+  position: sticky;
+  top: 0;
+  background: #121821;
+  text-align: left;
+  padding: 4px;
+  font-weight: 600;
+}
+
+.table input {
+  width: 100%;
+  min-width: 40px;
+  box-sizing: border-box;
+}
+
+.textarea {
+  width: 100%;
+  box-sizing: border-box;
+  resize: vertical;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 11px;
+}
+
+@media (max-width: 900px) {
+  .root {
+    grid-template-columns: 1fr;
+    grid-template-rows: min(42vh, 360px) 1fr;
+  }
+
+  .panel {
+    border-left: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+}

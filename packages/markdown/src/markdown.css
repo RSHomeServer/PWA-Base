@@ -1,0 +1,200 @@
+/* Shared Markdown prose — uses platform design tokens when available. */
+
+.platformMarkdown {
+  color: var(--color-text, #1c1917);
+  font-family: var(--font-family-sans, "Source Sans 3", system-ui, sans-serif);
+  font-size: var(--font-size-md, 1.05rem);
+  line-height: var(--line-height-relaxed, 1.65);
+  word-wrap: break-word;
+}
+
+.platformMarkdownDocument {
+  max-width: 52rem;
+}
+
+.platformMarkdownCompact {
+  font-size: var(--font-size-sm, 0.95rem);
+  line-height: 1.5;
+  max-width: none;
+}
+
+.platformMarkdown :first-child {
+  margin-top: 0;
+}
+
+.platformMarkdown :last-child {
+  margin-bottom: 0;
+}
+
+.platformMarkdown h1,
+.platformMarkdown h2,
+.platformMarkdown h3,
+.platformMarkdown h4,
+.platformMarkdown h5,
+.platformMarkdown h6 {
+  font-family: var(--font-family-display, "Syne", system-ui, sans-serif);
+  font-weight: 650;
+  line-height: 1.25;
+  color: var(--color-text, #1c1917);
+  margin: 1.6em 0 0.55em;
+}
+
+.platformMarkdown h1 {
+  font-size: var(--font-size-3xl, 2rem);
+  border-bottom: 1px solid var(--color-border-subtle, #e7e5e4);
+  padding-bottom: 0.35em;
+}
+
+.platformMarkdown h2 {
+  font-size: var(--font-size-2xl, 1.5rem);
+  border-bottom: 1px solid var(--color-border-subtle, #e7e5e4);
+  padding-bottom: 0.3em;
+}
+
+.platformMarkdown h3 {
+  font-size: var(--font-size-xl, 1.25rem);
+}
+
+.platformMarkdown p,
+.platformMarkdown ul,
+.platformMarkdown ol,
+.platformMarkdown blockquote,
+.platformMarkdown pre,
+.platformMarkdown table,
+.platformMarkdown hr {
+  margin: 0.85em 0;
+}
+
+.platformMarkdown ul,
+.platformMarkdown ol {
+  padding-left: 1.4em;
+}
+
+.platformMarkdown li + li {
+  margin-top: 0.25em;
+}
+
+.platformMarkdown li > ul,
+.platformMarkdown li > ol {
+  margin: 0.35em 0;
+}
+
+.platformMarkdown a {
+  color: var(--color-link, #0f766e);
+  text-decoration: underline;
+  text-underline-offset: 0.12em;
+}
+
+.platformMarkdown a:hover {
+  color: var(--color-link-hover, #0d9488);
+}
+
+.platformMarkdown blockquote {
+  margin-left: 0;
+  padding: 0.35em 0 0.35em 1em;
+  border-left: 3px solid var(--color-accent, #0d7a72);
+  color: var(--color-text-muted, #57534e);
+  background: color-mix(in srgb, var(--color-surface-sunken, #f5f5f4) 80%, transparent);
+}
+
+.platformMarkdown hr {
+  border: none;
+  border-top: 1px solid var(--color-border-subtle, #e7e5e4);
+}
+
+.platformMarkdown code {
+  font-family: var(--font-family-mono, "IBM Plex Mono", ui-monospace, monospace);
+  font-size: 0.9em;
+  background: var(--color-surface-sunken, #f5f5f4);
+  border: 1px solid var(--color-border-subtle, #e7e5e4);
+  border-radius: 0.3rem;
+  padding: 0.1em 0.35em;
+}
+
+.platformMarkdown pre {
+  overflow: auto;
+  padding: 0.9rem 1rem;
+  border-radius: 0.55rem;
+  background: #1c1917;
+  color: #fafaf9;
+  border: 1px solid color-mix(in srgb, #1c1917 90%, #fff);
+}
+
+.platformMarkdown pre code {
+  background: transparent;
+  border: none;
+  padding: 0;
+  font-size: 0.85rem;
+  color: inherit;
+}
+
+.platformMarkdown table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95em;
+  display: block;
+  overflow-x: auto;
+}
+
+.platformMarkdown th,
+.platformMarkdown td {
+  border: 1px solid var(--color-border-subtle, #e7e5e4);
+  padding: 0.45em 0.7em;
+  text-align: left;
+}
+
+.platformMarkdown th {
+  background: var(--color-surface-sunken, #f5f5f4);
+  font-weight: 600;
+}
+
+.platformMarkdown img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.4rem;
+}
+
+.platformMarkdown input[type="checkbox"] {
+  margin-right: 0.45em;
+}
+
+/* highlight.js token colors (dark code panes) */
+.platformMarkdown .hljs-comment,
+.platformMarkdown .hljs-quote {
+  color: #a8a29e;
+  font-style: italic;
+}
+
+.platformMarkdown .hljs-keyword,
+.platformMarkdown .hljs-selector-tag,
+.platformMarkdown .hljs-addition {
+  color: #5eead4;
+}
+
+.platformMarkdown .hljs-string,
+.platformMarkdown .hljs-meta .hljs-string,
+.platformMarkdown .hljs-attribute {
+  color: #fcd34d;
+}
+
+.platformMarkdown .hljs-number,
+.platformMarkdown .hljs-literal,
+.platformMarkdown .hljs-variable,
+.platformMarkdown .hljs-template-variable {
+  color: #fdba74;
+}
+
+.platformMarkdown .hljs-title,
+.platformMarkdown .hljs-section,
+.platformMarkdown .hljs-name {
+  color: #93c5fd;
+}
+
+.platformMarkdown .hljs-type,
+.platformMarkdown .hljs-built_in {
+  color: #c4b5fd;
+}
+
+.platformMarkdown .hljs-deletion {
+  color: #fca5a5;
+}

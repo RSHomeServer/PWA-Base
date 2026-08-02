@@ -1,0 +1,25 @@
+.face {
+  vector-effect: non-scaling-stroke;
+}
+
+.detail {
+  stroke: #2c241c;
+  stroke-width: 1.25;
+  stroke-linecap: round;
+  fill: none;
+  vector-effect: non-scaling-stroke;
+}
+
+.muntin {
+  stroke: #d8e4ec;
+  stroke-width: 1.35;
+  stroke-linecap: square;
+  fill: none;
+  vector-effect: non-scaling-stroke;
+}
+
+.handle {
+  fill: #e8dfd2;
+  stroke: #2c241c;
+  stroke-width: 1;
+}

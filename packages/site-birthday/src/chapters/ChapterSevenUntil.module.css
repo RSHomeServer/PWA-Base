@@ -1,0 +1,78 @@
+.scene {
+  background: radial-gradient(
+    ellipse 80% 40% at 50% 80%,
+    rgba(145, 183, 255, 0.05),
+    transparent 70%
+  );
+}
+
+.videoWrap {
+  max-width: 36rem;
+  margin: 0 auto 3.5rem;
+}
+
+.letter {
+  position: relative;
+  max-width: 40rem;
+  margin: 0 auto 4rem;
+  padding: clamp(2.25rem, 5vw, 3.5rem);
+  background: linear-gradient(178deg, var(--bd-ivory) 0%, var(--bd-ivory-dim) 100%);
+  border-radius: 0.15rem;
+  box-shadow: var(--bd-shadow-paper);
+}
+
+.ornament {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.5rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  color: var(--bd-accent);
+  opacity: 0.4;
+}
+
+.salutation {
+  margin: 0 0 1.25rem;
+  font-family: var(--bd-font-display);
+  font-style: italic;
+  font-size: 1.25rem;
+  color: var(--bd-paper-text-soft);
+}
+
+.paragraph {
+  margin: 0 0 1.15rem;
+  font-family: var(--bd-font-body);
+  font-size: 1.08rem;
+  line-height: 1.85;
+  color: var(--bd-paper-text);
+}
+
+.signoff {
+  margin: 1.5rem 0 0.25rem;
+  font-family: var(--bd-font-body);
+  font-style: italic;
+  font-size: 1rem;
+  color: var(--bd-paper-text-soft);
+}
+
+.signature {
+  margin: 0;
+  font-family: var(--bd-font-script);
+  font-size: 1.6rem;
+  color: var(--bd-paper-text);
+}
+
+.closing {
+  text-align: center;
+  padding-bottom: 2rem;
+}
+
+.closingText {
+  margin: 0 auto;
+  max-width: 28rem;
+  font-family: var(--bd-font-body);
+  font-style: italic;
+  font-size: 1rem;
+  line-height: 1.75;
+  color: rgba(250, 245, 235, 0.5);
+}

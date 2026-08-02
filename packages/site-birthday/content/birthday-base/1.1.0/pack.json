@@ -1,0 +1,42 @@
+{
+  "id": "birthday-base",
+  "version": "1.1.0",
+  "appId": "birthday",
+  "entries": [
+    {
+      "path": "README.md",
+      "hash": "sha256:83139752fcc763996606bf311e42e7185459b57c81fcefb94578279e6128d112",
+      "size": 164
+    },
+    {
+      "path": "content/keepsake.json",
+      "hash": "sha256:65bcd925216b48f62974201012506364bc94e504ac2104993a5f9761d879cdb3",
+      "size": 10134
+    },
+    {
+      "path": "media/letters/README.md",
+      "hash": "sha256:e018a77ef6e1c0e920da0514d04603524de5b8ef8b46486a58032993673a2344",
+      "size": 115
+    },
+    {
+      "path": "media/photos/README.md",
+      "hash": "sha256:007d508bedf67268aa5616fd2ab44645070d7e55c0544c53ca9c9c7c498c77df",
+      "size": 209
+    },
+    {
+      "path": "media/videos/README.md",
+      "hash": "sha256:594e047648e9275667ec39505dd2d23e7bf52e01e132ad2b4e603a9484798e11",
+      "size": 104
+    },
+    {
+      "path": "media/voice/README.md",
+      "hash": "sha256:61bef37b0037c5f11011d7aae2d670c0b10fa99046b6b1a2c3c8b39b84c11ead",
+      "size": 104
+    },
+    {
+      "path": "meta/welcome.json",
+      "hash": "sha256:30b400d31f3e9d669f073d2d6b6517062d68041429008dd356dbd99eedca932b",
+      "size": 110
+    }
+  ]
+}

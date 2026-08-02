@@ -1,0 +1,148 @@
+.stage {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  display: grid;
+  place-items: center;
+  padding: clamp(1.5rem, 5vw, 3rem);
+  background:
+    radial-gradient(ellipse at 50% 20%, rgba(217, 183, 95, 0.12), transparent 55%),
+    linear-gradient(165deg, #2c211c 0%, #1a1410 45%, #0c0a09 100%);
+  color: var(--bd-ivory, #faf5eb);
+  transition:
+    opacity var(--bd-duration-linger, 1.4s) var(--bd-ease-ballet, ease),
+    visibility var(--bd-duration-linger, 1.4s) var(--bd-ease-ballet, ease);
+}
+
+.stageOpening {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.paperGlow {
+  position: absolute;
+  inset: 20% 15%;
+  background: radial-gradient(circle, rgba(250, 245, 235, 0.08), transparent 70%);
+  pointer-events: none;
+}
+
+.envelope {
+  position: relative;
+  width: min(28rem, 100%);
+  padding: clamp(2rem, 5vw, 3rem);
+  border-radius: 0.35rem;
+  background:
+    linear-gradient(180deg, #faf5eb 0%, #f0e6d4 100%);
+  color: #2a221c;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.35) inset,
+    0 28px 60px -24px rgba(0, 0, 0, 0.65);
+  text-align: center;
+  transform-origin: 50% 10%;
+  animation: envelopeSettle 1.2s var(--bd-ease-ballet, ease) both;
+}
+
+.stageOpening .envelope {
+  animation: envelopeLift 1.5s var(--bd-ease-ballet, ease) both;
+}
+
+.eyebrow {
+  margin: 0 0 0.75rem;
+  font-family: var(--bd-font-script, cursive);
+  font-size: 1.35rem;
+  color: var(--bd-burgundy-wax, #7a2e3a);
+}
+
+.title {
+  margin: 0;
+  font-family: var(--bd-font-display, serif);
+  font-weight: 500;
+  font-size: clamp(1.75rem, 4vw, 2.35rem);
+  letter-spacing: 0.01em;
+}
+
+.from {
+  margin: 0.65rem 0 1.75rem;
+  font-family: var(--bd-font-body, Georgia, serif);
+  font-style: italic;
+  color: rgba(42, 34, 28, 0.65);
+}
+
+.sealButton {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 0 auto;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: inherit;
+  font: inherit;
+}
+
+.wax {
+  width: 4.25rem;
+  height: 4.25rem;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 35% 30%, #a34452, var(--bd-burgundy-wax, #7a2e3a) 55%, #5a1f2a);
+  box-shadow:
+    0 0 0 3px rgba(217, 183, 95, 0.45),
+    0 10px 20px -8px rgba(90, 31, 42, 0.7);
+  transition: transform var(--bd-duration-grace, 0.9s) var(--bd-ease-ballet, ease);
+}
+
+.sealButton:hover .wax,
+.sealButton:focus-visible .wax {
+  transform: scale(1.04);
+}
+
+.stageOpening .wax {
+  transform: scale(1.2);
+  opacity: 0.15;
+}
+
+.sealHint {
+  font-family: var(--bd-font-body, Georgia, serif);
+  font-size: 0.95rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: rgba(42, 34, 28, 0.72);
+}
+
+.whisper {
+  margin: 1.75rem 0 0;
+  font-family: var(--bd-font-body, Georgia, serif);
+  font-size: 0.95rem;
+  color: rgba(42, 34, 28, 0.55);
+}
+
+@keyframes envelopeSettle {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes envelopeLift {
+  to {
+    opacity: 0;
+    transform: translateY(-28px) scale(1.02);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .envelope,
+  .stageOpening .envelope,
+  .wax {
+    animation: none;
+    transition: none;
+  }
+}

@@ -1,0 +1,30 @@
+node_modules/
+dist/
+build/
+.env
+.env.*
+!.env.example
+!.env.*.example
+.vscode/
+.DS_Store
+coverage/
+
+# Vite / tooling
+*.local
+.turbo
+.eslintcache
+*.tsbuildinfo
+
+# Editor
+.idea/
+*.swp
+*.swo
+
+# Playwright
+test-results/
+playwright-report/
+
+# Telemetry SQLite
+apps/telemetry/data/
+data/*.sqlite
+*.sqlite

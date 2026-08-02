@@ -1,0 +1,10 @@
+{
+  "extends": "@platform/config/tsconfig.node.json",
+  "compilerOptions": {
+    "rootDir": "src",
+    "lib": ["ES2022"],
+    "types": ["node"]
+  },
+  "include": ["src"],
+  "exclude": ["src/artifacts/capture-cli.ts"]
+}

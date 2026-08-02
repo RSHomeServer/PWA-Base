@@ -1,0 +1,122 @@
+.scene {
+  background: linear-gradient(
+    180deg,
+    rgba(4, 10, 18, 0.2) 0%,
+    transparent 30%,
+    transparent 70%,
+    rgba(12, 26, 42, 0.25) 100%
+  );
+}
+
+.paper {
+  position: relative;
+  max-width: 40rem;
+  margin: 0 auto 4.5rem;
+  padding: clamp(2.25rem, 5vw, 3.5rem);
+  background: linear-gradient(178deg, var(--bd-ivory) 0%, var(--bd-ivory-dim) 100%);
+  border-radius: 0.15rem;
+  box-shadow: var(--bd-shadow-paper);
+}
+
+.ornament {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.5rem;
+  width: 2.75rem;
+  height: 2.75rem;
+  color: var(--bd-accent);
+  opacity: 0.4;
+}
+
+.letterHeading {
+  margin: 0 0 1.25rem;
+  font-family: var(--bd-font-display);
+  font-style: italic;
+  font-size: 1.3rem;
+  color: var(--bd-paper-text-soft);
+}
+
+.paragraph {
+  margin: 0 0 1.15rem;
+  font-family: var(--bd-font-body);
+  font-size: 1.08rem;
+  line-height: 1.85;
+  color: var(--bd-paper-text);
+}
+
+.paragraph:last-child {
+  margin-bottom: 0;
+}
+
+.thread {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1.5rem;
+  padding-top: 2.5rem;
+}
+
+.threadLine {
+  position: absolute;
+  top: 0.35rem;
+  left: 4%;
+  right: 4%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--bd-line) 8%,
+    var(--bd-line) 92%,
+    transparent
+  );
+}
+
+.waypoint {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.4rem;
+}
+
+.waypointDot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: var(--bd-highlight);
+  box-shadow: 0 0 8px 2px rgba(199, 232, 255, 0.4);
+}
+
+.waypointYear {
+  font-family: var(--bd-font-body);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(145, 183, 255, 0.55);
+}
+
+.waypointLabel {
+  font-family: var(--bd-font-display);
+  font-style: italic;
+  font-size: 1.05rem;
+  color: var(--bd-ivory);
+}
+
+.waypointNote {
+  font-family: var(--bd-font-body);
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: rgba(250, 245, 235, 0.48);
+}
+
+@media (max-width: 720px) {
+  .thread {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem 1rem;
+  }
+
+  .threadLine {
+    display: none;
+  }
+}

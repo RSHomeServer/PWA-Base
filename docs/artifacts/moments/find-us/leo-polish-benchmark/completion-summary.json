@@ -1,0 +1,85 @@
+{
+  "schemaVersion": 2,
+  "overview": "Reduced Find Us to a single polished Leo benchmark: removed Sagittarius and the entire sky→paper transition, replaced Leo with the supplied definition/instance exactly, and raised star quality (diffraction spikes, independent twinkle, Regulus rose heart glow, name+subtitle hover). Completion now settles into a calm resting state with constellation, solid edges, atlas artwork (screen-blended, body gaps filled), and soft twinkle — no automatic next beat. Added onStarMemoryRequest placeholder for future per-star memory panels without building panel UI. Validated with unit tests, typecheck, production docker rebuild/deploy to memories.songara.uk/moment, and three visual review iterations with screenshots under docs/artifacts/moments/find-us/leo-polish-benchmark/.",
+  "executiveSummary": "Leo-only Find Us is live as the polished interaction benchmark: supplied geometry, cinematic stars, Regulus as heart, calm rest after completion, and a clean hook for future star memories.",
+  "userVisibleChanges": [
+    "Only Leo remains on /moment in production; Sagittarius and paper transition are gone",
+    "Stars use white cores, four-point spikes, soft bloom, and independent twinkle (calmer after discovery)",
+    "Regulus has a warmer rose/pink heart glow and remains the focal star",
+    "Hovering a discovered star shows Name + Subtitle (e.g. Regulus / Heart of the Lion)",
+    "After the last star, Leo stays on screen with artwork + label — peaceful rest, no paper fade",
+    "Leo atlas artwork is visible behind the stick figure with filled body patches"
+  ],
+  "architectureChanges": [
+    "FindUsMoment phases simplified to boot | opening | constellation | complete",
+    "Paper dissolve/flecks/closing-text path removed from runtime and styles",
+    "Constellation catalog exports Leo only; Sagittarius definition/asset removed",
+    "StarMemoryRequestPayload + onStarMemoryRequest / onStarPress placeholder for future memory panels",
+    "Atlas art uses mix-blend-mode: screen for dark-sky readability without changing supplied opacity"
+  ],
+  "filesModified": [
+    {
+      "area": "Moment runtime",
+      "files": [
+        "packages/site-memories/src/moments/FindUsMoment.tsx",
+        "packages/site-memories/src/moments/FindUsMoment.module.css",
+        "packages/site-memories/src/moments/find-us.config.json"
+      ]
+    },
+    {
+      "area": "Constellation data/renderer",
+      "files": [
+        "packages/site-memories/src/moments/constellations/leo.json",
+        "packages/site-memories/src/moments/constellations/index.ts",
+        "packages/site-memories/src/moments/constellation/ConstellationRenderer.tsx",
+        "packages/site-memories/src/moments/alignment/model.ts"
+      ]
+    },
+    {
+      "area": "Assets / validation",
+      "files": [
+        "apps/memories-web/public/moments/find-us/leo-atlas.png",
+        "packages/site-memories/src/moments/constellation/transform.test.ts",
+        "packages/site-memories/src/moments/alignment/alignment.test.ts",
+        "docs/artifacts/moments/find-us/leo-polish-benchmark/"
+      ]
+    }
+  ],
+  "configurationChanges": [
+    "find-us.config.json constellationInstances is Leo-only with supplied transform centre (41.75, 37.11) scale 1.31",
+    "closingText removed from moment config",
+    "glow.lineWidth tuned to 0.55 for solid resting edges",
+    "Deployed memories-web with PLATFORM_RUNTIME_MODE=production"
+  ],
+  "testingPerformed": [
+    {
+      "check": "Unit tests (@platform/site-memories)",
+      "status": "pass",
+      "detail": "14 tests passed (transform + alignment)"
+    },
+    {
+      "check": "Typecheck",
+      "status": "pass",
+      "detail": "site-memories and memories-web tsc clean"
+    },
+    {
+      "check": "Production build + docker deploy",
+      "status": "pass",
+      "detail": "PLATFORM_RUNTIME_MODE=production docker compose up -d --build memories-web; version.json builtAt 2026-07-28T16:43:12Z"
+    },
+    {
+      "check": "Visual review ×3",
+      "status": "pass",
+      "detail": "Screenshots in docs/artifacts/moments/find-us/leo-polish-benchmark/; iterated spikes, Regulus rose, artwork blend, solid rest edges, focus ring"
+    }
+  ],
+  "knownLimitations": [
+    "Tenth fragment word \"sky.\" is unused because Leo has nine stars — left as supplied",
+    "Atlas fill still shows some mottled internal texture vs a perfectly seamless engraving",
+    "Service worker can serve stale assets after deploy — hard refresh / unregister SW if Alignment Tool appears",
+    "Star memory panels are intentionally not built — only the callback/interface exists",
+    "Alignment Tool remains available in development builds only"
+  ],
+  "recommendedNextMilestone": "Implement the per-star memory panel (right-side sheet) wired to onStarMemoryRequest: title, description, photos, voice notes, and videos — still Leo-only, no new constellations.",
+  "source": "structured"
+}

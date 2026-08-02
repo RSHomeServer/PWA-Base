@@ -1,0 +1,10 @@
+{
+  "extends": "@platform/config/tsconfig.react.json",
+  "compilerOptions": {
+    "rootDir": "src",
+    "resolveJsonModule": true
+  },
+  "include": [
+    "src"
+  ]
+}

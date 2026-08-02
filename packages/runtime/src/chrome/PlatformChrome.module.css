@@ -1,0 +1,70 @@
+.skipLink {
+  position: absolute;
+  inset-inline-start: var(--space-3);
+  top: var(--space-3);
+  z-index: calc(var(--z-sticky) + 10);
+  padding: var(--space-2) var(--space-3);
+  background: var(--color-surface);
+  color: var(--color-foreground);
+  border-radius: var(--radius-md);
+  transform: translateY(-200%);
+  transition: transform var(--motion-duration-fast) var(--motion-easing-standard);
+}
+
+.skipLink:focus {
+  transform: translateY(0);
+}
+
+.shell {
+  --platform-chrome-topbar-height: 2.5rem;
+  --platform-content-pad: clamp(1rem, 2.5vw, 1.75rem);
+
+  display: flex;
+  flex-direction: column;
+  height: 100dvh;
+  max-height: 100dvh;
+  overflow: hidden;
+  background: var(--color-background);
+  color: var(--color-foreground);
+}
+
+.flush {
+  --platform-content-pad: 0px;
+}
+
+.content {
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+  overflow: auto;
+  padding: var(--platform-content-pad);
+}
+
+.expandTopbar {
+  position: sticky;
+  top: var(--space-2);
+  align-self: flex-end;
+  z-index: calc(var(--z-sticky) + 2);
+  margin: var(--space-2) var(--space-2) 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border: var(--border-width-1) solid var(--color-border-subtle);
+  border-radius: var(--radius-md);
+  background: color-mix(in srgb, var(--color-surface) 92%, transparent);
+  color: var(--color-muted-foreground);
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+}
+
+.expandTopbar:hover {
+  color: var(--color-foreground);
+  border-color: color-mix(in srgb, var(--color-accent) 35%, var(--color-border-subtle));
+}
+
+.expandTopbar:focus-visible {
+  outline: var(--focus-ring-width) solid var(--color-focus-ring);
+  outline-offset: var(--focus-ring-offset);
+}

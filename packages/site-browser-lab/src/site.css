@@ -1,0 +1,123 @@
+@import "@platform/ui/tokens.css";
+
+/*
+ * Browser Lab forces a dark research-laboratory surface regardless of the host
+ * theme — live instrumentation reads best on dark glass with teal phosphor
+ * accents. Colors are scoped to .lab-root so the rest of the platform is
+ * unaffected.
+ */
+.lab-root {
+  --lab-bg: #060a0c;
+  --lab-bg-deep: #020404;
+  --lab-panel: #0b1214;
+  --lab-panel-raised: #101a1d;
+  --lab-border: #1c2b2e;
+  --lab-border-strong: #24393d;
+  --lab-fg: #e7f6f3;
+  --lab-muted: #8ba3a3;
+  --lab-muted-strong: #b7cbc9;
+  --lab-teal: #2dd4bf;
+  --lab-teal-bright: #6ee7d8;
+  --lab-teal-dim: rgba(45, 212, 191, 0.16);
+  --lab-warn: #fbbf24;
+  --lab-warn-dim: rgba(251, 191, 36, 0.14);
+  --lab-fail: #f87171;
+  --lab-fail-dim: rgba(248, 113, 113, 0.14);
+  --lab-grid-line: rgba(45, 212, 191, 0.06);
+
+  color-scheme: dark;
+  min-height: 100vh;
+  background:
+    radial-gradient(ellipse 70% 50% at 15% -10%, rgba(45, 212, 191, 0.07), transparent 60%),
+    radial-gradient(ellipse 60% 40% at 100% 0%, rgba(45, 212, 191, 0.04), transparent 55%),
+    linear-gradient(180deg, var(--lab-bg) 0%, var(--lab-bg-deep) 100%);
+  background-attachment: fixed;
+  color: var(--lab-fg);
+  font-family: var(--font-family-sans);
+}
+
+.lab-root *,
+.lab-root *::before,
+.lab-root *::after {
+  box-sizing: border-box;
+}
+
+.lab-root h1,
+.lab-root h2,
+.lab-root h3,
+.lab-root h4 {
+  color: var(--lab-fg);
+  font-family: var(--font-family-display, var(--font-family-sans));
+}
+
+.lab-root p {
+  color: var(--lab-muted-strong);
+}
+
+.lab-root a {
+  color: var(--lab-teal);
+}
+
+.lab-root code,
+.lab-root kbd {
+  font-family: var(--font-family-mono);
+}
+
+.lab-back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-size: var(--font-size-sm);
+  color: var(--lab-muted);
+  text-decoration: none;
+}
+
+.lab-back-link:hover {
+  color: var(--lab-teal-bright);
+}
+
+.lab-panel {
+  border: 1px solid var(--lab-border);
+  border-radius: var(--radius-lg);
+  background: linear-gradient(165deg, var(--lab-panel-raised) 0%, var(--lab-panel) 100%);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.03) inset,
+    0 12px 32px rgba(0, 0, 0, 0.35);
+}
+
+.lab-scanline {
+  background-image: repeating-linear-gradient(
+    180deg,
+    var(--lab-grid-line) 0px,
+    var(--lab-grid-line) 1px,
+    transparent 1px,
+    transparent 24px
+  );
+}
+
+.lab-mono {
+  font-family: var(--font-family-mono);
+  letter-spacing: 0.01em;
+}
+
+.lab-visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lab-root *,
+  .lab-root *::before,
+  .lab-root *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

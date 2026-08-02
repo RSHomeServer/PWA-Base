@@ -1,0 +1,292 @@
+.page {
+  --mx-wood: #4a3124;
+  --mx-brass: #c4a15a;
+  --mx-paper: #f3e6d4;
+  --mx-accent: #c47a4a;
+  --mx-atmosphere: #16110f;
+  --mx-ink: #f3e6d4;
+  --mx-font-display: "Fraunces", "Times New Roman", serif;
+  --mx-font-body: "Literata", "Georgia", serif;
+
+  position: relative;
+  min-height: 100%;
+  padding: clamp(1.25rem, 3vw, 2.5rem) clamp(1.25rem, 3vw, 2.25rem) 3rem;
+  background: linear-gradient(165deg, #1a1410, #0e0a08 55%, #16110e);
+  color: var(--mx-paper);
+  font-family: var(--mx-font-body);
+  overflow: hidden;
+}
+
+.atmosphere {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 70% 45% at 20% -5%, color-mix(in srgb, var(--mx-brass) 20%, transparent), transparent 60%),
+    radial-gradient(ellipse 50% 40% at 90% 20%, rgba(120, 60, 40, 0.12), transparent 55%);
+  pointer-events: none;
+}
+
+.hero {
+  position: relative;
+  max-width: 38rem;
+  margin-bottom: clamp(1.75rem, 4vw, 2.75rem);
+  z-index: 1;
+}
+
+.eyebrow {
+  margin: 0 0 0.4rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--mx-brass) 88%, white);
+}
+
+.title {
+  margin: 0;
+  font-family: var(--mx-font-display);
+  font-size: clamp(2.6rem, 6.5vw, 3.85rem);
+  line-height: 1.02;
+  font-weight: 650;
+  text-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+}
+
+.lede {
+  margin: 0.95rem 0 0;
+  font-size: 1.06rem;
+  line-height: 1.55;
+  color: color-mix(in srgb, var(--mx-paper) 74%, transparent);
+}
+
+.momentLinkWrap {
+  margin: 1.15rem 0 0;
+}
+
+.momentLink {
+  display: inline-block;
+  font-size: 0.92rem;
+  color: color-mix(in srgb, var(--mx-brass) 90%, white);
+  text-decoration: none;
+  border-bottom: 1px solid color-mix(in srgb, var(--mx-brass) 45%, transparent);
+  padding-bottom: 0.1rem;
+}
+
+.momentLink:hover {
+  color: var(--mx-paper);
+}
+
+.shelf {
+  position: relative;
+  z-index: 1;
+}
+
+.shelfRail {
+  position: absolute;
+  left: -2%;
+  right: -2%;
+  bottom: -0.35rem;
+  height: 1.1rem;
+  border-radius: 0.2rem;
+  background:
+    linear-gradient(180deg, #6a4a32, #3a281c 60%, #2a1c14);
+  box-shadow:
+    0 14px 28px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  opacity: 0.85;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(15.5rem, 1fr));
+  gap: 1.15rem;
+}
+
+.card {
+  display: grid;
+  gap: 0.35rem;
+  padding: 0 0 1.15rem;
+  border-radius: 1rem;
+  text-decoration: none;
+  color: inherit;
+  background:
+    linear-gradient(165deg, color-mix(in srgb, #2e221c 92%, var(--mx-brass)), #1c1512);
+  border: 1px solid color-mix(in srgb, var(--mx-brass) 26%, transparent);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.32);
+  overflow: hidden;
+  transition:
+    transform 240ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 220ms ease,
+    box-shadow 220ms ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  border-color: color-mix(in srgb, var(--mx-brass) 60%, transparent);
+  box-shadow: 0 26px 50px rgba(0, 0, 0, 0.4);
+}
+
+.card:focus-visible {
+  outline: 2px solid var(--mx-brass);
+  outline-offset: 3px;
+}
+
+.preview {
+  display: grid;
+  place-items: center;
+  height: 9.5rem;
+  background:
+    radial-gradient(ellipse 60% 50% at 50% 70%, color-mix(in srgb, var(--mx-brass) 18%, transparent), transparent 70%),
+    linear-gradient(180deg, #241a16, #120e0c);
+  border-bottom: 1px solid color-mix(in srgb, var(--mx-brass) 18%, transparent);
+}
+
+.miniGlobe {
+  position: relative;
+  width: 4.2rem;
+  height: 5.2rem;
+}
+
+.miniDome {
+  display: grid;
+  place-items: end center;
+  width: 4.2rem;
+  height: 4.2rem;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 32% 28%, rgba(255, 255, 255, 0.45), transparent 28%),
+    radial-gradient(circle at 50% 60%, #2a3548, #10141c);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.15),
+    0 0 0 2px color-mix(in srgb, var(--mx-brass) 40%, transparent);
+  overflow: hidden;
+  padding-bottom: 0.55rem;
+}
+
+.miniCentre {
+  width: 0.55rem;
+  height: 1.7rem;
+  background: linear-gradient(180deg, #c4a878, #6a523c);
+  clip-path: polygon(40% 0, 60% 0, 100% 100%, 0 100%);
+  opacity: 0.9;
+}
+
+.miniGlobe[data-variant="tree"] .miniCentre {
+  width: 1.4rem;
+  height: 1.5rem;
+  background: linear-gradient(180deg, #5f8a6c, #2f5640);
+  clip-path: polygon(50% 0, 100% 100%, 0 100%);
+}
+
+.miniBase {
+  display: block;
+  margin: -0.25rem auto 0;
+  width: 3.1rem;
+  height: 0.85rem;
+  border-radius: 0.15rem;
+  background: linear-gradient(180deg, #6a4a32, #3a281c);
+}
+
+.miniBox {
+  width: 4.4rem;
+}
+
+.miniLid {
+  display: block;
+  height: 1.1rem;
+  border-radius: 0.3rem 0.3rem 0.05rem 0.05rem;
+  background: linear-gradient(180deg, #6a4a34, #3a281c);
+  border: 1px solid color-mix(in srgb, var(--mx-brass) 40%, transparent);
+  transform: perspective(200px) rotateX(-28deg);
+  transform-origin: bottom center;
+  margin-bottom: 0.1rem;
+}
+
+.miniBody {
+  position: relative;
+  display: grid;
+  place-items: center;
+  height: 2.8rem;
+  margin-top: -1px;
+  border-radius: 0.05rem 0.05rem 0.3rem 0.3rem;
+  background:
+    radial-gradient(ellipse at 50% 40%, #5a2030, transparent 55%),
+    linear-gradient(180deg, #4a3224, #2a1c14);
+  border: 1px solid color-mix(in srgb, var(--mx-brass) 30%, transparent);
+}
+
+.miniBody::after {
+  content: "";
+  width: 1.1rem;
+  height: 1.1rem;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 40% 35%, #f0dca8, var(--mx-brass));
+  box-shadow: 0 0 0 0.15rem color-mix(in srgb, var(--mx-accent) 40%, transparent);
+}
+
+.miniFridge {
+  position: relative;
+  width: 3.4rem;
+  height: 4.4rem;
+  border-radius: 0.4rem;
+  background:
+    linear-gradient(115deg, rgba(255, 255, 255, 0.5), transparent 40%),
+    linear-gradient(160deg, #fffaf3, #e2d4c2);
+  border: 1px solid rgba(160, 130, 100, 0.45);
+  box-shadow: inset -6px 0 12px rgba(120, 90, 60, 0.08);
+}
+
+.miniDoor {
+  position: absolute;
+  inset: 0.25rem;
+  border-radius: 0.3rem;
+  border: 1px solid rgba(160, 130, 100, 0.25);
+}
+
+.miniMagnet {
+  position: absolute;
+  top: 0.85rem;
+  left: 0.55rem;
+  width: 0.65rem;
+  height: 0.65rem;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #f2a, var(--mx-accent));
+  box-shadow:
+    1.1rem 0.35rem 0 0 #d4a24a,
+    0.55rem 1.5rem 0 0 #4a7c8c;
+}
+
+.cardKind,
+.cardTitle,
+.cardBlurb,
+.cardEmotion {
+  padding-inline: 1.05rem;
+}
+
+.cardKind {
+  margin: 0.85rem 0 0;
+  font-size: 0.66rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--mx-brass) 82%, white);
+}
+
+.cardTitle {
+  margin: 0;
+  font-family: var(--mx-font-display);
+  font-size: 1.28rem;
+  font-weight: 650;
+}
+
+.cardBlurb {
+  margin: 0;
+  font-size: 0.88rem;
+  line-height: 1.45;
+  color: color-mix(in srgb, var(--mx-paper) 70%, transparent);
+}
+
+.cardEmotion {
+  margin: 0.2rem 0 0;
+  font-size: 0.76rem;
+  font-style: italic;
+  color: color-mix(in srgb, var(--mx-accent) 78%, var(--mx-paper));
+}

@@ -1,0 +1,15 @@
+.hud {
+  font-variant-numeric: tabular-nums;
+}
+
+.marker {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  margin-left: -5px;
+  margin-top: -5px;
+  border-radius: 50%;
+  background: #ff5f6d;
+  box-shadow: 0 0 8px 2px rgb(255 95 109 / 0.85);
+  pointer-events: none;
+}

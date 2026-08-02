@@ -1,0 +1,96 @@
+.page {
+  position: relative;
+  min-height: 100vh;
+  background: var(--bd-navy);
+  color: var(--bd-ivory);
+}
+
+.main {
+  position: relative;
+  z-index: 2;
+}
+
+.skipLink {
+  position: absolute;
+  top: -100%;
+  left: 1rem;
+  z-index: 300;
+  padding: 0.75rem 1.25rem;
+  background: var(--bd-gold);
+  color: var(--bd-navy);
+  font-family: var(--bd-font-body);
+  font-size: 0.9rem;
+  text-decoration: none;
+  border-radius: 0.25rem;
+}
+
+.skipLink:focus {
+  top: 1rem;
+  outline: 2px solid var(--bd-ivory);
+  outline-offset: 2px;
+}
+
+.progressRail {
+  --progress: 0%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 90;
+  height: 1px;
+  background: transparent;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 1.4s ease;
+}
+
+.progressFill {
+  height: 100%;
+  width: var(--progress);
+  background: linear-gradient(90deg, var(--bd-accent), var(--bd-highlight));
+  transition: width 0.1s linear;
+  opacity: 0.55;
+}
+
+.toolbar {
+  position: fixed;
+  top: 1.25rem;
+  left: 1.25rem;
+  right: 1.25rem;
+  z-index: 280;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.65rem;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.siteNav {
+  margin-right: 0;
+}
+
+.chromeVisible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+@media (max-width: 640px) {
+  .toolbar {
+    top: 0.85rem;
+    left: 0.85rem;
+    right: 0.85rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .progressFill {
+    transition: none;
+  }
+
+  .progressRail {
+    opacity: 1;
+    pointer-events: auto;
+    transition: none;
+  }
+}

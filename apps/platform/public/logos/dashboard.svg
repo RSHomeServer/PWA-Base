@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="AI Development Dashboard">
+  <rect width="64" height="64" rx="14" fill="#134e4a"/>
+  <rect x="10" y="12" width="20" height="18" rx="4" fill="#5eead4"/>
+  <rect x="34" y="12" width="20" height="18" rx="4" fill="#99f6e4" opacity=".9"/>
+  <rect x="10" y="34" width="44" height="18" rx="4" fill="#ccfbf1"/>
+  <circle cx="20" cy="43" r="3" fill="#134e4a"/>
+  <path d="M28 43h18" stroke="#134e4a" stroke-width="2.5" stroke-linecap="round" opacity=".45"/>
+</svg>

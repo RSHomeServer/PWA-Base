@@ -1,0 +1,41 @@
+{
+  "name": "website-hosting",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@9.15.9",
+  "scripts": {
+    "dev": "pnpm --filter @platform/host dev",
+    "build": "pnpm -r --if-present build",
+    "lint": "eslint .",
+    "typecheck": "pnpm -r --if-present typecheck",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "pnpm test:unit && pnpm test:e2e",
+    "test:unit": "pnpm --filter @platform/catalog --filter @platform/host --filter @platform/math --filter @platform/physics --filter @platform/runtime --filter @platform/experiences --filter @platform/site-viz --filter @platform/telemetry --filter @platform/docs-api test:unit",
+    "test:e2e": "playwright test",
+    "telemetry:up": "docker compose up -d telemetry",
+    "telemetry:down": "docker compose stop telemetry",
+    "telemetry:logs": "docker compose logs -f telemetry",
+    "telemetry:rebuild": "docker compose up -d --build telemetry",
+    "docs-api:up": "docker compose up -d docs-api",
+    "docs-api:down": "docker compose stop docs-api",
+    "docs-api:logs": "docker compose logs -f docs-api",
+    "docs-api:rebuild": "docker compose up -d --build docs-api",
+    "capture:artifacts": "pnpm --filter @platform/telemetry capture",
+    "version:bump": "node scripts/bump-version.mjs",
+    "birthday:pack": "node scripts/sync-birthday-pack.mjs",
+    "capture:birthday-previews": "node scripts/capture-birthday-previews.mjs"
+  },
+  "devDependencies": {
+    "@eslint/js": "catalog:",
+    "@platform/config": "workspace:*",
+    "@playwright/test": "catalog:",
+    "eslint": "catalog:",
+    "eslint-plugin-react-hooks": "catalog:",
+    "eslint-plugin-react-refresh": "catalog:",
+    "globals": "catalog:",
+    "prettier": "catalog:",
+    "typescript": "catalog:",
+    "typescript-eslint": "catalog:"
+  }
+}

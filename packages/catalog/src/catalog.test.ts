@@ -1,0 +1,37 @@
+import { describe, expect, it } from "vitest";
+import { getCatalogEntries } from "./entries.js";
+import { resolveSites } from "./loaders.js";
+
+describe("catalog", () => {
+  it("exposes synchronous metadata with independent hosts", () => {
+    const entries = getCatalogEntries();
+
+    expect(entries).toHaveLength(8);
+    expect(entries.map((e) => e.id).sort()).toEqual([
+      "birthday",
+      "browser-lab",
+      "components",
+      "dashboard",
+      "docs",
+      "memories",
+      "stats",
+      "viz",
+    ]);
+    expect(entries.find((e) => e.id === "birthday")?.host).toBe("birthday.songara.uk");
+    expect(entries.find((e) => e.id === "memories")?.host).toBe("memories.songara.uk");
+    expect(entries.find((e) => e.id === "birthday")?.requiredPackIds).toEqual(["birthday-base"]);
+    expect(entries.every((e) => e.basePath === "/")).toBe(true);
+  });
+
+  it("resolves site definitions via dynamic import", async () => {
+    const sites = await resolveSites();
+
+    expect(sites).toHaveLength(8);
+    expect(sites.find((site) => site.id === "birthday")?.basePath).toBe("/");
+    expect(sites.find((site) => site.id === "memories")?.basePath).toBe("/");
+    expect(sites.find((site) => site.id === "birthday")?.requiredPackIds).toEqual([
+      "birthday-base",
+    ]);
+    expect(sites.find((site) => site.id === "viz")?.basePath).toBe("/");
+  });
+});

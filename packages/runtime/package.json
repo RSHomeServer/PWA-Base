@@ -1,0 +1,37 @@
+{
+  "name": "@platform/runtime",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Shared client runtime — PWA helpers, connectivity, Content Pack client, storage facades",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "import": "./src/index.ts",
+      "default": "./src/index.ts"
+    }
+  },
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "test:unit": "vitest run"
+  },
+  "dependencies": {
+    "@platform/site-registry": "workspace:*",
+    "@platform/ui": "workspace:*",
+    "workbox-window": "^7.4.1"
+  },
+  "peerDependencies": {
+    "react": "^19.0.0",
+    "react-router-dom": "^7.6.0"
+  },
+  "devDependencies": {
+    "@platform/config": "workspace:*",
+    "@types/react": "catalog:",
+    "react": "catalog:",
+    "react-router-dom": "catalog:",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
+  }
+}

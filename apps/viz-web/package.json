@@ -1,0 +1,31 @@
+{
+  "name": "@platform/viz-web",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Independent packaging entry for Visual Computing",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc -b --noEmit"
+  },
+  "dependencies": {
+    "@platform/runtime": "workspace:*",
+    "@platform/site-viz": "workspace:*",
+    "@platform/ui": "workspace:*",
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "react-router-dom": "catalog:"
+  },
+  "devDependencies": {
+    "@platform/config": "workspace:*",
+    "@types/node": "catalog:",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "@vitejs/plugin-react": "catalog:",
+    "typescript": "catalog:",
+    "vite": "catalog:",
+    "vite-plugin-pwa": "catalog:"
+  }
+}
