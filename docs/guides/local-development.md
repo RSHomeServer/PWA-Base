@@ -14,7 +14,31 @@ Node **22+** recommended (matches the Docker build image). pnpm **9.15.9** is pi
 ## Dev server (fastest loop)
 
 ```bash
+pnpm install
 pnpm dev
+```
+
+Starts the default demo app (`@platform/hello-web`) **in the background** and prints:
+
+```text
+Development server started
+PID: …
+Port: 5182
+URL: http://localhost:5182
+```
+
+Stop it with:
+
+```bash
+pnpm stop
+```
+
+Logs: `.tmp/dev-server.log`. PID file: `.tmp/dev-server.pid`.
+
+### Catalogue host (foreground)
+
+```bash
+pnpm dev:host
 ```
 
 Starts `@platform/host` via Vite at **http://127.0.0.1:5173** (see `apps/platform/vite.config.ts`). Hot reload applies to host and workspace-linked packages.

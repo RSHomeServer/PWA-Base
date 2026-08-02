@@ -4,7 +4,9 @@
   "type": "module",
   "packageManager": "pnpm@9.15.9",
   "scripts": {
-    "dev": "pnpm --filter @platform/host dev",
+    "dev": "node scripts/dev-server.mjs start",
+    "stop": "node scripts/dev-server.mjs stop",
+    "dev:host": "pnpm --filter @platform/host dev",
     "build": "pnpm -r --if-present build",
     "lint": "eslint .",
     "typecheck": "pnpm -r --if-present typecheck",

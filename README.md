@@ -15,10 +15,20 @@ A **modular monorepo** for an ecosystem of independently hosted browser applicat
 ```bash
 corepack enable
 pnpm install
-pnpm telemetry:up # Docker telemetry (single SQLite backend on :4310)
-pnpm docs-api:up  # for Document Explorer
-pnpm dev          # Catalogue at http://127.0.0.1:5173
+pnpm dev          # Hello demo PWA (background) → http://localhost:5182
+pnpm stop         # stop the background demo server
+```
+
+`pnpm dev` starts `@platform/hello-web` in the background and prints PID / port / URL.
+Use `pnpm stop` to shut it down cleanly.
+
+Other apps:
+
+```bash
+pnpm dev:host                              # Catalogue at http://127.0.0.1:5173
 pnpm --filter @platform/dashboard-web dev  # Dashboard on :5180
+pnpm telemetry:up                          # Docker telemetry on :4310
+pnpm docs-api:up                           # Document Explorer API
 ```
 
 See [solo-packaging.md](./docs/guides/solo-packaging.md) for per-app ports.
@@ -88,7 +98,9 @@ pnpm exec playwright install chromium
 
 | Script                         | Purpose                                |
 | ------------------------------ | -------------------------------------- |
-| `pnpm dev`                     | Start host dev server                  |
+| `pnpm dev`                     | Start Hello demo PWA in the background |
+| `pnpm stop`                    | Stop the background demo server        |
+| `pnpm dev:host`                | Start catalogue host (foreground)      |
 | `pnpm new-app <name>`          | Scaffold a solo PWA + Content Pack     |
 | `pnpm content-pack:sync`       | Hash/mirror a Content Pack             |
 | `pnpm build`                   | Build all packages that define `build` |
