@@ -50,6 +50,12 @@ export {
 export { usePlatformPreferences } from "./preferences/usePlatformPreferences.js";
 export { useAppReady } from "./packs/useAppReady.js";
 export type { AppReadyState } from "./packs/useAppReady.js";
+export { PackReadyGate } from "./packs/PackReadyGate.js";
+export type {
+  PackReadyGateProps,
+  PackReadyGateCopy,
+  PackReadyGateClassNames,
+} from "./packs/PackReadyGate.js";
 export { SoloSiteApp, soloRoutePath } from "./solo/SoloSiteApp.js";
 export { PlatformChrome } from "./chrome/PlatformChrome.js";
 export type { PlatformChromeProps } from "./chrome/PlatformChrome.js";

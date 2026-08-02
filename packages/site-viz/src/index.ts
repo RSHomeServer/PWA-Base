@@ -1,4 +1,4 @@
-import { defineSite } from "@platform/site-registry/contract";
+import { defineSite, SITE_CAPABILITY } from "@platform/site-registry/contract";
 import { exhibits } from "./exhibits/registry.js";
 import { CafeWallPage } from "./pages/CafeWallPage.js";
 import { createExhibitPage } from "./pages/createExhibitPage.js";
@@ -28,6 +28,7 @@ export const vizSite = defineSite({
   id: "viz",
   basePath: "/",
   title: "Visual Computing",
+  capabilities: [SITE_CAPABILITY.fullBleed],
   routes: [
     { path: "", component: HomePage },
     { path: "/cafe-wall", component: CafeWallPage },

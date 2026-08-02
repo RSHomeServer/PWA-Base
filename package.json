@@ -23,7 +23,8 @@
     "docs-api:rebuild": "docker compose up -d --build docs-api",
     "capture:artifacts": "pnpm --filter @platform/telemetry capture",
     "version:bump": "node scripts/bump-version.mjs",
-    "birthday:pack": "node scripts/sync-birthday-pack.mjs",
+    "content-pack:sync": "node scripts/sync-content-pack.mjs",
+    "birthday:pack": "node scripts/sync-content-pack.mjs birthday birthday-base",
     "capture:birthday-previews": "node scripts/capture-birthday-previews.mjs"
   },
   "devDependencies": {

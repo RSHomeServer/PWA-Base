@@ -5,13 +5,13 @@
   "entries": [
     {
       "path": "README.md",
-      "hash": "sha256:83139752fcc763996606bf311e42e7185459b57c81fcefb94578279e6128d112",
-      "size": 164
+      "hash": "sha256:738a70e90223f4d239d810b8f65b6227157f0613188532dea83dcb7a77dffba2",
+      "size": 219
     },
     {
       "path": "content/keepsake.json",
-      "hash": "sha256:65bcd925216b48f62974201012506364bc94e504ac2104993a5f9761d879cdb3",
-      "size": 10134
+      "hash": "sha256:4cf91b0297e4a7ddbb7cf76879c81e4c523c1f1b3c890c1a9638add4f53f8c34",
+      "size": 11118
     },
     {
       "path": "media/letters/README.md",

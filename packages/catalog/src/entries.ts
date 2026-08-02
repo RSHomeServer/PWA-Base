@@ -28,6 +28,7 @@ export const catalogEntries: readonly CatalogEntryMeta[] = [
     basePath: "/",
     host: "viz.songara.uk",
     title: "Visual Computing",
+    capabilities: ["full-bleed"],
   },
   {
     id: "birthday",
@@ -35,19 +36,21 @@ export const catalogEntries: readonly CatalogEntryMeta[] = [
     host: "birthday.songara.uk",
     title: "Birthday",
     requiredPackIds: ["birthday-base"],
-    capabilities: ["offline", "media"],
+    capabilities: ["offline", "media", "full-bleed", "default-topbar-collapsed"],
   },
   {
     id: "memories",
     basePath: "/",
     host: "memories.songara.uk",
     title: "Memories",
+    capabilities: ["full-bleed"],
   },
   {
     id: "browser-lab",
     basePath: "/",
     host: "browser-lab.songara.uk",
     title: "Browser Lab",
+    capabilities: ["full-bleed"],
   },
   {
     id: "dashboard",

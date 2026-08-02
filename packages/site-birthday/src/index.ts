@@ -1,4 +1,4 @@
-import { defineSite } from "@platform/site-registry/contract";
+import { defineSite, SITE_CAPABILITY } from "@platform/site-registry/contract";
 import { BirthdayPage } from "./pages/BirthdayPage.js";
 import { ConstellationPage } from "./pages/ConstellationPage.js";
 import { ExperiencesPage } from "./pages/ExperiencesPage.js";
@@ -31,7 +31,12 @@ export const birthdaySite = defineSite({
   basePath: "/",
   title: "Birthday",
   requiredPackIds: ["birthday-base"],
-  capabilities: ["offline", "media"],
+  capabilities: [
+    SITE_CAPABILITY.offline,
+    SITE_CAPABILITY.media,
+    SITE_CAPABILITY.fullBleed,
+    SITE_CAPABILITY.defaultTopbarCollapsed,
+  ],
   routes: [
     { path: "", component: BirthdayPage },
     { path: "/bedroom", component: HomePage },

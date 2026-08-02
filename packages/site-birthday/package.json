@@ -19,7 +19,7 @@
   "scripts": {
     "typecheck": "tsc --noEmit -p tsconfig.json",
     "test:unit": "vitest run",
-    "pack:sync": "node ../../scripts/sync-birthday-pack.mjs"
+    "pack:sync": "node ../../scripts/sync-content-pack.mjs birthday birthday-base"
   },
   "dependencies": {
     "@platform/controls": "workspace:*",

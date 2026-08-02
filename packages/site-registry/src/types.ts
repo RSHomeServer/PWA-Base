@@ -13,6 +13,24 @@ export interface SiteRoute {
 }
 
 /**
+ * Well-known capability tags for {@link AppManifestFields.capabilities}.
+ * Apps may also declare custom string tags; hosts ignore unknown values.
+ */
+export const SITE_CAPABILITY = {
+  /** App needs offline / installable packaging affordances. */
+  offline: "offline",
+  /** App ships substantial media (photos, audio, video). */
+  media: "media",
+  /** Solo chrome: main content is full-bleed (no inset padding). */
+  fullBleed: "full-bleed",
+  /** Solo chrome: collapse the mega bar by default when no preference is stored. */
+  defaultTopbarCollapsed: "default-topbar-collapsed",
+} as const;
+
+export type KnownSiteCapability =
+  (typeof SITE_CAPABILITY)[keyof typeof SITE_CAPABILITY];
+
+/**
  * Packaging / offline surface for an application (evolving AppManifest).
  * Kept on {@link SiteDefinition} so we avoid a forced rename of site packages.
  */
@@ -23,10 +41,18 @@ export interface AppManifestFields {
    */
   requiredPackIds?: readonly string[];
   /**
-   * Optional capability tags for host chrome / future feature flags
-   * (e.g. `"offline"`, `"media"`).
+   * Optional capability tags for host chrome / packaging
+   * (see {@link SITE_CAPABILITY}, e.g. `"offline"`, `"full-bleed"`).
    */
   capabilities?: readonly string[];
+}
+
+/** True when `site.capabilities` includes the given tag. */
+export function hasSiteCapability(
+  site: Pick<AppManifestFields, "capabilities"> | null | undefined,
+  capability: string,
+): boolean {
+  return Boolean(site?.capabilities?.includes(capability));
 }
 
 /**

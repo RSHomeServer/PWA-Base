@@ -106,7 +106,8 @@ packages/site-birthday/content/birthday-base/<version>/
 ```
 
 ```bash
-pnpm birthday:pack
+pnpm content-pack:sync -- birthday birthday-base
+# alias: pnpm birthday:pack
 ```
 
 ---

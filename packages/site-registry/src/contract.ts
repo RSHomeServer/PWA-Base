@@ -9,7 +9,9 @@ export type {
   AppManifestFields,
   CatalogEntry,
   CatalogEntryMeta,
+  KnownSiteCapability,
   SiteDefinition,
   SiteRoute,
 } from "./types.js";
 export { defineSite } from "./define-site.js";
+export { hasSiteCapability, SITE_CAPABILITY } from "./types.js";

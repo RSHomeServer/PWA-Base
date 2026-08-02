@@ -8,14 +8,17 @@ export interface PlatformChromeProps {
   children: ReactNode;
   /**
    * When true, main content has no inset padding (full-bleed experiences).
-   * Birthday defaults the top bar to collapsed as well when no preference is stored.
+   * SoloSiteApp sets this from the `full-bleed` site capability.
    */
   flush?: boolean;
-  /** Site id — used for birthday default top-bar collapsed state. */
-  siteId?: string;
+  /**
+   * When true and no localStorage preference exists, start with the mega bar collapsed.
+   * SoloSiteApp sets this from the `default-topbar-collapsed` site capability.
+   */
+  defaultTopbarCollapsed?: boolean;
 }
 
-function readTopbarCollapsed(siteId?: string): boolean {
+function readTopbarCollapsed(defaultCollapsed: boolean): boolean {
   try {
     const stored = localStorage.getItem(TOPBAR_COLLAPSED_KEY);
     if (stored === "true") return true;
@@ -23,14 +26,20 @@ function readTopbarCollapsed(siteId?: string): boolean {
   } catch {
     // ignore
   }
-  return siteId === "birthday";
+  return defaultCollapsed;
 }
 
 /**
  * Shared sticky mega bar chrome for catalogue and solo apps.
  */
-export function PlatformChrome({ children, flush = false, siteId }: PlatformChromeProps) {
-  const [topbarCollapsed, setTopbarCollapsed] = useState(() => readTopbarCollapsed(siteId));
+export function PlatformChrome({
+  children,
+  flush = false,
+  defaultTopbarCollapsed = false,
+}: PlatformChromeProps) {
+  const [topbarCollapsed, setTopbarCollapsed] = useState(() =>
+    readTopbarCollapsed(defaultTopbarCollapsed),
+  );
 
   useEffect(() => {
     try {

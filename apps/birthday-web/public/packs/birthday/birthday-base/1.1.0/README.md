@@ -3,7 +3,8 @@
 Edit `content/keepsake.json`, drop media into `media/`, then run:
 
 ```bash
-pnpm birthday:pack
+pnpm content-pack:sync -- birthday birthday-base
+# or: pnpm birthday:pack
 ```
 
 See `docs/guides/birthday-experience.md`.

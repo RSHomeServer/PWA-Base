@@ -72,7 +72,8 @@ Static nginx (or Vite `public/packs`) paths:
 
 ### Follow-ups
 
-- Pack build script / CI hashing.
+- Pack build script / CI hashing — see `scripts/sync-content-pack.mjs` / `pnpm content-pack:sync`.
 - Object-store sidecar when static nginx is insufficient.
 - Optional quality / language packs.
 - Media transcoding pipeline (separate from pack format).
+- Reusable Ready UI — `PackReadyGate` in `@platform/runtime`.

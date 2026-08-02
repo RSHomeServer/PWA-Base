@@ -20,6 +20,10 @@ describe("catalog", () => {
     expect(entries.find((e) => e.id === "birthday")?.host).toBe("birthday.songara.uk");
     expect(entries.find((e) => e.id === "memories")?.host).toBe("memories.songara.uk");
     expect(entries.find((e) => e.id === "birthday")?.requiredPackIds).toEqual(["birthday-base"]);
+    expect(entries.find((e) => e.id === "birthday")?.capabilities).toEqual(
+      expect.arrayContaining(["offline", "media", "full-bleed", "default-topbar-collapsed"]),
+    );
+    expect(entries.find((e) => e.id === "viz")?.capabilities).toContain("full-bleed");
     expect(entries.every((e) => e.basePath === "/")).toBe(true);
   });
 
@@ -32,6 +36,10 @@ describe("catalog", () => {
     expect(sites.find((site) => site.id === "birthday")?.requiredPackIds).toEqual([
       "birthday-base",
     ]);
+    expect(sites.find((site) => site.id === "birthday")?.capabilities).toEqual(
+      expect.arrayContaining(["full-bleed", "default-topbar-collapsed"]),
+    );
+    expect(sites.find((site) => site.id === "viz")?.capabilities).toContain("full-bleed");
     expect(sites.find((site) => site.id === "viz")?.basePath).toBe("/");
   });
 });

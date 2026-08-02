@@ -103,7 +103,12 @@ Import from `/contract`, not `@platform/site-registry` root (types-only) or `@pl
 | `routes[].path`      | `""` or `"/about"` | Relative to `basePath`                             |
 | `routes[].component` | `HomePage`         | Typed `unknown` in registry                        |
 | `requiredPackIds`    | `["example-base"]` | Optional Content Packs gate (ADR-005)              |
-| `capabilities`       | `["offline"]`      | Optional tags for chrome / packaging               |
+| `capabilities`       | `["offline", "full-bleed"]` | Optional tags — see `SITE_CAPABILITY` in the contract |
+
+Well-known chrome tags (consumed by `SoloSiteApp`):
+
+- `full-bleed` — full-bleed main content (no inset padding)
+- `default-topbar-collapsed` — collapse the mega bar by default
 
 Optional: depend on `@platform/ui` / `@platform/runtime` as needed. See [design system](../design-system/README.md), [content-packs.md](./content-packs.md), [solo-packaging.md](./solo-packaging.md).
 
