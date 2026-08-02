@@ -220,6 +220,13 @@ export const PLATFORM_NAV_APPS: PlatformNavGroup = {
       description: "Capability probes, gauges, and benchmarks.",
     },
     {
+      id: "hello",
+      label: "Hello",
+      href: origin("hello.songara.uk"),
+      external: false,
+      description: "Hello — scaffolded with pnpm new-app.",
+    },
+    {
       id: "dashboard",
       label: "AI Development Dashboard",
       href: origin("dashboard.songara.uk"),

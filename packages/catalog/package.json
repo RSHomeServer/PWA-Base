@@ -28,6 +28,7 @@
     "@platform/site-components": "workspace:*",
     "@platform/site-dashboard": "workspace:*",
     "@platform/site-docs": "workspace:*",
+    "@platform/site-hello": "workspace:*",
     "@platform/site-memories": "workspace:*",
     "@platform/site-registry": "workspace:*",
     "@platform/site-stats": "workspace:*",

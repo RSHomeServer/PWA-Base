@@ -2,9 +2,31 @@
 
 This guide walks through adding an independently hosted application. Feature code lives in `packages/site-*`; packaging is a thin `apps/*-web` entry. `apps.songara.uk` (`@platform/host`) remains a **catalogue only** — it never imports site packages.
 
-Architecture background: [ADR-004](../adr/004-packageable-applications.md), [solo-packaging.md](./solo-packaging.md), [architecture.md](../architecture.md).
+Architecture background: [ADR-004](../adr/004-packageable-applications.md), [solo-packaging.md](./solo-packaging.md), [architecture.md](../architecture.md), [content-packs.md](./content-packs.md).
 
-## Overview
+## Quick start (recommended)
+
+```bash
+pnpm new-app <name>          # e.g. pnpm new-app recipe-box
+pnpm --filter @platform/<name>-web dev
+```
+
+The scaffold creates:
+
+| Path | Role |
+| --- | --- |
+| `packages/site-<name>/` | Site module + Hello World page + `PackReadyGate` |
+| `packages/site-<name>/content/<name>-base/` | Minimal Content Pack (`meta/welcome.json`) |
+| `apps/<name>-web/` | Solo Vite PWA packaging |
+| Catalogue / nav / logo | Registered in `packages/catalog` + `packages/runtime` chrome |
+
+It mirrors the pack into `apps/<name>-web/public/packs/` via `sync-content-pack`. Birthday is never modified.
+
+Docker / Traefik hosting is **not** scaffolded — add a Compose service when you deploy (see [solo-packaging.md](./solo-packaging.md)).
+
+---
+
+## Manual overview
 
 1. Create a site package under `packages/` (e.g. `packages/site-example`).
 2. Export a `SiteDefinition` via `defineSite(...)` with `basePath: "/"`.

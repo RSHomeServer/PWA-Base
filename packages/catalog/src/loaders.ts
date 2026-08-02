@@ -13,6 +13,7 @@ const loaders: Record<string, () => Promise<SiteDefinition>> = {
   birthday: () => import("@platform/site-birthday").then((m) => m.birthdaySite),
   memories: () => import("@platform/site-memories").then((m) => m.memoriesSite),
   "browser-lab": () => import("@platform/site-browser-lab").then((m) => m.browserLabSite),
+  hello: () => import("@platform/site-hello").then((m) => m.helloSite),
   dashboard: () => import("@platform/site-dashboard").then((m) => m.dashboardSite),
 };
 

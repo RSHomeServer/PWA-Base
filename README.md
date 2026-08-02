@@ -89,6 +89,8 @@ pnpm exec playwright install chromium
 | Script                         | Purpose                                |
 | ------------------------------ | -------------------------------------- |
 | `pnpm dev`                     | Start host dev server                  |
+| `pnpm new-app <name>`          | Scaffold a solo PWA + Content Pack     |
+| `pnpm content-pack:sync`       | Hash/mirror a Content Pack             |
 | `pnpm build`                   | Build all packages that define `build` |
 | `pnpm lint`                    | ESLint across the repo                 |
 | `pnpm typecheck`               | TypeScript check in all packages       |

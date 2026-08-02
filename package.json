@@ -25,6 +25,7 @@
     "version:bump": "node scripts/bump-version.mjs",
     "content-pack:sync": "node scripts/sync-content-pack.mjs",
     "birthday:pack": "node scripts/sync-content-pack.mjs birthday birthday-base",
+    "new-app": "node scripts/new-app.mjs",
     "capture:birthday-previews": "node scripts/capture-birthday-previews.mjs"
   },
   "devDependencies": {

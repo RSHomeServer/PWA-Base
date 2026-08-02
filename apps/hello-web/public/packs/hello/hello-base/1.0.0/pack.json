@@ -1,0 +1,17 @@
+{
+  "id": "hello-base",
+  "version": "1.0.0",
+  "appId": "hello",
+  "entries": [
+    {
+      "path": "README.md",
+      "hash": "sha256:a1153e966061899fd0786e66132f21bededb97c61e016f9ab1963aa3f83ff2a6",
+      "size": 112
+    },
+    {
+      "path": "meta/welcome.json",
+      "hash": "sha256:a232f8a39e6f59745da6120008f95ae08bad46dbbdb1c58074e331ca01817ecf",
+      "size": 133
+    }
+  ]
+}

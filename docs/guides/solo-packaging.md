@@ -40,7 +40,16 @@ Dashboard nginx proxies `/telemetry/` → `telemetry:4310`. Docs nginx proxies `
 
 ## Adding another application
 
+Preferred:
+
+```bash
+pnpm new-app <id>
+```
+
+Manual steps (same outcome as the scaffold, minus Docker):
+
 1. Keep feature code in `packages/site-<id>` with `basePath: "/"`.
 2. Add catalogue metadata (`host`) in `packages/catalog/src/entries.ts` and a loader in `loaders.ts`.
 3. Add thin `apps/<id>-web` (copy an existing `*-web` entry).
-4. Add a Compose service + Traefik Host label.
+4. Register nav + logo accent in `packages/runtime` chrome; drop a logo in `apps/platform/public/logos/`.
+5. Optionally add a Compose service + Traefik Host label when deploying.

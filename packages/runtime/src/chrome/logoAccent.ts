@@ -22,6 +22,7 @@ export const PLATFORM_LOGO_ACCENTS: Readonly<Record<string, string>> = {
   birthday: "#be185d",
   memories: "#c4a15a",
   "browser-lab": "#0e7490",
+  hello: "#0f766e",
   dashboard: "#134e4a",
 };
 
