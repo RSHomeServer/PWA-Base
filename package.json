@@ -1,8 +1,61 @@
 {
-  "name": "website-hosting",
+  "name": "@songara/pwa-base",
+  "version": "0.1.0",
   "private": true,
+  "description": "Shared Songara PWA foundation — site contract, runtime, UI primitives, and packaging helpers",
   "type": "module",
   "packageManager": "pnpm@9.15.9",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "import": "./src/index.ts",
+      "default": "./src/index.ts"
+    },
+    "./contract": {
+      "types": "./src/contract.ts",
+      "import": "./src/contract.ts",
+      "default": "./src/contract.ts"
+    },
+    "./ui": {
+      "types": "./packages/ui/src/index.ts",
+      "import": "./packages/ui/src/index.ts",
+      "default": "./packages/ui/src/index.ts"
+    },
+    "./ui/theme": {
+      "types": "./packages/ui/src/theme/index.ts",
+      "import": "./packages/ui/src/theme/index.ts",
+      "default": "./packages/ui/src/theme/index.ts"
+    },
+    "./ui/tokens.css": "./packages/ui/src/tokens/tokens.css",
+    "./config/tsconfig.base.json": "./packages/config/tsconfig.base.json",
+    "./config/tsconfig.react.json": "./packages/config/tsconfig.react.json",
+    "./config/tsconfig.node.json": "./packages/config/tsconfig.node.json",
+    "./config/vite-app-version": {
+      "types": "./packages/config/vite-app-version.d.ts",
+      "default": "./packages/config/vite-app-version.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "src",
+    "packages/runtime/src",
+    "packages/site-registry/src",
+    "packages/ui/src",
+    "packages/config/tsconfig.base.json",
+    "packages/config/tsconfig.react.json",
+    "packages/config/tsconfig.node.json",
+    "packages/config/vite-app-version.js",
+    "packages/config/vite-app-version.d.ts",
+    "packages/config/eslint.config.js",
+    "packages/config/prettier.config.js",
+    "README.md",
+    "docs/guides/consuming-pwa-base.md"
+  ],
+  "sideEffects": [
+    "**/*.css"
+  ],
   "scripts": {
     "dev": "node scripts/dev-server.mjs start",
     "stop": "node scripts/dev-server.mjs stop",
@@ -29,6 +82,19 @@
     "birthday:pack": "node scripts/sync-content-pack.mjs birthday birthday-base",
     "new-app": "node scripts/new-app.mjs",
     "capture:birthday-previews": "node scripts/capture-birthday-previews.mjs"
+  },
+  "dependencies": {
+    "workbox-window": "^7.4.1"
+  },
+  "peerDependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-router-dom": "^7.6.0"
+  },
+  "peerDependenciesMeta": {
+    "react-dom": {
+      "optional": true
+    }
   },
   "devDependencies": {
     "@eslint/js": "catalog:",

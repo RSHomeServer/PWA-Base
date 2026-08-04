@@ -1,6 +1,12 @@
 # Creating a new site
 
-This guide walks through adding an independently hosted application. Feature code lives in `packages/site-*`; packaging is a thin `apps/*-web` entry. `apps.songara.uk` (`@platform/host`) remains a **catalogue only** — it never imports site packages.
+This guide walks through adding an independently hosted application **inside this
+monorepo**. Feature code lives in `packages/site-*`; packaging is a thin
+`apps/*-web` entry. `apps.songara.uk` (`@platform/host`) remains a **catalogue
+only** — it never imports site packages.
+
+For a **sibling repository** that depends on this foundation via
+`file:../PWA-Base`, use [consuming-pwa-base.md](./consuming-pwa-base.md) instead.
 
 Architecture background: [ADR-004](../adr/004-packageable-applications.md), [solo-packaging.md](./solo-packaging.md), [architecture.md](../architecture.md), [content-packs.md](./content-packs.md).
 

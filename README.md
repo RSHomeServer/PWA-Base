@@ -1,6 +1,12 @@
-# Website Hosting
+# `@songara/pwa-base`
 
-A **modular monorepo** for an ecosystem of independently hosted browser applications. Shared packages and runtime live here; `apps.songara.uk` is the application **catalogue**. Each application is packaged as its own SPA/PWA on a subdomain (for example `viz.songara.uk`, `dashboard.songara.uk`).
+Shared foundation for Songara PWAs, developed as a **modular monorepo**. The
+publishable surface is `@songara/pwa-base` (see
+[consuming-pwa-base.md](./docs/guides/consuming-pwa-base.md)). Inside the repo,
+workspace packages keep the `@platform/*` names for backwards compatibility.
+
+`apps.songara.uk` is the application **catalogue**. Each application is packaged
+as its own SPA/PWA on a subdomain (for example `viz.songara.uk`, `dashboard.songara.uk`).
 
 ## Quick start
 
@@ -76,6 +82,19 @@ pnpm exec playwright install chromium
 | `packages/config`        | `@platform/config`        | Shared TS / ESLint / Prettier baselines   |
 | `docs/`                  | —                         | Architecture, guides, ADRs, design system |
 
+## Using this repo from a sibling PWA
+
+```json
+{
+  "dependencies": {
+    "@songara/pwa-base": "file:../PWA-Base"
+  }
+}
+```
+
+Import from `@songara/pwa-base` (or `@songara/pwa-base/contract`). Details:
+[docs/guides/consuming-pwa-base.md](./docs/guides/consuming-pwa-base.md).
+
 ## Documentation
 
 | Topic                         | Location                                                                           |
@@ -84,6 +103,7 @@ pnpm exec playwright install chromium
 | Platform strategy (living)    | [docs/milestones/](./docs/milestones/) — [VISION](./docs/milestones/VISION.md) · [PLATFORM](./docs/milestones/PLATFORM.md) · [ROADMAP](./docs/milestones/ROADMAP.md) · [IDEAS](./docs/milestones/IDEAS.md) |
 | Document Explorer             | [docs/guides/document-explorer.md](./docs/guides/document-explorer.md) (`docs.songara.uk`) |
 | Create a new site             | [docs/guides/creating-a-new-site.md](./docs/guides/creating-a-new-site.md)         |
+| Consume as `@songara/pwa-base` | [docs/guides/consuming-pwa-base.md](./docs/guides/consuming-pwa-base.md)           |
 | Independent packaging         | [docs/guides/solo-packaging.md](./docs/guides/solo-packaging.md)                   |
 | Content Packs (ADR-005)       | [docs/guides/content-packs.md](./docs/guides/content-packs.md)                     |
 | Local development             | [docs/guides/local-development.md](./docs/guides/local-development.md)             |

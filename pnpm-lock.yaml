@@ -67,6 +67,19 @@ catalogs:
 importers:
 
   .:
+    dependencies:
+      react:
+        specifier: ^19.0.0
+        version: 19.2.7
+      react-dom:
+        specifier: ^19.0.0
+        version: 19.2.7(react@19.2.7)
+      react-router-dom:
+        specifier: ^7.6.0
+        version: 7.18.1(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+      workbox-window:
+        specifier: ^7.4.1
+        version: 7.4.1
     devDependencies:
       '@eslint/js':
         specifier: 'catalog:'
@@ -799,12 +812,6 @@ importers:
 
   packages/runtime:
     dependencies:
-      '@platform/site-registry':
-        specifier: workspace:*
-        version: link:../site-registry
-      '@platform/ui':
-        specifier: workspace:*
-        version: link:../ui
       workbox-window:
         specifier: ^7.4.1
         version: 7.4.1

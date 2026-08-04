@@ -4,7 +4,7 @@ import {
   hasSiteCapability,
   SITE_CAPABILITY,
   type SiteDefinition,
-} from "@platform/site-registry/contract";
+} from "../../../site-registry/src/contract.js";
 import { PlatformChrome } from "../chrome/PlatformChrome.js";
 
 /** Map a site route path onto the solo-app root (base `/`). */

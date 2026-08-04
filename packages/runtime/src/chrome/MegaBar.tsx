@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { IconButton, ThemeMenu } from "@platform/ui";
+import { IconButton, ThemeMenu } from "../../../ui/src/index.js";
 import {
   PLATFORM_HOME,
   PLATFORM_NAV_GROUPS,
