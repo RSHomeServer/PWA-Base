@@ -9,3 +9,4 @@ Accepted decisions for the Website_Hosting platform:
 | [003](./003-phase2-shared-packages.md)    | Phase 2 shared packages and two-consumer rule    |
 | [004](./004-packageable-applications.md)  | Packageable applications with unified operations |
 | [005](./005-content-packs.md)             | Content Packs for offline-complete applications  |
+| [006](./006-kandev-sibling-file-deps.md)  | Local sibling packages under KanDev worktrees    |

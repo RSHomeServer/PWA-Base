@@ -95,6 +95,13 @@ pnpm exec playwright install chromium
 Import from `@songara/pwa-base` (or `@songara/pwa-base/contract`). Details:
 [docs/guides/consuming-pwa-base.md](./docs/guides/consuming-pwa-base.md).
 
+KanDev worktrees do not see `../PWA-Base` unless the task mirrors the sibling
+layout. Keep the `file:` dependency; before install in an isolated checkout run:
+
+```bash
+node "$HOME/projects/PWA-Base/scripts/ensure-sibling-file-deps.mjs"
+```
+
 ## Documentation
 
 | Topic                         | Location                                                                           |
@@ -122,6 +129,7 @@ Import from `@songara/pwa-base` (or `@songara/pwa-base/contract`). Details:
 | `pnpm stop`                    | Stop the background demo server        |
 | `pnpm dev:host`                | Start catalogue host (foreground)      |
 | `pnpm new-app <name>`          | Scaffold a solo PWA + Content Pack     |
+| `node scripts/ensure-sibling-file-deps.mjs` | Link `file:../` siblings for KanDev/worktrees (run from consumer app) |
 | `pnpm content-pack:sync`       | Hash/mirror a Content Pack             |
 | `pnpm build`                   | Build all packages that define `build` |
 | `pnpm lint`                    | ESLint across the repo                 |
