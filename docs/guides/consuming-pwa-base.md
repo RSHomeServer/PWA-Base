@@ -38,7 +38,7 @@ backwards compatibility. New sibling apps should use `@songara/pwa-base` only.
 ## Expected sibling folder layout
 
 ```text
-songara/
+songara/                    # or ~/projects/
   PWA-Base/                 # this repo → package @songara/pwa-base
   my-new-pwa/               # sibling application repo
     package.json
@@ -48,6 +48,36 @@ songara/
 
 Relative `file:` path assumes the two repos sit next to each other. Adjust the
 path if your layout differs.
+
+### KanDev / isolated worktrees
+
+KanDev materialises app worktrees under `~/.kandev/tasks/<task>/<App>/`, so
+`../PWA-Base` is missing unless the task directory mirrors the primary layout.
+
+**Do not change application `package.json` to work around this.** Keep
+`file:../PWA-Base` so primary checkouts and future Songara PWAs stay identical.
+
+Supported workflow (automatic once agents/scripts follow it):
+
+1. **Prefer multi-repo tasks** — attach `PWA-Base` beside the app (KanDev
+   `add_branch_to_task` / workspace sources). KanDev may name a branch worktree
+   `PWA-Base-main`; that is fine.
+2. **Run the generic linker** from the consumer app root before `npm install`:
+
+   ```bash
+   node "$HOME/projects/PWA-Base/scripts/ensure-sibling-file-deps.mjs"
+   ```
+
+   The script reads `file:../…` dependencies and creates the missing sibling
+   symlinks (task-local worktree or `$SONGARA_PROJECTS_ROOT`, default
+   `~/projects`). It is safe/no-op when siblings already exist and applies to
+   every future Songara PWA without per-app changes.
+
+3. **Overrides** — `SONGARA_PROJECTS_ROOT`, or `SONGARA_SIBLING_PWA_BASE=/abs/path`
+   when a specific checkout should be consumed.
+
+Primary `~/projects/<App>` development is unchanged: `../PWA-Base` already
+exists as a real directory, so the linker is a no-op.
 
 ## How a new PWA should consume this package
 
@@ -160,3 +190,5 @@ For **new sites inside this monorepo**, prefer `pnpm new-app <name>` — see
    (`content-pack:sync` currently assumes in-repo site packages).
 
 Until those land, **`file:../PWA-Base` is the supported consumption path**.
+Isolated worktrees use the KanDev sibling layout +
+`scripts/ensure-sibling-file-deps.mjs` (see above), not published packages.

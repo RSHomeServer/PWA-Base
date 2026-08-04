@@ -1,0 +1,30 @@
+---
+description: Link file:../ sibling deps (PWA-Base) before install/build in KanDev worktrees
+alwaysApply: true
+---
+
+# Sibling `file:` dependencies (KanDev worktrees)
+
+Songara PWAs depend on local siblings via relative file specs, e.g.
+`"@songara/pwa-base": "file:../PWA-Base"`.
+
+**Never** change application `package.json` to absolute paths, npm aliases, or a
+published package to fix KanDev worktrees. Primary `~/projects` checkouts must
+keep working unchanged.
+
+## Before `npm install` / `pnpm install` / `npm run build` in an isolated checkout
+
+1. If the task only has the app repo, attach `PWA-Base` with KanDev
+   `add_branch_to_task` / workspace sources (optional but preferred for dual-repo work).
+2. From the **consumer app root**, run the generic linker via the primary checkout path:
+
+```bash
+node "${SONGARA_PROJECTS_ROOT:-$HOME/projects}/PWA-Base/scripts/ensure-sibling-file-deps.mjs"
+```
+
+3. Then install and build as usual.
+
+The linker is a no-op when `../PWA-Base` already exists. It applies to every
+future Songara PWA that uses `file:../…` — no per-app bootstrap.
+
+Details: `docs/guides/consuming-pwa-base.md` (KanDev / isolated worktrees).
