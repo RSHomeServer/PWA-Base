@@ -2,8 +2,8 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { Badge, Button, Kbd } from "@platform/ui";
 import { SectionHeader } from "../../components/SectionHeader.js";
 import { StatGrid, type StatItem } from "../../components/StatGrid.js";
-import { formatMs, formatNumber } from "../../lib/format.js";
-import { verdictBadgeVariant, verdictFromThresholds } from "../../lib/verdict.js";
+import { formatMs, formatNumber, verdictFromThresholds } from "@platform/browser";
+import { verdictBadgeVariant } from "../../lib/verdict.js";
 import styles from "./InputSection.module.css";
 
 interface TrailPoint {

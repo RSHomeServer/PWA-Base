@@ -1,5 +1,5 @@
+import { clamp } from "@platform/browser";
 import type { Verdict } from "../lib/verdict.js";
-import { clamp } from "../lib/format.js";
 import styles from "./MeterBar.module.css";
 
 export interface MeterBarProps {

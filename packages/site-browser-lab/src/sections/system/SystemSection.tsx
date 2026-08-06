@@ -1,9 +1,9 @@
+import { useSystemInfo, verdictFromThresholds } from "@platform/browser";
 import { Badge } from "@platform/ui";
 import { Gauge } from "../../components/Gauge.js";
 import { SectionHeader } from "../../components/SectionHeader.js";
 import { StatGrid, type StatItem } from "../../components/StatGrid.js";
-import { verdictBadgeVariant, verdictFromThresholds } from "../../lib/verdict.js";
-import { useSystemInfo } from "./useSystemInfo.js";
+import { verdictBadgeVariant } from "../../lib/verdict.js";
 import styles from "./SystemSection.module.css";
 
 export function SystemSection() {

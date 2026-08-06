@@ -1,7 +1,5 @@
 import { useState, type CSSProperties } from "react";
-import { detectBrowserIdentity } from "../lib/browserDetect.js";
-import { getWebglInfo } from "../lib/webgl.js";
-import { formatNumber } from "../lib/format.js";
+import { detectBrowserIdentity, formatNumber, getWebglInfo } from "@platform/browser";
 import styles from "./SecondaryTelemetry.module.css";
 
 function truncate(text: string, max: number): string {

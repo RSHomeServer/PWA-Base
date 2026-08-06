@@ -1,14 +1,19 @@
 import { useCallback } from "react";
+import {
+  formatMs,
+  formatNumber,
+  pingOnce,
+  probeWebsocket,
+  useBenchmark,
+  useNetworkConnection,
+  verdictFromThresholds,
+  type BenchmarkRunner,
+} from "@platform/browser";
 import { BenchmarkCard } from "../../components/BenchmarkCard.js";
 import { MeterBar } from "../../components/MeterBar.js";
 import { SectionHeader } from "../../components/SectionHeader.js";
 import { StatGrid, type StatItem } from "../../components/StatGrid.js";
-import { useBenchmark, type BenchmarkRunner } from "../../hooks/useBenchmark.js";
-import { formatMs, formatNumber } from "../../lib/format.js";
-import { verdictFromThresholds } from "../../lib/verdict.js";
 import { PublicIpLookup } from "./PublicIpLookup.js";
-import { pingOnce, probeWebsocket } from "./net.js";
-import { useNetworkConnection } from "./useNetworkConnection.js";
 import styles from "./NetworkSection.module.css";
 
 const PING_SAMPLES = 12;

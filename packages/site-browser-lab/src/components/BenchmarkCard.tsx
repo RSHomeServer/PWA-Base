@@ -1,9 +1,12 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { Badge, Button } from "@platform/ui";
-import type { BenchmarkResult, BenchmarkStatus } from "../hooks/useBenchmark.js";
-import { useBenchmarkHistory } from "../hooks/useBenchmarkHistory.js";
+import {
+  formatNumber,
+  useBenchmarkHistory,
+  type BenchmarkResult,
+  type BenchmarkStatus,
+} from "@platform/browser";
 import { verdictBadgeVariant, verdictLabel } from "../lib/verdict.js";
-import { formatNumber } from "../lib/format.js";
 import { Flourish } from "./Flourish.js";
 import { MeterBar } from "./MeterBar.js";
 import { Sparkline } from "./Sparkline.js";

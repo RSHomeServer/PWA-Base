@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { Button, Label } from "@platform/ui";
 import { SectionHeader } from "../../components/SectionHeader.js";
 import { StatGrid, type StatItem } from "../../components/StatGrid.js";
-import { formatMs, formatNumber } from "../../lib/format.js";
+import { formatMs, formatNumber } from "@platform/browser";
 import styles from "./AudioSection.module.css";
 
 type OscWave = OscillatorType;

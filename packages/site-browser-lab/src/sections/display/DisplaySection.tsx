@@ -1,12 +1,10 @@
 import { useEffect } from "react";
 import { Button } from "@platform/ui";
+import { useDisplayInfo, useRefreshRate, verdictFromThresholds } from "@platform/browser";
 import { Gauge } from "../../components/Gauge.js";
 import { SectionHeader } from "../../components/SectionHeader.js";
 import { StatGrid, type StatItem } from "../../components/StatGrid.js";
-import { verdictFromThresholds } from "../../lib/verdict.js";
 import { FullscreenDemo } from "./FullscreenDemo.js";
-import { useDisplayInfo } from "./useDisplayInfo.js";
-import { useRefreshRate } from "./useRefreshRate.js";
 import styles from "./DisplaySection.module.css";
 
 export function DisplaySection() {

@@ -1,6 +1,8 @@
 import type { BadgeVariant } from "@platform/ui";
+import type { Verdict } from "@platform/browser";
 
-export type Verdict = "pass" | "warn" | "fail" | "info";
+export type { Verdict } from "@platform/browser";
+export { verdictFromThresholds } from "@platform/browser";
 
 export function verdictBadgeVariant(verdict: Verdict): BadgeVariant {
   switch (verdict) {
@@ -26,15 +28,4 @@ export function verdictLabel(verdict: Verdict): string {
     default:
       return "Info";
   }
-}
-
-/** Maps a value against ascending pass/warn thresholds (higher is better). */
-export function verdictFromThresholds(value: number, warnAt: number, passAt: number): Verdict {
-  if (value >= passAt) {
-    return "pass";
-  }
-  if (value >= warnAt) {
-    return "warn";
-  }
-  return "fail";
 }

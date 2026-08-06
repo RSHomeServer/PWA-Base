@@ -1,6 +1,5 @@
 import { useState, type CSSProperties } from "react";
-import { getWebglInfo } from "../lib/webgl.js";
-import { fpsHealth, useLiveFrameTelemetry } from "../hooks/useLiveFrameTelemetry.js";
+import { fpsHealth, getWebglInfo, useLiveFrameTelemetry } from "@platform/browser";
 import { Sparkline } from "./Sparkline.js";
 import styles from "./PrimaryScope.module.css";
 

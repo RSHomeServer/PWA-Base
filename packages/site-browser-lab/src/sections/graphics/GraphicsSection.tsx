@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Button } from "@platform/ui";
 import { SectionHeader } from "../../components/SectionHeader.js";
-import { formatNumber } from "../../lib/format.js";
+import { formatNumber } from "@platform/browser";
 import styles from "./GraphicsSection.module.css";
 
 const SHADERS = [

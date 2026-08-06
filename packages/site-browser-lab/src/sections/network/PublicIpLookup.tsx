@@ -1,6 +1,6 @@
 import { useCallback, useState } from "react";
 import { Button } from "@platform/ui";
-import { lookupPublicIp } from "./net.js";
+import { lookupPublicIp } from "@platform/browser";
 import styles from "./PublicIpLookup.module.css";
 
 type State = { status: "idle" | "loading" | "done" | "error"; ip?: string; error?: string };

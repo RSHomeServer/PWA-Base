@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "@platform/animation": "workspace:*",
+    "@platform/browser": "workspace:*",
     "@platform/site-registry": "workspace:*",
     "@platform/ui": "workspace:*",
     "react": "catalog:"

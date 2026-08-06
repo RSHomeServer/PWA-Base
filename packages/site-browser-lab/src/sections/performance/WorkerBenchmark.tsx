@@ -1,14 +1,19 @@
 import { useCallback, useEffect, useRef, useState, type RefObject } from "react";
 import { Badge } from "@platform/ui";
+import {
+  createComputeWorkers,
+  formatNumber,
+  isWorkerSupported,
+  resolveWorkerCoreCount,
+  useBenchmark,
+  WORKER_BENCHMARK_BUDGET_MS,
+  type BenchmarkResult,
+  type WorkerOutMessage,
+  type WorkerStartMessage,
+} from "@platform/browser";
 import { BenchmarkCard } from "../../components/BenchmarkCard.js";
-import { useBenchmark, type BenchmarkResult } from "../../hooks/useBenchmark.js";
-import { formatNumber } from "../../lib/format.js";
 import { verdictBadgeVariant, verdictFromThresholds } from "../../lib/verdict.js";
-import type { WorkerOutMessage, WorkerStartMessage } from "./worker/compute.worker.js";
 import styles from "./WorkerBenchmark.module.css";
-
-const BUDGET_MS = 700;
-const MAX_VISUAL_CORES = 16;
 
 /** Draws a per-core "equalizer" — bars pulse while their worker is busy, then settle to a height proportional to that core's measured throughput. */
 function useCoreActivityCanvas(canvasRef: RefObject<HTMLCanvasElement | null>, coreCount: number) {
@@ -73,21 +78,17 @@ function useCoreActivityCanvas(canvasRef: RefObject<HTMLCanvasElement | null>, c
 export function WorkerBenchmark() {
   const workersRef = useRef<Worker[]>([]);
   const [supported, setSupported] = useState(true);
-  const coreCount = Math.max(1, Math.min(MAX_VISUAL_CORES, navigator.hardwareConcurrency || 4));
+  const coreCount = resolveWorkerCoreCount();
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const { pulse } = useCoreActivityCanvas(canvasRef, coreCount);
 
   useEffect(() => {
-    if (typeof Worker === "undefined") {
+    if (!isWorkerSupported()) {
       setSupported(false);
       return;
     }
     try {
-      workersRef.current = Array.from(
-        { length: coreCount },
-        () =>
-          new Worker(new URL("./worker/compute.worker.ts", import.meta.url), { type: "module" }),
-      );
+      workersRef.current = createComputeWorkers(coreCount);
     } catch {
       setSupported(false);
     }
@@ -149,7 +150,7 @@ export function WorkerBenchmark() {
               worker.addEventListener("error", handleError);
               worker.postMessage({
                 type: "start",
-                budgetMs: BUDGET_MS,
+                budgetMs: WORKER_BENCHMARK_BUDGET_MS,
               } satisfies WorkerStartMessage);
             }),
         ),
@@ -178,7 +179,7 @@ export function WorkerBenchmark() {
   return (
     <BenchmarkCard
       title="Web Worker compute"
-      description={`Runs a prime-counting loop simultaneously across ${coreCount} dedicated Web Workers for ${(BUDGET_MS / 1000).toFixed(1)}s, lighting up a bar per core so you can see real thread utilisation, not just one busy thread.`}
+      description={`Runs a prime-counting loop simultaneously across ${coreCount} dedicated Web Workers for ${(WORKER_BENCHMARK_BUDGET_MS / 1000).toFixed(1)}s, lighting up a bar per core so you can see real thread utilisation, not just one busy thread.`}
       status={bench.status}
       progress={bench.progress}
       result={bench.result}

@@ -1,19 +1,24 @@
 import { useCallback, useEffect, useState } from "react";
 import { Badge, Button } from "@platform/ui";
-import { BenchmarkCard } from "../../components/BenchmarkCard.js";
-import { MeterBar } from "../../components/MeterBar.js";
-import { SectionHeader } from "../../components/SectionHeader.js";
-import { useBenchmark, type BenchmarkRunner } from "../../hooks/useBenchmark.js";
-import { formatBytes, formatMs, formatNumber, percent } from "../../lib/format.js";
-import { verdictBadgeVariant, verdictFromThresholds } from "../../lib/verdict.js";
 import {
+  formatBytes,
+  formatMs,
+  formatNumber,
   getStorageEstimate,
   isStoragePersisted,
+  percent,
   requestPersistentStorage,
   runIndexedDbBenchmark,
   runLocalStorageProbe,
+  useBenchmark,
+  verdictFromThresholds,
+  type BenchmarkRunner,
   type StorageEstimate,
-} from "./storage.js";
+} from "@platform/browser";
+import { BenchmarkCard } from "../../components/BenchmarkCard.js";
+import { MeterBar } from "../../components/MeterBar.js";
+import { SectionHeader } from "../../components/SectionHeader.js";
+import { verdictBadgeVariant } from "../../lib/verdict.js";
 import styles from "./StorageSection.module.css";
 
 const indexedDbRunner: BenchmarkRunner = async ({ onProgress }) => {
