@@ -40,9 +40,10 @@ local integration):
 - Commit message body and subject: **no** mentions of AI, LLMs, agents, Cursor, Copilot,
   or similar tooling.
 - **Never** add trailers such as `Co-authored-by:`, `Generated-by:`, `Made-with:`, or
-  equivalent for editor/AI tooling. If a hook or tool injects them, strip and rewrite the
-  commit before hand-off (new commit preferred over amend unless the ticket's amend rules
-  already allow it).
+  equivalent for editor/AI tooling. After every commit, run `git log -1 --format='%B'` and
+  confirm those trailers are absent. If the environment injects them on `git commit`,
+  rewrite the tip with `git commit-tree` (same tree + parent + clean message) and
+  `git reset --hard` to that commit before hand-off.
 - Do not update git config. Do not push unless the human explicitly asks in the ticket.
 
 ## When blocked
