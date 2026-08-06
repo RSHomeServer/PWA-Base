@@ -47,8 +47,11 @@ import {
   patchPlatformPreferences,
   usePlatformPreferences,
   defaultPlatformPreferences,
-} from "@platform/runtime";
+} from "@songara/pwa-base";
 ```
+
+Inside this monorepo, `@platform/runtime` remains valid. Sibling apps should use
+`@songara/pwa-base` (see [consuming-pwa-base.md](./consuming-pwa-base.md)).
 
 Apps must not call `registration.update()` / `skipWaiting` directly — use `useServiceWorkerUpdate` / `createServiceWorkerUpdateController`, which read these preferences.
 

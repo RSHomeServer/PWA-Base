@@ -76,8 +76,10 @@ pnpm exec playwright install chromium
 }
 ```
 
-Import from `@songara/pwa-base` (or subpath exports such as `@songara/pwa-base/ui`).
-Details: [docs/guides/consuming-pwa-base.md](./docs/guides/consuming-pwa-base.md).
+Import from `@songara/pwa-base` or a documented subpath (`/contract`, `/ui`,
+`/animation`, `/audio`, `/browser`, `/render`, `/completion-report`, …).
+Full entry-point table:
+[docs/guides/consuming-pwa-base.md](./docs/guides/consuming-pwa-base.md).
 
 KanDev worktrees do not see `../PWA-Base` unless the task mirrors the sibling layout.
 Keep the `file:` dependency; before install in an isolated checkout run:
@@ -92,7 +94,7 @@ node "${SONGARA_PROJECTS_ROOT:-$HOME/projects}/PWA-Base/scripts/ensure-sibling-f
 | --- | --- |
 | Living vision (foundation) | [docs/milestones/VISION.md](./docs/milestones/VISION.md) |
 | Architecture overview | [docs/architecture.md](./docs/architecture.md) |
-| Consume as `@songara/pwa-base` | [docs/guides/consuming-pwa-base.md](./docs/guides/consuming-pwa-base.md) |
+| Public API / consume as `@songara/pwa-base` | [docs/guides/consuming-pwa-base.md](./docs/guides/consuming-pwa-base.md) |
 | Independent packaging | [docs/guides/solo-packaging.md](./docs/guides/solo-packaging.md) |
 | Content Packs (ADR-005) | [docs/guides/content-packs.md](./docs/guides/content-packs.md) |
 | Local development | [docs/guides/local-development.md](./docs/guides/local-development.md) |
