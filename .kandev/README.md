@@ -135,6 +135,9 @@ Key properties:
   `origin/main` after a push,” **do not create it with `start_agent=true`** (and do not
   start an idle ticket) until the human has **confirmed they pushed**. Ask, wait, then
   start.
+- **Orchestrator briefs:** every task description must follow the ticket brief structure in
+  [`prompts/orchestrator.md`](./prompts/orchestrator.md) (role + profile name, sync block,
+  objective, deliverables, out of scope, validation, wrap-up, SoT links).
 
 ### The roles
 

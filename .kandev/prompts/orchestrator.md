@@ -60,12 +60,40 @@ Decide, based on **project state** (not a fixed script):
   the push**. Ask for confirmation, wait for their reply, then sync/start. Never assume
   a push happened or race the human’s terminal.
 
-Create, sequence, and coordinate KanDev tasks accordingly. Brief each specialist with the
-objective, the relevant workflow, and the source-of-truth links it needs.
+Create, sequence, and coordinate KanDev tasks accordingly.
 
-**Every ticket description must include** the mandatory **sync to `origin/main`** commands
-from [`_shared.md`](./_shared.md) (primary checkout + this worktree). After each ticket the
-human pushes; the next specialist will not see that tip unless they sync first.
+### Ticket brief structure (mandatory)
+
+Every `create_task_kandev` **description** (the specialist’s first prompt) must be a complete
+brief. Do **not** send a one-line title and rely on inheritance. Structure it as follows:
+
+1. **Role + KanDev profile** — name the role and the profile you selected (and use the
+   matching `agent_profile_id`). Example: “You are the **Executor** (KanDev profile
+   **Executor**).”
+2. **Inherit links** — point at `.kandev/prompts/<role>.md` and `_shared.md` (plus the
+   relevant workflow under `.kandev/workflows/` when one applies).
+3. **Gate status** — cleared (human confirmed push + start) **or** blocked (create idle /
+   `start_agent=false` and wait). Never auto-start push-gated work.
+4. **Sync to `origin/main`** — paste the mandatory commands from [`_shared.md`](./_shared.md)
+   (primary checkout + this worktree). After each ticket the human pushes; the next
+   specialist will not see that tip unless they sync first.
+5. **Objective** — one short paragraph of outcome.
+6. **Deliverables** — concrete paths / acceptance checks.
+7. **Out of scope** — explicit non-goals.
+8. **Validation** — what to run or verify (tie to `CURSOR.md` ladder when implementing).
+9. **Wrap-up** — commit (no editor/AI co-author trailers; strip via `commit-tree` if
+   injected) → merge **local `main`** → **do not push** → completion table →
+   `step_complete_kandev` → exact push commands for the human (or N/A).
+10. **SoT links** as needed — `CURSOR.md`, `docs/milestones/VISION.md`, ADR-007,
+    `docs/guides/consuming-pwa-base.md`, `.kandev/review-checklist.md`, etc. Prefer links
+    over pasting DoD / report section lists.
+
+Match profile to work: **Executor** = implement; **Discovery** = scope only; **Architect** =
+design/ADR; **Reviewer** = read-only; **Maintainer** = promote/version/`.kandev` upkeep.
+
+For **sibling application** work: the app repo lives **beside** `PWA-Base` (e.g. under
+`~/projects/`), not inside it; depend on `"@songara/pwa-base": "file:../PWA-Base"`; run the
+sibling linker before install; import only documented `@songara/pwa-base` entry points.
 
 ## Review and integrate
 
