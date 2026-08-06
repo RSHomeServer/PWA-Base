@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import type { PointerEvent as ReactPointerEvent } from "react";
 import { Button } from "@platform/ui";
 import { useShortcuts } from "../../shared/useShortcuts.js";
-import { useAudioEngine } from "../engine/useAudioEngine.js";
+import { useAudioEngine } from "@platform/audio";
 import { loadModeSession, saveModeSession } from "../session.js";
 import { ModeStage } from "../shared/ModeStage.js";
 import { SliderRow, ToggleChip } from "../shared/Controls.js";

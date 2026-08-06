@@ -2,7 +2,6 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import type { ChangeEvent } from "react";
 import { Button } from "@platform/ui";
 import { useShortcuts } from "../../shared/useShortcuts.js";
-import { useAudioEngine } from "../engine/useAudioEngine.js";
 import {
   FREQUENCY_BANDS,
   SimpleKWeightFilter,
@@ -10,7 +9,8 @@ import {
   bandEnergies,
   phaseCorrelation,
   rms,
-} from "../engine/analysis.js";
+  useAudioEngine,
+} from "@platform/audio";
 import { useAnimationFrame } from "../../shared/useAnimationFrame.js";
 import { useScreenshotTarget } from "../shared/useScreenshot.js";
 import { ModeStage } from "../shared/ModeStage.js";

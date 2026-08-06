@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { AudioEngineReactContext, type AudioEngineApi } from "./audioEngineStore.js";
+import { AudioEngineReactContext, type AudioEngineApi } from "./engineContext.js";
 
 export function useAudioEngine(): AudioEngineApi {
   const ctx = useContext(AudioEngineReactContext);
@@ -8,5 +8,3 @@ export function useAudioEngine(): AudioEngineApi {
   }
   return ctx;
 }
-
-export type { AudioEngineApi, EngineNodes } from "./audioEngineStore.js";

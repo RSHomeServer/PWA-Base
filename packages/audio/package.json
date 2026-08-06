@@ -1,8 +1,8 @@
 {
-  "name": "@platform/site-viz",
+  "name": "@platform/audio",
   "version": "0.0.0",
   "private": true,
-  "description": "Optical illusions and mathematical visualisations for the platform",
+  "description": "Web Audio graph, React context, and shared DSP analysis utilities",
   "type": "module",
   "exports": {
     ".": {
@@ -14,26 +14,23 @@
   "main": "./src/index.ts",
   "types": "./src/index.ts",
   "files": [
-    "src"
+    "src",
+    "README.md"
   ],
   "scripts": {
     "typecheck": "tsc --noEmit -p tsconfig.json",
     "test:unit": "vitest run"
   },
-  "dependencies": {
-    "@platform/audio": "workspace:*",
-    "@platform/render": "workspace:*",
-    "@platform/controls": "workspace:*",
-    "@platform/export": "workspace:*",
-    "@platform/math": "workspace:*",
-    "@platform/physics": "workspace:*",
-    "@platform/site-registry": "workspace:*",
-    "@platform/ui": "workspace:*",
-    "react": "catalog:"
+  "peerDependencies": {
+    "react": "^19.0.0"
   },
   "devDependencies": {
     "@platform/config": "workspace:*",
     "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "happy-dom": "^17.4.4",
+    "react": "catalog:",
+    "react-dom": "catalog:",
     "typescript": "catalog:",
     "vitest": "catalog:"
   }

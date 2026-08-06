@@ -1,9 +1,6 @@
 import { createContext } from "react";
 
-/**
- * Shared Web Audio graph types and React context for the Audio Lab.
- * Kept free of components so Fast Refresh stays healthy for the provider file.
- */
+/** Nodes wired by {@link createMasterGraph}: mode sources → masterGain → compressor → analyser → destination. */
 export interface EngineNodes {
   ctx: AudioContext;
   masterGain: GainNode;

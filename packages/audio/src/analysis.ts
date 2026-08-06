@@ -1,4 +1,4 @@
-/** Small, dependency-free DSP helpers shared by the visualiser, stem, and meter UIs. */
+/** Small, dependency-free DSP helpers for meters, visualisers, and analysers. */
 
 /** Root-mean-square level of a time-domain buffer, in `[0, 1]` for `Float32Array` input. */
 export function rms(buffer: Float32Array): number {
