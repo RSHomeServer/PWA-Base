@@ -18,11 +18,11 @@ Add new capability to an app or the shared foundation.
    [LDR](../decisions/) → produce a [feature-ticket](../templates/feature-ticket.md).
 3. **[Executor](../prompts/executor.md)** → implement in Build Mode (KanDev **Executor**
    profile), climb the validation ladder ([`CURSOR.md`](../../CURSOR.md)), capture Visual
-   Validation on UI change, persist the structured completion summary, merge to local
-   `main`, report the completion table, and `step_complete_kandev`.
+   Validation on UI change, persist the structured completion summary, push the feature
+   branch, open a PR, report the completion table, and `step_complete_kandev`.
 4. **[Reviewer](../prompts/reviewer.md)** → read-only pass against the
-   [review checklist](../review-checklist.md); findings back to the
-   Orchestrator, which dispatches any fixes.
+   [review checklist](../review-checklist.md) / PR; findings back to the
+   Orchestrator, which dispatches any fixes. Human squash-merges.
 
 The Orchestrator may run **multiple Executors in parallel** when the feature splits into
 independent, non-overlapping pieces.
@@ -41,5 +41,6 @@ solo packaging / site-registry contract per [ADR-002](../../docs/adr/002-site-re
 
 ## Exit
 
-DoD in [`CURSOR.md`](../../CURSOR.md) met; human review approved (**no auto-merge**,
+DoD in [`CURSOR.md`](../../CURSOR.md) met; PR open for human review/squash-merge
+(**Remote Git Policy** in [`_shared.md`](../prompts/_shared.md);
 [`CONTRIBUTING.md`](../../CONTRIBUTING.md)).

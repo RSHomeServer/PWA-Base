@@ -2,28 +2,23 @@
 
 > Follows a [discovery-ticket](./discovery-ticket.md). Fixed by the
 > [Executor](../prompts/executor.md) via the [bug-fix](../workflows/bug-fix.md) workflow.
-> KanDev profile: **Executor**.
+> KanDev profile: **Executor**. Remote Git Policy: [`../prompts/_shared.md`](../prompts/_shared.md).
 
 - **Severity:** blocker | major | minor
 - **Discovery / report:** link
 
-## Before you start — sync to `origin/main`
-
-The human pushes after every ticket. Run this **first**:
+## Before you start — sync + feature branch
 
 ```bash
 cd "${SONGARA_PROJECTS_ROOT:-$HOME/projects}/PWA-Base"
-git checkout main
-git fetch origin
-git pull --ff-only origin main
+git fetch origin && git checkout main && git pull --ff-only origin main
 
 cd "<this-worktree>"
-git fetch origin
-git merge --ff-only origin/main
+git fetch origin && git merge --ff-only origin/main
+git checkout -b <feature-branch>
 ```
 
-Confirm HEAD matches (or is based on) `origin/main`, then branch. Details:
-[`../prompts/_shared.md`](../prompts/_shared.md).
+Do **not** commit on `main`. Details: [`../prompts/_shared.md`](../prompts/_shared.md).
 
 ## Reproduction
 
@@ -65,5 +60,6 @@ Developer steps, or "No developer action required." Recorded in the completion r
 
 ## Wrap-up
 
-Commit (no editor/AI co-author trailers) → merge **local `main`** → do not push → completion
-table with push commands → `step_complete_kandev`.
+Commit on the feature branch → push feature branch → open/update PR into `main` →
+completion table (branch + PR URL) → `step_complete_kandev`. **Do not** merge or push
+`main`.

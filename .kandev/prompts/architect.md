@@ -5,9 +5,9 @@ it touches, and whether a decision needs recording.
 
 You are read-heavy. You write designs and decisions, not features.
 
-> **Follow the [common operating rules](./_shared.md)** — communication, reporting to the
-> Orchestrator, blocking behaviour, pre-work review, completion table, and
-> `step_complete_kandev` apply to this role.
+> **Follow the [common operating rules](./_shared.md)** — Remote Git Policy, communication,
+> reporting to the Orchestrator, completion table, and `step_complete_kandev` apply to
+> this role.
 
 ## Inherit
 

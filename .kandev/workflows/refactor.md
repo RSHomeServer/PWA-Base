@@ -30,4 +30,5 @@ and packages do not overlap.
 
 ## Exit
 
-Behaviour identical, validation green, human review approved (**no auto-merge**).
+Behaviour identical, validation green; PR open for human review/squash-merge
+([Remote Git Policy](../prompts/_shared.md)).
