@@ -41,11 +41,42 @@
       "import": "./packages/completion-report/src/index.ts",
       "default": "./packages/completion-report/src/index.ts"
     },
+    "./controls": {
+      "types": "./packages/controls/src/index.ts",
+      "import": "./packages/controls/src/index.ts",
+      "default": "./packages/controls/src/index.ts"
+    },
+    "./math": {
+      "types": "./packages/math/src/index.ts",
+      "import": "./packages/math/src/index.ts",
+      "default": "./packages/math/src/index.ts"
+    },
+    "./physics": {
+      "types": "./packages/physics/src/index.ts",
+      "import": "./packages/physics/src/index.ts",
+      "default": "./packages/physics/src/index.ts"
+    },
+    "./export": {
+      "types": "./packages/export/src/index.ts",
+      "import": "./packages/export/src/index.ts",
+      "default": "./packages/export/src/index.ts"
+    },
+    "./markdown": {
+      "types": "./packages/markdown/src/index.ts",
+      "import": "./packages/markdown/src/index.ts",
+      "default": "./packages/markdown/src/index.ts"
+    },
+    "./markdown/styles.css": "./packages/markdown/src/markdown.css",
     "./package.json": "./package.json"
   },
   "files": [
     "src",
     "packages/completion-report/src",
+    "packages/controls/src",
+    "packages/math/src",
+    "packages/physics/src",
+    "packages/export/src",
+    "packages/markdown/src",
     "packages/runtime/src",
     "packages/site-registry/src",
     "packages/ui/src",
@@ -72,7 +103,7 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "test": "pnpm test:unit && pnpm test:e2e",
-    "test:unit": "pnpm --filter @platform/catalog --filter @platform/host --filter @platform/math --filter @platform/physics --filter @platform/runtime --filter @platform/experiences --filter @platform/site-viz --filter @platform/completion-report --filter @platform/telemetry --filter @platform/docs-api test:unit",
+    "test:unit": "pnpm --filter @platform/catalog --filter @platform/host --filter @platform/math --filter @platform/physics --filter @platform/export --filter @platform/controls --filter @platform/markdown --filter @platform/runtime --filter @platform/experiences --filter @platform/site-viz --filter @platform/completion-report --filter @platform/telemetry --filter @platform/docs-api test:unit",
     "test:e2e": "playwright test",
     "telemetry:up": "docker compose up -d telemetry",
     "telemetry:down": "docker compose stop telemetry",

@@ -2,16 +2,11 @@
 
 Browser download helpers shared by platform sites. Pure TypeScript — no React dependency.
 
-## Installation
+## Public import
 
-Workspace package (already wired in the monorepo):
-
-```json
-{
-  "dependencies": {
-    "@platform/export": "workspace:*"
-  }
-}
+```typescript
+import { downloadText, downloadBlob, downloadCanvasPng } from "@songara/pwa-base/export";
+// or workspace: import { … } from "@platform/export";
 ```
 
 ## Usage
