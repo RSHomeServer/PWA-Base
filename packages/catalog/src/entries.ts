@@ -6,12 +6,6 @@ import type { CatalogEntryMeta } from "@platform/site-registry/contract";
  */
 export const catalogEntries: readonly CatalogEntryMeta[] = [
   {
-    id: "components",
-    basePath: "/",
-    host: "components.songara.uk",
-    title: "Components",
-  },
-  {
     id: "docs",
     basePath: "/",
     host: "docs.songara.uk",

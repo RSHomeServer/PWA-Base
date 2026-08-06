@@ -17,14 +17,12 @@ COPY packages/controls/package.json packages/controls/
 COPY packages/export/package.json packages/export/
 COPY packages/math/package.json packages/math/
 COPY packages/physics/package.json packages/physics/
-COPY packages/site-components/package.json packages/site-components/
 COPY packages/site-dashboard/package.json packages/site-dashboard/
 COPY packages/site-docs/package.json packages/site-docs/
 COPY packages/markdown/package.json packages/markdown/
 COPY packages/runtime/package.json packages/runtime/
 COPY apps/telemetry/package.json apps/telemetry/
 COPY apps/docs-api/package.json apps/docs-api/
-COPY apps/components-web/package.json apps/components-web/
 COPY apps/docs-web/package.json apps/docs-web/
 COPY apps/dashboard-web/package.json apps/dashboard-web/
 

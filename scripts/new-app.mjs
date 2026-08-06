@@ -29,7 +29,6 @@ const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 
 const RESERVED = new Set([
   "catalog",
-  "components",
   "config",
   "controls",
   "dashboard",

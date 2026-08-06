@@ -10,7 +10,6 @@ describe("catalog", () => {
     expect(new Set(ids).size).toBe(ids.length);
     expect(ids).toEqual(
       expect.arrayContaining([
-        "components",
         "dashboard",
         "docs",
       ]),
