@@ -67,10 +67,16 @@
       "default": "./packages/markdown/src/index.ts"
     },
     "./markdown/styles.css": "./packages/markdown/src/markdown.css",
+    "./animation": {
+      "types": "./packages/animation/src/index.ts",
+      "import": "./packages/animation/src/index.ts",
+      "default": "./packages/animation/src/index.ts"
+    },
     "./package.json": "./package.json"
   },
   "files": [
     "src",
+    "packages/animation/src",
     "packages/completion-report/src",
     "packages/controls/src",
     "packages/math/src",
@@ -103,7 +109,7 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "test": "pnpm test:unit && pnpm test:e2e",
-    "test:unit": "pnpm --filter @platform/catalog --filter @platform/host --filter @platform/math --filter @platform/physics --filter @platform/export --filter @platform/controls --filter @platform/markdown --filter @platform/runtime --filter @platform/experiences --filter @platform/site-viz --filter @platform/completion-report --filter @platform/telemetry --filter @platform/docs-api test:unit",
+    "test:unit": "pnpm --filter @platform/catalog --filter @platform/host --filter @platform/math --filter @platform/physics --filter @platform/export --filter @platform/controls --filter @platform/markdown --filter @platform/animation --filter @platform/runtime --filter @platform/experiences --filter @platform/site-viz --filter @platform/completion-report --filter @platform/telemetry --filter @platform/docs-api test:unit",
     "test:e2e": "playwright test",
     "telemetry:up": "docker compose up -d telemetry",
     "telemetry:down": "docker compose stop telemetry",

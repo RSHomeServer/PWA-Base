@@ -20,6 +20,7 @@
     "typecheck": "tsc --noEmit -p tsconfig.json"
   },
   "dependencies": {
+    "@platform/animation": "workspace:*",
     "@platform/site-registry": "workspace:*",
     "@platform/ui": "workspace:*",
     "react": "catalog:"

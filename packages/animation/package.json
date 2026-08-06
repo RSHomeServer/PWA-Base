@@ -1,8 +1,8 @@
 {
-  "name": "@platform/site-birthday",
+  "name": "@platform/animation",
   "version": "0.0.0",
   "private": true,
-  "description": "Premium interactive 21st birthday keepsake experience",
+  "description": "Cross-app UI motion utilities — reduced-motion, viewport, parallax, reveal",
   "type": "module",
   "exports": {
     ".": {
@@ -14,30 +14,21 @@
   "main": "./src/index.ts",
   "types": "./src/index.ts",
   "files": [
-    "src"
+    "src",
+    "README.md"
   ],
   "scripts": {
     "typecheck": "tsc --noEmit -p tsconfig.json",
-    "test:unit": "vitest run",
-    "pack:sync": "node ../../scripts/sync-content-pack.mjs birthday birthday-base"
-  },
-  "dependencies": {
-    "@platform/animation": "workspace:*",
-    "@platform/controls": "workspace:*",
-    "@platform/runtime": "workspace:*",
-    "@platform/site-memories": "workspace:*",
-    "@platform/site-registry": "workspace:*",
-    "@platform/ui": "workspace:*",
-    "react-router-dom": "catalog:"
+    "test:unit": "vitest run"
   },
   "peerDependencies": {
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react": "^19.0.0"
   },
   "devDependencies": {
     "@platform/config": "workspace:*",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
+    "happy-dom": "^17.4.4",
     "react": "catalog:",
     "react-dom": "catalog:",
     "typescript": "catalog:",
