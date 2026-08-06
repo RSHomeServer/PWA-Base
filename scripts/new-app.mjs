@@ -47,7 +47,6 @@ const RESERVED = new Set([
   "stats",
   "telemetry",
   "ui",
-  "viz",
 ]);
 
 const rawName = process.argv[2]?.trim();

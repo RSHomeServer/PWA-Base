@@ -741,25 +741,6 @@
     );
 }
 
-.galleryViz .galleryVeil {
-  background:
-    radial-gradient(
-      ellipse 95% 85% at 30% 0%,
-      color-mix(in srgb, var(--color-accent-hover) 38%, transparent) 0%,
-      transparent 60%
-    ),
-    radial-gradient(
-      ellipse 60% 50% at 90% 80%,
-      color-mix(in srgb, var(--color-accent) 18%, transparent) 0%,
-      transparent 55%
-    ),
-    linear-gradient(
-      145deg,
-      color-mix(in srgb, var(--landing-teal-deep) 50%, transparent),
-      transparent
-    );
-}
-
 .galleryBrowserLab .galleryVeil {
   background:
     linear-gradient(

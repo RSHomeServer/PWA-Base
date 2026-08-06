@@ -1,6 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Visual Computing">
-  <rect width="64" height="64" rx="14" fill="#c2410c"/>
-  <polygon points="32,10 54,48 10,48" fill="#ffedd5" opacity=".95"/>
-  <circle cx="32" cy="36" r="8" fill="#c2410c"/>
-  <path d="M18 48h28" stroke="#fdba74" stroke-width="3" stroke-linecap="round"/>
-</svg>

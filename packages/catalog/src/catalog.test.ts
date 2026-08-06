@@ -15,10 +15,8 @@ describe("catalog", () => {
         "dashboard",
         "docs",
         "stats",
-        "viz",
       ]),
     );
-    expect(entries.find((e) => e.id === "viz")?.capabilities).toContain("full-bleed");
     expect(entries.every((e) => e.basePath === "/")).toBe(true);
   });
 
@@ -27,8 +25,6 @@ describe("catalog", () => {
     const ids = sites.map((site) => site.id);
 
     expect(sites).toHaveLength(getCatalogEntries().length);
-    expect(ids).toEqual(expect.arrayContaining(["viz"]));
-    expect(sites.find((site) => site.id === "viz")?.capabilities).toContain("full-bleed");
-    expect(sites.find((site) => site.id === "viz")?.basePath).toBe("/");
+    expect(ids).toEqual(expect.arrayContaining(["hello"]));
   });
 });

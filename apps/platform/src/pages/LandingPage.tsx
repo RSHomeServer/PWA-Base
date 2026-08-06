@@ -13,12 +13,6 @@ interface LandingPageProps {
 
 const HERO_ENTRIES = [
   {
-    id: "viz",
-    kicker: "Flagship installation",
-    title: "Viz",
-    line: "Fluid sims, fractal skies, and science you leave glowing on a wide desktop.",
-  },
-  {
     id: "browser-lab",
     kicker: "Diagnostics theatre",
     title: "Browser Lab",
@@ -27,13 +21,6 @@ const HERO_ENTRIES = [
 ] as const;
 
 const FEATURE_BEATS = [
-  {
-    product: "Viz",
-    siteId: "viz",
-    title: "Installations that hold the room",
-    description:
-      "Panoramic canvases and high-refresh motion — experiences built to stop the scroll and invite someone else over.",
-  },
   {
     product: "Browser Lab",
     siteId: "browser-lab",
@@ -48,11 +35,6 @@ const GALLERY_IDENTITY: Record<string, { kicker: string; atmosphere: string; tag
     kicker: "Analysis",
     atmosphere: styles.galleryStats,
     tagline: "Hypothesis testing, distributions, and statistical workflows.",
-  },
-  viz: {
-    kicker: "Installation",
-    atmosphere: styles.galleryViz,
-    tagline: "An interactive science museum you can leave running.",
   },
   "browser-lab": {
     kicker: "Diagnostics",

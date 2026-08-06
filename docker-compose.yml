@@ -161,30 +161,6 @@ services:
       - "traefik.http.services.stats-web.loadbalancer.server.port=80"
       - "traefik.http.routers.stats-web.middlewares=crowdsec@docker"
 
-  viz-web:
-    build:
-      context: .
-      dockerfile: apps/viz-web/Dockerfile
-      args:
-        PLATFORM_APP_VERSION: ${PLATFORM_APP_VERSION:-}
-        PLATFORM_RUNTIME_MODE: ${PLATFORM_RUNTIME_MODE:-development}
-    container_name: website-hosting-viz-web
-    networks:
-      - workspace_network
-    healthcheck:
-      test: ["CMD", "wget", "-qO-", "http://127.0.0.1/health"]
-      interval: 30s
-      timeout: 3s
-      retries: 3
-      start_period: 10s
-    restart: unless-stopped
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.viz-web.rule=Host(`viz.songara.uk`)"
-      - "traefik.http.routers.viz-web.entrypoints=https"
-      - "traefik.http.routers.viz-web.tls.certresolver=cloudflare"
-      - "traefik.http.services.viz-web.loadbalancer.server.port=80"
-      - "traefik.http.routers.viz-web.middlewares=crowdsec@docker"
 
   browser-lab-web:
     build:

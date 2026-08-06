@@ -12,10 +12,6 @@ test.describe("application catalogue", () => {
 
     const apps = page.getByRole("list", { name: "Apps" });
     await expect(apps.getByRole("link", { name: /Statistical Analysis/i })).toBeVisible();
-    await expect(apps.getByRole("link", { name: /Visual Computing/i })).toHaveAttribute(
-      "href",
-      "https://viz.songara.uk",
-    );
 
     const media = page.getByRole("list", { name: "Media" });
     await expect(media.getByRole("link", { name: /Overseerr/i })).toHaveAttribute(

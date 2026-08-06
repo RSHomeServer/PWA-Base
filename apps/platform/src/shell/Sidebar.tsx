@@ -15,7 +15,6 @@ interface SidebarProps {
 
 const SITE_ACCENTS: Record<string, string> = {
   stats: styles.appAccentStats,
-  viz: styles.appAccentViz,
   "browser-lab": styles.appAccentBrowserLab,
 };
 

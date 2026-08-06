@@ -29,8 +29,7 @@
     "@platform/site-docs": "workspace:*",
     "@platform/site-hello": "workspace:*",
     "@platform/site-registry": "workspace:*",
-    "@platform/site-stats": "workspace:*",
-    "@platform/site-viz": "workspace:*"
+    "@platform/site-stats": "workspace:*"
   },
   "devDependencies": {
     "@platform/config": "workspace:*",

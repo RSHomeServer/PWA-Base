@@ -218,10 +218,6 @@
   border-inline-start-color: color-mix(in srgb, var(--color-accent) 85%, var(--color-accent-hover));
 }
 
-.appAccentViz.navLinkActive {
-  border-inline-start-color: var(--color-accent-hover);
-}
-
 .appAccentBrowserLab.navLinkActive {
   border-inline-start-color: color-mix(in srgb, var(--color-accent) 75%, var(--color-foreground));
 }
