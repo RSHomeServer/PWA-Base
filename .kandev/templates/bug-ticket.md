@@ -60,6 +60,8 @@ Developer steps, or "No developer action required." Recorded in the completion r
 
 ## Wrap-up
 
-Commit on the feature branch → push feature branch → open/update PR into `main` →
-completion table (branch + PR URL) → `step_complete_kandev`. **Do not** merge or push
-`main`.
+When the ticket work is validated (wrap-up — no extra human “open a PR” prompt needed):
+commit on the feature branch → push feature branch → open/update PR into `main` →
+completion table (branch + PR URL) → `step_complete_kandev`. **Do not** merge, approve, or
+push `main`. Human reviews and squash-merges; the next ticket syncs to `origin/main` after
+that merge.

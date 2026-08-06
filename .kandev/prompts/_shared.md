@@ -52,6 +52,10 @@ details: [`CONTRIBUTING.md`](../../CONTRIBUTING.md). Authorship rules below stil
   feature branch) when needed to keep the PR current — still **no** push or merge to
   `main`.
 
+Opening a PR is part of **normal ticket wrap-up** once the work is validated (same moment
+we previously prepared a human publish). The human remains the **approval and merge** gate
+— agents do not approve or merge.
+
 ### Never perform automatically
 
 Unless the **current task explicitly instructs otherwise**, never:
@@ -117,6 +121,11 @@ unless the ticket explicitly allows it.
 Every Orchestrator-created ticket **must** include these sync + branch expectations in the
 brief.
 
+**After changes land on `main`:** when the human has squash-merged a PR (or otherwise
+updated remote `main`), the **next** ticket must sync to `origin/main` before branching —
+same as today’s “sync first” rule. Do not start that next ticket until the human confirms
+the merge **and** says to start (merge alone is not start approval).
+
 **Start gate:** If the next ticket depends on a PR the human has not yet merged (or on a
 remote tip you cannot see), create it idle / `start_agent=false`, ask them to merge (or
 confirm), and **only then** start. Do not race their review/merge.
@@ -179,12 +188,17 @@ workspace completion-summary channel when available (`@songara/pwa-base/completi
 
 ## Git wrap-up (when the ticket changed the repo)
 
-Default path (unless the ticket says otherwise):
+Default path (unless the ticket says otherwise) — run this when the ticket work is done
+and validated (**wrap-up**), without waiting for a second human “please open a PR” message:
 
 1. Commit on the **feature branch** (authorship rules above).
 2. Push the **feature branch** to origin.
-3. Open or update a **pull request** into `main` (squash-merge workflow; human merges).
-4. **Do not** merge the PR, approve it, or push to `main`.
-5. Fill the completion table (branch + PR URL required when git changed).
+3. Open or update a **pull request** into `main` (squash-merge workflow).
+4. **Do not** merge the PR, approve it, or push to `main` — that is the human’s gate.
+5. Fill the completion table (branch + PR URL required when git changed) and
+   `step_complete_kandev`.
+
+The Orchestrator then presents the PR to the user for review/merge. After the human
+merges, subsequent tickets **sync to `origin/main`** before starting (see Before starting).
 
 Do **not** start the next ticket unless the Orchestrator (or human) explicitly approves.

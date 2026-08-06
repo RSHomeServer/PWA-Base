@@ -45,6 +45,8 @@ You own remote-git governance for this project. Follow the **Remote Git Policy**
 - **Never** ask an Executor (or anyone) to merge directly into `main`, push to `main`,
   approve a PR, or squash-merge — that is the human’s action after review.
 - Recommend when a PR is ready for human review, and recommend follow-up after review.
+- After the human merges, ensure the **next** specialist syncs to `origin/main` before
+  branching (preserve post-change sync). Do not auto-start that next ticket.
 
 ## Delegate and sequence
 
@@ -86,8 +88,10 @@ Every `create_task_kandev` **description** must be a complete brief:
 6. **Deliverables** — concrete paths / acceptance checks.
 7. **Out of scope** — explicit non-goals.
 8. **Validation** — tie to [`CURSOR.md`](../../CURSOR.md) when implementing.
-9. **Wrap-up** — commit on feature branch → push feature branch → open/update PR →
-   completion table (branch + PR URL) → `step_complete_kandev`. **Never** merge to `main`.
+9. **Wrap-up** — when work is validated: commit on feature branch → push feature branch →
+   open/update PR → completion table (branch + PR URL) → `step_complete_kandev`. **Never**
+   merge or approve the PR. Human is the gate. Next ticket (after merge + explicit start)
+   must sync to `origin/main` first.
 10. **SoT links** as needed — prefer links over pasting DoD / report section lists.
 
 Match profile to work: **Executor** = implement; **Discovery** = scope; **Architect** =
