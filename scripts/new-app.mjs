@@ -10,9 +10,9 @@
  *   packages/site-<name>/
  *   apps/<name>-web/
  *   minimal Content Pack (<name>-base)
- *   catalogue + nav registration
  *
- * Does not modify Docker / Compose.
+ * Does not modify Docker / Compose. Catalogue registration removed in T0.4;
+ * T0.5 rewrites this scaffolder for solo-only apps.
  */
 import { spawnSync } from "node:child_process";
 import {
@@ -72,7 +72,6 @@ const host = `${name}.songara.uk`;
 const packageSite = `@platform/site-${name}`;
 const packageWeb = `@platform/${name}-web`;
 const accent = pickAccent(name);
-const monogram = monogramLetters(name);
 const { devPort, previewPort } = nextPorts();
 
 function toTitle(kebab) {
@@ -86,15 +85,6 @@ function toCamelCase(kebab) {
   return kebab
     .split("-")
     .map((part, i) => (i === 0 ? part : part.charAt(0).toUpperCase() + part.slice(1)))
-    .join("");
-}
-
-function monogramLetters(kebab) {
-  const parts = kebab.split("-");
-  if (parts.length === 1) return parts[0].slice(0, 2).toUpperCase();
-  return parts
-    .slice(0, 2)
-    .map((p) => p.charAt(0).toUpperCase())
     .join("");
 }
 
@@ -128,42 +118,6 @@ function write(path, contents) {
   mkdirSync(dirname(path), { recursive: true });
   writeFileSync(path, contents);
   console.log("  +", relative(root, path));
-}
-
-function insertBeforeMarker(filePath, marker, insertion, { alreadyContains } = {}) {
-  const text = readFileSync(filePath, "utf8");
-  if (alreadyContains && text.includes(alreadyContains)) {
-    console.log("  ~", relative(root, filePath), "(already registered)");
-    return;
-  }
-  const idx = text.indexOf(marker);
-  if (idx === -1) {
-    throw new Error(`Marker not found in ${relative(root, filePath)}: ${marker}`);
-  }
-  writeFileSync(filePath, `${text.slice(0, idx)}${insertion}${text.slice(idx)}`);
-  console.log("  ~", relative(root, filePath));
-}
-
-function patchJsonDependency(filePath, depName) {
-  const pkg = JSON.parse(readFileSync(filePath, "utf8"));
-  pkg.dependencies ??= {};
-  if (pkg.dependencies[depName]) {
-    console.log("  ~", relative(root, filePath), `(${depName} already listed)`);
-    return;
-  }
-  pkg.dependencies[depName] = "workspace:*";
-  const sorted = Object.fromEntries(Object.entries(pkg.dependencies).sort(([a], [b]) => a.localeCompare(b)));
-  pkg.dependencies = sorted;
-  writeFileSync(filePath, `${JSON.stringify(pkg, null, 2)}\n`);
-  console.log("  ~", relative(root, filePath));
-}
-
-function logoSvg(id, letters, color) {
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="${id}">
-  <rect width="64" height="64" rx="14" fill="${color}"/>
-  <text x="32" y="38" text-anchor="middle" font-family="ui-sans-serif,system-ui,sans-serif" font-size="20" font-weight="700" fill="#fff">${letters}</text>
-</svg>
-`;
 }
 
 function appIconSvg(color) {
@@ -634,62 +588,8 @@ export function App() {
 
 write(join(appDir, "public/icons/icon.svg"), appIconSvg(accent));
 
-// --- registrations ----------------------------------------------------------
-
-insertBeforeMarker(
-  join(root, "packages/catalog/src/entries.ts"),
-  `  {
-    id: "dashboard",`,
-  `  {
-    id: "${name}",
-    basePath: "/",
-    host: "${host}",
-    title: "${title}",
-    requiredPackIds: ["${packId}"],
-    capabilities: ["offline"],
-  },
-`,
-  { alreadyContains: `id: "${name}"` },
-);
-
-  // Prefer unquoted keys for simple ids; quoted keys for kebab-case.
-  const loaderKey = /^[a-z][a-z0-9]*$/.test(name) ? name : `"${name}"`;
-  insertBeforeMarker(
-  join(root, "packages/catalog/src/loaders.ts"),
-  `  dashboard: () => import("@platform/site-dashboard")`,
-  `  ${loaderKey}: () => import("${packageSite}").then((m) => m.${siteExport}),
-`,
-  { alreadyContains: `import("${packageSite}")` },
-);
-
-patchJsonDependency(join(root, "packages/catalog/package.json"), packageSite);
-
-insertBeforeMarker(
-  join(root, "apps/platform/src/nav/catalogueNav.ts"),
-  `    {
-      id: "dashboard",
-      label: "AI Development Dashboard",`,
-  `    {
-      id: "${name}",
-      label: "${title}",
-      href: origin("${host}"),
-      external: false,
-      description: "${title} — scaffolded with pnpm new-app.",
-    },
-`,
-  { alreadyContains: `id: "${name}"` },
-);
-
-const accentKey = /^[a-z][a-z0-9]*$/.test(name) ? name : `"${name}"`;
-insertBeforeMarker(
-  join(root, "apps/platform/src/nav/catalogueNav.ts"),
-  `  dashboard: "#134e4a",`,
-  `  ${accentKey}: "${accent}",
-`,
-  { alreadyContains: `${accentKey}:` },
-);
-
-write(join(root, "apps/platform/public/logos", `${name}.svg`), logoSvg(name, monogram, accent));
+// Catalogue host + packages/catalog were removed in T0.4. T0.5 rewrites this
+// scaffolder for solo-only apps (no catalogue/nav patches).
 
 // --- install + pack sync ----------------------------------------------------
 
@@ -719,7 +619,7 @@ Done.
   Site:  packages/site-${name}
   App:   apps/${name}-web
   Pack:  ${packId}@1.0.0
-  Host:  ${host} (catalogue metadata)
+  Host:  ${host} (solo deploy hostname; no in-repo catalogue)
 
 Next:
   pnpm --filter ${packageWeb} dev     # http://127.0.0.1:${devPort}

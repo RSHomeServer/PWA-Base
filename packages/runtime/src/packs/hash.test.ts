@@ -15,8 +15,8 @@ describe("pack hash helpers", () => {
 
 describe("packBaseUrl", () => {
   it("builds static pack paths", () => {
-    expect(packBaseUrl("birthday", "birthday-base", "1.0.0")).toBe(
-      "/packs/birthday/birthday-base/1.0.0",
+    expect(packBaseUrl("hello", "hello-base", "1.0.0")).toBe(
+      "/packs/hello/hello-base/1.0.0",
     );
   });
 });

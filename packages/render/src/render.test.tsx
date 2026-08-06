@@ -94,7 +94,7 @@ describe("useAnimationFrame", () => {
 });
 
 describe("LabShell", () => {
-  it("renders title and stub children without site-viz imports", () => {
+  it("renders title and stub children without product site imports", () => {
     const host = document.createElement("div");
     document.body.appendChild(host);
     const root = createRoot(host);

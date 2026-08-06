@@ -6,18 +6,18 @@ Site registration **contract** for the platform.
 
 | Import                             | Who uses it   | Exports                              |
 | ---------------------------------- | ------------- | ------------------------------------ |
-| `@platform/site-registry`          | Host (types)  | `SiteDefinition` / `SiteRoute` types |
+| `@platform/site-registry`          | Apps (types)  | `SiteDefinition` / `SiteRoute` types |
 | `@platform/site-registry/contract` | Site packages | `defineSite()`, types                |
 
-Registered sites are listed in **`@platform/catalog`** (`getCatalogEntries` / `resolveSites`). That package is the only place that depends on concrete `@platform/site-*` implementations — keeping this contract package free of site cycles.
+Solo apps mount their own `defineSite({…})` export via `SoloSiteApp`. The former `@platform/catalog` multi-app catalogue was removed in T0.4; `CatalogEntryMeta` remains as optional metadata for future hosts.
 
 `SiteDefinition` may include AppManifest fields (`requiredPackIds`, `capabilities`) for packaging and Content Packs (ADR-004 / ADR-005).
 
 ## Adding a site
 
 1. Export `defineSite({…})` from `@platform/site-registry/contract`.
-2. Add the site as a dependency of `@platform/catalog`.
-3. Append one **lazy** entry in `packages/catalog/src/catalog.ts` (`load: () => import("…")`).
+2. Scaffold with `pnpm new-app <name>` (or mirror `packages/site-hello` + `apps/hello-web`).
+3. Run the solo app with `pnpm --filter @platform/<name>-web dev`.
 
 ## See also
 
