@@ -84,7 +84,7 @@ export interface CatalogEntryMeta extends AppManifestFields {
   basePath: string;
   title: string;
   /**
-   * Public hostname for independent hosting (e.g. `hello.songara.uk`).
+   * Public hostname for independent hosting (e.g. `hello.example.com`).
    * Catalogue links use `https://${host}/`.
    */
   host: string;

@@ -42,4 +42,4 @@ Where the defect likely lives and why. Fix the root cause, not the symptom
 ## Actions Required
 
 Developer steps, or "No developer action required." Recorded in the completion report
-(shape: [`apps/telemetry/src/types.ts`](../../apps/telemetry/src/types.ts)).
+(shape: [`packages/completion-report/src/types.ts`](../../packages/completion-report/src/types.ts)).

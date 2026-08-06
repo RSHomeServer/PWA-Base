@@ -35,7 +35,8 @@ public export. If in doubt, do a short Architect pass.
 
 Prefer `pnpm new-app <name>` and follow
 [creating-a-new-site.md](../../docs/guides/creating-a-new-site.md); the Architect confirms
-catalogue wiring per [ADR-002](../../docs/adr/002-site-registration-catalog.md).
+solo packaging / site-registry contract per [ADR-002](../../docs/adr/002-site-registration-catalog.md)
+(catalogue host removed in Milestone 0 — Milestone 1 rewrites ADR prose).
 
 ## Exit
 

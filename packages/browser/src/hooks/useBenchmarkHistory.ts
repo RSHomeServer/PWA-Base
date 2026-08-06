@@ -19,7 +19,7 @@ export interface BenchmarkHistory {
 }
 
 const MAX_ENTRIES = 10;
-const STORAGE_PREFIX = "browser-lab:bench-history:";
+const STORAGE_PREFIX = "pwa-browser:bench-history:";
 
 function readHistory(key: string): HistoryEntry[] {
   try {

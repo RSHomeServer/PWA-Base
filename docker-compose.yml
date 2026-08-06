@@ -1,3 +1,6 @@
+# Reference app only (hello-web). Product Traefik / *.songara.uk labels removed in T0.5.
+# Prefer `pnpm dev` for day-to-day work; Compose is optional for image smoke tests.
+
 services:
   hello-web:
     build:
@@ -6,24 +9,12 @@ services:
       args:
         PLATFORM_APP_VERSION: ${PLATFORM_APP_VERSION:-}
         PLATFORM_RUNTIME_MODE: ${PLATFORM_RUNTIME_MODE:-development}
-    container_name: website-hosting-hello-web
-    networks:
-      - workspace_network
+    container_name: pwa-base-hello-web
+    ports:
+      - "8080:80"
     healthcheck:
       test: ["CMD", "wget", "-qO-", "http://127.0.0.1/health"]
       interval: 30s
       timeout: 3s
       retries: 3
       start_period: 10s
-    restart: unless-stopped
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.hello-web.rule=Host(`hello.songara.uk`)"
-      - "traefik.http.routers.hello-web.entrypoints=https"
-      - "traefik.http.routers.hello-web.tls.certresolver=cloudflare"
-      - "traefik.http.services.hello-web.loadbalancer.server.port=80"
-      - "traefik.http.routers.hello-web.middlewares=crowdsec@docker"
-
-networks:
-  workspace_network:
-    external: true

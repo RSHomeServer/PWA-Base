@@ -11,8 +11,8 @@
  *   apps/<name>-web/
  *   minimal Content Pack (<name>-base)
  *
- * Does not modify Docker / Compose. Catalogue registration removed in T0.4;
- * T0.5 rewrites this scaffolder for solo-only apps.
+ * Solo-only: ThemeProvider → SoloSiteApp → defineSite → PackReadyGate.
+ * Does not patch catalogue/nav, Docker, or Compose.
  */
 import { spawnSync } from "node:child_process";
 import {
@@ -28,13 +28,19 @@ import { fileURLToPath } from "node:url";
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 
 const RESERVED = new Set([
+  "animation",
+  "audio",
+  "browser",
+  "completion-report",
   "config",
   "controls",
   "export",
+  "hello",
   "markdown",
   "math",
   "physics",
   "platform",
+  "render",
   "runtime",
   "site-registry",
   "ui",
@@ -68,7 +74,6 @@ const title = toTitle(name);
 const camel = toCamelCase(name);
 const siteExport = `${camel}Site`;
 const packId = `${name}-base`;
-const host = `${name}.songara.uk`;
 const packageSite = `@platform/site-${name}`;
 const packageWeb = `@platform/${name}-web`;
 const accent = pickAccent(name);
@@ -588,9 +593,6 @@ export function App() {
 
 write(join(appDir, "public/icons/icon.svg"), appIconSvg(accent));
 
-// Catalogue host + packages/catalog were removed in T0.4. T0.5 rewrites this
-// scaffolder for solo-only apps (no catalogue/nav patches).
-
 // --- install + pack sync ----------------------------------------------------
 
 console.log("\nInstalling workspace links…");
@@ -619,11 +621,10 @@ Done.
   Site:  packages/site-${name}
   App:   apps/${name}-web
   Pack:  ${packId}@1.0.0
-  Host:  ${host} (solo deploy hostname; no in-repo catalogue)
 
 Next:
   pnpm --filter ${packageWeb} dev     # http://127.0.0.1:${devPort}
   pnpm --filter ${packageWeb} build
 
-Docker / Traefik hosting is not scaffolded — add a Compose service when you deploy.
+Deploy separately (Dockerfile / Compose are not scaffolded per app).
 `);

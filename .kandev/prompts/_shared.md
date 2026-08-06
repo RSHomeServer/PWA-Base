@@ -55,6 +55,6 @@ role). The Orchestrator reviews this and decides the next task and the user-faci
 This report is the hand-off to the Orchestrator. It **complements** the structured
 completion summary and does not replace or redefine it — the report shape remains the
 source of truth in
-[`apps/telemetry/src/types.ts`](../../apps/telemetry/src/types.ts) (see
-[run-report-standard](../../docs/guides/run-report-standard.md)), persisted via
-`PUT /telemetry/api/tasks/:id/completion-summary`.
+[`packages/completion-report/src/types.ts`](../../packages/completion-report/src/types.ts) (see
+[run-report-standard](../../docs/guides/run-report-standard.md)). Persist via the
+workspace's completion-summary channel when available (`@songara/pwa-base/completion-report`).

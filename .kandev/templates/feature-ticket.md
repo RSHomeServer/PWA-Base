@@ -42,4 +42,4 @@ Climb the ladder from [`CURSOR.md`](../../CURSOR.md); tick what applies:
 
 Developer steps with **why / priority / expected outcome**, or "No developer action required."
 These belong in the completion report; the report shape is defined in
-[`apps/telemetry/src/types.ts`](../../apps/telemetry/src/types.ts) — do not redefine it here.
+[`packages/completion-report/src/types.ts`](../../packages/completion-report/src/types.ts) — do not redefine it here.

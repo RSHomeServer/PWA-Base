@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1
-# Reference app image (hello-web). Catalogue host removed in T0.4 B9.
+# Reference app image (hello-web). Optional — prefer `pnpm --filter @platform/hello-web build` locally.
 
 FROM node:22-alpine AS build
 

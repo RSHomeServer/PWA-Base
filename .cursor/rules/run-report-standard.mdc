@@ -1,5 +1,5 @@
 ---
-description: Follow root CURSOR.md; report SoT is telemetry RunCompletionSummary
+description: Follow root CURSOR.md; report SoT is completion-report RunCompletionSummary
 alwaysApply: true
 ---
 
@@ -7,6 +7,6 @@ alwaysApply: true
 
 Follow root **`CURSOR.md`** for execution, validation, DoD, developer actions, and task lifecycle.
 
-Completion reports: use structured `RunCompletionSummary` — canonical shape in `apps/telemetry/src/types.ts`, section registry/validation in `apps/telemetry/src/completion-report-contract.ts`. Prefer `PUT /telemetry/api/tasks/:id/completion-summary`. Do not redefine report sections in prompts. Human guide: `docs/guides/run-report-standard.md`.
+Completion reports: use structured `RunCompletionSummary` — canonical shape in `packages/completion-report/src/types.ts`, section registry/validation in `packages/completion-report/src/completion-report-contract.ts` (also `@songara/pwa-base/completion-report`). Do not redefine report sections in prompts. Human guide: `docs/guides/run-report-standard.md` (Milestone 1 refreshes prose still mentioning the removed telemetry service).
 
-When UI changes: capture artifacts (`pnpm capture:artifacts`) and describe them in Visual Validation. Markdown is export-only.
+When UI changes: run `pnpm capture:artifacts` (no-op guidance stub in PWA-Base after T0.4) and describe Visual Validation. Markdown is export-only.

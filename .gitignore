@@ -24,8 +24,7 @@ coverage/
 test-results/
 playwright-report/
 
-# Telemetry SQLite
-apps/telemetry/data/
+# Local SQLite scratch (if any)
 data/*.sqlite
 *.sqlite
 

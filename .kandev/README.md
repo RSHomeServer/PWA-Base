@@ -11,7 +11,7 @@ or architecture rules — it links to their sources of truth:
 | Source of truth | Owns |
 | --- | --- |
 | [`CURSOR.md`](../CURSOR.md) | Execution philosophy, validation ladder, Developer Actions, Task lifecycle, Definition of Done |
-| [`apps/telemetry/src/types.ts`](../apps/telemetry/src/types.ts) + [`completion-report-contract.ts`](../apps/telemetry/src/completion-report-contract.ts) | `RunCompletionSummary` shape + section registry (never redefine sections elsewhere) |
+| [`packages/completion-report/src/types.ts`](../packages/completion-report/src/types.ts) + [`completion-report-contract.ts`](../packages/completion-report/src/completion-report-contract.ts) | `RunCompletionSummary` shape + section registry (never redefine sections elsewhere) |
 | [`docs/architecture.md`](../docs/architecture.md) + [`docs/adr/`](../docs/adr/) | Package map, dependency rules, accepted decisions |
 | [ADR-003](../docs/adr/003-phase2-shared-packages.md) | **Two-consumer rule** — the gate for promoting code into PWA-Base |
 | [`docs/guides/consuming-pwa-base.md`](../docs/guides/consuming-pwa-base.md) | Public API surface + `file:../PWA-Base` consumption |

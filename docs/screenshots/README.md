@@ -1,1 +1,2 @@
-Product screenshots removed in T0.4; Milestone 1 / T0.5 may restore hello-only captures.
+Hello reference screenshots can be restored here when capture tooling is available again.
+Product app screenshots were removed in T0.4.

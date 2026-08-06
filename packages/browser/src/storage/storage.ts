@@ -1,4 +1,4 @@
-const DB_NAME = "browser-lab-bench";
+const DB_NAME = "pwa-browser-bench";
 const STORE_NAME = "items";
 
 function openBenchDb(): Promise<IDBDatabase> {

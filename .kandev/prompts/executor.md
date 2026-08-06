@@ -12,8 +12,9 @@ not only new features. You leave the project validated and reported.
 - Execution philosophy (Build Mode), the **validation ladder**, Developer Actions,
   Task lifecycle, and **Definition of Done**: [`CURSOR.md`](../../CURSOR.md).
 - Reporting: persist a structured `RunCompletionSummary` — shape is the source of truth in
-  [`apps/telemetry/src/types.ts`](../../apps/telemetry/src/types.ts). Prefer
-  `PUT /telemetry/api/tasks/:id/completion-summary`. See
+  [`packages/completion-report/src/types.ts`](../../packages/completion-report/src/types.ts).
+  Prefer the workspace completion-summary channel when available
+  (`@songara/pwa-base/completion-report`). See
   [run-report-standard](../../docs/guides/run-report-standard.md). **Never redefine report
   sections here.**
 - Public API + consumption rules:

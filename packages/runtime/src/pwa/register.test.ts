@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import { resolveServiceWorkerScriptUrl } from "./register.js";
 
 describe("resolveServiceWorkerScriptUrl", () => {
-  const page = "https://hello.songara.uk/";
+  const page = "https://hello.example.com/";
 
   it("resolves against a root base href without throwing", () => {
     expect(resolveServiceWorkerScriptUrl("/", page)).toBe("/sw.js");
@@ -20,7 +20,7 @@ describe("resolveServiceWorkerScriptUrl", () => {
 
   it("accepts an absolute base URL", () => {
     expect(
-      resolveServiceWorkerScriptUrl("https://hello.songara.uk/", page),
+      resolveServiceWorkerScriptUrl("https://hello.example.com/", page),
     ).toBe("/sw.js");
   });
 });
