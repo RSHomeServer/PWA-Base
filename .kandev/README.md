@@ -16,7 +16,18 @@ or architecture rules — it links to their sources of truth:
 | [ADR-003](../docs/adr/003-phase2-shared-packages.md) | **Two-consumer rule** — the gate for promoting code into PWA-Base |
 | [`docs/guides/consuming-pwa-base.md`](../docs/guides/consuming-pwa-base.md) | Public API surface + `file:../PWA-Base` consumption |
 | [`CONTRIBUTING.md`](../CONTRIBUTING.md) | Branch workflow, ownership boundaries, **no auto-merge** |
-| [`docs/reviews/review-checklist.md`](../docs/reviews/review-checklist.md) | Human/reviewer walkthrough |
+| [`review-checklist.md`](./review-checklist.md) | Living reviewer walkthrough |
+
+## Environment
+
+| Layer | Where | Role |
+| --- | --- | --- |
+| Dev / validation | Ubuntu VM | Day-to-day work for this repo and sibling apps |
+| Production | Proxmox | Website Hosting (and any legacy Telemetry retained there) |
+| Telemetry | **Not in PWA-Base** | Removed; KanDev + `packages/completion-report` replace it for engineering workflow |
+
+Product applications are **sibling repositories**. This monorepo ships the foundation plus
+the `hello-web` / `site-hello` reference app only.
 
 ## Purpose
 
@@ -38,6 +49,7 @@ PWA-Base is the canonical **upstream** for both dimensions:
 ```text
 .kandev/
 ├── README.md                     # this file
+├── review-checklist.md           # living reviewer checklist
 ├── prompts/                      # reusable role operating instructions
 │   ├── _shared.md                #  cross-cutting rules every role inherits
 │   ├── orchestrator.md           #  persistent coordinator; owns project flow & user contact
@@ -62,6 +74,23 @@ PWA-Base is the canonical **upstream** for both dimensions:
     ├── refactor.md
     └── promote-to-pwa-base.md
 ```
+
+## KanDev agent profiles
+
+When creating a task, **always set `agent_profile_id`**. Unset profiles inherit the parent
+(often Discovery) and open Ask/read-only by mistake.
+
+| Role | Profile name | Profile ID |
+| --- | --- | --- |
+| Orchestrator | Orchestrator | `b211f358-2094-4ee7-aab3-dc60c72d1b02` |
+| Discovery | Discovery | `009eb23d-4325-41c0-9ced-f42e3a1d32de` |
+| Architect | Architect | `c3f6c1b4-327a-4a7a-99ea-a881ef12c29b` |
+| **Executor** | **Executor** | `dfd3c6e9-19ad-4e17-bcde-7880c71256a2` |
+| Reviewer | Reviewer | `7f3772db-26a3-49be-805a-e64764e1a3c1` |
+| Maintainer | Maintainer | `38393318-45c5-448a-bbe0-65bfd7db4ed6` |
+
+If KanDev still shows the Executor row under a legacy label, rename it to **Executor** in
+settings so the UI matches this table. The ID above is the implementation profile.
 
 ## Orchestration model
 
@@ -92,11 +121,14 @@ Key properties:
 - **The Orchestrator owns project flow.** It decides the next task from **project state**,
   not by walking a fixed sequence.
 - **Specialists are disposable workers.** They never talk to the user; they report to the
-  Orchestrator using the 9-item completion report in [`_shared.md`](./prompts/_shared.md).
+  Orchestrator using the completion table + 9-item hand-off in
+  [`_shared.md`](./prompts/_shared.md), then signal `step_complete_kandev`.
 - **Multiple Executors may run simultaneously** when the work is genuinely independent
   (non-overlapping packages/files; sequence anything sharing `pnpm-lock.yaml`).
 - **Every specialist reports back to the Orchestrator**, which reviews the work against the
-  original objective and presents the user-facing summary.
+  original objective and presents the user-facing summary (including push commands).
+- **Git wrap-up:** commit → merge **local `main`** → human pushes. No editor/AI co-authors.
+- **Next ticket:** only after explicit human approval.
 
 ### The roles
 

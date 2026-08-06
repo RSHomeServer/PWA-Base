@@ -1,16 +1,23 @@
 # Run Report Standard
 
 Agent behaviour (execution, validation, DoD): see root [`CURSOR.md`](../../CURSOR.md).
+Process wrap-up (completion table, local `main`, no AI co-authors):
+[`.kandev/prompts/_shared.md`](../../.kandev/prompts/_shared.md).
 
 ## Canonical definition (source of truth)
 
 | Concern | Location |
 | --- | --- |
-| Field shape (`RunCompletionSummary`) | [`apps/telemetry/src/types.ts`](../../apps/telemetry/src/types.ts) |
-| Section registry + validation | [`apps/telemetry/src/completion-report-contract.ts`](../../apps/telemetry/src/completion-report-contract.ts) |
-| Normalise / markdown export | [`apps/telemetry/src/completion-summary.ts`](../../apps/telemetry/src/completion-summary.ts) |
+| Field shape (`RunCompletionSummary`) | [`packages/completion-report/src/types.ts`](../../packages/completion-report/src/types.ts) |
+| Section registry + validation | [`packages/completion-report/src/completion-report-contract.ts`](../../packages/completion-report/src/completion-report-contract.ts) |
+| Normalise / markdown export | [`packages/completion-report/src/completion-summary.ts`](../../packages/completion-report/src/completion-summary.ts) |
+| Public import | `@songara/pwa-base/completion-report` |
 
-**Do not** redefine sections in prompts, `CURSOR.md`, or Cursor rules. Change the TypeScript contract, add/adjust tests, then update this guide if human wording needs a refresh.
+**Do not** redefine sections in prompts, `CURSOR.md`, or editor rules. Change the TypeScript
+contract, add/adjust tests, then update this guide if human wording needs a refresh.
+
+Telemetry HTTP APIs are **not** part of PWA-Base. Prefer the workspace completion-summary
+channel when available.
 
 Schema version: **2** (`COMPLETION_SUMMARY_SCHEMA_VERSION`).
 
@@ -26,45 +33,43 @@ Persisted summary fields plus presentation-only sections (registry-driven):
 5. Configuration Changes
 6. Testing Performed
 7. Visual Validation *(artifacts; when UI changed)*
-8. **Actions Required** *(derived in dashboard from modified paths — not a summary JSON field)*
+8. **Actions Required** *(operator steps — not a second Task)*
 9. Known Limitations
 10. Recommended Next Milestone
 
-PUT responses include `reportValidation` (`ok`, `errors`, `warnings`, `missingSections`) from the contract validator. Missing required/recommended sections are **warnings** (persist still succeeds); structural issues are **errors**.
+Validators may report `reportValidation` (`ok`, `errors`, `warnings`, `missingSections`).
+Missing recommended sections are **warnings**; structural issues are **errors**.
 
 ## Overview quality
 
 Write for someone returning after several days. Cover: what was implemented, why,
-user impact, validation performed, remaining work. Avoid fixture one-liners
-(e.g. “E2E fixture…”). Prefer ≥40 characters of real narrative.
-
-API: `PUT /telemetry/api/tasks/:id/completion-summary` (preferred) or
-`PUT /telemetry/api/runs/:id/completion-summary`.
+user impact, validation performed, remaining work. Prefer ≥40 characters of real narrative.
 
 ## Actions Required
 
 Belongs inside the Task report. Never starts another Task. Each item: Action,
 Priority, Reason, Expected Outcome. **When the operator must run something, include the exact command(s)** in the Action or Expected Outcome (copy-pasteable). If none: **“No developer action required.”**
 
+Include push-to-`origin/main` commands here when git changed (agents merge local `main` only).
+
 ## Visual Validation
 
 ```bash
-pnpm capture:artifacts -- --run-id <uuid> --files … --base-url http://127.0.0.1:4173
+pnpm capture:artifacts
 ```
+
+Capture tooling may be a stub in this foundation repo after product removal; still describe
+Visual Validation when UI changed.
 
 ## How to change the report format
 
-1. Edit `RunCompletionSummary` in `apps/telemetry/src/types.ts` (bump `schemaVersion` on breaking changes).
+1. Edit `RunCompletionSummary` in `packages/completion-report/src/types.ts` (bump `schemaVersion` on breaking changes).
 2. Update `COMPLETION_REPORT_SECTIONS` and validators in `completion-report-contract.ts`.
 3. Update `normaliseCompletionSummary` / merge / markdown export in `completion-summary.ts` as needed.
-4. Mirror field types in `packages/site-dashboard/src/api/types.ts`.
-5. Extend unit tests; keep Playwright green.
-6. Refresh this guide — not `CURSOR.md` section lists.
+4. Extend unit tests.
+5. Refresh this guide — not `CURSOR.md` section lists.
 
-## Lifecycle
+## Related
 
-See [run-lifecycle.md](./run-lifecycle.md) for Task/Run consolidation and auto-complete.
-
-## Notification Centre
-
-API: `/telemetry/api/inbox`, `/telemetry/api/notification-preferences`.
+- Living process: [`.kandev/`](../../.kandev/)
+- Reviewer checklist: [`.kandev/review-checklist.md`](../../.kandev/review-checklist.md)

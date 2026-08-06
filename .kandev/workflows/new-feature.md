@@ -16,11 +16,12 @@ Add new capability to an app or the shared foundation.
    [ADR-003](../../docs/adr/003-phase2-shared-packages.md)); record a formal
    [ADR](../templates/architecture-decision.md) if a boundary/API changes, else an
    [LDR](../decisions/) → produce a [feature-ticket](../templates/feature-ticket.md).
-3. **[Executor](../prompts/executor.md)** → implement in Build Mode, climb the validation
-   ladder ([`CURSOR.md`](../../CURSOR.md)), capture Visual Validation on UI change, persist
-   the structured completion summary.
+3. **[Executor](../prompts/executor.md)** → implement in Build Mode (KanDev **Executor**
+   profile), climb the validation ladder ([`CURSOR.md`](../../CURSOR.md)), capture Visual
+   Validation on UI change, persist the structured completion summary, merge to local
+   `main`, report the completion table, and `step_complete_kandev`.
 4. **[Reviewer](../prompts/reviewer.md)** → read-only pass against the
-   [review checklist](../../docs/reviews/review-checklist.md); findings back to the
+   [review checklist](../review-checklist.md); findings back to the
    Orchestrator, which dispatches any fixes.
 
 The Orchestrator may run **multiple Executors in parallel** when the feature splits into

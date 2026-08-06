@@ -1,6 +1,8 @@
 # Contributing
 
-Thank you for contributing to Website Hosting. This document covers workflow expectations for the platform monorepo.
+Thank you for contributing to `@songara/pwa-base`. This document covers workflow
+expectations for the foundation repository (Ubuntu VM for day-to-day work; Proxmox for
+production Website Hosting). Product apps live in sibling repositories.
 
 ## Before you start
 
@@ -8,15 +10,20 @@ Read the architecture overview and ADRs so changes align with accepted decisions
 
 - [docs/architecture.md](./docs/architecture.md)
 - [docs/adr/](./docs/adr/)
+- [`.kandev/`](./.kandev/) — role prompts and wrap-up rules (local `main`, human push)
 
-Key rule from [ADR-002](./docs/adr/002-site-registration-catalog.md): the host consumes `@platform/site-registry` only — **never import individual site packages in `apps/platform`**.
+Key rule from [ADR-003](./docs/adr/003-phase2-shared-packages.md): promote shared code only
+when a **second** consumer needs the same API. Sibling apps import `@songara/pwa-base`
+public entry points only.
 
 ## Branch workflow
 
-- Branch from the current integration branch (e.g. `feat/platform-foundation` during foundation work, then `main` once established).
-- Use descriptive branch names: `feat/site-docs`, `fix/host-routing`, `docs/testing-guide`.
-- Keep PRs focused; prefer separate PRs for unrelated packages or concerns.
+- Branch from `main`.
+- Use descriptive branch names: `feat/…`, `fix/…`, `docs/…`.
+- Keep changes focused; prefer separate PRs for unrelated packages or concerns.
 - **Do not auto-merge.** Every change requires human review and approval.
+- Agents merge to **local `main` only**; the human runs `git push origin main`.
+- Commits must not include editor/AI co-author trailers or tooling branding.
 
 ## Ownership
 

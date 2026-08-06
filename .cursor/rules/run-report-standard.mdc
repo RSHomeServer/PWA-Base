@@ -7,6 +7,10 @@ alwaysApply: true
 
 Follow root **`CURSOR.md`** for execution, validation, DoD, developer actions, and task lifecycle.
 
-Completion reports: use structured `RunCompletionSummary` — canonical shape in `packages/completion-report/src/types.ts`, section registry/validation in `packages/completion-report/src/completion-report-contract.ts` (also `@songara/pwa-base/completion-report`). Do not redefine report sections in prompts. Human guide: `docs/guides/run-report-standard.md` (Milestone 1 refreshes prose still mentioning the removed telemetry service).
+Completion reports: use structured `RunCompletionSummary` — canonical shape in `packages/completion-report/src/types.ts`, section registry/validation in `packages/completion-report/src/completion-report-contract.ts` (also `@songara/pwa-base/completion-report`). Do not redefine report sections in prompts. Human guide: `docs/guides/run-report-standard.md`.
 
-When UI changes: run `pnpm capture:artifacts` (no-op guidance stub in PWA-Base after T0.4) and describe Visual Validation. Markdown is export-only.
+Telemetry is **not** in this repository. Do not call `PUT /telemetry/...` or point SoT at `apps/telemetry`.
+
+Git: no editor/AI co-author trailers; merge to local `main`; human pushes. Process details: `.kandev/prompts/_shared.md`.
+
+When UI changes: run `pnpm capture:artifacts` (stub guidance after product removal) and describe Visual Validation. Markdown is export-only.

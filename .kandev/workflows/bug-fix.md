@@ -10,7 +10,7 @@ Correct incorrect behaviour with a regression guard. Lightweight by default.
 
 1. **[Discovery](../prompts/discovery.md)** → [bug-ticket](../templates/bug-ticket.md):
    reproduction, expected vs actual, suspected root cause.
-2. **[Executor](../prompts/executor.md)** → fix the **root cause** (not the symptom,
+2. **[Executor](../prompts/executor.md)** (KanDev **Executor** profile) → fix the **root cause** (not the symptom,
    [`CURSOR.md`](../../CURSOR.md)); **add a regression test**; climb the validation ladder;
    capture Visual Validation if UI changed.
 3. **[Reviewer](../prompts/reviewer.md)** → confirm the fix, the regression test, and no new

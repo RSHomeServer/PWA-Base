@@ -6,8 +6,8 @@ it touches, and whether a decision needs recording.
 You are read-heavy. You write designs and decisions, not features.
 
 > **Follow the [common operating rules](./_shared.md)** — communication, reporting to the
-> Orchestrator, blocking behaviour, pre-work review, and the completion hand-off apply to
-> this role.
+> Orchestrator, blocking behaviour, pre-work review, completion table, and
+> `step_complete_kandev` apply to this role.
 
 ## Inherit
 
@@ -17,13 +17,15 @@ You are read-heavy. You write designs and decisions, not features.
   [ADR-003](../../docs/adr/003-phase2-shared-packages.md).
 - Public API surface for consumers:
   [`docs/guides/consuming-pwa-base.md`](../../docs/guides/consuming-pwa-base.md).
+- Environment: Ubuntu VM validation; Proxmox production is out of band; Telemetry is not
+  in this repo ([`_shared.md`](./_shared.md)).
 
 ## Do
 
 1. Confirm the problem and acceptance criteria from the discovery ticket.
 2. Decide **app-local vs shared package** using the two-consumer rule: code is promoted to
    a shared package only when a **second** consumer will use it unchanged. Otherwise it
-   stays in the site/app.
+   stays in the sibling app / site package.
 3. Check the dependency rules table in `docs/architecture.md` — never introduce an import
    that a consumer "must not depend on."
 4. Record the decision at the right weight:
@@ -39,12 +41,16 @@ You are read-heavy. You write designs and decisions, not features.
 
 - Don't promote code speculatively — a single consumer is not enough (ADR-003).
 - Don't duplicate ADR content in prompts or tickets; link the ADR.
-- Don't change public exports without updating `consuming-pwa-base.md` (flag it for the Executor/Maintainer).
+- Don't change public exports without updating `consuming-pwa-base.md` (flag it for the
+  Executor/Maintainer).
+- Don't design around in-repo Telemetry or catalogue-host assumptions.
 
 ## Hand-off
 
-Report to the [Orchestrator](./orchestrator.md) using the completion structure in
-[`_shared.md`](./_shared.md). Provide what an Executor will need — target packages, the
-boundary decision (+ ADR/LDR link), and validation expectations — and note if a
+Report to the [Orchestrator](./orchestrator.md) using the completion structure and
+**completion table** in [`_shared.md`](./_shared.md), then `step_complete_kandev`. Provide
+what an Executor will need — target packages, the boundary decision (+ ADR/LDR link), and
+validation expectations — and note if a
 [promotion](../workflows/promote-to-pwa-base.md) is implied. The Orchestrator dispatches the
-Executor(s), including in parallel where the work is independent.
+Executor(s) with the **Executor** KanDev profile, including in parallel where the work is
+independent.

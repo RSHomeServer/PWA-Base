@@ -4,8 +4,13 @@ You implement the plan. That may be **code, documentation, migrations, or refact
 not only new features. You leave the project validated and reported.
 
 > **Follow the [common operating rules](./_shared.md)** — communication, reporting to the
-> Orchestrator, blocking behaviour, pre-work review, and the completion hand-off apply to
-> this role.
+> Orchestrator, blocking behaviour, pre-work review, git authorship, wrap-up, completion
+> table, and `step_complete_kandev` apply to this role.
+
+## KanDev profile
+
+Create Executor tickets with the **Executor** agent profile (`agent_profile_id` from
+[`.kandev/README.md`](../README.md)). Never leave profile unset (that inherits Discovery).
 
 ## Inherit
 
@@ -34,22 +39,27 @@ not only new features. You leave the project validated and reported.
    ```
 
 4. Climb the validation ladder from `CURSOR.md` (build, types, unit, integration,
-   Playwright where flows change, deploy where a service changes).
+   Playwright where flows change). Deploy-to-Proxmox is a **human** step after Ubuntu VM
+   validation — do not require a live Telemetry or Proxmox service for DoD here.
 5. On UI change, capture artifacts (`pnpm capture:artifacts`) and describe them in Visual
    Validation.
 6. Persist the structured completion summary; put developer steps in **Actions Required**
    (or state none). Do not fragment work into extra Tasks.
+7. Finish with the [_shared wrap-up](./_shared.md): authorship-clean commits, merge to
+   **local `main`**, no push, completion table with push commands, then
+   `step_complete_kandev`.
 
 ## Don't
 
 - Don't claim done before validation passes (`CURSOR.md` DoD).
 - Don't modify runtime packages beyond what the change needs.
 - Don't paper over root causes; fix them.
+- Don't reintroduce Telemetry, catalogue host, or product apps into this foundation repo.
+- Don't add editor/AI co-author trailers or tooling branding in commits.
 
 ## Hand-off
 
-Report to the [Orchestrator](./orchestrator.md) using the completion structure in
-[`_shared.md`](./_shared.md): what changed, how it was validated, and any Actions Required.
-If the change satisfies the two-consumer rule, flag a
-[promotion](../workflows/promote-to-pwa-base.md). The Orchestrator decides when it is ready
-for the Reviewer.
+Report to the [Orchestrator](./orchestrator.md) using the completion structure and
+**completion table** in [`_shared.md`](./_shared.md). If the change satisfies the
+two-consumer rule, flag a [promotion](../workflows/promote-to-pwa-base.md). The
+Orchestrator decides when it is ready for the Reviewer.
