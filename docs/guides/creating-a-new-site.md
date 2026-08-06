@@ -1,44 +1,52 @@
-# Creating a new site
+# Creating a new site / app
 
-This guide walks through adding an independently hosted application **inside this
-monorepo**. Feature code lives in `packages/site-*`; packaging is a thin
-`apps/*-web` entry. `apps.songara.uk` (`@platform/host`) remains a **catalogue
-only** — it never imports site packages.
+**Preferred path:** create a **sibling repository** next to `PWA-Base` and depend on
+`@songara/pwa-base` — see [consuming-pwa-base.md](./consuming-pwa-base.md).
 
-For a **sibling repository** that depends on this foundation via
-`file:../PWA-Base`, use [consuming-pwa-base.md](./consuming-pwa-base.md) instead.
+This guide covers the **in-monorepo** pattern used by the Hello reference
+(`packages/site-hello` + `apps/hello-web`), and the optional `pnpm new-app` scaffold for
+experiments inside this workspace. Do not reintroduce a catalogue host or product
+verticals here ([ADR-007](../adr/007-pwa-base-reusable-foundation.md)).
 
-Architecture background: [ADR-004](../adr/004-packageable-applications.md), [solo-packaging.md](./solo-packaging.md), [architecture.md](../architecture.md), [content-packs.md](./content-packs.md).
+Architecture: [ADR-004](../adr/004-packageable-applications.md),
+[solo-packaging.md](./solo-packaging.md), [architecture.md](../architecture.md),
+[content-packs.md](./content-packs.md).
 
-## Quick start (recommended)
+## Quick start — sibling app (recommended)
+
+```bash
+# ~/projects/<name>/package.json
+# "@songara/pwa-base": "file:../PWA-Base"
+```
+
+Copy the Hello packaging shape: a Vite entry that mounts a `defineSite` export via
+`SoloSiteApp`, imports `@songara/pwa-base/ui/tokens.css`, and configures PWA. In KanDev
+worktrees, run the sibling linker before install (ADR-006).
+
+## Quick start — in-monorepo scaffold
 
 ```bash
 pnpm new-app <name>          # e.g. pnpm new-app recipe-box
 pnpm --filter @platform/<name>-web dev
 ```
 
-The scaffold creates:
+The scaffold typically creates:
 
 | Path | Role |
 | --- | --- |
-| `packages/site-<name>/` | Site module + Hello World page + `PackReadyGate` |
-| `packages/site-<name>/content/<name>-base/` | Minimal Content Pack (`meta/welcome.json`) |
+| `packages/site-<name>/` | Site module + starter page (+ optional Content Pack) |
 | `apps/<name>-web/` | Solo Vite PWA packaging |
-| Catalogue / nav / logo | Registered in `packages/catalog` + `packages/runtime` chrome |
 
-It mirrors the pack into `apps/<name>-web/public/packs/` via `sync-content-pack`. Birthday is never modified.
-
-Docker / Traefik hosting is **not** scaffolded — add a Compose service when you deploy (see [solo-packaging.md](./solo-packaging.md)).
+Use this for foundation experiments. Prefer a sibling repo for real products.
 
 ---
 
-## Manual overview
+## Manual overview (monorepo)
 
 1. Create a site package under `packages/` (e.g. `packages/site-example`).
 2. Export a `SiteDefinition` via `defineSite(...)` with `basePath: "/"`.
-3. Register catalogue metadata (`host`) in `packages/catalog/src/entries.ts` and a loader in `loaders.ts`.
-4. Add `apps/<id>-web` packaging (Vite PWA + nginx + Compose Traefik host).
-5. Validate with `pnpm typecheck`, `pnpm test`, and local/dev Compose.
+3. Add thin `apps/<id>-web` packaging (mirror `apps/hello-web`).
+4. Validate with `pnpm typecheck`, `pnpm test`, and `pnpm --filter @platform/<id>-web dev`.
 
 ## 1. Create the site package
 
@@ -74,9 +82,9 @@ Add a workspace package (name pattern: `@platform/site-<id>`).
 }
 ```
 
-Depend on the package for resolution; in source, import from `@platform/site-registry/contract` (not the package root).
+In source, import from `@platform/site-registry/contract` (not the package root).
 
-**`packages/site-example/tsconfig.json`** — extend the React baseline:
+**`packages/site-example/tsconfig.json`**:
 
 ```json
 {
@@ -119,89 +127,51 @@ export const exampleSite = defineSite({
 });
 ```
 
-Import from `/contract`, not `@platform/site-registry` root (types-only) or `@platform/catalog`.
-
 ### Contract reference
 
 | Field                | Example            | Notes                                              |
 | -------------------- | ------------------ | -------------------------------------------------- |
 | `id`                 | `"example"`        | Stable unique key                                  |
 | `basePath`           | `"/"`              | Application root on its own host                   |
-| `title`              | `"Example"`        | Shown on the catalogue                             |
+| `title`              | `"Example"`        | Human-readable label                               |
 | `routes[].path`      | `""` or `"/about"` | Relative to `basePath`                             |
 | `routes[].component` | `HomePage`         | Typed `unknown` in registry                        |
 | `requiredPackIds`    | `["example-base"]` | Optional Content Packs gate (ADR-005)              |
-| `capabilities`       | `["offline", "full-bleed"]` | Optional tags — see `SITE_CAPABILITY` in the contract |
+| `capabilities`       | `["offline", "full-bleed"]` | Optional tags — see `SITE_CAPABILITY` |
 
 Well-known chrome tags (consumed by `SoloSiteApp`):
 
 - `full-bleed` — full-bleed main content (no inset padding)
 - `default-topbar-collapsed` — collapse the mega bar by default
 
-Optional: depend on `@platform/ui` / `@platform/runtime` as needed. See [design system](../design-system/README.md), [content-packs.md](./content-packs.md), [solo-packaging.md](./solo-packaging.md).
+Optional: depend on `@platform/ui` / `@platform/runtime` as needed. See
+[design system](../design-system/README.md), [content-packs.md](./content-packs.md),
+[solo-packaging.md](./solo-packaging.md).
 
-## 3. Register in the catalog
+## 3. Package as a solo Vite app
 
-Add the site package as a dependency of `@platform/catalog` so the dynamic import resolves for tests/tooling:
+Copy `apps/hello-web`:
 
-**`packages/catalog/package.json`**:
+1. Depend on the site package and `@platform/runtime`.
+2. Mount with `SoloSiteApp` / the same entry pattern as Hello.
+3. Set Vite `base: "/"` and configure `vite-plugin-pwa` with `start_url: "/"`.
 
-```json
-"dependencies": {
-  "@platform/site-example": "workspace:*"
-}
-```
+There is **no** in-repo catalogue registration step.
 
-**`packages/catalog/src/entries.ts`** — catalogue metadata (used by `apps.songara.uk`):
-
-```ts
-{
-  id: "example",
-  basePath: "/",
-  host: "example.songara.uk",
-  title: "Example",
-},
-```
-
-**`packages/catalog/src/loaders.ts`** — lazy loader (tests / tooling only; catalogue host does not mount sites):
-
-```ts
-{
-  id: "example",
-  load: () => import("@platform/site-example").then((m) => m.exampleSite),
-},
-```
-
-Do **not** add site imports to `apps/platform`.
-
-## 4. Package and deploy
-
-Copy an existing `apps/*-web` entry (for example `apps/components-web`):
-
-1. Point Vite at the site package and set `base: "/"`.
-2. Configure `vite-plugin-pwa` with its own scope / `start_url: "/"`.
-3. Add Compose service + Traefik `Host(\`example.songara.uk\`)`.
-4. Ensure DNS/TLS for the subdomain at the edge.
-
-See [solo-packaging.md](./solo-packaging.md).
-
-## 5. Validate
+## 4. Validate
 
 ```bash
 pnpm typecheck
-pnpm --filter @platform/catalog test:unit
 pnpm --filter @platform/example-web build
-pnpm --filter @platform/host build
-pnpm --filter @platform/example-web dev   # open http://127.0.0.1:<port>/
+pnpm --filter @platform/example-web dev
 ```
 
-The catalogue at `apps.songara.uk` / local `:5173` should list “Example” linking to `https://example.songara.uk/`.
+Open the printed local URL and confirm the home route renders.
 
 ## Checklist
 
 - [ ] Site package depends on `@platform/site-registry` and imports from `/contract`
 - [ ] `defineSite` with unique `id` and `basePath: "/"`
-- [ ] Catalogue `host` in `entries.ts` + loader in `loaders.ts`
-- [ ] `apps/<id>-web` packaging entry + Compose Traefik host
-- [ ] No site imports in `apps/platform`
-- [ ] `pnpm lint`, `pnpm typecheck`, and `pnpm test` pass
+- [ ] Thin solo Vite entry (Hello pattern) — no catalogue host
+- [ ] `pnpm lint`, `pnpm typecheck`, and relevant `pnpm test` pass
+- [ ] Prefer promoting real products to a sibling repo + `@songara/pwa-base`

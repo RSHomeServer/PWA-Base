@@ -16,8 +16,8 @@ You **do not write production code.** You clarify, scope, and hand off.
 - Current foundation intent: [`docs/milestones/VISION.md`](../../docs/milestones/VISION.md)
   and [ADR-007](../../docs/adr/007-pwa-base-reusable-foundation.md). Milestone 0 history:
   [`docs/milestones/m0-rationalisation/`](../../docs/milestones/m0-rationalisation/).
-  Do **not** treat historical Website Hosting strategy files
-  (`PLATFORM.md`, `ROADMAP.md`, `IDEAS.md`) as current product intent.
+  Do **not** treat archived Website Hosting strategy files under
+  `docs/archive/strategy/` as current product intent.
 
 ## Do
 

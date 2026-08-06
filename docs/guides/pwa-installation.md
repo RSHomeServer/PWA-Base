@@ -1,44 +1,38 @@
-# PWA installation — independently hosted apps
+# PWA installation
 
-Each application is packaged as its own Progressive Web App with a dedicated origin, manifest, and service worker. The catalogue at `apps.songara.uk` is also installable as **Songara Studio**.
+Each application is packaged as its own Progressive Web App with a dedicated origin,
+manifest, and service worker. The foundation reference is **Hello**
+(`apps/hello-web` / local `pnpm dev`).
 
-## Dashboard example
+Sibling product apps follow the same pattern in their own repositories.
 
-The AI Development Dashboard (`dashboard.songara.uk` / local `:5180`) can be installed to your home screen or dock.
+## What you get
 
-### What you get
+- **Standalone window** — opens without browser chrome, scoped to the app origin
+- **Offline app shell** — cached UI assets via the service worker; network APIs remain
+  network-first unless the app opts into Content Packs / offline strategies
+- **Update prompt** — when a new build is deployed, runtime helpers can offer reload or
+  defer ([`@platform/runtime`](../../packages/runtime/) / `@songara/pwa-base`)
 
-- **Standalone window** — opens without browser chrome, scoped to the dashboard origin
-- **Offline app shell** — cached UI assets via the service worker; telemetry API calls remain network-first
-- **Update prompt** — when a new build is deployed, a toast offers **Reload** or **Later**
+Push notifications are **not** part of this foundation.
 
-Push notifications are **not** implemented yet. The install banner mentions them as a future capability only.
+## Install (desktop / Android)
 
-### Install (desktop / Android)
+1. Open the app (Hello: `http://127.0.0.1:5182/` via `pnpm dev`)
+2. Use the browser’s **Install app** affordance when it appears
+3. Launch the app from the applications menu
 
-1. Open the dashboard: `http://127.0.0.1:5180/` (local) or `https://dashboard.songara.uk`
-2. Use the **Install app** banner when it appears, or the browser’s install icon in the address bar
-3. Launch **Dashboard** from your applications menu
+## Install (iOS Safari)
 
-### Install (iOS Safari)
+iOS does not fire `beforeinstallprompt`. Use **Share → Add to Home Screen**.
 
-iOS does not fire `beforeinstallprompt`. When Safari is detected, the dashboard shows manual steps:
-
-1. Tap **Share**
-2. Choose **Add to Home Screen**
-3. Open **Dashboard** from the home screen
-
-### Dismissing the banner
-
-**Not now** stores `dashboard:pwaInstallDismissed:v1` in `localStorage` and hides the banner until you clear site data.
-
-### Developer notes
+## Developer notes
 
 | Item | Location |
 | ---- | -------- |
-| PWA plugin + Workbox | `apps/dashboard-web/vite.config.ts` |
-| Manifest icons | `apps/dashboard-web/public/icons/` (or shared assets) |
-| SW update toast | `@platform/runtime` / app shell |
-| Install UX | `packages/site-dashboard/src/components/InstallExperience.tsx` |
+| Reference Vite + PWA plugin | `apps/hello-web/vite.config.ts` |
+| Manifest / icons | `apps/hello-web/public/` |
+| Shared install / update UX | `@platform/runtime` (consumed as `@songara/pwa-base`) |
 
-Other apps follow the same pattern under `apps/*-web`. See [solo-packaging.md](./solo-packaging.md).
+See [solo-packaging.md](./solo-packaging.md) and
+[consuming-pwa-base.md](./consuming-pwa-base.md).

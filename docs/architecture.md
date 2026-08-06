@@ -87,8 +87,8 @@ flowchart LR
 2. **Packaging** — thin `apps/hello-web` mounts via `SoloSiteApp` with its own Vite PWA.
 3. **Sibling apps** copy that pattern in their own repo and depend on `@songara/pwa-base`.
 
-Step-by-step packaging notes still live in [creating-a-new-site.md](./guides/creating-a-new-site.md)
-and [solo-packaging.md](./guides/solo-packaging.md) (Milestone 2 refreshes product-era prose).
+Step-by-step packaging notes: [creating-a-new-site.md](./guides/creating-a-new-site.md)
+and [solo-packaging.md](./guides/solo-packaging.md).
 
 ## Design system
 

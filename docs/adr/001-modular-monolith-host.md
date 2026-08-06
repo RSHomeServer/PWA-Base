@@ -11,23 +11,33 @@ and a single reference app.
 
 ## Context
 
-We need a platform that hosts multiple websites under one deployment while keeping each site independently developable. Options considered:
+*(Historical — Website Hosting monorepo era.)* We needed a platform that hosts multiple
+websites under one deployment while keeping each site independently developable. Options
+considered:
 
 1. **Separate apps per site** — each site is its own Vite app and deployable. Maximum isolation, but shared UI, routing, and ops multiply quickly.
 2. **Microfrontends (runtime federation)** — strong runtime boundaries, higher complexity and operational cost than we need for an early platform.
 3. **Modular monolith** — one Vite + React + TypeScript host application; sites live as packages that register into a shared catalog. One build, one deploy, clear package boundaries.
 
-The platform must stay small at the foundation: prefer host/platform naming (not “shell”), avoid speculative abstractions, and keep the host free of site-specific knowledge.
+The platform needed to stay small at the foundation: prefer host/platform naming (not
+“shell”), avoid speculative abstractions, and keep the host free of site-specific knowledge.
+
+**Today:** product apps are sibling solo PWAs ([ADR-007](./007-pwa-base-reusable-foundation.md)).
+The Vite + React + TypeScript app shape and site contract survive; the in-repo multi-site
+host does not.
 
 ## Decision
 
-Adopt a **modular monolith**:
+*(Original decision — partially superseded.)* Adopt a **modular monolith**:
 
 - **Host**: a Vite + React + TypeScript application (`apps/platform`) that owns the single SPA entry, root router, and layout chrome.
 - **Sites**: packages that implement a shared registration contract and appear in a central catalog.
 - **Shared libraries**: packages such as `@platform/ui` and `@platform/config` for cross-cutting concerns when needed.
 
 The host depends only on the site registration contract/catalog API (`@platform/site-registry`), never on individual site package implementations.
+
+**Still in force:** modular package boundaries and a typed site registration contract.
+**No longer in force for this repo:** shipping an in-tree multi-site catalogue host.
 
 ## Consequences
 

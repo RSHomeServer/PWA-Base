@@ -6,7 +6,9 @@ Accepted
 
 ## Context
 
-Several applications (starting with Birthday) must work entirely offline after installation and carry substantial authored content: images, audio, video, markdown, configuration, and metadata.
+Several applications must work entirely offline after installation and carry substantial
+authored content: images, audio, video, markdown, configuration, and metadata. (Birthday
+was the original in-monorepo driver; the format applies to Hello and sibling PWAs.)
 
 Bundling all bytes into the JS/CSS app shell couples content churn to app deploys and blows up first-load size. Ad-hoc `public/` files lack versioning, integrity checks, and deferred updates. A vague “Asset Store” conflates human library UX, blob storage, and distribution.
 
@@ -61,7 +63,7 @@ Static nginx (or Vite `public/packs`) paths:
 
 - Offline-complete installs with clear Ready gating.
 - Content versioning decoupled from app JS deploys.
-- Same format for Birthday and the next twenty apps.
+- Same format for Hello, sibling PWAs, and future offline-complete apps.
 - Path to optional packs and object-store backends without changing app APIs much.
 
 ### Negative / trade-offs

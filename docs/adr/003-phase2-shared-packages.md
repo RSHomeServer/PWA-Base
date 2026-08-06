@@ -2,16 +2,15 @@
 
 ## Status
 
-Accepted
+Accepted (two-consumer rule still applies; original Phase 2 product sites are historical)
 
 ## Context
 
-Phase 2 introduces two interactive sites:
-
-1. **Statistical Analysis** — data input, hypothesis tests, regression, export of results.
-2. **Optical Illusions / Math Visualisations** — canvas/WebGL demos with tunable parameters and image export.
-
-Both need form controls, parameter panels, numeric helpers, and browser downloads. A prior architecture review also flagged the risk of premature platform abstraction: packages with a single consumer add maintenance cost without reuse benefit.
+*(Historical trigger.)* Phase 2 of the Website Hosting roadmap introduced two interactive
+sites (Statistical Analysis and Optical Illusions / Math Visualisations) that both needed
+form controls, parameter panels, numeric helpers, and browser downloads. A prior review
+flagged premature platform abstraction: packages with a single consumer add maintenance
+cost without reuse benefit.
 
 Alternatives considered:
 
@@ -19,9 +18,16 @@ Alternatives considered:
 2. **Large shared libraries upfront** (charting, data grid, full stats engine, canvas framework) — forces APIs before requirements are known.
 3. **Minimal shared packages with a two-consumer rule** — extract only what both sites will use unchanged.
 
+**Today:** the durable rule is the **two-consumer rule** for anything promoted into
+`@songara/pwa-base` / `@platform/*`. The second consumer may be a **sibling app**, not
+only an in-monorepo site ([ADR-007](./007-pwa-base-reusable-foundation.md)).
+
 ## Decision
 
-Add and extend shared packages under `packages/` using the **two-consumer rule**: a platform package must have a concrete, unchanged use in **both** the Statistical Analysis site and the Optical Illusions / Math Visualisations site. Otherwise the code stays in the site package.
+Add and extend shared packages under `packages/` using the **two-consumer rule**: a
+platform package must have a concrete, unchanged use in **two** present or near-term
+consumers (historically both Phase 2 sites; now commonly Hello + a sibling app, or two
+siblings). Otherwise the code stays in the application.
 
 ### Shared in Phase 2
 
@@ -32,7 +38,9 @@ Add and extend shared packages under `packages/` using the **two-consumer rule**
 | `@platform/export`   | `downloadText`, `downloadBlob`, `downloadCanvasPng`                                          |
 | `@platform/math`     | `clamp`, `lerp`, `inverseLerp`, `linspace`, `sum`, `mean`, `varianceSample`, `stdevSample`   |
 
-Existing foundation packages (`@platform/config`, `@platform/site-registry`) stay focused. Site **registration wiring** lives in `@platform/catalog` (depends on site packages + contract types; host calls `getSites()` from there) so the contract package does not form a dependency cycle with sites.
+Existing foundation packages (`@platform/config`, `@platform/site-registry`) stay focused.
+Site registration uses `@platform/site-registry/contract`; solo entries mount one site
+(no in-repo catalog package).
 
 ### App-local (not platform packages)
 

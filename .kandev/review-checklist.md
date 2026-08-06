@@ -1,7 +1,7 @@
 # Review checklist
 
 Living checklist for the [Reviewer](./prompts/reviewer.md) role. Prefer this over archived
-`docs/reviews/*` packages.
+`docs/archive/reviews/*` packages.
 
 ## Scope and intent
 

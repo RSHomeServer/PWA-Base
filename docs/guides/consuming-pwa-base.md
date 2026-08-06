@@ -26,11 +26,10 @@ its documented entry points.
 
 ### Internal (do not import from consumers)
 
-- `packages/site-*` (Birthday, Hello, and other product modules)
-- `apps/*` packaging hosts
-- `packages/catalog` (catalogue metadata + loaders for `apps.songara.uk`)
-- Domain packages (`math`, `physics`, `experiences`, `controls`, …) unless later promoted
-- Scripts, Docker Compose, telemetry/docs-api services
+- `packages/site-*` (including the Hello reference module — copy the pattern, do not import it)
+- `apps/*` packaging entries (including `hello-web`)
+- Domain packages (`math`, `physics`, `controls`, …) unless promoted to a documented export
+- Scripts and Docker Compose for this monorepo
 
 Existing `@platform/*` imports continue to work **inside this monorepo** for
 backwards compatibility. New sibling apps should use `@songara/pwa-base` only.

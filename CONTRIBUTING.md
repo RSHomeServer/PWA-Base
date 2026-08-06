@@ -54,7 +54,7 @@ and packaging notes:
 
 - [docs/guides/consuming-pwa-base.md](./docs/guides/consuming-pwa-base.md)
 - [docs/guides/solo-packaging.md](./docs/guides/solo-packaging.md)
-- [docs/guides/creating-a-new-site.md](./docs/guides/creating-a-new-site.md) (prose refresh in Milestone 2)
+- [docs/guides/creating-a-new-site.md](./docs/guides/creating-a-new-site.md)
 
 In-tree changes for a new shared capability require a second consumer (ADR-003) or an
 explicit foundation ADR.

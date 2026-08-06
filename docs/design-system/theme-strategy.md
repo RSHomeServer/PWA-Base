@@ -1,6 +1,8 @@
 # Theme Strategy
 
-Songara Studio uses a **CSS-variable theme** with an optional **React theme layer** for persistence and UI controls. Tokens ship as a single stylesheet; components consume variables; the host applies theme state on `<html>`.
+Songara PWAs use a **CSS-variable theme** with an optional **React theme layer** for
+persistence and UI controls. Tokens ship as a single stylesheet; components consume
+variables; the app entry applies theme state on `<html>`.
 
 ## Layers
 
@@ -8,8 +10,8 @@ Songara Studio uses a **CSS-variable theme** with an optional **React theme laye
 @platform/ui/tokens.css     ← token definitions + base element styles
 @platform/ui components     ← primitives styled with var(--token)
 @platform/ui/theme          ← ThemeProvider, useTheme, ThemeToggle
-apps/platform               ← wraps app in ThemeProvider; imports tokens
-site packages               ← use primitives and/or tokens
+apps/hello-web (reference)  ← wraps app in ThemeProvider; imports tokens
+site packages / sibling apps ← use primitives and/or tokens
 ```
 
 ## Consumption
@@ -17,9 +19,9 @@ site packages               ← use primitives and/or tokens
 ### 1. Import tokens at the app root
 
 ```ts
-// apps/platform/src/main.tsx
-import "@platform/ui/tokens.css";
-import { ThemeProvider } from "@platform/ui";
+// apps/hello-web (or sibling app entry)
+import "@platform/ui/tokens.css"; // or @songara/pwa-base/ui/tokens.css
+import { ThemeProvider } from "@platform/ui"; // or @songara/pwa-base/ui
 
 root.render(
   <ThemeProvider>

@@ -1,15 +1,15 @@
 # Engineering Roadmap
 
-> **Historical — not current intent.** Living north star:
-> [VISION.md](./VISION.md) and [ADR-007](../adr/007-pwa-base-reusable-foundation.md).
-> Milestone 2 archives this file.
+> **Historical — not current intent.** Archived under `docs/archive/strategy/`. Living
+> north star: [VISION.md](../../milestones/VISION.md) and
+> [ADR-007](../../adr/007-pwa-base-reusable-foundation.md).
 
 | | |
 | --- | --- |
 | **Status** | Historical (superseded by VISION v1 / ADR-007) |
 | **Version** | 0.1.0 |
 | **Last reviewed** | 2026-07-21 |
-| **Related** | [VISION.md](./VISION.md) · [PLATFORM.md](./PLATFORM.md) · [IDEAS.md](./IDEAS.md) |
+| **Related** | [PLATFORM.md](./PLATFORM.md) · [IDEAS.md](./IDEAS.md) · [VISION.md](../../milestones/VISION.md) |
 
 ---
 

@@ -29,8 +29,8 @@ code lives in sibling repos. See [`_shared.md`](./_shared.md).
   [ADRs](../../docs/adr/) (especially [ADR-007](../../docs/adr/007-pwa-base-reusable-foundation.md)),
   living [`docs/milestones/VISION.md`](../../docs/milestones/VISION.md), and prior work — so
   you never delegate duplicated or conflicting work.
-- Do **not** treat historical `docs/milestones/PLATFORM.md` / `ROADMAP.md` / `IDEAS.md` or
-  `docs/reviews/*` as current product intent.
+- Do **not** treat archived `docs/archive/strategy/*` or `docs/archive/reviews/*` as
+  current product intent.
 
 ## Delegate and sequence
 

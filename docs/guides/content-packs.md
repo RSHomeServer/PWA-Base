@@ -10,25 +10,17 @@ Versioned, hash-verified content units for offline-complete applications.
 /packs/<appId>/<packId>/current.json   # optional { "version": "1.0.0" }
 ```
 
-### Example: Birthday
+### Example: Hello (reference)
 
-Pack source: [`packages/site-birthday/content/birthday-base/`](../../packages/site-birthday/content/birthday-base/).
+Pack source: `packages/site-hello/content/hello-base/`.
 
-Birthday product content lives in `content/keepsake.json` inside that pack — see
-[`birthday-experience.md`](./birthday-experience.md) for the design language, opening vision, and milestone plan.
-Platform update behaviour: [`platform-preferences.md`](./platform-preferences.md).
+Mirrored into `apps/hello-web/public/packs/` by the sync script.
 
 ```bash
-# After editing keepsake.json or media files:
-pnpm content-pack:sync -- birthday birthday-base
-# Backwards-compatible alias:
-pnpm birthday:pack
+pnpm content-pack:sync -- hello hello-base
 ```
 
-Mirrored into:
-
-- `apps/birthday-web/public/packs/` (solo packaging)
-- `apps/platform/public/packs/` (when present — catalogue host static mirror)
+Update / deferral behaviour for shell vs packs: [platform-preferences.md](./platform-preferences.md).
 
 ## Sync tooling
 
@@ -37,18 +29,20 @@ pnpm content-pack:sync -- <appId> <packId> [version]
 node scripts/sync-content-pack.mjs <appId> <packId> [version]
 ```
 
-`appId` must match the site package (`packages/site-<appId>`) and solo app (`apps/<appId>-web`).
-If `version` is omitted, the script uses `content/<packId>/current.json` when present, otherwise `1.1.0`.
+`appId` must match the site package (`packages/site-<appId>`) and solo app
+(`apps/<appId>-web`) when working inside this monorepo. Sibling apps can mirror the same
+layout under their own `public/packs/`.
 
-Legacy Birthday entry points (`pnpm birthday:pack`, `scripts/sync-birthday-pack.mjs`) call the same generic syncer.
+If `version` is omitted, the script uses `content/<packId>/current.json` when present,
+otherwise a default version from the script.
 
 ## Manifest shape
 
 ```json
 {
-  "id": "birthday-base",
+  "id": "hello-base",
   "version": "1.0.0",
-  "appId": "birthday",
+  "appId": "hello",
   "entries": [
     {
       "path": "meta/welcome.json",
@@ -61,27 +55,29 @@ Legacy Birthday entry points (`pnpm birthday:pack`, `scripts/sync-birthday-pack.
 
 ## Runtime API
 
-`@platform/runtime` provides:
+`@platform/runtime` (and `@songara/pwa-base` for siblings) provides:
 
 - `ensureRequiredPacks(appId, packIds)` — complete-first-install
 - `installContentPack` — fetch, verify, Cache Storage + IndexedDB activation
 - `useAppReady(appId, requiredPackIds)` — React Ready state hook
 - `PackReadyGate` — reusable UI gate around `useAppReady`
 
-Apps declare `requiredPackIds` on their `SiteDefinition` / catalog metadata.
+Apps declare `requiredPackIds` on their `SiteDefinition`.
 
 ## Ready rule
 
 The application must not present its product UI until required base packs are active.
-Use `PackReadyGate` from `@platform/runtime` (Birthday wraps it as `BirthdayReadyGate` with themed copy).
+Use `PackReadyGate` from `@platform/runtime` / `@songara/pwa-base`.
 
 ## Chrome capabilities
 
-Immersive apps declare layout preferences as capability tags on `SiteDefinition` (not hard-coded app ids):
+Immersive apps declare layout preferences as capability tags on `SiteDefinition`
+(not hard-coded app ids):
 
 | Capability | Effect |
 | --- | --- |
 | `full-bleed` | Solo chrome: no content inset padding |
 | `default-topbar-collapsed` | Solo chrome: mega bar starts collapsed until the user expands it |
 
-See `SITE_CAPABILITY` / `hasSiteCapability` in `@platform/site-registry/contract`.
+See `SITE_CAPABILITY` / `hasSiteCapability` in `@platform/site-registry/contract`
+(or `@songara/pwa-base/contract`).

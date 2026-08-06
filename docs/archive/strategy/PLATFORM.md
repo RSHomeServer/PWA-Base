@@ -1,21 +1,22 @@
 # Platform Assessment
 
-> **Historical — not current intent.** Post–Milestone 0 north star is
-> [VISION.md](./VISION.md) and [ADR-007](../adr/007-pwa-base-reusable-foundation.md).
-> This file describes the former Website Hosting monorepo; Milestone 2 archives it.
+> **Historical — not current intent.** Archived under `docs/archive/strategy/`. Living
+> north star: [VISION.md](../../milestones/VISION.md) and
+> [ADR-007](../../adr/007-pwa-base-reusable-foundation.md). This file describes the former
+> Website Hosting monorepo.
 
 | | |
 | --- | --- |
 | **Status** | Historical (superseded by VISION v1 / ADR-007) |
 | **Version** | 0.1.0 |
 | **Last reviewed** | 2026-07-21 |
-| **Related** | [VISION.md](./VISION.md) · [ROADMAP.md](./ROADMAP.md) · [IDEAS.md](./IDEAS.md) |
+| **Related** | [ROADMAP.md](./ROADMAP.md) · [IDEAS.md](./IDEAS.md) · [VISION.md](../../milestones/VISION.md) |
 
 ---
 
 ## Purpose
 
-Current-state architecture, domains, capabilities, debt, and missing foundations—grounded in the repository as it exists today. Complements runtime docs in [`docs/architecture.md`](../architecture.md).
+Current-state architecture, domains, capabilities, debt, and missing foundations—grounded in the repository as it existed then. Complements runtime docs in [`docs/architecture.md`](../../architecture.md).
 
 ## How to update
 
@@ -83,7 +84,7 @@ Decisions: [ADR-001](../adr/001-modular-monolith-host.md), [ADR-002](../adr/002-
 | `browser-lab` | `browser-lab.songara.uk` | `@platform/site-browser-lab` | `@platform/browser-lab-web` |
 | `dashboard` | `dashboard.songara.uk` | `@platform/site-dashboard` | `@platform/dashboard-web` |
 
-Catalogue metadata: `packages/catalog/src/entries.ts`. Guide: [solo-packaging.md](../guides/solo-packaging.md).
+Catalogue metadata: `packages/catalog/src/entries.ts` (removed post-M0).
 
 ---
 
@@ -182,7 +183,7 @@ Status: **Not Started** / **Partial** / **Complete**.
 | Birthday deps | Declares `controls` / ui beyond tokens with little runtime use |
 | Physics surface area | Broad API; production use concentrated in viz |
 | No CI | Reviews accepted deferred GitHub Actions |
-| Foundation reviews | `docs/reviews/*` are historical; do not treat as live inventory |
+| Foundation reviews | `docs/archive/reviews/*` are historical; do not treat as live inventory |
 
 ---
 

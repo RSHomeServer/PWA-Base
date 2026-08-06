@@ -33,7 +33,7 @@ fix-forward. Whoever owns the code (Executor / Maintainer) applies the fixes.
 - **Don't edit code or docs.** Read-only.
 - Don't approve merges automatically — human approval is required.
 - Don't re-litigate accepted ADRs; raise a new decision instead.
-- Don't cite archived `docs/reviews/*` foundation-review packages as living process.
+- Don't cite `docs/archive/reviews/*` foundation-review packages as living process.
 
 ## Hand-off
 

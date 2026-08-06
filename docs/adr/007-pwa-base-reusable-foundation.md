@@ -57,7 +57,7 @@ Environment today:
 | ADR-001 | **Superseded in part** — modular Vite/React/TS app shape remains; in-repo multi-site host is not the repository identity |
 | ADR-002 | **Superseded in part** — `defineSite` / site-registry contract remains; `@platform/catalog` host registration is gone |
 | ADR-003 | Still **Accepted** — two-consumer rule for shared packages |
-| ADR-004 | Still **Accepted** in spirit — apps are packageable units; default packaging is sibling solo PWAs, not an in-repo multi-app host |
+| ADR-004 | Still **Accepted** — apps are packageable units; default packaging is sibling / solo PWAs (ADR-007), not an in-repo multi-app host |
 | ADR-005 | Still **Accepted** — Content Packs |
 | ADR-006 | Still **Accepted** — KanDev sibling `file:` linking |
 
@@ -71,12 +71,13 @@ Environment today:
 
 ### Negative / trade-offs
 
-- Guides and strategy docs written for Website Hosting need cleanup (Milestone 2+).
-- ADR-004 prose still mentions `@platform/host` / catalog packaging; treat that as
-  historical packaging context until a later hygiene pass rewrites it.
+- Historical Website Hosting docs live under [docs/archive/](../archive/) and must not be
+  treated as living SoT.
+- Consumer-facing public API matrix still needs a dedicated refresh (Milestone 3).
 
 ### Follow-ups
 
 - Living strategy: [VISION.md](../milestones/VISION.md).
 - Package map: [architecture.md](../architecture.md).
 - Consumer API surface refresh: Milestone 3 (`consuming-pwa-base.md`).
+- Archive / guide hygiene: Milestone 2.

@@ -1,8 +1,10 @@
-# Architectural review package
+# Architectural review package (archived)
 
-Branch: `feat/platform-foundation`  
-Purpose: Prepare the platform foundation for human (and external) architectural review.  
-**Do not merge** until review is complete.
+> **Non-authoritative.** Moved under `docs/archive/reviews/` in Milestone 2. Do not treat
+> as living inventory or process. See [archive README](../README.md).
+
+Branch (historical): `feat/platform-foundation`  
+Purpose: Prepare the then-platform foundation for human (and external) architectural review.
 
 | Document                                                                | Audience                                  |
 | ----------------------------------------------------------------------- | ----------------------------------------- |
@@ -11,8 +13,8 @@ Purpose: Prepare the platform foundation for human (and external) architectural 
 | [Architecture review notes](./architecture-review-notes.md)             | Trade-offs, debt, “do not change lightly” |
 | [Agent retrospective](./agent-retrospective.md)                         | How multitask built this iteration        |
 | [Review checklist](./review-checklist.md)                               | Human reviewer walkthrough                |
-| [Multitask progress instructions](./multitask-progress-instructions.md) | Monitoring Cursor parallel agents         |
+| [Multitask progress instructions](./multitask-progress-instructions.md) | Monitoring parallel agent work            |
 | [ChatGPT review summary](./chatgpt-review-summary.md)                   | Self-contained paste for external review  |
 | [Platform foundation review](./platform-foundation-review.md)           | Earlier Agent 7 + P0/P1 re-check          |
 
-Related product docs: [architecture](../architecture.md), [ADRs](../adr/), [creating a site](../guides/creating-a-new-site.md), [README](../../README.md).
+Living docs: [architecture](../../architecture.md), [ADRs](../../adr/), [VISION](../../milestones/VISION.md), [README](../../../README.md).

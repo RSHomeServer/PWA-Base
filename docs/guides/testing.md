@@ -1,27 +1,29 @@
 # Testing strategy
 
-Platform foundation tests validate the host shell and site registry before any site packages exist. Keep them small and fast.
+Foundation tests validate shared packages and the Hello reference PWA. Keep them small
+and fast.
 
-See also: [local development](./local-development.md), [architecture overview](../architecture.md), [creating a new site](./creating-a-new-site.md).
+See also: [local development](./local-development.md), [architecture overview](../architecture.md),
+[creating a new site](./creating-a-new-site.md).
 
 ## Unit tests (Vitest)
 
 Run with `pnpm test:unit`.
 
-| Package             | Scope                                                  |
-| ------------------- | ------------------------------------------------------ |
-| `@platform/catalog` | `getSites()` returns registered sites (`stats`, `viz`) |
-| `@platform/host`    | Host utilities such as route path joining              |
-
-Unit tests live next to source as `*.test.ts` files. Vitest runs in Node; no browser required.
+Root `package.json` filters cover foundation packages (math, physics, export, controls,
+markdown, animation, audio, browser, render, ui, runtime, completion-report). Unit tests
+live next to source as `*.test.ts` files. Vitest runs in Node; no browser required.
 
 ## End-to-end smoke (Playwright)
 
 Run with `pnpm test:e2e`.
 
-Playwright builds the host, serves the production preview, and checks that `/` renders the landing page (heading and empty-catalog message). This confirms the Vite build, router wiring, and registry integration work together.
+Playwright builds and serves the Hello reference app production preview, then checks that
+`/` renders Hello World content. This confirms Vite packaging, `SoloSiteApp`, and the
+site contract wire together.
 
-Configuration: `playwright.config.ts` at the repo root; specs under `e2e/`.
+Configuration: `playwright.config.ts` at the repo root; specs under `e2e/`
+(e.g. `hello.spec.ts`).
 
 ## Full suite
 
@@ -35,6 +37,7 @@ pnpm exec playwright install chromium
 
 ## What we do not test here
 
-- Individual site packages (added later under `apps/` or `packages/`)
-- Docker image/runtime (owned separately)
-- Visual or accessibility regression (see [design-system docs](../design-system/) when sites exist)
+- Sibling product application repos (own CI)
+- Proxmox / production Website Hosting (human deploy after Ubuntu validation)
+- Visual or accessibility regression at scale (see [design-system docs](../design-system/)
+  when changing shared UI)

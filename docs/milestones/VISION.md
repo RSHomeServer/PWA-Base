@@ -8,9 +8,10 @@
 | **Related** | [ADR-007](../adr/007-pwa-base-reusable-foundation.md) · [architecture.md](../architecture.md) · [m0-rationalisation/](./m0-rationalisation/) |
 
 > **Historical note:** Pre–Milestone 0 Website Hosting strategy lived in
-> [PLATFORM.md](./PLATFORM.md), [ROADMAP.md](./ROADMAP.md), and [IDEAS.md](./IDEAS.md).
-> Those files are **not** current product intent (archive/delete in Milestone 2). Use this
-> document and ADR-007 as the north star.
+> [PLATFORM.md](../archive/strategy/PLATFORM.md),
+> [ROADMAP.md](../archive/strategy/ROADMAP.md), and
+> [IDEAS.md](../archive/strategy/IDEAS.md). Those files are archived and **not** current
+> product intent. Use this document and ADR-007 as the north star.
 
 ---
 
