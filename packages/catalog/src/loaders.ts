@@ -6,7 +6,6 @@ import { catalogEntries } from "./entries.js";
  * not import this module — independent apps mount their own site packages.
  */
 const loaders: Record<string, () => Promise<SiteDefinition>> = {
-  docs: () => import("@platform/site-docs").then((m) => m.docsSite),
   hello: () => import("@platform/site-hello").then((m) => m.helloSite),
   dashboard: () => import("@platform/site-dashboard").then((m) => m.dashboardSite),
 };

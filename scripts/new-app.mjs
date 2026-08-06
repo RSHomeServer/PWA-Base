@@ -32,8 +32,6 @@ const RESERVED = new Set([
   "config",
   "controls",
   "dashboard",
-  "docs",
-  "docs-api",
   "export",
   "host",
   "markdown",

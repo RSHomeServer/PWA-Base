@@ -11,7 +11,6 @@ describe("catalog", () => {
     expect(ids).toEqual(
       expect.arrayContaining([
         "dashboard",
-        "docs",
       ]),
     );
     expect(entries.every((e) => e.basePath === "/")).toBe(true);

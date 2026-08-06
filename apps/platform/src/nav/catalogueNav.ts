@@ -155,13 +155,6 @@ export const PLATFORM_NAV_APPS: PlatformNavGroup = {
   blurb: "Songara Studio applications — each on its own host with PWA support.",
   links: [
     {
-      id: "docs",
-      label: "Documents",
-      href: origin("docs.songara.uk"),
-      external: false,
-      description: "Architecture, guides, and platform strategy docs.",
-    },
-    {
       id: "hello",
       label: "Hello",
       href: origin("hello.songara.uk"),
@@ -204,7 +197,6 @@ export const PLATFORM_LOGO_ACCENTS: Readonly<Record<string, string>> = {
   chrome: "#4285f4",
   guacamole: "#d22128",
   notes: "#a16207",
-  docs: "#0f766e",
   hello: "#0f766e",
   dashboard: "#134e4a",
 };
