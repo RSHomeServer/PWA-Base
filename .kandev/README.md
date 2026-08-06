@@ -18,6 +18,7 @@ or architecture rules — it links to their sources of truth:
 | [`docs/guides/consuming-pwa-base.md`](../docs/guides/consuming-pwa-base.md) | Public API entry points (root `exports`, kits, injectable chrome) + `file:../PWA-Base` consumption |
 | [`CONTRIBUTING.md`](../CONTRIBUTING.md) | Branch / PR workflow (feature → PR → squash merge); ownership |
 | [`prompts/_shared.md`](./prompts/_shared.md) | Remote Git Policy + completion table (all roles) |
+| [GitHub CLI on KanDev executors](#github-cli-on-kandev-executors) | KanDev `gh` shim + managed credential lease (runbook pointer) |
 | [`review-checklist.md`](./review-checklist.md) | Living reviewer walkthrough |
 
 ## Environment
@@ -130,6 +131,7 @@ Key properties:
   original objective and presents the user-facing summary (including branch + PR URL).
 - **Remote Git Policy:** feature branch → PR → human squash-merge. See
   [`prompts/_shared.md`](./prompts/_shared.md). No direct pushes/merges to `main`.
+- **KanDev `gh` + credential lease:** see [GitHub CLI on KanDev executors](#github-cli-on-kandev-executors) below — prefer the shim, use session-injected lease vars, never fabricate them.
 - **Start of every ticket:** sync to `origin/main`, then a dedicated feature branch —
   [`prompts/_shared.md`](./prompts/_shared.md). Ticket briefs must include the commands.
 - **Next ticket:** only after **explicit human approval**. A merged PR alone is not
@@ -164,6 +166,20 @@ The Orchestrator returns to the centre after every step and chooses what happens
 **Architect is skippable** for small features and most bug fixes; **Maintainer** runs only
 when promotion or a release is involved. The [workflow guides](./workflows/) describe typical
 sequences the Orchestrator adapts to project state.
+
+## GitHub CLI on KanDev executors
+
+Thin runbook for opening PRs from a KanDev session. Policy substance stays in
+[`prompts/_shared.md`](./prompts/_shared.md) (Remote Git Policy + wrap-up).
+
+1. **Prefer the KanDev `gh` shim** — prepend `$KANDEV_GITHUB_CLI_SHIM_DIR` to `PATH` so
+   `gh` resolves to the lease-aware wrapper.
+2. **Managed credentials** — when `task_git_credentials_mode=managed`, the session injects
+   `KANDEV_GITHUB_CREDENTIAL_*` (and related lease vars) at start. Use them; do **not**
+   invent or paste fabricated lease env values.
+3. **Real `gh` binary required** — the shim wraps a real CLI on `PATH`. If apt/`/usr/bin/gh`
+   is unavailable on this host, install a user-local binary (e.g. `$HOME/.local/bin/gh`) and
+   keep that directory on `PATH` after the shim dir.
 
 ## Formal ADRs vs lightweight decisions
 

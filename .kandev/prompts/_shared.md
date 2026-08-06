@@ -198,6 +198,11 @@ and validated (**wrap-up**), without waiting for a second human “please open a
 5. Fill the completion table (branch + PR URL required when git changed) and
    `step_complete_kandev`.
 
+For `gh` / lease setup on KanDev executors (shim `PATH`, managed
+`KANDEV_GITHUB_CREDENTIAL_*`, real `gh` binary), see
+[GitHub CLI on KanDev executors](../README.md#github-cli-on-kandev-executors). Do not
+fabricate lease env vars.
+
 The Orchestrator then presents the PR to the user for review/merge. After the human
 merges, subsequent tickets **sync to `origin/main`** before starting (see Before starting).
 
