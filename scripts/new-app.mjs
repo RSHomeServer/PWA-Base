@@ -43,7 +43,6 @@ const RESERVED = new Set([
   "platform",
   "runtime",
   "site-registry",
-  "stats",
   "telemetry",
   "ui",
 ]);

@@ -27,8 +27,7 @@
     "@platform/site-dashboard": "workspace:*",
     "@platform/site-docs": "workspace:*",
     "@platform/site-hello": "workspace:*",
-    "@platform/site-registry": "workspace:*",
-    "@platform/site-stats": "workspace:*"
+    "@platform/site-registry": "workspace:*"
   },
   "devDependencies": {
     "@platform/config": "workspace:*",

@@ -8,7 +8,6 @@ import { catalogEntries } from "./entries.js";
 const loaders: Record<string, () => Promise<SiteDefinition>> = {
   components: () => import("@platform/site-components").then((m) => m.componentsSite),
   docs: () => import("@platform/site-docs").then((m) => m.docsSite),
-  stats: () => import("@platform/site-stats").then((m) => m.statsSite),
   hello: () => import("@platform/site-hello").then((m) => m.helloSite),
   dashboard: () => import("@platform/site-dashboard").then((m) => m.dashboardSite),
 };

@@ -18,12 +18,6 @@ export const catalogEntries: readonly CatalogEntryMeta[] = [
     title: "Documents",
   },
   {
-    id: "stats",
-    basePath: "/",
-    host: "stats.songara.uk",
-    title: "Statistical Analysis",
-  },
-  {
     id: "hello",
     basePath: "/",
     host: "hello.songara.uk",

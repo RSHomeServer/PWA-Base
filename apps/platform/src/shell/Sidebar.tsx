@@ -14,7 +14,6 @@ interface SidebarProps {
 }
 
 const SITE_ACCENTS: Record<string, string> = {
-  stats: styles.appAccentStats,
 };
 
 function getAppAccent(siteId: string): string | undefined {

@@ -13,7 +13,6 @@ describe("catalog", () => {
         "components",
         "dashboard",
         "docs",
-        "stats",
       ]),
     );
     expect(entries.every((e) => e.basePath === "/")).toBe(true);

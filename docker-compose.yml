@@ -136,32 +136,6 @@ services:
       - "traefik.http.services.docs-web.loadbalancer.server.port=80"
       - "traefik.http.routers.docs-web.middlewares=crowdsec@docker"
 
-  stats-web:
-    build:
-      context: .
-      dockerfile: apps/stats-web/Dockerfile
-      args:
-        PLATFORM_APP_VERSION: ${PLATFORM_APP_VERSION:-}
-        PLATFORM_RUNTIME_MODE: ${PLATFORM_RUNTIME_MODE:-development}
-    container_name: website-hosting-stats-web
-    networks:
-      - workspace_network
-    healthcheck:
-      test: ["CMD", "wget", "-qO-", "http://127.0.0.1/health"]
-      interval: 30s
-      timeout: 3s
-      retries: 3
-      start_period: 10s
-    restart: unless-stopped
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.stats-web.rule=Host(`stats.songara.uk`)"
-      - "traefik.http.routers.stats-web.entrypoints=https"
-      - "traefik.http.routers.stats-web.tls.certresolver=cloudflare"
-      - "traefik.http.services.stats-web.loadbalancer.server.port=80"
-      - "traefik.http.routers.stats-web.middlewares=crowdsec@docker"
-
-
   dashboard-web:
     build:
       context: .

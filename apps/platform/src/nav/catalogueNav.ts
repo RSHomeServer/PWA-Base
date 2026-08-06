@@ -169,13 +169,6 @@ export const PLATFORM_NAV_APPS: PlatformNavGroup = {
       description: "Architecture, guides, and platform strategy docs.",
     },
     {
-      id: "stats",
-      label: "Statistical Analysis",
-      href: origin("stats.songara.uk"),
-      external: false,
-      description: "Hypothesis tests, regression, and CSV workflows.",
-    },
-    {
       id: "hello",
       label: "Hello",
       href: origin("hello.songara.uk"),
@@ -220,7 +213,6 @@ export const PLATFORM_LOGO_ACCENTS: Readonly<Record<string, string>> = {
   notes: "#a16207",
   components: "#0d7a72",
   docs: "#0f766e",
-  stats: "#1d4ed8",
   hello: "#0f766e",
   dashboard: "#134e4a",
 };

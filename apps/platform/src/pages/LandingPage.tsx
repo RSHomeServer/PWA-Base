@@ -31,11 +31,6 @@ const FEATURE_BEATS = [
 ] as const;
 
 const GALLERY_IDENTITY: Record<string, { kicker: string; atmosphere: string; tagline: string }> = {
-  stats: {
-    kicker: "Analysis",
-    atmosphere: styles.galleryStats,
-    tagline: "Hypothesis testing, distributions, and statistical workflows.",
-  },
   hello: {
     kicker: "Reference",
     atmosphere: styles.galleryDefault,
