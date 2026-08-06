@@ -1,3 +1,7 @@
+import type { ChartData } from "@platform/ui";
+
+export type { ChartData };
+
 export type AnalysisKind = "ttest" | "pearson" | "regression";
 
 export interface ResultRow {
@@ -12,19 +16,6 @@ export interface AnalysisResult {
   explanation: string;
   chart: ChartData;
 }
-
-export type ChartData =
-  | {
-      kind: "groups";
-      groups: { label: string; mean: number; stdev: number; values: number[] }[];
-    }
-  | {
-      kind: "scatter";
-      points: { x: number; y: number }[];
-      line?: { slope: number; intercept: number };
-      xLabel: string;
-      yLabel: string;
-    };
 
 export interface ParsedColumns {
   headers: string[];

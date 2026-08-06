@@ -74,3 +74,19 @@ export type {
   ThemePreference,
   ResolvedTheme,
 } from "./theme/index.js";
+
+export {
+  Sparkline,
+  Gauge,
+  AnalysisChart,
+  scaleLinear,
+  niceExtent,
+  clamp,
+} from "./charts/index.js";
+export type {
+  SparklineProps,
+  GaugeProps,
+  GaugeTone,
+  AnalysisChartProps,
+  ChartData,
+} from "./charts/index.js";

@@ -10,12 +10,12 @@
 }
 
 .axis {
-  stroke: var(--color-border-strong);
+  stroke: var(--chart-axis-color, var(--color-border-strong));
   stroke-width: 1;
 }
 
 .bar {
-  fill: var(--color-accent, var(--color-primary));
+  fill: var(--chart-bar-color, var(--color-accent, var(--color-primary)));
   opacity: 0.88;
   transition: opacity var(--motion-duration-fast) var(--motion-easing-standard);
 }
@@ -25,17 +25,17 @@
 }
 
 .whisker {
-  stroke: var(--color-foreground);
+  stroke: var(--chart-whisker-color, var(--color-foreground));
   stroke-width: 1.5;
 }
 
 .point {
-  fill: var(--color-accent, var(--color-primary));
+  fill: var(--chart-point-color, var(--color-accent, var(--color-primary)));
   opacity: 0.85;
 }
 
 .regressionLine {
-  stroke: var(--color-accent, var(--color-primary));
+  stroke: var(--chart-regression-color, var(--color-accent, var(--color-primary)));
   stroke-width: 2;
   stroke-dasharray: 6 4;
   opacity: 0.75;
@@ -43,12 +43,12 @@
 
 .label,
 .valueLabel {
-  fill: var(--color-muted);
+  fill: var(--chart-label-color, var(--color-muted));
   font-size: 12px;
   font-family: var(--font-family-sans);
 }
 
 .valueLabel {
-  fill: var(--color-foreground);
+  fill: var(--chart-value-label-color, var(--color-foreground));
   font-weight: var(--font-weight-medium);
 }

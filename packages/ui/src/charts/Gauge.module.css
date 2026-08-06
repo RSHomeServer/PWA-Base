@@ -21,34 +21,41 @@
 }
 
 .track {
-  stroke: var(--lab-border-strong);
+  stroke: var(--chart-track-color, var(--color-border-strong));
 }
 
 .value {
   transition: stroke 0.4s ease;
-  filter: drop-shadow(0 0 6px var(--gauge-color, var(--lab-teal)));
+  filter: drop-shadow(
+    0 0 6px var(--gauge-color, var(--chart-value-color, var(--color-accent)))
+  );
   animation: gauge-glow-pulse 3.2s ease-in-out infinite;
 }
 
 .tick {
-  stroke: var(--lab-border-strong);
+  stroke: var(--chart-tick-color, var(--color-border-strong));
   stroke-width: 1.5;
   opacity: 0.7;
 }
 
 .typicalMark {
-  fill: var(--lab-bg);
-  stroke: var(--lab-muted-strong);
+  fill: var(--chart-mark-fill, var(--color-background));
+  stroke: var(--chart-mark-stroke, var(--color-muted-foreground));
   stroke-width: 1.5;
 }
 
 @keyframes gauge-glow-pulse {
   0%,
   100% {
-    filter: drop-shadow(0 0 6px var(--gauge-color, var(--lab-teal)));
+    filter: drop-shadow(
+      0 0 6px var(--gauge-color, var(--chart-value-color, var(--color-accent)))
+    );
   }
   50% {
-    filter: drop-shadow(0 0 11px var(--gauge-color, var(--lab-teal))) brightness(1.15);
+    filter: drop-shadow(
+        0 0 11px var(--gauge-color, var(--chart-value-color, var(--color-accent)))
+      )
+      brightness(1.15);
   }
 }
 
@@ -75,7 +82,7 @@
   margin-top: 2px;
   font-family: var(--font-family-mono);
   font-size: var(--font-size-xs);
-  color: var(--lab-muted);
+  color: var(--chart-label-color, var(--color-muted));
   letter-spacing: 0.05em;
 }
 
@@ -84,7 +91,7 @@
   bottom: 2px;
   margin: 0;
   font-size: var(--font-size-xs);
-  color: var(--lab-muted-strong);
+  color: var(--chart-caption-color, var(--color-muted-foreground));
   text-align: center;
   letter-spacing: 0.03em;
 }
