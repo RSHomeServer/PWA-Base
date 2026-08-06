@@ -1,7 +1,7 @@
 import { defineConfig, devices } from "@playwright/test";
 
 const previewHost = "127.0.0.1";
-const cataloguePort = 4173;
+const helloPort = 4173;
 
 export default defineConfig({
   testDir: "./e2e",
@@ -14,18 +14,18 @@ export default defineConfig({
   },
   projects: [
     {
-      name: "catalogue",
-      testMatch: /host\.spec\.ts/,
+      name: "hello",
+      testMatch: /hello\.spec\.ts/,
       use: {
         ...devices["Desktop Chrome"],
-        baseURL: `http://${previewHost}:${cataloguePort}`,
+        baseURL: `http://${previewHost}:${helloPort}`,
       },
     },
   ],
   webServer: [
     {
-      command: `pnpm --filter @platform/host build && pnpm --filter @platform/host preview --host ${previewHost} --port ${cataloguePort}`,
-      url: `http://${previewHost}:${cataloguePort}`,
+      command: `pnpm --filter @platform/hello-web build && pnpm --filter @platform/hello-web preview --host ${previewHost} --port ${helloPort}`,
+      url: `http://${previewHost}:${helloPort}`,
       reuseExistingServer: !process.env.CI,
       timeout: 120_000,
     },

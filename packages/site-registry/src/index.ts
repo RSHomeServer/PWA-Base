@@ -2,7 +2,8 @@
  * Host-facing type re-exports.
  *
  * Site packages use `@platform/site-registry/contract`.
- * The host reads registered sites from `@platform/catalog` (`getSites` / `resolveSites`).
+ * Concrete apps register via `defineSite` and mount with SoloSiteApp.
+ * Multi-app catalogue hosting was removed from PWA-Base in T0.4.
  */
 export type {
   AppManifestFields,

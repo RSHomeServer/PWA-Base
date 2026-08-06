@@ -28,11 +28,9 @@ import { fileURLToPath } from "node:url";
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 
 const RESERVED = new Set([
-  "catalog",
   "config",
   "controls",
   "export",
-  "host",
   "markdown",
   "math",
   "physics",
