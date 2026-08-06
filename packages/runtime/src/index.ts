@@ -57,24 +57,25 @@ export type {
   PackReadyGateClassNames,
 } from "./packs/PackReadyGate.js";
 export { SoloSiteApp, soloRoutePath } from "./solo/SoloSiteApp.js";
+export type { SoloSiteAppProps } from "./solo/SoloSiteApp.js";
 export { PlatformChrome } from "./chrome/PlatformChrome.js";
 export type { PlatformChromeProps } from "./chrome/PlatformChrome.js";
 export {
-  PLATFORM_HOME,
-  PLATFORM_NAV_GROUPS,
-  PLATFORM_NAV_APPS,
-  PLATFORM_NAV_MEDIA,
-  PLATFORM_NAV_MONITORING,
-  PLATFORM_NAV_WORKSPACE,
+  hasPlatformNav,
   isPlatformNavActive,
   platformNavLinkProps,
   platformNavLogoUrl,
   platformNavLogoCandidates,
   platformNavLogoAccent,
-  PLATFORM_LOGO_ACCENTS,
-  PLATFORM_LOGO_ORIGIN,
+  DEFAULT_LOGO_ACCENT,
   extractDominantColor,
 } from "./chrome/nav.js";
 export { NavLogoChip } from "./chrome/NavLogoChip.js";
 export type { NavLogoChipProps } from "./chrome/NavLogoChip.js";
-export type { PlatformNavGroup, PlatformNavLink } from "./chrome/nav.js";
+export type {
+  PlatformNavConfig,
+  PlatformNavGroup,
+  PlatformNavLink,
+} from "./chrome/nav.js";
+export { PlatformNavProvider } from "./chrome/PlatformNavProvider.js";
+export { usePlatformNavConfig } from "./chrome/PlatformNavContext.js";

@@ -1,35 +1,11 @@
-/** Fallback accents when canvas sampling is unavailable (CORS / SSR). */
-export const PLATFORM_LOGO_ACCENTS: Readonly<Record<string, string>> = {
-  home: "#0d7a72",
-  qbt: "#2f67ba",
-  overseerr: "#6366f1",
-  radarr: "#ffcb3d",
-  sonarr: "#2596be",
-  lidarr: "#629e48",
-  prowlarr: "#e66001",
-  filebrowser: "#006498",
-  dozzle: "#2496ed",
-  portainer: "#13bef9",
-  kuma: "#5cdd8b",
-  netdata: "#00ab44",
-  chrome: "#4285f4",
-  guacamole: "#d22128",
-  notes: "#a16207",
-  components: "#0d7a72",
-  docs: "#0f766e",
-  stats: "#1d4ed8",
-  viz: "#c2410c",
-  birthday: "#be185d",
-  memories: "#c4a15a",
-  "browser-lab": "#0e7490",
-  hello: "#0f766e",
-  dashboard: "#134e4a",
-};
+/** Default accent when no map entry and canvas sampling is unavailable. */
+export const DEFAULT_LOGO_ACCENT = "#0d7a72";
 
-const DEFAULT_ACCENT = "#0d7a72";
-
-export function platformNavLogoAccent(id: string): string {
-  return PLATFORM_LOGO_ACCENTS[id] ?? DEFAULT_ACCENT;
+export function platformNavLogoAccent(
+  id: string,
+  accents?: Readonly<Record<string, string>> | null,
+): string {
+  return accents?.[id] ?? DEFAULT_LOGO_ACCENT;
 }
 
 /**

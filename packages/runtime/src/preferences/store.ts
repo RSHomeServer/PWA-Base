@@ -1,10 +1,14 @@
 import {
+  LEGACY_PLATFORM_PREFERENCES_KEY,
   PLATFORM_PREFERENCES_KEY,
   defaultPlatformPreferences,
   detectPlatformRuntimeMode,
   type PlatformPreferences,
   type PlatformUpdatePreferences,
 } from "./types.js";
+
+const PLATFORM_PREFS_EVENT = "pwa-base:platform-prefs";
+const LEGACY_PLATFORM_PREFS_EVENT = "songara:platform-prefs";
 
 function isObject(value: unknown): value is Record<string, unknown> {
   return Boolean(value) && typeof value === "object";
@@ -51,12 +55,28 @@ export function normalisePlatformPreferences(
   };
 }
 
+function readStoredPreferencesRaw(): string | null {
+  if (typeof window === "undefined") return null;
+  try {
+    const current = window.localStorage.getItem(PLATFORM_PREFERENCES_KEY);
+    if (current) return current;
+    const legacy = window.localStorage.getItem(LEGACY_PLATFORM_PREFERENCES_KEY);
+    if (legacy) {
+      window.localStorage.setItem(PLATFORM_PREFERENCES_KEY, legacy);
+      return legacy;
+    }
+  } catch {
+    /* private mode */
+  }
+  return null;
+}
+
 export function loadPlatformPreferences(
   mode = detectPlatformRuntimeMode(),
 ): PlatformPreferences {
   if (typeof window === "undefined") return defaultPlatformPreferences(mode);
   try {
-    const raw = window.localStorage.getItem(PLATFORM_PREFERENCES_KEY);
+    const raw = readStoredPreferencesRaw();
     if (!raw) return defaultPlatformPreferences(mode);
     return normalisePlatformPreferences(JSON.parse(raw) as unknown, mode);
   } catch {
@@ -73,7 +93,7 @@ export function savePlatformPreferences(
     try {
       window.localStorage.setItem(PLATFORM_PREFERENCES_KEY, JSON.stringify(normalised));
       window.dispatchEvent(
-        new CustomEvent("songara:platform-prefs", { detail: normalised }),
+        new CustomEvent(PLATFORM_PREFS_EVENT, { detail: normalised }),
       );
     } catch {
       /* private mode */
@@ -106,14 +126,21 @@ export function subscribePlatformPreferences(
     listener(normalisePlatformPreferences(detail));
   };
   const onStorage = (event: StorageEvent) => {
-    if (event.key !== PLATFORM_PREFERENCES_KEY) return;
+    if (
+      event.key !== PLATFORM_PREFERENCES_KEY &&
+      event.key !== LEGACY_PLATFORM_PREFERENCES_KEY
+    ) {
+      return;
+    }
     listener(loadPlatformPreferences());
   };
 
-  window.addEventListener("songara:platform-prefs", onCustom);
+  window.addEventListener(PLATFORM_PREFS_EVENT, onCustom);
+  window.addEventListener(LEGACY_PLATFORM_PREFS_EVENT, onCustom);
   window.addEventListener("storage", onStorage);
   return () => {
-    window.removeEventListener("songara:platform-prefs", onCustom);
+    window.removeEventListener(PLATFORM_PREFS_EVENT, onCustom);
+    window.removeEventListener(LEGACY_PLATFORM_PREFS_EVENT, onCustom);
     window.removeEventListener("storage", onStorage);
   };
 }

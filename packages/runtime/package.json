@@ -22,12 +22,15 @@
   },
   "peerDependencies": {
     "react": "^19.0.0",
+    "react-dom": "^19.0.0",
     "react-router-dom": "^7.6.0"
   },
   "devDependencies": {
     "@platform/config": "workspace:*",
     "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
     "react": "catalog:",
+    "react-dom": "catalog:",
     "react-router-dom": "catalog:",
     "typescript": "catalog:",
     "vitest": "catalog:"

@@ -3,7 +3,7 @@ import { useTheme } from "./useTheme.js";
 import type { ThemePreference } from "./types.js";
 import styles from "./ThemeMenu.module.css";
 
-export interface ThemeMenuProps extends Omit<ButtonHTMLAttributes<HTMLDivElement>, "onChange"> {}
+export type ThemeMenuProps = Omit<ButtonHTMLAttributes<HTMLDivElement>, "onChange">;
 
 const OPTIONS: { value: ThemePreference; label: string; icon: "sun" | "moon" | "system" }[] = [
   { value: "light", label: "Light", icon: "sun" },

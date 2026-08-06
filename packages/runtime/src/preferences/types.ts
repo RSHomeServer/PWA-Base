@@ -3,7 +3,10 @@
  * Apps should use this API — not browser update APIs directly.
  */
 
-export const PLATFORM_PREFERENCES_KEY = "songara-platform-prefs:v1";
+export const PLATFORM_PREFERENCES_KEY = "pwa-base-platform-prefs:v1";
+
+/** Previous key — read once and migrated on load. */
+export const LEGACY_PLATFORM_PREFERENCES_KEY = "songara-platform-prefs:v1";
 
 export type PlatformUpdatePreferences = {
   /** Poll / check for a newer service worker on launch and on an interval. */

@@ -7,6 +7,7 @@ import {
   platformNavLogoCandidates,
   type PlatformNavLink,
 } from "./nav.js";
+import { usePlatformNavConfig } from "./PlatformNavContext.js";
 import styles from "./NavLogoChip.module.css";
 
 export type NavLogoChipProps = {
@@ -20,9 +21,12 @@ export type NavLogoChipProps = {
  * Icon chip with a tinted background/outline from the logo’s dominant colour.
  */
 export function NavLogoChip({ link, size = 28, className }: NavLogoChipProps) {
-  const candidates = platformNavLogoCandidates(link);
+  const nav = usePlatformNavConfig();
+  const candidates = platformNavLogoCandidates(link, nav);
   const [index, setIndex] = useState(0);
-  const [accent, setAccent] = useState(() => platformNavLogoAccent(link.id));
+  const [accent, setAccent] = useState(() =>
+    platformNavLogoAccent(link.id, nav?.logoAccents),
+  );
   const initial = link.label.trim().charAt(0).toUpperCase() || "?";
   const crossOrigin =
     candidates[0]?.startsWith("https://") &&

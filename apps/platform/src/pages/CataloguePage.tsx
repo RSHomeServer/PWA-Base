@@ -1,9 +1,9 @@
 import {
-  PLATFORM_NAV_GROUPS,
   NavLogoChip,
   platformNavLinkProps,
   type PlatformNavLink,
 } from "@platform/runtime";
+import { PLATFORM_NAV_GROUPS } from "../nav/catalogueNav";
 import styles from "./CataloguePage.module.css";
 
 function SiteCard({ link }: { link: PlatformNavLink }) {

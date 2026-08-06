@@ -35,4 +35,16 @@ export default tseslint.config(
       "react-refresh/only-export-components": ["warn", { allowConstantExport: true }],
     },
   },
+  {
+    files: ["**/*.{js,mjs,cjs}"],
+    languageOptions: {
+      ecmaVersion: 2022,
+      sourceType: "module",
+      globals: {
+        ...globals.node,
+        // Playwright page.waitForFunction callbacks are authored in-repo.
+        document: "readonly",
+      },
+    },
+  },
 );

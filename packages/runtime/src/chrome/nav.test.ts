@@ -1,64 +1,100 @@
+import { readdirSync, readFileSync, statSync } from "node:fs";
+import { join } from "node:path";
+import { fileURLToPath } from "node:url";
 import { describe, expect, it } from "vitest";
 import {
-  PLATFORM_HOME,
-  PLATFORM_NAV_APPS,
-  PLATFORM_NAV_GROUPS,
-  PLATFORM_NAV_MEDIA,
+  hasPlatformNav,
   isPlatformNavActive,
   platformNavLinkProps,
   platformNavLogoUrl,
+  type PlatformNavConfig,
+  type PlatformNavLink,
 } from "./nav.js";
 
-describe("platform nav", () => {
-  it("lists expected groups in order", () => {
-    expect(PLATFORM_NAV_GROUPS.map((g) => g.id)).toEqual([
-      "media",
-      "monitoring",
-      "workspace",
-      "apps",
-    ]);
-  });
+const home: PlatformNavLink = {
+  id: "home",
+  label: "Home",
+  href: "https://apps.example.com",
+  external: false,
+  description: "Catalogue home for the example platform.",
+};
 
-  it("includes blurbs and descriptions for catalogue cards", () => {
-    for (const group of PLATFORM_NAV_GROUPS) {
-      expect(group.blurb.length).toBeGreaterThan(8);
-      for (const link of group.links) {
-        expect(link.description.length).toBeGreaterThan(8);
-      }
-    }
-  });
+const sampleConfig: PlatformNavConfig = {
+  home,
+  groups: [
+    {
+      id: "apps",
+      label: "Apps",
+      blurb: "Product applications on this platform.",
+      links: [
+        {
+          id: "hello",
+          label: "Hello",
+          href: "https://hello.example.com",
+          external: false,
+          description: "Reference solo application.",
+        },
+        {
+          id: "docs",
+          label: "Docs",
+          href: "https://docs.external.example",
+          external: true,
+          description: "External documentation site.",
+        },
+      ],
+    },
+  ],
+  logoOrigin: "https://apps.example.com",
+};
 
-  it("marks media links external and apps internal", () => {
-    expect(PLATFORM_NAV_MEDIA.links.every((l) => l.external)).toBe(true);
-    expect(PLATFORM_NAV_APPS.links.every((l) => !l.external)).toBe(true);
-  });
-
-  it("maps qbittorrent to qbt host and chrome to chatgpt host", () => {
-    expect(PLATFORM_NAV_MEDIA.links.find((l) => l.id === "qbt")?.href).toBe(
-      "https://qbt.songara.uk",
-    );
-    const chrome = PLATFORM_NAV_GROUPS.find((g) => g.id === "workspace")?.links.find(
-      (l) => l.id === "chrome",
-    );
-    expect(chrome?.href).toBe("https://chatgpt.songara.uk");
+describe("platform nav helpers", () => {
+  it("treats missing or empty config as no mega bar", () => {
+    expect(hasPlatformNav(undefined)).toBe(false);
+    expect(hasPlatformNav(null)).toBe(false);
+    expect(hasPlatformNav({})).toBe(false);
+    expect(hasPlatformNav({ groups: [] })).toBe(false);
+    expect(hasPlatformNav(sampleConfig)).toBe(true);
+    expect(hasPlatformNav({ home })).toBe(true);
   });
 
   it("detects active origin", () => {
-    expect(isPlatformNavActive(PLATFORM_HOME.href, "https://apps.songara.uk")).toBe(true);
-    expect(isPlatformNavActive(PLATFORM_HOME.href, "https://viz.songara.uk")).toBe(false);
+    expect(isPlatformNavActive(home.href, "https://apps.example.com")).toBe(true);
+    expect(isPlatformNavActive(home.href, "https://hello.example.com")).toBe(false);
   });
 
   it("sets target blank only for external links", () => {
-    expect(platformNavLinkProps(PLATFORM_HOME).target).toBeUndefined();
-    expect(platformNavLinkProps(PLATFORM_NAV_MEDIA.links[0]!).target).toBe("_blank");
+    expect(platformNavLinkProps(home).target).toBeUndefined();
+    expect(platformNavLinkProps(sampleConfig.groups![0]!.links[1]!).target).toBe("_blank");
   });
 
-  it("resolves logo URLs for apps and externals", () => {
-    expect(platformNavLogoUrl(PLATFORM_NAV_APPS.links[0]!)).toBe(
-      "https://apps.songara.uk/logos/components.svg",
+  it("resolves logo URLs from injected logoOrigin", () => {
+    expect(platformNavLogoUrl(sampleConfig.groups![0]!.links[0]!, sampleConfig)).toBe(
+      "https://apps.example.com/logos/hello.svg",
     );
-    expect(platformNavLogoUrl(PLATFORM_NAV_MEDIA.links[0]!)).toBe(
-      "https://apps.songara.uk/logos/qbt.svg",
-    );
+  });
+
+  it("resolves same-origin logos when logoOrigin is omitted", () => {
+    expect(platformNavLogoUrl(home)).toBe("/logos/home.svg");
+  });
+});
+
+describe("runtime chrome source", () => {
+  it("does not embed product *.songara.uk hosts", () => {
+    const chromeDir = fileURLToPath(new URL(".", import.meta.url));
+    const files: string[] = [];
+    const walk = (dir: string) => {
+      for (const name of readdirSync(dir)) {
+        const path = join(dir, name);
+        if (statSync(path).isDirectory()) walk(path);
+        else if (/\.(ts|tsx|css)$/.test(name) && !name.endsWith(".test.ts")) {
+          files.push(path);
+        }
+      }
+    };
+    walk(chromeDir);
+    for (const file of files) {
+      const text = readFileSync(file, "utf8");
+      expect(text, file).not.toMatch(/\.songara\.uk/);
+    }
   });
 });

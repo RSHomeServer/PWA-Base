@@ -1,12 +1,11 @@
 import { useState } from "react";
 import { IconButton, ThemeMenu } from "../../../ui/src/index.js";
 import {
-  PLATFORM_HOME,
-  PLATFORM_NAV_GROUPS,
   isPlatformNavActive,
   platformNavLinkProps,
 } from "./nav.js";
 import { NavLogoChip } from "./NavLogoChip.js";
+import { usePlatformNavConfig } from "./PlatformNavContext.js";
 import { UpdateControl } from "./UpdateControl.js";
 import styles from "./MegaBar.module.css";
 
@@ -24,6 +23,9 @@ function MenuIcon() {
 }
 
 export function MegaBar({ onCollapse }: { onCollapse: () => void }) {
+  const nav = usePlatformNavConfig();
+  const home = nav?.home;
+  const groups = nav?.groups ?? [];
   const currentOrigin = typeof window !== "undefined" ? window.location.origin : "";
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -39,21 +41,23 @@ export function MegaBar({ onCollapse }: { onCollapse: () => void }) {
         <MenuIcon />
       </IconButton>
 
-      <a
-        {...platformNavLinkProps(PLATFORM_HOME)}
-        className={[
-          styles.home,
-          isPlatformNavActive(PLATFORM_HOME.href, currentOrigin) ? styles.homeActive : null,
-        ]
-          .filter(Boolean)
-          .join(" ")}
-      >
-        <NavLogoChip link={PLATFORM_HOME} size={22} />
-        <span>Homepage</span>
-      </a>
+      {home ? (
+        <a
+          {...platformNavLinkProps(home)}
+          className={[
+            styles.home,
+            isPlatformNavActive(home.href, currentOrigin) ? styles.homeActive : null,
+          ]
+            .filter(Boolean)
+            .join(" ")}
+        >
+          <NavLogoChip link={home} size={22} />
+          <span>{home.label}</span>
+        </a>
+      ) : null}
 
       <nav className={styles.groups} aria-label="Platform sections">
-        {PLATFORM_NAV_GROUPS.map((group) => (
+        {groups.map((group) => (
           <div key={group.id} className={styles.group}>
             <button type="button" className={styles.groupLabel} aria-haspopup="true">
               {group.label}
@@ -130,15 +134,17 @@ export function MegaBar({ onCollapse }: { onCollapse: () => void }) {
                 ×
               </IconButton>
             </div>
-            <a
-              {...platformNavLinkProps(PLATFORM_HOME)}
-              className={styles.mobileLink}
-              onClick={() => setMobileOpen(false)}
-            >
-              <NavLogoChip link={PLATFORM_HOME} size={26} />
-              <span>{PLATFORM_HOME.label}</span>
-            </a>
-            {PLATFORM_NAV_GROUPS.map((group) => (
+            {home ? (
+              <a
+                {...platformNavLinkProps(home)}
+                className={styles.mobileLink}
+                onClick={() => setMobileOpen(false)}
+              >
+                <NavLogoChip link={home} size={26} />
+                <span>{home.label}</span>
+              </a>
+            ) : null}
+            {groups.map((group) => (
               <div key={group.id} className={styles.mobileSection}>
                 <p className={styles.mobileSectionLabel}>{group.label}</p>
                 <ul className={styles.mobileList}>

@@ -678,7 +678,7 @@ insertBeforeMarker(
 patchJsonDependency(join(root, "packages/catalog/package.json"), packageSite);
 
 insertBeforeMarker(
-  join(root, "packages/runtime/src/chrome/nav.ts"),
+  join(root, "apps/platform/src/nav/catalogueNav.ts"),
   `    {
       id: "dashboard",
       label: "AI Development Dashboard",`,
@@ -695,7 +695,7 @@ insertBeforeMarker(
 
 const accentKey = /^[a-z][a-z0-9]*$/.test(name) ? name : `"${name}"`;
 insertBeforeMarker(
-  join(root, "packages/runtime/src/chrome/logoAccent.ts"),
+  join(root, "apps/platform/src/nav/catalogueNav.ts"),
   `  dashboard: "#134e4a",`,
   `  ${accentKey}: "${accent}",
 `,

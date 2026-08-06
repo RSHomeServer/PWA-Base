@@ -1,23 +1,18 @@
 import { describe, expect, it } from "vitest";
 import {
-  PLATFORM_LOGO_ACCENTS,
+  DEFAULT_LOGO_ACCENT,
   extractDominantColor,
   platformNavLogoAccent,
 } from "./logoAccent.js";
 
 describe("logo accents", () => {
-  it("maps known nav ids to hex accents", () => {
-    expect(platformNavLogoAccent("birthday")).toBe("#be185d");
-    expect(platformNavLogoAccent("viz")).toBe("#c2410c");
-    expect(platformNavLogoAccent("stats")).toBe("#1d4ed8");
-    expect(platformNavLogoAccent("qbt")).toMatch(/^#[0-9a-f]{6}$/i);
+  it("uses injected accents when provided", () => {
+    expect(platformNavLogoAccent("hello", { hello: "#0f766e" })).toBe("#0f766e");
   });
 
-  it("covers every accent entry with a hex colour", () => {
-    for (const [id, color] of Object.entries(PLATFORM_LOGO_ACCENTS)) {
-      expect(id.length).toBeGreaterThan(0);
-      expect(color).toMatch(/^#[0-9a-f]{6}$/i);
-    }
+  it("falls back to the default accent", () => {
+    expect(platformNavLogoAccent("unknown")).toBe(DEFAULT_LOGO_ACCENT);
+    expect(platformNavLogoAccent("unknown", {})).toBe(DEFAULT_LOGO_ACCENT);
   });
 
   it("returns null from extractDominantColor without a canvas image", () => {
