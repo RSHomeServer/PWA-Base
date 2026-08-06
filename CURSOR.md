@@ -113,6 +113,8 @@ Do not drop images without narrative.
 - End each specialist run with the completion table in `.kandev/prompts/_shared.md`
   (what / why / push commands) and signal `step_complete_kandev`.
 - Do not start the next ticket without explicit human approval.
+- If work depends on a human push to `origin/main`, wait until they **confirm the push**,
+  then start — never auto-start and race their terminal.
 
 ---
 

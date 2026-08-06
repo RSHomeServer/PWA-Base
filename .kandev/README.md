@@ -129,7 +129,11 @@ Key properties:
 - **Git wrap-up:** commit → merge **local `main`** → human pushes. No editor/AI co-authors.
 - **Start of every ticket:** sync to `origin/main` (primary + worktree) — see
   [`prompts/_shared.md`](./prompts/_shared.md). Ticket briefs must include the commands.
-- **Next ticket:** only after explicit human approval (a push alone is not approval).
+- **Next ticket:** only after **explicit human approval**. A human push alone is not
+  approval to spawn the next specialist. If the next ticket’s first step is “sync to
+  `origin/main` after a push,” **do not create it with `start_agent=true`** (and do not
+  start an idle ticket) until the human has **confirmed they pushed**. Ask, wait, then
+  start.
 
 ### The roles
 

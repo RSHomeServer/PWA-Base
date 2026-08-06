@@ -81,6 +81,10 @@ branching for the ticket.
 Every Orchestrator-created ticket **must** include these sync commands (or equivalent) in
 the brief so the specialist cannot miss them.
 
+**Orchestrator rule (push gate):** If the human still needs to push before that sync can
+succeed, create the ticket with `start_agent=false` (or leave it idle), ask them to push
+and confirm, and **only then** start the specialist. Do not auto-start push-gated work.
+
 ### Then review, in order
 
 1. [`.kandev/README.md`](../README.md) — how the operating system fits together.

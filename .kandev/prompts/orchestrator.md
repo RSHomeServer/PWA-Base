@@ -51,8 +51,14 @@ Decide, based on **project state** (not a fixed script):
 - **When work should be promoted** into PWA-Base — trigger the
   [promote-to-pwa-base](../workflows/promote-to-pwa-base.md) workflow when the two-consumer
   rule ([ADR-003](../../docs/adr/003-phase2-shared-packages.md)) is satisfied.
-- **When to start the next ticket** — only after **explicit human approval**. A human push
-  or "I've pushed" is not approval to spawn the next specialist.
+- **When to start the next ticket** — only after **explicit human approval**. A human
+  push or “I’ve pushed” alone is **not** approval to spawn or start the next specialist
+  unless they also say to start it.
+- **Push-gated tickets** — if a ticket must begin from a tip the human still needs to
+  push (or that only exists on local `main`), **do not** create it with
+  `start_agent=true` and **do not** start an idle ticket until the human has **confirmed
+  the push**. Ask for confirmation, wait for their reply, then sync/start. Never assume
+  a push happened or race the human’s terminal.
 
 Create, sequence, and coordinate KanDev tasks accordingly. Brief each specialist with the
 objective, the relevant workflow, and the source-of-truth links it needs.
