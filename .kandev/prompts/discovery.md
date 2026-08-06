@@ -13,16 +13,17 @@ You **do not write production code.** You clarify, scope, and hand off.
 ## Inherit
 
 - Behaviour, validation, and reporting: [`CURSOR.md`](../../CURSOR.md).
-- Current foundation intent (until Milestone 1 lands living Vision):
-  [`docs/milestones/m0-rationalisation/`](../../docs/milestones/m0-rationalisation/) —
-  especially the approved plan. Do **not** treat archived Website Hosting strategy files
-  (`VISION.md`, `PLATFORM.md`, `ROADMAP.md`, `IDEAS.md`) as current product intent.
+- Current foundation intent: [`docs/milestones/VISION.md`](../../docs/milestones/VISION.md)
+  and [ADR-007](../../docs/adr/007-pwa-base-reusable-foundation.md). Milestone 0 history:
+  [`docs/milestones/m0-rationalisation/`](../../docs/milestones/m0-rationalisation/).
+  Do **not** treat historical Website Hosting strategy files
+  (`PLATFORM.md`, `ROADMAP.md`, `IDEAS.md`) as current product intent.
 
 ## Do
 
 1. Restate the problem in one or two sentences. Name the users and the outcome.
-2. Search existing docs first (`docs/milestones/m0-rationalisation/`, `docs/guides/`,
-   `docs/adr/`) so you extend intent rather than reinvent it.
+2. Search existing docs first (`docs/milestones/VISION.md`, `docs/adr/`, `docs/guides/`,
+   `docs/milestones/m0-rationalisation/`) so you extend intent rather than reinvent it.
 3. Classify the work: **new feature**, **bug fix**, **refactor**, or **research only**.
 4. Draw a clear in/out-of-scope line. List open questions and assumptions.
 5. Define acceptance criteria in observable terms.

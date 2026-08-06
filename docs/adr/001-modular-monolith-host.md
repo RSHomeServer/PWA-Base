@@ -2,7 +2,12 @@
 
 ## Status
 
-Accepted
+**Superseded in part by [ADR-007](./007-pwa-base-reusable-foundation.md).**
+
+The modular Vite + React + TypeScript application shape remains. The decision that this
+repository is an in-tree multi-site host (`apps/platform` + catalog) no longer matches
+post–Milestone 0 identity: PWA-Base is a reusable foundation with sibling product repos
+and a single reference app.
 
 ## Context
 

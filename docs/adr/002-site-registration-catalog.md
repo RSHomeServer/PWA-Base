@@ -2,7 +2,12 @@
 
 ## Status
 
-Accepted
+**Superseded in part by [ADR-007](./007-pwa-base-reusable-foundation.md).**
+
+The `defineSite` / `SiteDefinition` contract in `@platform/site-registry` remains the
+registration shape for packageable apps. The in-repo `@platform/catalog` host catalog and
+path-mounting into `apps/platform` were removed in Milestone 0; product apps now live in
+sibling repositories.
 
 ## Context
 

@@ -1,75 +1,96 @@
-# Platform Vision
+# Foundation Vision
 
 | | |
 | --- | --- |
 | **Status** | Living |
-| **Version** | 0.1.0 |
-| **Last reviewed** | 2026-07-21 |
-| **Related** | [PLATFORM.md](./PLATFORM.md) · [ROADMAP.md](./ROADMAP.md) · [IDEAS.md](./IDEAS.md) |
+| **Version** | 1.0.0 |
+| **Last reviewed** | 2026-08-06 |
+| **Related** | [ADR-007](../adr/007-pwa-base-reusable-foundation.md) · [architecture.md](../architecture.md) · [m0-rationalisation/](./m0-rationalisation/) |
+
+> **Historical note:** Pre–Milestone 0 Website Hosting strategy lived in
+> [PLATFORM.md](./PLATFORM.md), [ROADMAP.md](./ROADMAP.md), and [IDEAS.md](./IDEAS.md).
+> Those files are **not** current product intent (archive/delete in Milestone 2). Use this
+> document and ADR-007 as the north star.
 
 ---
 
 ## Purpose of this document
 
-High-level intent for the Website Hosting platform: what we are building, why reuse matters, and how to decide where to invest engineering effort. Runtime architecture lives in [`docs/architecture.md`](../architecture.md). Agent execution behaviour lives in root [`CURSOR.md`](../../CURSOR.md)—this file is **strategy**, not a coding contract.
+High-level intent for **`@songara/pwa-base`**: what this repository is for, how sibling
+PWAs consume it, and how to decide what belongs here versus in an application repo.
+Runtime layout lives in [`docs/architecture.md`](../architecture.md). Agent execution
+behaviour lives in root [`CURSOR.md`](../../CURSOR.md) — this file is **strategy**, not a
+coding contract.
 
 ## How to update
 
-Revise when the product vision changes (new classes of apps, hosting model shifts, or a deliberate change to the reuse rule). Bump the version, update **Last reviewed**, and sync any impacted sections in PLATFORM / ROADMAP / IDEAS.
+Revise when foundation identity or investment rules change (new classes of shared kits,
+consumption model shifts, or a deliberate change to the two-consumer rule). Bump the
+version and **Last reviewed**.
 
 ---
 
 ## Vision statement
 
-Build a **self-hosted ecosystem of reusable browser applications** on a Proxmox-backed Docker stack—not a collection of independent one-off projects.
+Ship a **reusable browser/PWA foundation** that sibling Songara applications depend on —
+not a catalogue of in-monorepo products, and not an in-tree Telemetry stack.
 
-Every meaningful infrastructure investment should unlock **multiple future applications**. Prefer extending shared capabilities over inventing a new stack per idea.
+Every meaningful extraction into `@songara/pwa-base` should unlock **multiple** present or
+near-term applications. Prefer extending shared contracts and kits over inventing a new
+stack per idea.
 
 ## Operating context
 
 | Constraint | Implication |
 | --- | --- |
-| Self-hosted on Proxmox | Own the full stack; favour Docker-first deploy and operable services |
-| Browser-based apps | One TypeScript-first front-end host; progressive enrichment of shared UI |
-| Long-term growth | Optimise for maintainability and velocity over years, not for today’s hardware specs |
-| Production quality | Prefer explicit contracts, tests, and ADRs over speculative abstraction |
+| Ubuntu VM for day-to-day work | Develop and validate here; do not assume Proxmox services in the agent environment |
+| Proxmox for production Website Hosting | Human deploys when happy; out of band for foundation DoD |
+| Sibling product repos | Apps use `file:../PWA-Base`; see [ADR-006](../adr/006-kandev-sibling-file-deps.md) |
+| One reference app in-tree | `hello-web` / `site-hello` only — smoke and packaging reference |
+| Telemetry not in this repo | KanDev + `packages/completion-report` own engineering workflow reporting |
 
 ## Investment rule
 
 Align with [ADR-003](../adr/003-phase2-shared-packages.md) **two-consumer rule**:
 
-> Extract or build a **platform capability** only when at least two concrete applications will use it unchanged—or when the roadmap shows that capability as a deliberate foundation for a class of apps (e.g. identity, data plane, object storage).
+> Extract or build a **foundation capability** only when at least two concrete applications
+> will use it unchanged — or when an explicit foundation milestone requires it (contracts,
+> packaging helpers, design tokens).
 
-Do **not** rebuild foundations that already exist (modular host, catalog, design tokens, telemetry Task lifecycle, PWA shell, Traefik routing for the platform SPA). See [PLATFORM.md](./PLATFORM.md) for inventory.
+The second consumer may be a **sibling repository**. Do not reintroduce a catalogue host,
+product verticals, or Telemetry into this monorepo to create artificial second consumers.
 
 ## Capability vs framework vs application
 
-Keep these distinct when planning:
-
 | Term | Meaning | Example today |
 | --- | --- | --- |
-| **Capability** | Reusable behaviour or service with a clear contract | Site registration, ParameterPanel, telemetry ingest |
-| **Framework** | Shared kit that many capabilities/apps compose | `@platform/ui` tokens + primitives; host + catalog |
-| **Application** | User-facing independently hosted SPA | `stats.songara.uk`, `viz.songara.uk`, `dashboard.songara.uk` |
+| **Capability** | Reusable behaviour with a clear contract | `defineSite`, Content Packs, completion-report shape |
+| **Framework / kit** | Shared package many apps compose | `@platform/ui`, `@platform/runtime`, animation/audio/browser/render |
+| **Application** | User-facing PWA in a **sibling** repo | Consumes `@songara/pwa-base` entry points |
+| **Reference app** | In-tree demo only | `apps/hello-web` + `packages/site-hello` |
 
-An application may contain local code that is **not** yet a capability. Promoting it to the platform requires a second consumer or an explicit foundational milestone.
+Application-local code stays in the sibling repo until a second consumer justifies
+promotion ([promote-to-pwa-base](../../.kandev/workflows/promote-to-pwa-base.md)).
 
 ## Success looks like
 
-- A new app is primarily a **catalog entry** plus reuse of host, UI, and platform services—not a greenfield monorepo.
-- Private, data-backed, and media-heavy apps become possible without reinventing auth, persistence, or storage each time.
-- Documentation answers: what exists, what is missing, what to build next, and what each milestone unlocks ([ROADMAP.md](./ROADMAP.md)).
-- Future ideas are mapped against capabilities before implementation ([IDEAS.md](./IDEAS.md)).
+- A new Songara PWA starts as a sibling repo plus documented `@songara/pwa-base` imports —
+  not a greenfield copy of host/catalog/telemetry.
+- Shared kits grow only when reuse is real (two consumers or an accepted ADR).
+- Living docs match the cleaned tree: foundation packages + hello reference.
+- Agents follow [VISION](./VISION.md) and [ADR-007](../adr/007-pwa-base-reusable-foundation.md),
+  not archived multi-app Website Hosting strategy.
 
-## Non-goals (for this vision)
+## Non-goals
 
-- Optimising for a single “hero” app at the expense of shared foundations.
-- Premature extraction of site-local charting, canvas, or stats engines without a second consumer.
-- Replacing Cursor telemetry with a general observability product before an app data plane exists.
-- Multi-cloud or multi-tenant SaaS design—this remains a personal / household self-hosted platform.
+- Hosting many product apps inside this monorepo again.
+- In-tree Telemetry, Document Explorer API, or catalogue SPA.
+- Optimising the foundation for a single hero app at the expense of reusable contracts.
+- Multi-cloud / multi-tenant SaaS design — household / self-hosted Songara apps remain the scope.
 
 ## North-star outcomes
 
-1. **Reuse by default** — shared packages and services absorb cross-cutting needs.
-2. **Clear growth path** — identity → data → storage → media → content apps, in that leverage order (see ROADMAP).
-3. **Honest inventory** — strategy docs stay current with the codebase so planning is trustworthy.
+1. **Reuse by default** — sibling apps share contracts, UI, runtime, and kits via
+   `@songara/pwa-base`.
+2. **Clear home for code** — foundation vs sibling app is obvious; promotion has a gate.
+3. **Honest docs** — strategy and architecture stay aligned with the tree after Milestone 0.

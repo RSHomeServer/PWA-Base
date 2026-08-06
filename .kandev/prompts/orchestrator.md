@@ -26,10 +26,10 @@ code lives in sibling repos. See [`_shared.md`](./_shared.md).
   blocked, or queued).
 - Review repository context before delegating: [`.kandev/README.md`](../README.md),
   [`docs/architecture.md`](../../docs/architecture.md), the relevant
-  [ADRs](../../docs/adr/), [`docs/milestones/m0-rationalisation/`](../../docs/milestones/m0-rationalisation/)
-  (post–Milestone 0 truth until M1 replaces living Vision), and prior work — so you never
-  delegate duplicated or conflicting work.
-- Do **not** treat archived `docs/milestones/VISION.md` / `ROADMAP.md` / `PLATFORM.md` or
+  [ADRs](../../docs/adr/) (especially [ADR-007](../../docs/adr/007-pwa-base-reusable-foundation.md)),
+  living [`docs/milestones/VISION.md`](../../docs/milestones/VISION.md), and prior work — so
+  you never delegate duplicated or conflicting work.
+- Do **not** treat historical `docs/milestones/PLATFORM.md` / `ROADMAP.md` / `IDEAS.md` or
   `docs/reviews/*` as current product intent.
 
 ## Delegate and sequence

@@ -2,14 +2,16 @@
 
 Thank you for contributing to `@songara/pwa-base`. This document covers workflow
 expectations for the foundation repository (Ubuntu VM for day-to-day work; Proxmox for
-production Website Hosting). Product apps live in sibling repositories.
+production Website Hosting). Product apps live in sibling repositories
+([ADR-007](./docs/adr/007-pwa-base-reusable-foundation.md)).
 
 ## Before you start
 
 Read the architecture overview and ADRs so changes align with accepted decisions:
 
+- [docs/milestones/VISION.md](./docs/milestones/VISION.md) — living foundation intent
 - [docs/architecture.md](./docs/architecture.md)
-- [docs/adr/](./docs/adr/)
+- [docs/adr/](./docs/adr/) — start with [ADR-007](./docs/adr/007-pwa-base-reusable-foundation.md)
 - [`.kandev/`](./.kandev/) — role prompts and wrap-up rules (local `main`, human push)
 
 Key rule from [ADR-003](./docs/adr/003-phase2-shared-packages.md): promote shared code only
@@ -28,25 +30,34 @@ public entry points only.
 
 ## Ownership
 
-Respect package and doc boundaries. When multiple agents or contributors work in parallel:
+Respect package and doc boundaries. When multiple contributors work in parallel:
 
-- **Host** — `apps/platform`
+- **Reference app** — `apps/hello-web`, `packages/site-hello`
 - **Site registry** — `packages/site-registry`
+- **Runtime / Content Packs** — `packages/runtime`
 - **Design system** — `packages/ui` and `docs/design-system/`
+- **Domain kits** — `packages/controls`, `export`, `math`, `physics`, `markdown`,
+  `animation`, `audio`, `browser`, `render`
+- **Completion report** — `packages/completion-report`
 - **Shared config** — `packages/config`
-- **Site packages** — `packages/site-*` (each site owns its package)
 - **ADRs** — `docs/adr/` (architecture decisions; link from other docs, do not rewrite in place)
-- **Product / contributor docs** — root `README.md`, `CONTRIBUTING.md`, `docs/architecture.md`, `docs/guides/*`
+- **Process** — `.kandev/`
+- **Product / contributor docs** — root `README.md`, `CONTRIBUTING.md`, `docs/architecture.md`,
+  `docs/guides/*`, living [VISION.md](./docs/milestones/VISION.md)
 
 If your change crosses boundaries, call it out in the PR description and tag relevant reviewers.
 
-## Adding a site
+## Adding an application
 
-Follow [docs/guides/creating-a-new-site.md](./docs/guides/creating-a-new-site.md). Summary:
+Product apps belong in **sibling repositories**, not in this monorepo. Scaffolding helpers
+and packaging notes:
 
-1. Create a site package that imports `defineSite` from `@platform/site-registry/contract`.
-2. Add the site as a registry workspace dependency of `@platform/catalog` and **one catalog line** in `packages/catalog/src/catalog.ts`.
-3. Do **not** edit host imports for the new site.
+- [docs/guides/consuming-pwa-base.md](./docs/guides/consuming-pwa-base.md)
+- [docs/guides/solo-packaging.md](./docs/guides/solo-packaging.md)
+- [docs/guides/creating-a-new-site.md](./docs/guides/creating-a-new-site.md) (prose refresh in Milestone 2)
+
+In-tree changes for a new shared capability require a second consumer (ADR-003) or an
+explicit foundation ADR.
 
 ## Local validation
 
@@ -68,13 +79,6 @@ pnpm exec playwright install chromium
 
 See [docs/guides/testing.md](./docs/guides/testing.md) for what each layer covers.
 
-Optional Docker smoke test:
-
-```bash
-docker compose up --build
-curl -f http://localhost:8080/health
-```
-
 ## Code style
 
 - TypeScript strict mode; extend baselines from `@platform/config`.
@@ -83,13 +87,16 @@ curl -f http://localhost:8080/health
 
 ## Design system
 
-Sites and the host should consume shared UI via `@platform/ui` when appropriate. See [docs/design-system/](./docs/design-system/) for tokens, primitives, and accessibility baseline. The host may not import `@platform/ui` yet; follow [theme strategy](./docs/design-system/theme-strategy.md) when wiring it.
+Apps should consume shared UI via `@platform/ui` / `@songara/pwa-base/ui` when appropriate.
+See [docs/design-system/](./docs/design-system/) for tokens, primitives, and accessibility
+baseline. Follow [theme strategy](./docs/design-system/theme-strategy.md) when wiring themes.
 
 ## Documentation changes
 
 - Link to ADRs and source rather than duplicating architecture decisions.
 - Verify internal links resolve to existing files.
 - Do not document APIs that are not implemented — check exports in source or package READMEs.
+- Do not revive catalogue-host / Telemetry docs as living guidance.
 
 ## Questions
 

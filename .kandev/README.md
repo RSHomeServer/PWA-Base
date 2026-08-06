@@ -12,7 +12,8 @@ or architecture rules — it links to their sources of truth:
 | --- | --- |
 | [`CURSOR.md`](../CURSOR.md) | Execution philosophy, validation ladder, Developer Actions, Task lifecycle, Definition of Done |
 | [`packages/completion-report/src/types.ts`](../packages/completion-report/src/types.ts) + [`completion-report-contract.ts`](../packages/completion-report/src/completion-report-contract.ts) | `RunCompletionSummary` shape + section registry (never redefine sections elsewhere) |
-| [`docs/architecture.md`](../docs/architecture.md) + [`docs/adr/`](../docs/adr/) | Package map, dependency rules, accepted decisions |
+| [`docs/milestones/VISION.md`](../docs/milestones/VISION.md) | Living foundation intent (north star) |
+| [`docs/architecture.md`](../docs/architecture.md) + [`docs/adr/`](../docs/adr/) | Package map, dependency rules, accepted decisions ([ADR-007](../docs/adr/007-pwa-base-reusable-foundation.md) = identity) |
 | [ADR-003](../docs/adr/003-phase2-shared-packages.md) | **Two-consumer rule** — the gate for promoting code into PWA-Base |
 | [`docs/guides/consuming-pwa-base.md`](../docs/guides/consuming-pwa-base.md) | Public API surface + `file:../PWA-Base` consumption |
 | [`CONTRIBUTING.md`](../CONTRIBUTING.md) | Branch workflow, ownership boundaries, **no auto-merge** |

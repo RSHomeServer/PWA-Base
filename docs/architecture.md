@@ -1,114 +1,115 @@
 # Architecture
 
-Website Hosting is a **modular monorepo**: independently packaged applications share packages and a catalogue host. Architecture decisions are recorded as ADRs; this document summarizes how the pieces fit together.
+PWA-Base is a **pnpm monorepo foundation**: shared `@platform/*` packages published to
+sibling apps as `@songara/pwa-base`, plus one reference PWA (`hello-web` / `site-hello`).
+Product applications are **not** hosted in this repository.
 
-**Platform strategy** (vision, capability inventory, roadmap, application ideas) lives under [`docs/milestones/`](./milestones/)—start with [PLATFORM.md](./milestones/PLATFORM.md). Browse strategy Markdown via **docs.songara.uk** ([Document Explorer guide](./guides/document-explorer.md)).
+**Identity:** [ADR-007](./adr/007-pwa-base-reusable-foundation.md). **Living strategy:**
+[VISION.md](./milestones/VISION.md). Agent behaviour: root [`CURSOR.md`](../CURSOR.md).
+
+| Layer | Where | Role |
+| --- | --- | --- |
+| Dev / validation | Ubuntu VM | Day-to-day work on this checkout and sibling apps |
+| Production | Proxmox | Website Hosting (and any legacy Telemetry retained there) |
+| Telemetry | Not in this repo | KanDev + `packages/completion-report` for engineering reporting |
 
 ## Decisions (ADRs)
 
-| ADR                                                                       | Summary                                                                          |
-| ------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
-| [001 — Modular monolith host](./adr/001-modular-monolith-host.md)         | Historical default packaging; evolved by ADR-004                                 |
-| [002 — Site registration catalog](./adr/002-site-registration-catalog.md) | Path-based registration via `defineSite` + catalog metadata                      |
-| [003 — Shared packages](./adr/003-phase2-shared-packages.md)              | Two-consumer rule for extracting shared kits                                     |
-| [004 — Packageable applications](./adr/004-packageable-applications.md)   | App identity ≠ deploy topology; independent hosts; `@platform/runtime`           |
-| [005 — Content Packs](./adr/005-content-packs.md)                         | Versioned/hash-verified packs; complete first install; deferrable updates        |
+| ADR | Summary |
+| --- | --- |
+| [001 — Modular monolith host](./adr/001-modular-monolith-host.md) | Historical host packaging; **superseded in part** by ADR-007 |
+| [002 — Site registration catalog](./adr/002-site-registration-catalog.md) | `defineSite` contract remains; in-repo catalog host gone; **superseded in part** by ADR-007 |
+| [003 — Shared packages](./adr/003-phase2-shared-packages.md) | Two-consumer rule for extracting shared kits |
+| [004 — Packageable applications](./adr/004-packageable-applications.md) | App identity ≠ deploy topology; `@platform/runtime` |
+| [005 — Content Packs](./adr/005-content-packs.md) | Versioned/hash-verified packs |
+| [006 — KanDev sibling deps](./adr/006-kandev-sibling-file-deps.md) | `file:../` + linker for worktrees |
+| [007 — Reusable foundation](./adr/007-pwa-base-reusable-foundation.md) | **Current identity** — sibling product repos; hello reference only |
 
 Full index: [docs/adr/README.md](./adr/README.md).
 
 ## Package map
 
 ```
-website-hosting (pnpm workspace root)
-├── apps/platform              Catalogue SPA (apps.songara.uk)
-├── apps/*-web                 Independent app packaging entries (*.songara.uk)
-├── apps/telemetry             Cursor hook ingest / Task lifecycle (:4310)
-├── apps/docs-api              Read-only Markdown docs API (:4320)
-├── packages/site-registry     Registration / AppManifest contract
-├── packages/catalog           Catalogue metadata + optional site loaders
-├── packages/runtime           PWA helpers, connectivity, Content Packs, SoloSiteApp
-├── packages/ui + kits         Design system / domain libs
-└── packages/site-*            Application feature modules
+@songara/pwa-base (pnpm workspace root)
+├── apps/hello-web              Reference solo PWA entry
+├── packages/site-hello         Reference site feature module
+├── packages/site-registry      defineSite / SiteDefinition contract
+├── packages/runtime            PWA helpers, Content Packs, SoloSiteApp
+├── packages/ui                 Design tokens + primitives
+├── packages/controls           Parameter panels
+├── packages/export             Browser download helpers
+├── packages/math + physics     Numeric helpers
+├── packages/markdown           Markdown helpers
+├── packages/animation          Particle / animation kit
+├── packages/audio              Web Audio kit
+├── packages/browser            Capability probes
+├── packages/render             Canvas / RAF helpers
+├── packages/completion-report  RunCompletionSummary contract
+└── packages/config             Shared TS / ESLint / Prettier baselines
 ```
 
-Guides: [solo-packaging.md](./guides/solo-packaging.md), [content-packs.md](./guides/content-packs.md), [memory-experiences.md](./guides/memory-experiences.md).
+Guides: [solo-packaging.md](./guides/solo-packaging.md), [content-packs.md](./guides/content-packs.md),
+[consuming-pwa-base.md](./guides/consuming-pwa-base.md).
 
 ### Dependency rules
 
-| Consumer                  | May depend on                                                                                      | Must not depend on                                          |
-| ------------------------- | -------------------------------------------------------------------------------------------------- | ----------------------------------------------------------- |
-| `@platform/host` (catalogue) | `@platform/catalog` (metadata), `@platform/runtime`, `@platform/ui`                             | Individual `@platform/site-*` packages                      |
-| Solo `*-web` entries      | One site package + `@platform/runtime` + UI                                                        | Other site packages; catalogue shell                        |
-| Site packages             | `@platform/site-registry/contract`, `@platform/runtime`, shared kits, React                        | Host / `*-web` internals; `@platform/catalog`               |
-| `@platform/runtime`       | Browser APIs; `workbox-window`; site-registry types; React/router peers                            | Site packages                                               |
-| `@platform/catalog`       | Site packages only via `./loaders` (tests/tooling)                                                 | Host internals                                              |
+| Consumer | May depend on | Must not depend on |
+| --- | --- | --- |
+| `apps/hello-web` | `site-hello`, `@platform/runtime`, `@platform/ui`, shared kits | Other product site packages (none in-tree) |
+| `packages/site-hello` | `@platform/site-registry/contract`, `@platform/runtime`, shared kits, React | App entry internals |
+| Shared kits (`ui`, `runtime`, …) | Browser APIs; peers as declared; other kits only when justified | Site packages; sibling app repos |
+| Sibling product apps | Documented `@songara/pwa-base` entry points only | Deep imports into `@platform/*` workspace paths |
 
-Catalogue links use `https://${host}/` from `packages/catalog/src/entries.ts`. Applications mount at `/` on their own origin.
+Inside the monorepo use `@platform/*`. In sibling apps import only from `@songara/pwa-base`
+documented exports.
 
-## Registration flow
-
-Applications do not self-register at runtime. A maintainer adds catalogue metadata and packaging explicitly.
+## Reference app flow
 
 ```mermaid
 flowchart LR
-  subgraph site_pkg [Site package]
+  subgraph site_pkg ["packages/site-hello"]
     DS[defineSite]
-    EXP[export SiteDefinition]
+    EXP[SiteDefinition]
   end
-  subgraph catalogPkg ["@platform/catalog"]
-    ENT[entries.ts host]
-    LOAD[loaders.ts]
-  end
-  subgraph catalogue ["apps.songara.uk"]
-    CP[CataloguePage]
-  end
-  subgraph solo ["apps/*-web"]
+  subgraph solo ["apps/hello-web"]
     SOLO[SoloSiteApp + PWA]
   end
+  subgraph sibling [Sibling product repo]
+    APP[App Vite entry]
+  end
   DS --> EXP
-  EXP --> LOAD
-  ENT --> CP
   EXP --> SOLO
+  EXP -.->|pattern for consumers| APP
 ```
 
-1. **Site package** imports `defineSite` from `@platform/site-registry/contract` and exports `defineSite({ id, basePath: "/", title, routes })`.
-2. **Catalogue metadata** — add `host` in `packages/catalog/src/entries.ts` (linked from `apps.songara.uk`).
-3. **Packaging** — thin `apps/<id>-web` mounts the site via `SoloSiteApp` with its own Vite PWA; Compose + Traefik `Host(...)` publishes the subdomain.
+1. **Site package** exports `defineSite({ id, basePath: "/", title, routes })` from
+   `@platform/site-registry/contract`.
+2. **Packaging** — thin `apps/hello-web` mounts via `SoloSiteApp` with its own Vite PWA.
+3. **Sibling apps** copy that pattern in their own repo and depend on `@songara/pwa-base`.
 
-Adding an application does **not** require catalogue-host source changes. Step-by-step: [creating-a-new-site.md](./guides/creating-a-new-site.md), [solo-packaging.md](./guides/solo-packaging.md).
-
-## Host behavior (current)
-
-- `apps.songara.uk` (`@platform/host`) — catalogue only; links are `https://${host}/`.
-- Each `*.songara.uk` app — independent SPA/PWA at `/` with its own service worker.
-- **Catalogue PWA** — Songara Studio catalogue install (`start_url: "/"`).
-- **App PWAs** — each `*-web` entry has its own manifest / SW. Dashboard keeps NetworkFirst for `/telemetry/**`. See [PWA installation](./guides/pwa-installation.md).
-
-## Telemetry & AI Development Dashboard
-
-- Package: `@platform/telemetry` (Docker service on `:4310`, version **0.2.6**).
-- Dashboard: `dashboard.songara.uk` (`@platform/dashboard-web` → `@platform/site-dashboard`) — **History** is task-centric (Tasks group Runs); Conversation / Files / Shell / All Events remain on run drill-in.
-- **Engineering contract:** root [`CURSOR.md`](../CURSOR.md) — behaviour for Cursor/agents. Guide: [engineering-contract.md](./guides/engineering-contract.md).
-- **Completion report SoT:** `RunCompletionSummary` in `apps/telemetry/src/types.ts` + section validation in `completion-report-contract.ts`. See [run-report-standard.md](./guides/run-report-standard.md).
-- **Task model:** one open Task per `conversation_id`; multiple Cursor `prompt_submitted` events consolidate as Runs under that Task. Completion report + Actions Required live on the Task. See [run-lifecycle.md](./guides/run-lifecycle.md).
-- Run completion still stores per-run summaries; Task auto-complete promotes/uses Task-level `completionSummary`.
-- Delete: `DELETE /api/runs/:id`. After API changes always `pnpm telemetry:rebuild` (not only `telemetry:up`).
-- Notifications: in-app inbox + OS Notification stubs (client localStorage, default off). Architecture: [notification-architecture.md](./guides/notification-architecture.md).
-- Actions Required / Dev Diagnostics derive restart vs HMR guidance from modified paths (inside the Task report).
+Step-by-step packaging notes still live in [creating-a-new-site.md](./guides/creating-a-new-site.md)
+and [solo-packaging.md](./guides/solo-packaging.md) (Milestone 2 refreshes product-era prose).
 
 ## Design system
 
-Shared visual language lives in `@platform/ui` and is documented under [docs/design-system/](./design-system/). The Components catalogue (`components.songara.uk`) is kept current via `pnpm --filter @platform/site-components generate:catalog`. [theme strategy](./design-system/theme-strategy.md) describes how apps should consume tokens and components.
+Shared visual language lives in `@platform/ui` and is documented under
+[docs/design-system/](./design-system/). [theme strategy](./design-system/theme-strategy.md)
+describes how apps should consume tokens and components.
 
 ## Deployment
 
-- **Dev** — `pnpm --filter @platform/host dev` (catalogue :5173); per-app `pnpm --filter @platform/*-web dev` (see [solo-packaging.md](./guides/solo-packaging.md)).
-- **Docker** — Compose builds catalogue + each `*-web` image; Traefik routes by Host. Dashboard nginx proxies `/telemetry/`; docs nginx proxies `/docs-api/`.
+- **Dev (Ubuntu VM)** — `pnpm dev` for the hello reference app; `pnpm lint` / `typecheck` /
+  `test` for validation.
+- **Production (Proxmox)** — human-operated Website Hosting stack; not required for
+  foundation Definition of Done on this VM.
 
 ## Testing boundaries
 
-Unit tests cover catalog loaders and host utilities; Playwright covers the catalogue landing page and dashboard report flows. Details: [testing.md](./guides/testing.md).
+Unit tests cover foundation packages (`pnpm test:unit`). Playwright covers the reference
+app smoke (`pnpm test:e2e`). Details: [testing.md](./guides/testing.md).
 
-## Adding or extracting applications
+## Reporting
 
-Applications are already independently packaged. Add new apps via catalogue `host` + `apps/*-web` + Compose (see [creating-a-new-site.md](./guides/creating-a-new-site.md)). Historical path-mount notes remain in [ADR-002](./adr/002-site-registration-catalog.md#extractability-notes).
+Completion report shape: `packages/completion-report` /
+`@songara/pwa-base/completion-report`. Guide: [run-report-standard.md](./guides/run-report-standard.md).
+Do not point agents at `apps/telemetry` or `PUT /telemetry/...`.
