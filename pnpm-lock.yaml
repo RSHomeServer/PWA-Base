@@ -556,6 +556,9 @@ importers:
 
   apps/telemetry:
     dependencies:
+      '@platform/completion-report':
+        specifier: workspace:*
+        version: link:../../packages/completion-report
       tsx:
         specifier: ^4.20.0
         version: 4.23.1
@@ -657,6 +660,18 @@ importers:
       '@platform/site-viz':
         specifier: workspace:*
         version: link:../site-viz
+    devDependencies:
+      '@platform/config':
+        specifier: workspace:*
+        version: link:../config
+      typescript:
+        specifier: 'catalog:'
+        version: 5.9.3
+      vitest:
+        specifier: 'catalog:'
+        version: 3.2.7(@types/debug@4.1.13)(@types/node@22.20.1)(terser@5.49.0)(tsx@4.23.1)
+
+  packages/completion-report:
     devDependencies:
       '@platform/config':
         specifier: workspace:*

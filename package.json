@@ -36,10 +36,16 @@
       "types": "./packages/config/vite-app-version.d.ts",
       "default": "./packages/config/vite-app-version.js"
     },
+    "./completion-report": {
+      "types": "./packages/completion-report/src/index.ts",
+      "import": "./packages/completion-report/src/index.ts",
+      "default": "./packages/completion-report/src/index.ts"
+    },
     "./package.json": "./package.json"
   },
   "files": [
     "src",
+    "packages/completion-report/src",
     "packages/runtime/src",
     "packages/site-registry/src",
     "packages/ui/src",
@@ -66,7 +72,7 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "test": "pnpm test:unit && pnpm test:e2e",
-    "test:unit": "pnpm --filter @platform/catalog --filter @platform/host --filter @platform/math --filter @platform/physics --filter @platform/runtime --filter @platform/experiences --filter @platform/site-viz --filter @platform/telemetry --filter @platform/docs-api test:unit",
+    "test:unit": "pnpm --filter @platform/catalog --filter @platform/host --filter @platform/math --filter @platform/physics --filter @platform/runtime --filter @platform/experiences --filter @platform/site-viz --filter @platform/completion-report --filter @platform/telemetry --filter @platform/docs-api test:unit",
     "test:e2e": "playwright test",
     "telemetry:up": "docker compose up -d telemetry",
     "telemetry:down": "docker compose stop telemetry",
@@ -76,7 +82,7 @@
     "docs-api:down": "docker compose stop docs-api",
     "docs-api:logs": "docker compose logs -f docs-api",
     "docs-api:rebuild": "docker compose up -d --build docs-api",
-    "capture:artifacts": "pnpm --filter @platform/telemetry capture",
+    "capture:artifacts": "node scripts/capture-artifacts.mjs",
     "version:bump": "node scripts/bump-version.mjs",
     "content-pack:sync": "node scripts/sync-content-pack.mjs",
     "birthday:pack": "node scripts/sync-content-pack.mjs birthday birthday-base",

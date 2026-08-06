@@ -1,4 +1,3 @@
-/// <reference path="../vite-env.d.ts" />
 import type { ComponentType } from "react";
 import { Route, Routes } from "react-router-dom";
 import {

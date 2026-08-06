@@ -22,6 +22,7 @@
     "capture": "tsx src/artifacts/capture-cli.ts"
   },
   "dependencies": {
+    "@platform/completion-report": "workspace:*",
     "tsx": "^4.20.0",
     "ws": "^8.18.0"
   },
