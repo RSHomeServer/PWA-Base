@@ -11,6 +11,6 @@ Completion reports: use structured `RunCompletionSummary` — canonical shape in
 
 Telemetry is **not** in this repository. Do not call `PUT /telemetry/...` or point SoT at `apps/telemetry`.
 
-Git: no editor/AI co-author trailers; merge to local `main`; human pushes. Process details: `.kandev/prompts/_shared.md`.
+Git: Remote Git Policy in `.kandev/prompts/_shared.md` — feature branch → PR → human squash-merge; no editor/AI co-author trailers; never push/merge `main` unless the user explicitly instructs it.
 
 When UI changes: run `pnpm capture:artifacts` (stub guidance after product removal) and describe Visual Validation. Markdown is export-only.

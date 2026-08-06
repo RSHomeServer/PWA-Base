@@ -2,29 +2,24 @@
 
 > Follows a [discovery-ticket](./discovery-ticket.md). Implemented by the
 > [Executor](../prompts/executor.md) via the [new-feature](../workflows/new-feature.md) workflow.
-> KanDev profile: **Executor**.
+> KanDev profile: **Executor**. Remote Git Policy: [`../prompts/_shared.md`](../prompts/_shared.md).
 
 - **Discovery:** link to the discovery ticket
 - **Decision:** link to the ADR ([draft](./architecture-decision.md) → `docs/adr/`) or
   [LDR](../decisions/), if any
 
-## Before you start — sync to `origin/main`
-
-The human pushes after every ticket. Run this **first**:
+## Before you start — sync + feature branch
 
 ```bash
 cd "${SONGARA_PROJECTS_ROOT:-$HOME/projects}/PWA-Base"
-git checkout main
-git fetch origin
-git pull --ff-only origin main
+git fetch origin && git checkout main && git pull --ff-only origin main
 
 cd "<this-worktree>"
-git fetch origin
-git merge --ff-only origin/main
+git fetch origin && git merge --ff-only origin/main
+git checkout -b <feature-branch>
 ```
 
-Confirm HEAD matches (or is based on) `origin/main`, then create your feature branch.
-Details: [`../prompts/_shared.md`](../prompts/_shared.md).
+Do **not** commit on `main`. Details: [`../prompts/_shared.md`](../prompts/_shared.md).
 
 ## Summary
 
@@ -64,5 +59,8 @@ These belong in the completion report; the report shape is defined in
 
 ## Wrap-up
 
-Commit (no editor/AI co-author trailers) → merge **local `main`** → do not push → completion
-table with push commands → `step_complete_kandev`.
+When the ticket work is validated (wrap-up — no extra human “open a PR” prompt needed):
+commit on the feature branch → push feature branch → open/update PR into `main` →
+completion table (branch + PR URL) → `step_complete_kandev`. **Do not** merge, approve, or
+push `main`. Human reviews and squash-merges; the next ticket syncs to `origin/main` after
+that merge.

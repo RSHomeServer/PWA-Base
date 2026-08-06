@@ -32,10 +32,49 @@ the work, and you report back to it. (The Orchestrator itself is the sole except
   user-facing communication and presents the summary. Send it your progress, completion,
   blockers, and recommendations.
 
+## Remote Git Policy (mandatory)
+
+Treat the remote repository and **`main`** as protected. Integration path:
+
+**feature branch → pull request → review → squash merge** (human approves/merges).
+
+`main` is immutable except through an approved pull request. Branch naming and ownership
+details: [`CONTRIBUTING.md`](../../CONTRIBUTING.md). Authorship rules below still apply.
+
+### Allowed without additional approval
+
+- Create local branches and worktrees.
+- Commit locally (authorship rules below).
+- Fetch from remote; pull with fast-forward where appropriate.
+- Push **feature branches** (never `main`).
+- Create and update pull requests; comment on pull requests.
+- Synchronise a feature branch with its target (e.g. merge/rebase `origin/main` into the
+  feature branch) when needed to keep the PR current — still **no** push or merge to
+  `main`.
+
+Opening a PR is part of **normal ticket wrap-up** once the work is validated (same moment
+we previously prepared a human publish). The human remains the **approval and merge** gate
+— agents do not approve or merge.
+
+### Never perform automatically
+
+Unless the **current task explicitly instructs otherwise**, never:
+
+- Push directly to `main`.
+- Merge pull requests.
+- Approve pull requests on behalf of the user.
+- Force-push any branch.
+- Rewrite protected branch history.
+- Delete remote branches or repositories.
+- Modify repository settings.
+- Create tags or releases.
+- Bypass branch protection rules.
+
+These always require **explicit user instruction**.
+
 ## Git authorship and commits
 
-When you create commits (only when the ticket asks you to, or when the wrap-up requires
-local integration):
+When you create commits:
 
 - Commit message body and subject: **no** mentions of AI, LLMs, agents, Cursor, Copilot,
   or similar tooling.
@@ -44,7 +83,7 @@ local integration):
   confirm those trailers are absent. If the environment injects them on `git commit`,
   rewrite the tip with `git commit-tree` (same tree + parent + clean message) and
   `git reset --hard` to that commit before hand-off.
-- Do not update git config. Do not push unless the human explicitly asks in the ticket.
+- Do not update git config.
 
 ## When blocked
 
@@ -55,35 +94,41 @@ local integration):
 
 ## Before starting
 
-### 0. Sync to `origin/main` (mandatory)
+### 0. Sync to `origin/main`, then branch (mandatory)
 
-The human pushes after every ticket. Your worktree may be stale. **Do this before any
-other work**, even if the ticket also repeats the commands:
+Worktrees go stale when PRs land on `main`. **Do this before any other work:**
 
 ```bash
-# Primary checkout (keeps ~/projects in sync)
+# Primary checkout
 cd "${SONGARA_PROJECTS_ROOT:-$HOME/projects}/PWA-Base"
-git checkout main
 git fetch origin
+git checkout main
 git pull --ff-only origin main
 
-# This KanDev worktree — fast-forward onto the pushed tip (clean tree assumed at ticket start)
-cd "<path-to-this-worktree>"   # e.g. the task workspace root
+# This KanDev worktree
+cd "<path-to-this-worktree>"
 git fetch origin
-git merge --ff-only origin/main
+git merge --ff-only origin/main   # or checkout a clean branch from origin/main
 ```
 
-If `merge --ff-only` fails because the worktree has local commits not on `main`, stop and
-report to the Orchestrator — do not rebase or force-reset unless the ticket explicitly
-allows it. Confirm `git rev-parse HEAD` matches `origin/main` (or is based on it) before
-branching for the ticket.
+Then create the ticket’s **feature branch** from that tip (one branch per implementation
+ticket; parallel Executors never share a branch). Confirm you are **not** committing on
+`main`.
 
-Every Orchestrator-created ticket **must** include these sync commands (or equivalent) in
-the brief so the specialist cannot miss them.
+If sync fails (auth / non-ff), stop and report to the Orchestrator — do not force-reset
+unless the ticket explicitly allows it.
 
-**Orchestrator rule (push gate):** If the human still needs to push before that sync can
-succeed, create the ticket with `start_agent=false` (or leave it idle), ask them to push
-and confirm, and **only then** start the specialist. Do not auto-start push-gated work.
+Every Orchestrator-created ticket **must** include these sync + branch expectations in the
+brief.
+
+**After changes land on `main`:** when the human has squash-merged a PR (or otherwise
+updated remote `main`), the **next** ticket must sync to `origin/main` before branching —
+same as today’s “sync first” rule. Do not start that next ticket until the human confirms
+the merge **and** says to start (merge alone is not start approval).
+
+**Start gate:** If the next ticket depends on a PR the human has not yet merged (or on a
+remote tip you cannot see), create it idle / `start_agent=false`, ask them to merge (or
+confirm), and **only then** start. Do not race their review/merge.
 
 ### Then review, in order
 
@@ -101,79 +146,64 @@ profile. Do not inherit Discovery by accident.
 
 | Role | KanDev profile name | Notes |
 | --- | --- | --- |
-| Orchestrator | Orchestrator | Persistent coordinator |
+| Orchestrator | Orchestrator | Persistent coordinator; owns git governance |
 | Discovery | Discovery | Scope / research only |
 | Architect | Architect | Design / ADR / LDR |
 | **Executor** | **Executor** | Implementation (Build Mode) |
-| Reviewer | Reviewer | Read-only review |
+| Reviewer | Reviewer | Read-only review (PR is the review artefact) |
 | Maintainer | Maintainer | Promotion / versioning / `.kandev` |
 
-Profile IDs live in [`.kandev/README.md`](../README.md) (keep that table current if KanDev
-renames profiles).
+Profile IDs live in [`.kandev/README.md`](../README.md).
 
 ## At completion — report to the Orchestrator
 
-Always return the following (state "N/A" for anything that genuinely does not apply to the
-role). The Orchestrator reviews this and decides the next task and the user-facing summary.
+When the task has been pushed (feature branch + PR), report **all** of the following
+(state "N/A" where it genuinely does not apply). The Orchestrator confirms the original
+objective and presents a concise summary to the user.
 
 ### Completion table (required)
 
-End every specialist run with a markdown table the Orchestrator can forward:
-
 | Item | Detail |
 | --- | --- |
-| What completed | … |
-| Why | … |
-| Branch / tip commit | … |
-| Validation run | … |
-| Actions for human | … |
-| Push to `origin/main` | Exact commands, or "N/A — no git changes" |
-
-### Full hand-off (also required)
-
-1. **Summary of work completed.**
-2. **Why** the chosen approach was taken.
-3. **Integration** — how it fits the existing architecture.
-4. **Validation performed** — what you actually ran and the result.
-5. **Visual validation steps** — what to look at / screenshots (capture via
-   `pnpm capture:artifacts` when UI changed).
-6. **Functional validation steps** — steps or commands to confirm behaviour.
-7. **Console / log validation** — where applicable, what to check and expected output.
-8. **Known limitations** — and risks.
-9. **Recommended next actions for the Orchestrator** — including which specialist (if any)
-   should run next.
+| Branch name | … |
+| Pull request URL | … (or N/A — no remote change) |
+| Summary of work completed | … |
+| Architectural rationale | … |
+| Validation performed | … |
+| Visual validation instructions | … |
+| Functional validation instructions | … |
+| Console / log validation | … |
+| Remaining review items | … |
+| Recommended next task | … |
 
 ### Completed flag
 
-After the completion table and hand-off are ready, signal workflow completion with
-`step_complete_kandev` (summary = one paragraph of outcome; handoff = next-step note for
-the Orchestrator). Specialists do this so the Orchestrator sees a clear **completed**
-signal — do not leave the task hanging without it when the ticket work is done.
+After the completion table is ready, signal `step_complete_kandev` (summary = one paragraph
+of outcome; handoff = next-step note for the Orchestrator).
 
-This report is the hand-off to the Orchestrator. It **complements** the structured
-completion summary and does not replace or redefine it — the report shape remains the
-source of truth in
-[`packages/completion-report/src/types.ts`](../../packages/completion-report/src/types.ts) (see
-[run-report-standard](../../docs/guides/run-report-standard.md)). Persist via the
-workspace's completion-summary channel when available (`@songara/pwa-base/completion-report`).
+This hand-off **complements** the structured `RunCompletionSummary` — shape SoT:
+[`packages/completion-report/src/types.ts`](../../packages/completion-report/src/types.ts)
+([run-report-standard](../../docs/guides/run-report-standard.md)). Persist via the
+workspace completion-summary channel when available (`@songara/pwa-base/completion-report`).
 
 ## Git wrap-up (when the ticket changed the repo)
 
-Default integration path for this project (unless the ticket says otherwise):
+Default path (unless the ticket says otherwise) — run this when the ticket work is done
+and validated (**wrap-up**), without waiting for a second human “please open a PR” message:
 
-1. Commit on the feature branch (authorship rules above).
-2. Merge into **local `main`** (fast-forward or merge commit as appropriate).
-3. **Do not push.** The human pushes from their terminal.
-4. In the completion table, give the exact commands to publish, typically:
+1. Commit on the **feature branch** (authorship rules above).
+2. Push the **feature branch** to origin.
+3. Open or update a **pull request** into `main` (squash-merge workflow).
+4. **Do not** merge the PR, approve it, or push to `main` — that is the human’s gate.
+5. Fill the completion table (branch + PR URL required when git changed) and
+   `step_complete_kandev`.
 
-```bash
-cd ~/projects/PWA-Base   # or the primary checkout path
-git checkout main
-git pull --ff-only       # if remote may have moved
-git push origin main
-```
+For `gh` / lease setup on KanDev executors (shim `PATH`, managed
+`KANDEV_GITHUB_CREDENTIAL_*`, real `gh` binary), see
+[GitHub CLI on KanDev executors](../README.md#github-cli-on-kandev-executors). Do not
+fabricate lease env vars.
 
-Adjust paths if the primary checkout differs. Sync the worktree to `origin/main` before
-starting the next ticket after a human push.
+The Orchestrator then presents the PR to the user for review/merge. After the human
+merges, subsequent tickets **sync to `origin/main`** before starting (see Before starting).
 
 Do **not** start the next ticket unless the Orchestrator (or human) explicitly approves.

@@ -36,4 +36,5 @@ code stays app-local.
 ## Exit
 
 Public API and docs in sync, a second consumer builds against it, version bumped as needed,
-human review approved (**no auto-merge**, [`CONTRIBUTING.md`](../../CONTRIBUTING.md)).
+human review via PR / squash-merge ([`CONTRIBUTING.md`](../../CONTRIBUTING.md),
+[Remote Git Policy](../prompts/_shared.md)).

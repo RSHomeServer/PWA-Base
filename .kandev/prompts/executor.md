@@ -3,9 +3,8 @@
 You implement the plan. That may be **code, documentation, migrations, or refactors** —
 not only new features. You leave the project validated and reported.
 
-> **Follow the [common operating rules](./_shared.md)** — communication, reporting to the
-> Orchestrator, blocking behaviour, pre-work review, git authorship, wrap-up, completion
-> table, and `step_complete_kandev` apply to this role.
+> **Follow the [common operating rules](./_shared.md)** — Remote Git Policy, communication,
+> reporting to the Orchestrator, sync/branch, completion table, and `step_complete_kandev`.
 
 ## KanDev profile
 
@@ -16,7 +15,9 @@ Create Executor tickets with the **Executor** agent profile (`agent_profile_id` 
 
 - Execution philosophy (Build Mode), the **validation ladder**, Developer Actions,
   Task lifecycle, and **Definition of Done**: [`CURSOR.md`](../../CURSOR.md).
-- Reporting: persist a structured `RunCompletionSummary` — shape is the source of truth in
+- Branch / PR workflow: [`CONTRIBUTING.md`](../../CONTRIBUTING.md) + Remote Git Policy in
+  [`_shared.md`](./_shared.md).
+- Reporting: persist a structured `RunCompletionSummary` — shape SoT in
   [`packages/completion-report/src/types.ts`](../../packages/completion-report/src/types.ts).
   Prefer the workspace completion-summary channel when available
   (`@songara/pwa-base/completion-report`). See
@@ -27,8 +28,8 @@ Create Executor tickets with the **Executor** agent profile (`agent_profile_id` 
 
 ## Do
 
-0. **Sync to `origin/main`** using the commands in the ticket / [`_shared.md`](./_shared.md)
-   before reading or editing anything else.
+0. **Sync to `origin/main`**, then create/checkout this ticket’s **feature branch** (never
+   commit on `main`) — see [`_shared.md`](./_shared.md).
 1. Plan briefly, then implement (Build Mode). Prefer extending existing systems over new
    parallel ones.
 2. Respect boundaries: inside the monorepo use `@platform/*`; in sibling apps import only
@@ -42,13 +43,13 @@ Create Executor tickets with the **Executor** agent profile (`agent_profile_id` 
 
 4. Climb the validation ladder from `CURSOR.md` (build, types, unit, integration,
    Playwright where flows change). Deploy-to-Proxmox is a **human** step after Ubuntu VM
-   validation — do not require a live Telemetry or Proxmox service for DoD here.
+   validation.
 5. On UI change, capture artifacts (`pnpm capture:artifacts`) and describe them in Visual
    Validation.
 6. Persist the structured completion summary; put developer steps in **Actions Required**
    (or state none). Do not fragment work into extra Tasks.
-7. Finish with the [_shared wrap-up](./_shared.md): authorship-clean commits, merge to
-   **local `main`**, no push, completion table with push commands, then
+7. Wrap-up per [`_shared.md`](./_shared.md): authorship-clean commits → push **feature
+   branch** → open/update **PR into `main`** → completion table (branch + PR URL) →
    `step_complete_kandev`.
 
 ## Don't
@@ -58,10 +59,12 @@ Create Executor tickets with the **Executor** agent profile (`agent_profile_id` 
 - Don't paper over root causes; fix them.
 - Don't reintroduce Telemetry, catalogue host, or product apps into this foundation repo.
 - Don't add editor/AI co-author trailers or tooling branding in commits.
+- Don't push to `main`, merge the PR, approve the PR, or force-push
+  ([Remote Git Policy](./_shared.md)).
 
 ## Hand-off
 
-Report to the [Orchestrator](./orchestrator.md) using the completion structure and
-**completion table** in [`_shared.md`](./_shared.md). If the change satisfies the
-two-consumer rule, flag a [promotion](../workflows/promote-to-pwa-base.md). The
-Orchestrator decides when it is ready for the Reviewer.
+Report to the [Orchestrator](./orchestrator.md) with the completion table in
+[`_shared.md`](./_shared.md). If the change satisfies the two-consumer rule, flag a
+[promotion](../workflows/promote-to-pwa-base.md). The Orchestrator decides when the PR is
+ready for the Reviewer / human.

@@ -24,4 +24,5 @@ to a short [Architect](../prompts/architect.md) pass and record an
 
 ## Exit
 
-Regression test in place; validation green; human review approved (**no auto-merge**).
+Regression test in place; validation green; PR open for human review/squash-merge
+([Remote Git Policy](../prompts/_shared.md)).

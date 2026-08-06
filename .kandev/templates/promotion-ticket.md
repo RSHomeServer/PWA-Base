@@ -12,12 +12,13 @@
 
 ```bash
 cd "${SONGARA_PROJECTS_ROOT:-$HOME/projects}/PWA-Base"
-git checkout main && git fetch origin && git pull --ff-only origin main
+git fetch origin && git checkout main && git pull --ff-only origin main
 cd "<this-worktree>" && git fetch origin && git merge --ff-only origin/main
 ```
 
 See [`../prompts/_shared.md`](../prompts/_shared.md). KanDev profile: **Maintainer** (or
-**Executor** if the Orchestrator assigns implementation).
+**Executor** if the Orchestrator assigns implementation). Ship via **feature branch + PR**;
+do not push or merge `main`.
 
 ## Two-consumer gate (required)
 
@@ -51,5 +52,6 @@ If you cannot name two, it stays app-local. Stop here.
 
 ## Actions Required
 
-Release/version steps, or "No developer action required." Human review required — **no auto-merge**
+Release/version steps, or "No developer action required." Human review via PR /
+squash-merge — agents do not merge ([Remote Git Policy](../prompts/_shared.md)).
 ([`CONTRIBUTING.md`](../../CONTRIBUTING.md)).

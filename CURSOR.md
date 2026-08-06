@@ -101,20 +101,20 @@ Do not drop images without narrative.
 
 ---
 
-## Git authorship and publish path
+## Git authorship and Remote Git Policy
 
 - Authorship is the human account only. **Never** add editor/AI co-author trailers
   (`Co-authored-by:`, `Generated-by:`, `Made-with:`, and similar) or mention tooling brands
   in commit messages.
-- Default wrap-up: commit on the feature branch → merge into **local `main`** → **do not
-  push**. The human runs `git push origin main` from their terminal.
-- **Start of every ticket:** sync primary + worktree to `origin/main` (commands in
-  `.kandev/prompts/_shared.md` and in the ticket brief).
+- Follow the **Remote Git Policy** in [`.kandev/prompts/_shared.md`](.kandev/prompts/_shared.md)
+  and branch workflow in [`CONTRIBUTING.md`](CONTRIBUTING.md): feature branch → PR → human
+  review → squash merge. Never push or merge to `main` unless the user explicitly instructs it.
+- **Start of every ticket:** sync to `origin/main`, then work on a dedicated feature branch.
 - End each specialist run with the completion table in `.kandev/prompts/_shared.md`
-  (what / why / push commands) and signal `step_complete_kandev`.
+  (branch name, PR URL, validation, recommended next task) and `step_complete_kandev`.
 - Do not start the next ticket without explicit human approval.
-- If work depends on a human push to `origin/main`, wait until they **confirm the push**,
-  then start — never auto-start and race their terminal.
+- If work depends on a PR the human has not yet merged, wait until they confirm the merge,
+  then start — never auto-start and race their review.
 
 ---
 

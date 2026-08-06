@@ -1,11 +1,13 @@
 # Review checklist
 
 Living checklist for the [Reviewer](./prompts/reviewer.md) role. Prefer this over archived
-`docs/archive/reviews/*` packages.
+`docs/archive/reviews/*` packages. Review against the **pull request** (Remote Git Policy:
+[`.kandev/prompts/_shared.md`](./prompts/_shared.md)).
 
 ## Scope and intent
 
-- [ ] Specialist synced to `origin/main` before starting (or justified exception).
+- [ ] Specialist synced to `origin/main` and worked on a **feature branch** (not `main`).
+- [ ] PR targets `main`; one logical ticket per PR where practical.
 - [ ] Change matches the ticket / objective (not drive-by scope).
 - [ ] No revival of deleted product apps, catalogue host, or Telemetry in this repo.
 - [ ] Sibling-app changes import only documented `@songara/pwa-base` entry points.
@@ -26,8 +28,8 @@ Living checklist for the [Reviewer](./prompts/reviewer.md) role. Prefer this ove
 
 - [ ] Commits have no editor/AI co-author or "generated with" trailers.
 - [ ] Commit messages do not mention AI/tooling.
-- [ ] Specialist provided completion table + push commands (or N/A).
-- [ ] No auto-merge; human owns `git push origin main`.
+- [ ] Specialist provided completion table with **branch name** and **PR URL** (or N/A).
+- [ ] No agent merge/approve of the PR; human owns squash-merge to `main`.
 
 ## Severity guide
 

@@ -12,11 +12,13 @@
 
 ```bash
 cd "${SONGARA_PROJECTS_ROOT:-$HOME/projects}/PWA-Base"
-git checkout main && git fetch origin && git pull --ff-only origin main
+git fetch origin && git checkout main && git pull --ff-only origin main
 cd "<this-worktree>" && git fetch origin && git merge --ff-only origin/main
 ```
 
-See [`../prompts/_shared.md`](../prompts/_shared.md).
+See [`../prompts/_shared.md`](../prompts/_shared.md). If this Discovery output becomes an
+implementation ticket, that ticket must use a **feature branch + PR** (never merge to
+`main` directly).
 
 ## Problem
 

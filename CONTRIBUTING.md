@@ -12,7 +12,7 @@ Read the architecture overview and ADRs so changes align with accepted decisions
 - [docs/milestones/VISION.md](./docs/milestones/VISION.md) — living foundation intent
 - [docs/architecture.md](./docs/architecture.md)
 - [docs/adr/](./docs/adr/) — start with [ADR-007](./docs/adr/007-pwa-base-reusable-foundation.md)
-- [`.kandev/`](./.kandev/) — role prompts and wrap-up rules (local `main`, human push)
+- [`.kandev/`](./.kandev/) — role prompts; Remote Git Policy in `.kandev/prompts/_shared.md`
 
 Key rule from [ADR-003](./docs/adr/003-phase2-shared-packages.md): promote shared code only
 when a **second** consumer needs the same API. Sibling apps import `@songara/pwa-base`
@@ -20,12 +20,16 @@ public entry points only.
 
 ## Branch workflow
 
-- Branch from `main`.
+Integration path: **feature branch → pull request → human review → squash merge**.
+`main` is immutable except through an approved PR. Full Remote Git Policy (allowed vs
+never-automatic actions): [`.kandev/prompts/_shared.md`](./.kandev/prompts/_shared.md).
+
+- Branch from up-to-date `origin/main`.
 - Use descriptive branch names: `feat/…`, `fix/…`, `docs/…`.
-- Keep changes focused; prefer separate PRs for unrelated packages or concerns.
-- **Do not auto-merge.** Every change requires human review and approval.
-- Agents **sync to `origin/main` first** on every ticket, then branch; merge to **local
-  `main` only** at the end; the human runs `git push origin main`.
+- Keep changes focused; prefer **one PR per logical ticket**.
+- **Do not** push directly to `main`, auto-merge, force-push, or bypass branch protection
+  unless the user explicitly instructs it.
+- Agents may push **feature branches** and open/update PRs; the human approves and merges.
 - Commits must not include editor/AI co-author trailers or tooling branding.
 
 ## Ownership

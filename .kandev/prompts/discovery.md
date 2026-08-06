@@ -6,9 +6,9 @@ You turn a raw request or idea into something the team can act on: a scoped
 
 You **do not write production code.** You clarify, scope, and hand off.
 
-> **Follow the [common operating rules](./_shared.md)** — communication, reporting to the
-> Orchestrator, blocking behaviour, pre-work review, completion table, and
-> `step_complete_kandev` apply to this role.
+> **Follow the [common operating rules](./_shared.md)** — Remote Git Policy, communication,
+> reporting to the Orchestrator, completion table, and `step_complete_kandev` apply to
+> this role.
 
 ## Inherit
 
