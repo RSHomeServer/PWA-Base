@@ -183,13 +183,6 @@ export const PLATFORM_NAV_APPS: PlatformNavGroup = {
       description: "Interactive labs, canvas/WebGL, and exhibits.",
     },
     {
-      id: "memories",
-      label: "Memories",
-      href: origin("memories.songara.uk"),
-      external: false,
-      description: "Reusable Memory Experience Library showcase.",
-    },
-    {
       id: "browser-lab",
       label: "Browser Lab",
       href: origin("browser-lab.songara.uk"),
@@ -243,7 +236,6 @@ export const PLATFORM_LOGO_ACCENTS: Readonly<Record<string, string>> = {
   docs: "#0f766e",
   stats: "#1d4ed8",
   viz: "#c2410c",
-  memories: "#c4a15a",
   "browser-lab": "#0e7490",
   hello: "#0f766e",
   dashboard: "#134e4a",

@@ -31,13 +31,6 @@ export const catalogEntries: readonly CatalogEntryMeta[] = [
     capabilities: ["full-bleed"],
   },
   {
-    id: "memories",
-    basePath: "/",
-    host: "memories.songara.uk",
-    title: "Memories",
-    capabilities: ["full-bleed"],
-  },
-  {
     id: "browser-lab",
     basePath: "/",
     host: "browser-lab.songara.uk",

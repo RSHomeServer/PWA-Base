@@ -16,10 +16,6 @@ test.describe("application catalogue", () => {
       "href",
       "https://viz.songara.uk",
     );
-    await expect(apps.getByRole("link", { name: /Memories/i })).toHaveAttribute(
-      "href",
-      "https://memories.songara.uk",
-    );
 
     const media = page.getByRole("list", { name: "Media" });
     await expect(media.getByRole("link", { name: /Overseerr/i })).toHaveAttribute(
