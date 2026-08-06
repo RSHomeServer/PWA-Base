@@ -108,6 +108,8 @@ Do not drop images without narrative.
   in commit messages.
 - Default wrap-up: commit on the feature branch → merge into **local `main`** → **do not
   push**. The human runs `git push origin main` from their terminal.
+- **Start of every ticket:** sync primary + worktree to `origin/main` (commands in
+  `.kandev/prompts/_shared.md` and in the ticket brief).
 - End each specialist run with the completion table in `.kandev/prompts/_shared.md`
   (what / why / push commands) and signal `step_complete_kandev`.
 - Do not start the next ticket without explicit human approval.

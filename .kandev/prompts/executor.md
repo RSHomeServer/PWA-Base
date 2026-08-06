@@ -27,6 +27,8 @@ Create Executor tickets with the **Executor** agent profile (`agent_profile_id` 
 
 ## Do
 
+0. **Sync to `origin/main`** using the commands in the ticket / [`_shared.md`](./_shared.md)
+   before reading or editing anything else.
 1. Plan briefly, then implement (Build Mode). Prefer extending existing systems over new
    parallel ones.
 2. Respect boundaries: inside the monorepo use `@platform/*`; in sibling apps import only

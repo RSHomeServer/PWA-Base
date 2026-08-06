@@ -22,7 +22,8 @@ public entry points only.
 - Use descriptive branch names: `feat/…`, `fix/…`, `docs/…`.
 - Keep changes focused; prefer separate PRs for unrelated packages or concerns.
 - **Do not auto-merge.** Every change requires human review and approval.
-- Agents merge to **local `main` only**; the human runs `git push origin main`.
+- Agents **sync to `origin/main` first** on every ticket, then branch; merge to **local
+  `main` only** at the end; the human runs `git push origin main`.
 - Commits must not include editor/AI co-author trailers or tooling branding.
 
 ## Ownership

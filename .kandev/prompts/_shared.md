@@ -55,7 +55,33 @@ local integration):
 
 ## Before starting
 
-Review, in order:
+### 0. Sync to `origin/main` (mandatory)
+
+The human pushes after every ticket. Your worktree may be stale. **Do this before any
+other work**, even if the ticket also repeats the commands:
+
+```bash
+# Primary checkout (keeps ~/projects in sync)
+cd "${SONGARA_PROJECTS_ROOT:-$HOME/projects}/PWA-Base"
+git checkout main
+git fetch origin
+git pull --ff-only origin main
+
+# This KanDev worktree — fast-forward onto the pushed tip (clean tree assumed at ticket start)
+cd "<path-to-this-worktree>"   # e.g. the task workspace root
+git fetch origin
+git merge --ff-only origin/main
+```
+
+If `merge --ff-only` fails because the worktree has local commits not on `main`, stop and
+report to the Orchestrator — do not rebase or force-reset unless the ticket explicitly
+allows it. Confirm `git rev-parse HEAD` matches `origin/main` (or is based on it) before
+branching for the ticket.
+
+Every Orchestrator-created ticket **must** include these sync commands (or equivalent) in
+the brief so the specialist cannot miss them.
+
+### Then review, in order
 
 1. [`.kandev/README.md`](../README.md) — how the operating system fits together.
 2. Your role prompt in this directory.

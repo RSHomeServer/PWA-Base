@@ -5,6 +5,7 @@ Living checklist for the [Reviewer](./prompts/reviewer.md) role. Prefer this ove
 
 ## Scope and intent
 
+- [ ] Specialist synced to `origin/main` before starting (or justified exception).
 - [ ] Change matches the ticket / objective (not drive-by scope).
 - [ ] No revival of deleted product apps, catalogue host, or Telemetry in this repo.
 - [ ] Sibling-app changes import only documented `@songara/pwa-base` entry points.

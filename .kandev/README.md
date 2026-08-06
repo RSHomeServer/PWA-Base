@@ -89,8 +89,7 @@ When creating a task, **always set `agent_profile_id`**. Unset profiles inherit 
 | Reviewer | Reviewer | `7f3772db-26a3-49be-805a-e64764e1a3c1` |
 | Maintainer | Maintainer | `38393318-45c5-448a-bbe0-65bfd7db4ed6` |
 
-If KanDev still shows the Executor row under a legacy label, rename it to **Executor** in
-settings so the UI matches this table. The ID above is the implementation profile.
+The ID above is the implementation profile. Keep the KanDev profile **name** as **Executor**.
 
 ## Orchestration model
 
@@ -128,7 +127,9 @@ Key properties:
 - **Every specialist reports back to the Orchestrator**, which reviews the work against the
   original objective and presents the user-facing summary (including push commands).
 - **Git wrap-up:** commit → merge **local `main`** → human pushes. No editor/AI co-authors.
-- **Next ticket:** only after explicit human approval.
+- **Start of every ticket:** sync to `origin/main` (primary + worktree) — see
+  [`prompts/_shared.md`](./prompts/_shared.md). Ticket briefs must include the commands.
+- **Next ticket:** only after explicit human approval (a push alone is not approval).
 
 ### The roles
 

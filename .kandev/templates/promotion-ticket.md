@@ -8,6 +8,17 @@
 - **Proposed home:** target package + public entry point in
   [`consuming-pwa-base.md`](../../docs/guides/consuming-pwa-base.md)
 
+## Before you start — sync to `origin/main`
+
+```bash
+cd "${SONGARA_PROJECTS_ROOT:-$HOME/projects}/PWA-Base"
+git checkout main && git fetch origin && git pull --ff-only origin main
+cd "<this-worktree>" && git fetch origin && git merge --ff-only origin/main
+```
+
+See [`../prompts/_shared.md`](../prompts/_shared.md). KanDev profile: **Maintainer** (or
+**Executor** if the Orchestrator assigns implementation).
+
 ## Two-consumer gate (required)
 
 Promotion is allowed only when a **second** consumer uses the API **unchanged**.

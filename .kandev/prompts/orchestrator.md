@@ -57,6 +57,10 @@ Decide, based on **project state** (not a fixed script):
 Create, sequence, and coordinate KanDev tasks accordingly. Brief each specialist with the
 objective, the relevant workflow, and the source-of-truth links it needs.
 
+**Every ticket description must include** the mandatory **sync to `origin/main`** commands
+from [`_shared.md`](./_shared.md) (primary checkout + this worktree). After each ticket the
+human pushes; the next specialist will not see that tip unless they sync first.
+
 ## Review and integrate
 
 - Collect each specialist's **completion table** and 9-item hand-off

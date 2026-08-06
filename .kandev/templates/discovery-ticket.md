@@ -8,6 +8,16 @@
 - **Classification:** new feature | bug fix | refactor
 - **Suggested workflow:** [new-feature](../workflows/new-feature.md) | [bug-fix](../workflows/bug-fix.md) | [refactor](../workflows/refactor.md)
 
+## Before you start — sync to `origin/main`
+
+```bash
+cd "${SONGARA_PROJECTS_ROOT:-$HOME/projects}/PWA-Base"
+git checkout main && git fetch origin && git pull --ff-only origin main
+cd "<this-worktree>" && git fetch origin && git merge --ff-only origin/main
+```
+
+See [`../prompts/_shared.md`](../prompts/_shared.md).
+
 ## Problem
 
 One or two sentences: what is wrong or missing, for whom, and the desired outcome.
