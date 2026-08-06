@@ -7,7 +7,6 @@ import { catalogEntries } from "./entries.js";
  */
 const loaders: Record<string, () => Promise<SiteDefinition>> = {
   hello: () => import("@platform/site-hello").then((m) => m.helloSite),
-  dashboard: () => import("@platform/site-dashboard").then((m) => m.dashboardSite),
 };
 
 export function getCatalogLoaders(): readonly CatalogEntry[] {

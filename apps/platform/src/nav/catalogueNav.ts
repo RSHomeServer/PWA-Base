@@ -161,13 +161,6 @@ export const PLATFORM_NAV_APPS: PlatformNavGroup = {
       external: false,
       description: "Hello — scaffolded with pnpm new-app.",
     },
-    {
-      id: "dashboard",
-      label: "AI Development Dashboard",
-      href: origin("dashboard.songara.uk"),
-      external: false,
-      description: "Cursor Tasks, Runs, ops, and notifications.",
-    },
   ],
 };
 
@@ -198,7 +191,6 @@ export const PLATFORM_LOGO_ACCENTS: Readonly<Record<string, string>> = {
   guacamole: "#d22128",
   notes: "#a16207",
   hello: "#0f766e",
-  dashboard: "#134e4a",
 };
 
 export const CATALOGUE_NAV: PlatformNavConfig = {

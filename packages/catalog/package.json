@@ -23,7 +23,6 @@
     "test:unit": "vitest run"
   },
   "dependencies": {
-    "@platform/site-dashboard": "workspace:*",
     "@platform/site-hello": "workspace:*",
     "@platform/site-registry": "workspace:*"
   },

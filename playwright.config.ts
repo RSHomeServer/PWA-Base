@@ -2,7 +2,6 @@ import { defineConfig, devices } from "@playwright/test";
 
 const previewHost = "127.0.0.1";
 const cataloguePort = 4173;
-const dashboardPort = 4180;
 
 export default defineConfig({
   testDir: "./e2e",
@@ -22,14 +21,6 @@ export default defineConfig({
         baseURL: `http://${previewHost}:${cataloguePort}`,
       },
     },
-    {
-      name: "dashboard",
-      testMatch: /dashboard-report\.spec\.ts/,
-      use: {
-        ...devices["Desktop Chrome"],
-        baseURL: `http://${previewHost}:${dashboardPort}`,
-      },
-    },
   ],
   webServer: [
     {
@@ -37,12 +28,6 @@ export default defineConfig({
       url: `http://${previewHost}:${cataloguePort}`,
       reuseExistingServer: !process.env.CI,
       timeout: 120_000,
-    },
-    {
-      command: `pnpm --filter @platform/dashboard-web build && pnpm --filter @platform/dashboard-web preview --host ${previewHost} --port ${dashboardPort}`,
-      url: `http://${previewHost}:${dashboardPort}`,
-      reuseExistingServer: !process.env.CI,
-      timeout: 180_000,
     },
   ],
 });

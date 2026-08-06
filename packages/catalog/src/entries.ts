@@ -13,12 +13,6 @@ export const catalogEntries: readonly CatalogEntryMeta[] = [
     requiredPackIds: ["hello-base"],
     capabilities: ["offline"],
   },
-  {
-    id: "dashboard",
-    basePath: "/",
-    host: "dashboard.songara.uk",
-    title: "AI Development Dashboard",
-  },
 ];
 
 export function getCatalogEntries(): readonly CatalogEntryMeta[] {

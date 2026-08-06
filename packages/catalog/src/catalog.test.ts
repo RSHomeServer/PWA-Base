@@ -8,11 +8,7 @@ describe("catalog", () => {
     const ids = entries.map((e) => e.id);
 
     expect(new Set(ids).size).toBe(ids.length);
-    expect(ids).toEqual(
-      expect.arrayContaining([
-        "dashboard",
-      ]),
-    );
+    expect(ids).toEqual(expect.arrayContaining(["hello"]));
     expect(entries.every((e) => e.basePath === "/")).toBe(true);
   });
 

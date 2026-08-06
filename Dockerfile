@@ -17,11 +17,8 @@ COPY packages/controls/package.json packages/controls/
 COPY packages/export/package.json packages/export/
 COPY packages/math/package.json packages/math/
 COPY packages/physics/package.json packages/physics/
-COPY packages/site-dashboard/package.json packages/site-dashboard/
 COPY packages/markdown/package.json packages/markdown/
 COPY packages/runtime/package.json packages/runtime/
-COPY apps/telemetry/package.json apps/telemetry/
-COPY apps/dashboard-web/package.json apps/dashboard-web/
 
 RUN pnpm install --frozen-lockfile
 

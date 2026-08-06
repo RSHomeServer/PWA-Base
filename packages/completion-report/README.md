@@ -65,4 +65,4 @@ import {
 
 ## Artifact capture
 
-Screenshot capture uploads to the telemetry HTTP service and is **not** part of this package. Use `pnpm capture:artifacts` (delegates to `@platform/telemetry` until the telemetry product is extracted).
+Screenshot capture lived with the telemetry product service and is **not** part of this package (removed from PWA-Base in T0.4). The completion-report contract above remains the in-repo source of truth.

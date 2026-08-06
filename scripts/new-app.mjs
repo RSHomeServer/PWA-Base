@@ -31,7 +31,6 @@ const RESERVED = new Set([
   "catalog",
   "config",
   "controls",
-  "dashboard",
   "export",
   "host",
   "markdown",
@@ -40,7 +39,6 @@ const RESERVED = new Set([
   "platform",
   "runtime",
   "site-registry",
-  "telemetry",
   "ui",
 ]);
 
