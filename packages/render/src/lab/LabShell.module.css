@@ -1,6 +1,6 @@
 /* ── Songara Lab chrome — theme-aware, desktop-first ───────────────────── */
 
-:global(.viz-lab) {
+:global(.render-lab) {
   --lab-easing-spring: cubic-bezier(0.34, 1.45, 0.64, 1);
   --lab-easing-spring-soft: cubic-bezier(0.22, 1.18, 0.36, 1);
   --lab-duration-fast: var(--motion-duration-fast, 160ms);
@@ -16,8 +16,8 @@
   --lab-vignette-opacity: 0.55;
 }
 
-:global([data-theme="dark"]) :global(.viz-lab),
-:global(.theme-dark) :global(.viz-lab) {
+:global([data-theme="dark"]) :global(.render-lab),
+:global(.theme-dark) :global(.render-lab) {
   --lab-accent-rgb: 45 212 191;
   --lab-glow-rgb: 45 212 191;
   --lab-glow-alt-rgb: 94 234 212;

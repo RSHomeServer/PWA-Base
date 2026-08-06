@@ -12,7 +12,7 @@ import { FlagshipShell } from "../shared/FlagshipShell.js";
 import { useAnimationFrame } from "../shared/useAnimationFrame.js";
 import { useShortcuts } from "../shared/useShortcuts.js";
 import { toCanvasPoint } from "../shared/pointer.js";
-import canvasStyles from "../shared/canvasStyles.module.css";
+import canvasStyles from "../shared/canvasStyles.js";
 import { bobPositions, stepPendulum, totalEnergy } from "./physics.js";
 import type { PendulumParams, PendulumState } from "./physics.js";
 import styles from "./DoublePendulumProPage.module.css";

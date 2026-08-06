@@ -1,11 +1,11 @@
 import { useCallback, useState } from "react";
-import { useShortcuts } from "../flagship/shared/useShortcuts.js";
+import { useShortcuts } from "../hooks/useShortcuts.js";
 import type { UseLabShortcutsOptions, UseLabShortcutsResult } from "./types.js";
 
 const PREVIEW_COUNT = 4;
 
 /**
- * Lab keyboard layer: transport, help overlay, and exhibit-specific bindings.
+ * Lab keyboard layer: transport, help overlay, and custom bindings.
  * Ignores key events while focus is in form fields.
  */
 export function useLabShortcuts({

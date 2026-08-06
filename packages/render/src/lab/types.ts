@@ -1,6 +1,16 @@
 import type { ReactNode, RefObject } from "react";
 import type { BadgeVariant } from "@platform/ui";
 
+export interface ShellDemoLink {
+  href: string;
+  title: string;
+}
+
+export interface ShellDemoNav {
+  prev?: ShellDemoLink | null;
+  next?: ShellDemoLink | null;
+}
+
 export interface LabShortcut {
   keys: string;
   label: string;
@@ -34,12 +44,12 @@ export interface LabTransportHandlers {
 export interface LabShellProps {
   title: string;
   tagline?: string;
-  /** Route path segment for gallery analytics and adjacent demo nav, e.g. "/cymatics-lab". */
-  demoPath?: string;
   badge?: string;
   badgeVariant?: BadgeVariant;
-  /** Explanation of the underlying science / technique — shown in the educational panel. */
+  /** Explanation shown in the educational panel. */
   about: ReactNode;
+  /** Summary label for the about/details panel. */
+  aboutSummary?: string;
   shortcuts: LabShortcut[];
   /** Simulation canvas or WebGL stage rendered inside the main frame. */
   children: ReactNode;
@@ -76,6 +86,10 @@ export interface LabShellProps {
   defaultAboutOpen?: boolean;
   backHref?: string;
   backLabel?: string;
+  /** Optional prev/next links below the workspace. */
+  demoNav?: ShellDemoNav;
+  /** Called once when the shell mounts (e.g. for analytics). */
+  onMount?: () => void;
   /** Hide the shortcut hint strip below the workspace. */
   hideShortcutStrip?: boolean;
 }
@@ -158,4 +172,43 @@ export interface UseLabShortcutsResult {
   openHelp: () => void;
   closeHelp: () => void;
   previewShortcuts: LabShortcut[];
+}
+
+export interface RenderShortcut {
+  keys: string;
+  label: string;
+}
+
+export interface RenderShellProps {
+  title: string;
+  tagline?: string;
+  badge?: string;
+  badgeVariant?: BadgeVariant;
+  shortcuts: RenderShortcut[];
+  onReset?: () => void;
+  onExport?: () => void;
+  /** Extra controls rendered in the toolbar, e.g. palette picker, mode buttons. */
+  toolbarExtra?: ReactNode;
+  /** Absolutely positioned HUD content layered on top of the canvas frame. */
+  overlay?: ReactNode;
+  /** Live readouts rendered below the canvas (energy, FPS, generation, etc). */
+  statusBar?: ReactNode;
+  /** Explanation shown in a collapsible panel. */
+  about: ReactNode;
+  /** Summary label for the about/details panel. */
+  aboutSummary?: string;
+  frameMaxWidth?: number;
+  frameAspectRatio?: string;
+  /**
+   * Notified whenever immersive fullscreen is entered/exited. Immersive state is also
+   * exposed as `data-immersive` on the frame element.
+   */
+  onImmersiveChange?: (immersive: boolean) => void;
+  backHref?: string;
+  backLabel?: string;
+  /** Optional prev/next links below the workspace. */
+  demoNav?: ShellDemoNav;
+  /** Called once when the shell mounts (e.g. for analytics). */
+  onMount?: () => void;
+  children: ReactNode;
 }

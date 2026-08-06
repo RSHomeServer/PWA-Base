@@ -72,11 +72,17 @@
       "import": "./packages/animation/src/index.ts",
       "default": "./packages/animation/src/index.ts"
     },
+    "./render": {
+      "types": "./packages/render/src/index.ts",
+      "import": "./packages/render/src/index.ts",
+      "default": "./packages/render/src/index.ts"
+    },
     "./package.json": "./package.json"
   },
   "files": [
     "src",
     "packages/animation/src",
+    "packages/render/src",
     "packages/completion-report/src",
     "packages/controls/src",
     "packages/math/src",
@@ -109,7 +115,7 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "test": "pnpm test:unit && pnpm test:e2e",
-    "test:unit": "pnpm --filter @platform/catalog --filter @platform/host --filter @platform/math --filter @platform/physics --filter @platform/export --filter @platform/controls --filter @platform/markdown --filter @platform/animation --filter @platform/ui --filter @platform/runtime --filter @platform/experiences --filter @platform/site-viz --filter @platform/completion-report --filter @platform/telemetry --filter @platform/docs-api test:unit",
+    "test:unit": "pnpm --filter @platform/catalog --filter @platform/host --filter @platform/math --filter @platform/physics --filter @platform/export --filter @platform/controls --filter @platform/markdown --filter @platform/animation --filter @platform/render --filter @platform/ui --filter @platform/runtime --filter @platform/experiences --filter @platform/site-viz --filter @platform/completion-report --filter @platform/telemetry --filter @platform/docs-api test:unit",
     "test:e2e": "playwright test",
     "telemetry:up": "docker compose up -d telemetry",
     "telemetry:down": "docker compose stop telemetry",

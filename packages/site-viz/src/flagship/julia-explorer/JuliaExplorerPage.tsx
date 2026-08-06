@@ -17,7 +17,7 @@ import { useAnimationFrame } from "../shared/useAnimationFrame.js";
 import { useShortcuts } from "../shared/useShortcuts.js";
 import { toCanvasPoint, primaryTouch } from "../shared/pointer.js";
 import { FRACTAL_PALETTES, FRACTAL_PALETTE_NAMES } from "../shared/palettes.js";
-import canvasStyles from "../shared/canvasStyles.module.css";
+import canvasStyles from "../shared/canvasStyles.js";
 import {
   computeBudget,
   createField,

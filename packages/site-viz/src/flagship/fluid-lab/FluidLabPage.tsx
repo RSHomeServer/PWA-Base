@@ -14,7 +14,7 @@ import { FlagshipShell } from "../shared/FlagshipShell.js";
 import { useAnimationFrame } from "../shared/useAnimationFrame.js";
 import { useShortcuts } from "../shared/useShortcuts.js";
 import { toCanvasPoint } from "../shared/pointer.js";
-import canvasStyles from "../shared/canvasStyles.module.css";
+import canvasStyles from "../shared/canvasStyles.js";
 
 const W = FLAGSHIP_CANVAS_WIDTH;
 const H = FLAGSHIP_CANVAS_HEIGHT;
