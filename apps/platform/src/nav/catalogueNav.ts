@@ -183,13 +183,6 @@ export const PLATFORM_NAV_APPS: PlatformNavGroup = {
       description: "Interactive labs, canvas/WebGL, and exhibits.",
     },
     {
-      id: "birthday",
-      label: "Birthday",
-      href: origin("birthday.songara.uk"),
-      external: false,
-      description: "Interactive keepsake experience with offline packs.",
-    },
-    {
       id: "memories",
       label: "Memories",
       href: origin("memories.songara.uk"),
@@ -250,7 +243,6 @@ export const PLATFORM_LOGO_ACCENTS: Readonly<Record<string, string>> = {
   docs: "#0f766e",
   stats: "#1d4ed8",
   viz: "#c2410c",
-  birthday: "#be185d",
   memories: "#c4a15a",
   "browser-lab": "#0e7490",
   hello: "#0f766e",

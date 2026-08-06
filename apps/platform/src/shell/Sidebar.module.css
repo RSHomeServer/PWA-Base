@@ -222,10 +222,6 @@
   border-inline-start-color: var(--color-accent-hover);
 }
 
-.appAccentBirthday.navLinkActive {
-  border-inline-start-color: color-mix(in srgb, var(--color-accent) 45%, #071422);
-}
-
 .appAccentBrowserLab.navLinkActive {
   border-inline-start-color: color-mix(in srgb, var(--color-accent) 75%, var(--color-foreground));
 }

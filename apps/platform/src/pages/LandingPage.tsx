@@ -19,12 +19,6 @@ const HERO_ENTRIES = [
     line: "Fluid sims, fractal skies, and science you leave glowing on a wide desktop.",
   },
   {
-    id: "birthday",
-    kicker: "Interactive letter",
-    title: "Birthday",
-    line: "Navy night, candlelight paper, and chapters paced like a handwritten keepsake.",
-  },
-  {
     id: "browser-lab",
     kicker: "Diagnostics theatre",
     title: "Browser Lab",
@@ -39,13 +33,6 @@ const FEATURE_BEATS = [
     title: "Installations that hold the room",
     description:
       "Panoramic canvases and high-refresh motion — experiences built to stop the scroll and invite someone else over.",
-  },
-  {
-    product: "Birthday",
-    siteId: "birthday",
-    title: "A keepsake, not a template",
-    description:
-      "Night sky, quiet surprise, and pacing that rewards curiosity — emotional craft over component demos.",
   },
   {
     product: "Browser Lab",
@@ -66,11 +53,6 @@ const GALLERY_IDENTITY: Record<string, { kicker: string; atmosphere: string; tag
     kicker: "Installation",
     atmosphere: styles.galleryViz,
     tagline: "An interactive science museum you can leave running.",
-  },
-  birthday: {
-    kicker: "Letter",
-    atmosphere: styles.galleryBirthday,
-    tagline: "Navy night, candlelight paper, and quiet surprise.",
   },
   "browser-lab": {
     kicker: "Diagnostics",

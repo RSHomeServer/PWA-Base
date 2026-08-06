@@ -31,14 +31,6 @@ export const catalogEntries: readonly CatalogEntryMeta[] = [
     capabilities: ["full-bleed"],
   },
   {
-    id: "birthday",
-    basePath: "/",
-    host: "birthday.songara.uk",
-    title: "Birthday",
-    requiredPackIds: ["birthday-base"],
-    capabilities: ["offline", "media", "full-bleed", "default-topbar-collapsed"],
-  },
-  {
     id: "memories",
     basePath: "/",
     host: "memories.songara.uk",

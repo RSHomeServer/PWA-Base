@@ -17,7 +17,6 @@ COPY packages/controls/package.json packages/controls/
 COPY packages/export/package.json packages/export/
 COPY packages/math/package.json packages/math/
 COPY packages/physics/package.json packages/physics/
-COPY packages/site-birthday/package.json packages/site-birthday/
 COPY packages/site-browser-lab/package.json packages/site-browser-lab/
 COPY packages/site-components/package.json packages/site-components/
 COPY packages/site-stats/package.json packages/site-stats/
@@ -28,7 +27,6 @@ COPY packages/markdown/package.json packages/markdown/
 COPY packages/runtime/package.json packages/runtime/
 COPY apps/telemetry/package.json apps/telemetry/
 COPY apps/docs-api/package.json apps/docs-api/
-COPY apps/birthday-web/package.json apps/birthday-web/
 COPY apps/components-web/package.json apps/components-web/
 COPY apps/docs-web/package.json apps/docs-web/
 COPY apps/stats-web/package.json apps/stats-web/

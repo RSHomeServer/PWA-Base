@@ -4,12 +4,8 @@
  *
  * Usage:
  *   node scripts/sync-content-pack.mjs <appId> <packId> [version]
- *   pnpm content-pack:sync -- birthday birthday-base
- *   pnpm content-pack:sync -- birthday birthday-base 1.1.0
- *
- * Birthday shorthand (backwards compatible):
- *   pnpm birthday:pack
- *   node scripts/sync-birthday-pack.mjs [version]
+ *   pnpm content-pack:sync -- hello hello-base
+ *   pnpm content-pack:sync -- hello hello-base 1.0.0
  */
 import { createHash } from "node:crypto";
 import {
@@ -34,7 +30,7 @@ const versionArg = process.argv[4];
 if (!appId || !packId) {
   console.error(
     "Usage: node scripts/sync-content-pack.mjs <appId> <packId> [version]\n" +
-      "Example: node scripts/sync-content-pack.mjs birthday birthday-base 1.1.0",
+      "Example: node scripts/sync-content-pack.mjs hello hello-base 1.0.0",
   );
   process.exit(1);
 }

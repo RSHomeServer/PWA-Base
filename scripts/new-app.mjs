@@ -12,7 +12,7 @@
  *   minimal Content Pack (<name>-base)
  *   catalogue + nav registration
  *
- * Does not modify Docker / Compose. Birthday is left untouched.
+ * Does not modify Docker / Compose.
  */
 import { spawnSync } from "node:child_process";
 import {
@@ -28,7 +28,6 @@ import { fileURLToPath } from "node:url";
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 
 const RESERVED = new Set([
-  "birthday",
   "browser-lab",
   "catalog",
   "components",

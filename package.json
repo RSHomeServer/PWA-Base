@@ -140,10 +140,8 @@
     "capture:artifacts": "node scripts/capture-artifacts.mjs",
     "version:bump": "node scripts/bump-version.mjs",
     "content-pack:sync": "node scripts/sync-content-pack.mjs",
-    "birthday:pack": "node scripts/sync-content-pack.mjs birthday birthday-base",
     "new-app": "node scripts/new-app.mjs",
-    "ensure-sibling-file-deps": "node scripts/ensure-sibling-file-deps.mjs",
-    "capture:birthday-previews": "node scripts/capture-birthday-previews.mjs"
+    "ensure-sibling-file-deps": "node scripts/ensure-sibling-file-deps.mjs"
   },
   "dependencies": {
     "workbox-window": "^7.4.1"

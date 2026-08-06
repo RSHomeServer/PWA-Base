@@ -760,25 +760,6 @@
     );
 }
 
-.galleryBirthday .galleryVeil {
-  background:
-    radial-gradient(
-      ellipse 70% 60% at 75% 15%,
-      color-mix(in srgb, var(--color-accent) 16%, var(--landing-night)) 0%,
-      transparent 58%
-    ),
-    linear-gradient(
-      165deg,
-      color-mix(in srgb, var(--landing-night) 82%, transparent),
-      transparent 70%
-    ),
-    radial-gradient(
-      ellipse 50% 40% at 20% 90%,
-      color-mix(in srgb, var(--color-accent) 12%, transparent) 0%,
-      transparent 50%
-    );
-}
-
 .galleryBrowserLab .galleryVeil {
   background:
     linear-gradient(
