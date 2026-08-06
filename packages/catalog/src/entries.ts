@@ -24,13 +24,6 @@ export const catalogEntries: readonly CatalogEntryMeta[] = [
     title: "Statistical Analysis",
   },
   {
-    id: "browser-lab",
-    basePath: "/",
-    host: "browser-lab.songara.uk",
-    title: "Browser Lab",
-    capabilities: ["full-bleed"],
-  },
-  {
     id: "hello",
     basePath: "/",
     host: "hello.songara.uk",

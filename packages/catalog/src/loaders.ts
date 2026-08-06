@@ -9,7 +9,6 @@ const loaders: Record<string, () => Promise<SiteDefinition>> = {
   components: () => import("@platform/site-components").then((m) => m.componentsSite),
   docs: () => import("@platform/site-docs").then((m) => m.docsSite),
   stats: () => import("@platform/site-stats").then((m) => m.statsSite),
-  "browser-lab": () => import("@platform/site-browser-lab").then((m) => m.browserLabSite),
   hello: () => import("@platform/site-hello").then((m) => m.helloSite),
   dashboard: () => import("@platform/site-dashboard").then((m) => m.dashboardSite),
 };

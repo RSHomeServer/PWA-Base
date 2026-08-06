@@ -176,13 +176,6 @@ export const PLATFORM_NAV_APPS: PlatformNavGroup = {
       description: "Hypothesis tests, regression, and CSV workflows.",
     },
     {
-      id: "browser-lab",
-      label: "Browser Lab",
-      href: origin("browser-lab.songara.uk"),
-      external: false,
-      description: "Capability probes, gauges, and benchmarks.",
-    },
-    {
       id: "hello",
       label: "Hello",
       href: origin("hello.songara.uk"),
@@ -228,7 +221,6 @@ export const PLATFORM_LOGO_ACCENTS: Readonly<Record<string, string>> = {
   components: "#0d7a72",
   docs: "#0f766e",
   stats: "#1d4ed8",
-  "browser-lab": "#0e7490",
   hello: "#0f766e",
   dashboard: "#134e4a",
 };

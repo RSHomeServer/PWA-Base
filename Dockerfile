@@ -17,7 +17,6 @@ COPY packages/controls/package.json packages/controls/
 COPY packages/export/package.json packages/export/
 COPY packages/math/package.json packages/math/
 COPY packages/physics/package.json packages/physics/
-COPY packages/site-browser-lab/package.json packages/site-browser-lab/
 COPY packages/site-components/package.json packages/site-components/
 COPY packages/site-stats/package.json packages/site-stats/
 COPY packages/site-dashboard/package.json packages/site-dashboard/
@@ -29,7 +28,6 @@ COPY apps/docs-api/package.json apps/docs-api/
 COPY apps/components-web/package.json apps/components-web/
 COPY apps/docs-web/package.json apps/docs-web/
 COPY apps/stats-web/package.json apps/stats-web/
-COPY apps/browser-lab-web/package.json apps/browser-lab-web/
 COPY apps/dashboard-web/package.json apps/dashboard-web/
 
 RUN pnpm install --frozen-lockfile

@@ -162,31 +162,6 @@ services:
       - "traefik.http.routers.stats-web.middlewares=crowdsec@docker"
 
 
-  browser-lab-web:
-    build:
-      context: .
-      dockerfile: apps/browser-lab-web/Dockerfile
-      args:
-        PLATFORM_APP_VERSION: ${PLATFORM_APP_VERSION:-}
-        PLATFORM_RUNTIME_MODE: ${PLATFORM_RUNTIME_MODE:-development}
-    container_name: website-hosting-browser-lab-web
-    networks:
-      - workspace_network
-    healthcheck:
-      test: ["CMD", "wget", "-qO-", "http://127.0.0.1/health"]
-      interval: 30s
-      timeout: 3s
-      retries: 3
-      start_period: 10s
-    restart: unless-stopped
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.browser-lab-web.rule=Host(`browser-lab.songara.uk`)"
-      - "traefik.http.routers.browser-lab-web.entrypoints=https"
-      - "traefik.http.routers.browser-lab-web.tls.certresolver=cloudflare"
-      - "traefik.http.services.browser-lab-web.loadbalancer.server.port=80"
-      - "traefik.http.routers.browser-lab-web.middlewares=crowdsec@docker"
-
   dashboard-web:
     build:
       context: .

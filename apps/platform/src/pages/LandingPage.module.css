@@ -741,26 +741,6 @@
     );
 }
 
-.galleryBrowserLab .galleryVeil {
-  background:
-    linear-gradient(
-      180deg,
-      transparent 0%,
-      color-mix(in srgb, var(--color-accent) 8%, transparent) 100%
-    ),
-    repeating-linear-gradient(
-      0deg,
-      transparent,
-      transparent 2.4rem,
-      color-mix(in srgb, var(--color-accent) 5%, transparent) 2.4rem,
-      color-mix(in srgb, var(--color-accent) 5%, transparent) 2.42rem
-    ),
-    radial-gradient(
-      ellipse 80% 70% at 50% 0%,
-      color-mix(in srgb, var(--color-accent) 24%, var(--color-foreground)) 0%,
-      transparent 62%
-    );
-}
 
 .galleryKicker {
   font-size: var(--font-size-2xs);

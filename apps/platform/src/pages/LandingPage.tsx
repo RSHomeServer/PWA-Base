@@ -13,20 +13,20 @@ interface LandingPageProps {
 
 const HERO_ENTRIES = [
   {
-    id: "browser-lab",
-    kicker: "Diagnostics theatre",
-    title: "Browser Lab",
-    line: "Live capability probes, gauges, and benchmarks worth watching.",
+    id: "hello",
+    kicker: "Reference app",
+    title: "Hello",
+    line: "Minimal SoloSiteApp scaffold — ThemeProvider, packs, and injectable chrome.",
   },
 ] as const;
 
 const FEATURE_BEATS = [
   {
-    product: "Browser Lab",
-    siteId: "browser-lab",
-    title: "The browser, revealed",
+    product: "Hello",
+    siteId: "hello",
+    title: "The foundation reference",
     description:
-      "Capability probes turned into a control room — telemetry, flourishes, and benchmarks with personality.",
+      "One minimal PWA that demonstrates site registration, content packs, and solo packaging.",
   },
 ] as const;
 
@@ -36,13 +36,12 @@ const GALLERY_IDENTITY: Record<string, { kicker: string; atmosphere: string; tag
     atmosphere: styles.galleryStats,
     tagline: "Hypothesis testing, distributions, and statistical workflows.",
   },
-  "browser-lab": {
-    kicker: "Diagnostics",
-    atmosphere: styles.galleryBrowserLab,
-    tagline: "Gauges, celebrations, and live telemetry.",
+  hello: {
+    kicker: "Reference",
+    atmosphere: styles.galleryDefault,
+    tagline: "Scaffolded SoloSiteApp for future PWAs.",
   },
 };
-
 function getGalleryIdentity(site: SiteDefinition) {
   return (
     GALLERY_IDENTITY[site.id] ?? {
