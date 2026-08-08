@@ -46,7 +46,7 @@ Lifecycle and Wave 1 plan: [preview-packages.md](./preview-packages.md),
 | --- | --- | --- |
 | `@songara/pwa-base/preview/motion` | **Live** | Thin Motion integration + reduced-motion-aware helpers (`packages/preview-motion`) |
 | `@songara/pwa-base/preview/dexie` | **Live** | Dexie core factory / migration helpers (no Cloud; `packages/preview-dexie`) |
-| `@songara/pwa-base/preview/lottie` | Planned (Wave 1) | Narrow Lottie/dotLottie player + reduced-motion freeze |
+| `@songara/pwa-base/preview/lottie` | **Live** | Narrow `lottie-react` player + reduced-motion freeze (`packages/preview-lottie`) |
 
 Rows above become live when an Executor lands `packages/preview-*` and wires `exports`.
 Until then, apps may use catalogue OSS **app-locally**; do not invent parallel wrapper
@@ -98,6 +98,12 @@ import {
   songaraDbName,
 } from "@songara/pwa-base/preview/dexie";
 // Peer: pnpm add dexie
+
+import {
+  SongaraLottie,
+  useSongaraLottiePlayback,
+} from "@songara/pwa-base/preview/lottie";
+// Peer: pnpm add lottie-react
 ```
 
 Preview surfaces never appear on the root `@songara/pwa-base` barrel.
