@@ -18,11 +18,21 @@ The forces at play: requirements, constraints, and the prior state. Link relevan
 
 The decision, stated plainly.
 
-### Shared vs app-local (two-consumer check)
+### Preview vs Stable vs app-local
 
-Per [ADR-003](../../docs/adr/003-phase2-shared-packages.md), shared placement requires a
-**second consumer using the API unchanged**. Record the two consumers, or state why the
-code stays app-local.
+Per [ADR-008](../../docs/adr/008-preview-stable-capability-lifecycle.md) and
+[ADR-003](../../docs/adr/003-phase2-shared-packages.md):
+
+- **App-local** — single-app or unevaluated spike; stays in the sibling repo / Test-PWA
+  exploration until Preview entry or Stable extraction.
+- **Preview** — curated thin OSS integration under `@songara/pwa-base/preview/<name>`.
+  Record why ADR-008 entry criteria are met (selected OSS, thin wrapper, standardisation
+  intent). Catalogue Ready alone is not enough.
+- **Stable** — prefer two **product** consumers using the API unchanged (ADR-003), or
+  Architect-signed graduation from Preview after real product usage. Hello and Test-PWA
+  are not product consumers for this gate.
+
+Record the consumers / Preview export path, or state why the code stays app-local.
 
 ## Consequences
 
@@ -37,4 +47,5 @@ code stays app-local.
 ### Follow-up
 
 - Docs to update (e.g. dependency table in `docs/architecture.md`,
-  [`consuming-pwa-base.md`](../../docs/guides/consuming-pwa-base.md)).
+  [`consuming-pwa-base.md`](../../docs/guides/consuming-pwa-base.md),
+  [`preview-packages.md`](../../docs/guides/preview-packages.md) when Preview is involved).

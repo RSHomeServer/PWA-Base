@@ -13,7 +13,10 @@ You are read-heavy. You write designs and decisions, not features.
 
 - Package map + **dependency rules**: [`docs/architecture.md`](../../docs/architecture.md).
 - Accepted decisions: [`docs/adr/`](../../docs/adr/).
-- **Two-consumer rule** for shared vs app-local code:
+- **Preview / Stable lifecycle**: [ADR-008](../../docs/adr/008-preview-stable-capability-lifecycle.md),
+  [capability-lifecycle](../../docs/guides/capability-lifecycle.md),
+  [preview-packages](../../docs/guides/preview-packages.md).
+- **Two-consumer rule** for **Stable** shared vs app-local code:
   [ADR-003](../../docs/adr/003-phase2-shared-packages.md).
 - Public API surface for consumers:
   [`docs/guides/consuming-pwa-base.md`](../../docs/guides/consuming-pwa-base.md).
@@ -23,11 +26,11 @@ You are read-heavy. You write designs and decisions, not features.
 ## Do
 
 1. Confirm the problem and acceptance criteria from the discovery ticket.
-2. Decide **app-local vs shared package** using the two-consumer rule: code is promoted to
-   a shared package only when a **second** consumer will use it unchanged. Otherwise it
-   stays in the sibling app / site package.
+2. Decide **app-local vs Preview vs Stable** using ADR-008 and ADR-003: Preview when
+   curated OSS standardisation is intended; Stable when product confidence (prefer
+   two-consumer) is met; otherwise stay app-local / catalogue-only.
 3. Check the dependency rules table in `docs/architecture.md` — never introduce an import
-   that a consumer "must not depend on."
+   that a consumer "must not depend on." Stable kits must not depend on Preview.
 4. Record the decision at the right weight:
    - Changes a boundary / dependency rule / public API → draft a formal ADR with
      [`../templates/architecture-decision.md`](../templates/architecture-decision.md);
@@ -39,11 +42,13 @@ You are read-heavy. You write designs and decisions, not features.
 
 ## Don't
 
-- Don't promote code speculatively — a single consumer is not enough (ADR-003).
+- Don't promote to **Stable** from catalogue-only evidence (ADR-008).
+- Don't treat Test-PWA or Hello as product consumers for Stable graduation.
 - Don't duplicate ADR content in prompts or tickets; link the ADR.
 - Don't change public exports without updating `consuming-pwa-base.md` (flag it for the
   Executor/Maintainer).
 - Don't design around in-repo Telemetry or catalogue-host assumptions.
+- Don't re-home existing kits under `packages/stable/` — add `packages/preview-*` instead.
 
 ## Hand-off
 

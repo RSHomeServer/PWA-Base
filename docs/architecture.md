@@ -24,8 +24,12 @@ Product applications are **not** hosted in this repository.
 | [005 — Content Packs](./adr/005-content-packs.md) | Versioned/hash-verified packs |
 | [006 — KanDev sibling deps](./adr/006-kandev-sibling-file-deps.md) | `file:../` + linker for worktrees |
 | [007 — Reusable foundation](./adr/007-pwa-base-reusable-foundation.md) | **Current identity** — sibling product repos; hello reference only |
+| [008 — Preview / Stable lifecycle](./adr/008-preview-stable-capability-lifecycle.md) | Curated Preview integrations → Stable graduation |
 
 Full index: [docs/adr/README.md](./adr/README.md).
+
+Capability lifecycle: [capability-lifecycle.md](./guides/capability-lifecycle.md) ·
+Preview layout: [preview-packages.md](./guides/preview-packages.md).
 
 ## Package map
 
@@ -40,16 +44,22 @@ Full index: [docs/adr/README.md](./adr/README.md).
 ├── packages/export             Browser download helpers
 ├── packages/math + physics     Numeric helpers
 ├── packages/markdown           Markdown helpers
-├── packages/animation          Particle / animation kit
-├── packages/audio              Web Audio kit
+├── packages/animation          Particle / animation kit (Stable)
+├── packages/audio              Web Audio kit (Stable)
 ├── packages/browser            Capability probes
 ├── packages/render             Canvas / RAF helpers
+├── packages/preview-*          Curated OSS Preview integrations (ADR-008)
 ├── packages/completion-report  RunCompletionSummary contract
 └── packages/config             Shared TS / ESLint / Prettier baselines
 ```
 
+Existing kits without a `/preview/` export are **implicit Stable**. Do not re-home them
+under `packages/stable/`. Preview packages use `packages/preview-<name>/` and export only
+via `@songara/pwa-base/preview/<name>`.
+
 Guides: [solo-packaging.md](./guides/solo-packaging.md), [content-packs.md](./guides/content-packs.md),
-[consuming-pwa-base.md](./guides/consuming-pwa-base.md).
+[consuming-pwa-base.md](./guides/consuming-pwa-base.md),
+[preview-packages.md](./guides/preview-packages.md).
 
 ### Dependency rules
 
@@ -57,8 +67,9 @@ Guides: [solo-packaging.md](./guides/solo-packaging.md), [content-packs.md](./gu
 | --- | --- | --- |
 | `apps/hello-web` | `site-hello`, `@platform/runtime`, `@platform/ui`, shared kits | Other product site packages (none in-tree) |
 | `packages/site-hello` | `@platform/site-registry/contract`, `@platform/runtime`, shared kits, React | App entry internals |
-| Shared kits (`ui`, `runtime`, …) | Browser APIs; peers as declared; other kits only when justified | Site packages; sibling app repos |
-| Sibling product apps | Documented `@songara/pwa-base` entry points only | Deep imports into `@platform/*` workspace paths |
+| Shared Stable kits (`ui`, `runtime`, …) | Browser APIs; peers as declared; other Stable kits only when justified | Site packages; sibling app repos; Preview packages |
+| Preview kits (`preview-*`) | Declared OSS peers; Stable kits when justified | Site packages; product repos |
+| Sibling product apps / Test-PWA | Documented `@songara/pwa-base` entry points only (incl. `/preview/*`) | Deep imports into `@platform/*` workspace paths; Test-PWA as a library |
 
 Inside the monorepo use `@platform/*`. In sibling apps import only from `@songara/pwa-base`
 documented exports.

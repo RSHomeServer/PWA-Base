@@ -2,7 +2,10 @@
 
 ## Status
 
-Accepted (two-consumer rule still applies; original Phase 2 product sites are historical)
+Accepted (two-consumer rule remains the **Stable** confidence signal; original Phase 2
+product sites are historical). **Preview** entry is governed by
+[ADR-008](./008-preview-stable-capability-lifecycle.md) — two-consumer is no longer the
+primary gate for curated Preview integrations.
 
 ## Context
 
@@ -18,16 +21,21 @@ Alternatives considered:
 2. **Large shared libraries upfront** (charting, data grid, full stats engine, canvas framework) — forces APIs before requirements are known.
 3. **Minimal shared packages with a two-consumer rule** — extract only what both sites will use unchanged.
 
-**Today:** the durable rule is the **two-consumer rule** for anything promoted into
-`@songara/pwa-base` / `@platform/*`. The second consumer may be a **sibling app**, not
-only an in-monorepo site ([ADR-007](./007-pwa-base-reusable-foundation.md)).
+**Today:** for **Stable** kits and Stable graduation, prefer the **two-consumer rule**:
+a Stable platform API should have concrete, unchanged use in **two** present or near-term
+consumers (historically both Phase 2 sites; now commonly two sibling product apps). The
+second consumer may be a **sibling app**, not only an in-monorepo site
+([ADR-007](./007-pwa-base-reusable-foundation.md)). Curated **Preview** integrations of
+chosen OSS follow ADR-008 instead of waiting for two consumers before the package exists.
 
 ## Decision
 
-Add and extend shared packages under `packages/` using the **two-consumer rule**: a
-platform package must have a concrete, unchanged use in **two** present or near-term
-consumers (historically both Phase 2 sites; now commonly Hello + a sibling app, or two
-siblings). Otherwise the code stays in the application.
+Add and extend **Stable** shared packages under `packages/` using the **two-consumer
+rule** as the preferred confidence signal: a Stable platform package must have a
+concrete, unchanged use in **two** present or near-term consumers (historically both
+Phase 2 sites; now commonly Hello + a sibling app, or two siblings) — or meet ADR-008’s
+Stable graduation path with Architect sign-off. Otherwise the code stays in the
+application or, when Songara intends to standardise, enters **Preview** per ADR-008.
 
 ### Shared in Phase 2
 

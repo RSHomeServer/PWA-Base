@@ -3,9 +3,9 @@
 | | |
 | --- | --- |
 | **Status** | Living |
-| **Version** | 1.0.0 |
-| **Last reviewed** | 2026-08-06 |
-| **Related** | [ADR-007](../adr/007-pwa-base-reusable-foundation.md) · [architecture.md](../architecture.md) · [m0-rationalisation/](./m0-rationalisation/) |
+| **Version** | 1.1.0 |
+| **Last reviewed** | 2026-08-08 |
+| **Related** | [ADR-007](../adr/007-pwa-base-reusable-foundation.md) · [ADR-008](../adr/008-preview-stable-capability-lifecycle.md) · [architecture.md](../architecture.md) · [capability-lifecycle](../guides/capability-lifecycle.md) · [m0-rationalisation/](./m0-rationalisation/) |
 
 > **Historical note:** Pre–Milestone 0 Website Hosting strategy lived in
 > [PLATFORM.md](../archive/strategy/PLATFORM.md),
@@ -52,25 +52,32 @@ stack per idea.
 
 ## Investment rule
 
-Align with [ADR-003](../adr/003-phase2-shared-packages.md) **two-consumer rule**:
+Songara is a **curated platform** on carefully selected mature OSS
+([ADR-008](../adr/008-preview-stable-capability-lifecycle.md)):
 
-> Extract or build a **foundation capability** only when at least two concrete applications
-> will use it unchanged — or when an explicit foundation milestone requires it (contracts,
-> packaging helpers, design tokens).
+1. **Preview** — thin integrations of OSS Songara intends to standardise on, after
+   catalogue evaluation. Entry criteria live in ADR-008 / [capability-lifecycle](../guides/capability-lifecycle.md).
+   Catalogue eligibility alone is not enough.
+2. **Stable** — prefer [ADR-003](../adr/003-phase2-shared-packages.md) **two-consumer**
+   confidence (or Architect-signed graduation from Preview after real **product** usage).
+   Contracts, packaging helpers, and design tokens may land as Stable when an explicit
+   foundation milestone requires them.
 
-The second consumer may be a **sibling repository**. Do not reintroduce a catalogue host,
-product verticals, or Telemetry into this monorepo to create artificial second consumers.
+Do not reintroduce a catalogue host, product verticals, or Telemetry into this monorepo.
+Test-PWA validates Preview; it is not a product consumer for Stable graduation.
 
 ## Capability vs framework vs application
 
 | Term | Meaning | Example today |
 | --- | --- | --- |
 | **Capability** | Reusable behaviour with a clear contract | `defineSite`, Content Packs, completion-report shape |
-| **Framework / kit** | Shared package many apps compose | `@platform/ui`, `@platform/runtime`, animation/audio/browser/render |
+| **Stable kit** | Shared package many apps compose | `@platform/ui`, `@platform/runtime`, animation/audio/browser/render |
+| **Preview kit** | Curated thin OSS integration (unstable) | `@songara/pwa-base/preview/<name>` ([preview-packages](../guides/preview-packages.md)) |
 | **Application** | User-facing PWA in a **sibling** repo | Consumes `@songara/pwa-base` entry points |
+| **Catalogue** | Engineering Capability Catalogue | Test-PWA (sibling) — evaluates; consumes Preview |
 | **Reference app** | In-tree demo only | `apps/hello-web` + `packages/site-hello` |
 
-Application-local code stays in the sibling repo until a second consumer justifies
+Application-local code stays in the sibling repo until Preview entry (ADR-008) or Stable
 promotion ([promote-to-pwa-base](../../.kandev/workflows/promote-to-pwa-base.md)).
 
 ## Success looks like
