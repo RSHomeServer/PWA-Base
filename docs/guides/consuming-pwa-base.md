@@ -33,6 +33,24 @@ only).
 | `@songara/pwa-base/audio` | Web Audio master graph, `AudioEngineProvider`, analysis helpers |
 | `@songara/pwa-base/browser` | Browser capability probes, storage / network / display hooks, benchmarks |
 | `@songara/pwa-base/render` | Canvas setup, render/lab shells, animation-frame and pointer helpers |
+| `@songara/pwa-base/preview/<name>` | **Preview** curated OSS integrations ([ADR-008](../adr/008-preview-stable-capability-lifecycle.md)) — unstable; see below |
+
+### Preview entry points
+
+Preview exports are **opt-in and unstable**. They never appear on the root
+`@songara/pwa-base` barrel. Install declared peer dependencies in the consumer.
+Lifecycle and Wave 1 plan: [preview-packages.md](./preview-packages.md),
+[capability-lifecycle.md](./capability-lifecycle.md).
+
+| Import | Status | Contents |
+| --- | --- | --- |
+| `@songara/pwa-base/preview/motion` | Planned (Wave 1) | Thin Motion integration + reduced-motion-aware helpers |
+| `@songara/pwa-base/preview/dexie` | Planned (Wave 1) | Dexie core factory / migration helpers (no Cloud) |
+| `@songara/pwa-base/preview/lottie` | Planned (Wave 1) | Narrow Lottie/dotLottie player + reduced-motion freeze |
+
+Rows above become live when an Executor lands `packages/preview-*` and wires `exports`.
+Until then, apps may use catalogue OSS **app-locally**; do not invent parallel wrapper
+APIs that diverge from the planned Preview paths.
 
 ### Root / contract / UI
 
