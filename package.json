@@ -72,6 +72,11 @@
       "import": "./packages/animation/src/index.ts",
       "default": "./packages/animation/src/index.ts"
     },
+    "./preview/motion": {
+      "types": "./packages/preview-motion/src/index.ts",
+      "import": "./packages/preview-motion/src/index.ts",
+      "default": "./packages/preview-motion/src/index.ts"
+    },
     "./browser": {
       "types": "./packages/browser/src/index.ts",
       "import": "./packages/browser/src/index.ts",
@@ -92,6 +97,7 @@
   "files": [
     "src",
     "packages/animation/src",
+    "packages/preview-motion/src",
     "packages/browser/src",
     "packages/audio/src",
     "packages/render/src",
@@ -126,7 +132,7 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "test": "pnpm test:unit && pnpm test:e2e",
-    "test:unit": "pnpm --filter @platform/math --filter @platform/physics --filter @platform/export --filter @platform/controls --filter @platform/markdown --filter @platform/animation --filter @platform/audio --filter @platform/browser --filter @platform/render --filter @platform/ui --filter @platform/runtime --filter @platform/completion-report test:unit",
+    "test:unit": "pnpm --filter @platform/math --filter @platform/physics --filter @platform/export --filter @platform/controls --filter @platform/markdown --filter @platform/animation --filter @platform/preview-motion --filter @platform/audio --filter @platform/browser --filter @platform/render --filter @platform/ui --filter @platform/runtime --filter @platform/completion-report test:unit",
     "test:e2e": "playwright test",
     "capture:artifacts": "node scripts/capture-artifacts.mjs",
     "version:bump": "node scripts/bump-version.mjs",

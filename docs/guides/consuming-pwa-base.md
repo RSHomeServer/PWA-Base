@@ -44,7 +44,7 @@ Lifecycle and Wave 1 plan: [preview-packages.md](./preview-packages.md),
 
 | Import | Status | Contents |
 | --- | --- | --- |
-| `@songara/pwa-base/preview/motion` | Planned (Wave 1) | Thin Motion integration + reduced-motion-aware helpers |
+| `@songara/pwa-base/preview/motion` | **Live** | Thin Motion integration + reduced-motion-aware helpers (`packages/preview-motion`) |
 | `@songara/pwa-base/preview/dexie` | Planned (Wave 1) | Dexie core factory / migration helpers (no Cloud) |
 | `@songara/pwa-base/preview/lottie` | Planned (Wave 1) | Narrow Lottie/dotLottie player + reduced-motion freeze |
 
@@ -81,6 +81,19 @@ import {
 
 Kit APIs are the package `src/index.ts` barrels re-exported via `exports`. See each
 `packages/<kit>/src/index.ts` for the full symbol list.
+
+### Preview (opt-in)
+
+```ts
+import {
+  motion,
+  useSongaraMotion,
+  useMotionTransition,
+} from "@songara/pwa-base/preview/motion";
+// Peer: pnpm add motion
+```
+
+Preview surfaces never appear on the root `@songara/pwa-base` barrel.
 
 ### Injectable chrome
 
