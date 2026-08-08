@@ -56,6 +56,7 @@ PWA-Base is the canonical **upstream** for both dimensions:
 ├── prompts/                      # reusable role operating instructions
 │   ├── _shared.md                #  cross-cutting rules every role inherits
 │   ├── orchestrator.md           #  persistent coordinator; owns project flow & user contact
+│   ├── orchestrator-dual-repo-platform.md  #  dual-repo (PWA-Base + Test-PWA) programme brief
 │   ├── discovery.md              #  scope a request → discovery ticket / research report
 │   ├── architect.md              #  shape the technical approach, decide shared vs app-local
 │   ├── executor.md               #  implement code / docs / migrations / refactors
