@@ -63,7 +63,7 @@ editor tooling (Cursor, etc.) as a collaborator in commits, PRs, or reports.
 
 | File | Purpose | When to use |
 | --- | --- | --- |
-| [`docs/adr/008-preview-packages.md`](../../docs/adr/008-preview-packages.md) | Preview package boundaries; engineering-confidence model | Before any Preview Executor |
+| [`docs/adr/008-preview-stable-capability-lifecycle.md`](../../docs/adr/008-preview-stable-capability-lifecycle.md) | Preview package boundaries; engineering-confidence model | Before any Preview Executor |
 | [`docs/guides/capability-lifecycle.md`](../../docs/guides/capability-lifecycle.md) | Discovery → Preview → catalogue → product → Stable | Sequencing and ownership questions |
 | [`docs/guides/preview-packages.md`](../../docs/guides/preview-packages.md) | Preview conventions (naming, peers, exports, must-nots) | Briefing Preview Executors — skip per-capability Architect if this answers |
 | [`docs/guides/consuming-pwa-base.md`](../../docs/guides/consuming-pwa-base.md) | Public `@songara/pwa-base` entry points | Export map / consumer docs |
@@ -151,8 +151,8 @@ packages/
   physics/            # Custom timestep helpers — not Rapier Preview
   browser/  render/  runtime/  ui/  markdown/  math/  export/  controls/  …
   site-registry/  site-hello/  completion-report/  config/
-  preview-motion/     # Preview — Motion (Wave 1 T1) — live when merged
-  preview-dexie/      # Preview — Dexie (Wave 1 T2) — when merged
+  preview-motion/     # Preview — Motion (Wave 1 T1) — live
+  preview-dexie/      # Preview — Dexie (Wave 1 T2) — live
 ```
 
 Public imports: `@songara/pwa-base/...` and `@songara/pwa-base/preview/<name>` per
@@ -163,8 +163,8 @@ Public imports: `@songara/pwa-base/...` and `@songara/pwa-base/preview/<name>` p
 ```text
 packages/
   preview-motion/     # Live
-  preview-dexie/      # Wave 1
-  preview-lottie/     # Wave 1 T3
+  preview-dexie/      # Live
+  preview-lottie/     # Wave 1 T3 — idle ticket awaiting kickoff
   # Parked Wave 1 — do not open until Architect/product say so:
   # preview-howler/   # P1 revisit
   # preview-rapier2d/ # P2 after a product commits
@@ -193,12 +193,14 @@ must import Preview — not vendor duplicate engines.
 
 | Item | Status |
 | --- | --- |
-| ADR-008 + capability-lifecycle + preview-packages | On PWA-Base `main` (PR #4 era) |
-| T0 Test-PWA docs align ADR-008 | Done / merged (confirm on Test-PWA `main`) |
-| T1 `preview-motion` | Done / merged on PWA-Base `main` |
-| T2 `preview-dexie` | PR https://github.com/RSHomeServer/PWA-Base/pull/6 — human merge gate |
-| T1b catalogue consumes Motion | Dispatched under prior Test-PWA Orchestrator — adopt/track under **this** dual-repo parent going forward |
-| T2b / T3 / T3b | Not started — wait for merge + **explicit human kickoff** |
+| ADR-008 + capability-lifecycle + preview-packages | On PWA-Base `main` (PR #4); ADR path `docs/adr/008-preview-stable-capability-lifecycle.md` |
+| T0 Test-PWA docs align ADR-008 | Done / merged (Test-PWA #7) |
+| T1 `preview-motion` | Done / merged on PWA-Base `main` (#5) |
+| T2 `preview-dexie` | Done / merged on PWA-Base `main` (#6) |
+| T1b catalogue consumes Motion | Done / merged (Test-PWA #8) |
+| T2b catalogue consumes Dexie | Idle Executor under this dual-repo parent — **await human kickoff** |
+| T3 `preview-lottie` (peer `lottie-react`) | Idle Executor under this dual-repo parent — **await human kickoff** |
+| T3b catalogue consumes Lottie | Not started — after T3 merge + **explicit human kickoff** |
 | Howler / Rapier2D / Stable promote | **Parked** — not Wave 1 |
 
 Prior single-repo Orchestrators (PWA-Base `50633146-…`, Test-PWA `10c904a2-…`) are superseded
