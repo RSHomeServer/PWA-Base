@@ -50,6 +50,9 @@ Every implementation should:
 4. Pass integration tests
 5. Pass Playwright where UI or user flows are affected
 6. Contain no obvious regressions
+7. When the ticket changes a **runnable site** (catalogue, product PWA, hello): load the
+   affected routes on the Ubuntu site the human uses and confirm the **browser console is
+   clear** of errors/warnings caused by this change
 
 Production deploy to Proxmox is a **human** step after Ubuntu VM validation — not a
 local DoD gate for foundation work unless the ticket explicitly requires it.
@@ -111,7 +114,8 @@ Do not drop images without narrative.
   review → squash merge. Never push or merge to `main` unless the user explicitly instructs it.
 - **Start of every ticket:** sync to `origin/main`, then work on a dedicated feature branch.
 - End each specialist run with the completion table in `.kandev/prompts/_shared.md`
-  (branch name, PR URL, validation, recommended next task) and `step_complete_kandev`.
+  (branch name, PR URL, validation, recommended next task) and `step_complete_kandev`
+  **after** the human validation gate (local sync offer; PR only when the human asks).
 - Do not start the next ticket without explicit human approval.
 - If work depends on a PR the human has not yet merged, wait until they confirm the merge,
   then start — never auto-start and race their review.
@@ -141,7 +145,8 @@ Prefer the workspace completion-summary channel when available. Markdown is an e
 Completion is allowed only when:
 
 - [ ] Implementation finished
-- [ ] Validation passed (build, types, unit, integration, Playwright as applicable)
+- [ ] Validation passed (build, types, unit, integration, Playwright as applicable; live
+      site + clear console when a runnable site changed)
 - [ ] Documentation updated when architecture or public API changed
 - [ ] Visual validation captured and described when UI changed
 - [ ] Developer actions documented in the report (or explicitly none)

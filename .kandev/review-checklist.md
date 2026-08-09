@@ -21,6 +21,7 @@ Living checklist for the [Reviewer](./prompts/reviewer.md) role. Prefer this ove
 ## Validation and DoD
 
 - [ ] Validation ladder in `CURSOR.md` actually run for the change.
+- [ ] Site/UI tickets: live affected routes loaded; browser console clear of change-caused errors.
 - [ ] UI changes include Visual Validation narrative (`pnpm capture:artifacts` when wired).
 - [ ] Structured `RunCompletionSummary` conforms to `packages/completion-report`.
 
@@ -28,6 +29,7 @@ Living checklist for the [Reviewer](./prompts/reviewer.md) role. Prefer this ove
 
 - [ ] Commits have no editor/AI co-author or "generated with" trailers.
 - [ ] Commit messages do not mention AI/tooling.
+- [ ] Human validation gate followed: local-sync offered in plain chat; PR opened only after human ask.
 - [ ] Specialist provided completion table with **branch name** and **PR URL** (or N/A).
 - [ ] No agent merge/approve of the PR; human owns squash-merge to `main`.
 

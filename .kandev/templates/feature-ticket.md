@@ -59,8 +59,13 @@ These belong in the completion report; the report shape is defined in
 
 ## Wrap-up
 
-When the ticket work is validated (wrap-up — no extra human “open a PR” prompt needed):
-commit on the feature branch → push feature branch → open/update PR into `main` →
-completion table (branch + PR URL) → `step_complete_kandev`. **Do not** merge, approve, or
-push `main`. Human reviews and squash-merges; the next ticket syncs to `origin/main` after
-that merge.
+Human validation gate ([`_shared.md`](../prompts/_shared.md)):
+
+1. Commit on the feature branch after ladder + live-site/console validation (when applicable).
+2. Ask in **plain chat** whether to sync the primary local checkout for human testing; remain
+   idle until they reply. Do **not** use clickable question cards.
+3. Open/update the PR into `main` **only after** they ask to raise a PR.
+4. Completion table (branch + PR URL) → `step_complete_kandev`.
+
+**Do not** merge, approve, or push `main`. Human reviews and squash-merges; the next ticket
+syncs to `origin/main` after that merge.

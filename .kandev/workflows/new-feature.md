@@ -4,8 +4,9 @@ Add new capability to an app or the shared foundation.
 
 > Coordinated by the [Orchestrator](../prompts/orchestrator.md). It briefs each specialist,
 > collects the report, and returns to the centre between steps to decide the next one based
-> on project state. Every specialist reports back to the Orchestrator, never to the user.
-> The sequence below is typical, not rigid.
+> on project state. Specialists report to the Orchestrator for programme state; Executors
+> also use the **human validation gate** in this task’s chat (local sync + wait for PR ask)
+> per [`_shared.md`](../prompts/_shared.md). The sequence below is typical, not rigid.
 
 ## Sequence (Orchestrator-coordinated)
 
@@ -17,9 +18,10 @@ Add new capability to an app or the shared foundation.
    [ADR](../templates/architecture-decision.md) if a boundary/API changes, else an
    [LDR](../decisions/) → produce a [feature-ticket](../templates/feature-ticket.md).
 3. **[Executor](../prompts/executor.md)** → implement in Build Mode (KanDev **Executor**
-   profile), climb the validation ladder ([`CURSOR.md`](../../CURSOR.md)), capture Visual
-   Validation on UI change, persist the structured completion summary, push the feature
-   branch, open a PR, report the completion table, and `step_complete_kandev`.
+   profile), climb the validation ladder ([`CURSOR.md`](../../CURSOR.md)) including
+   live-site + clear console when applicable, offer primary-local sync in plain chat,
+   open a PR **only after the human asks**, then report the completion table and
+   `step_complete_kandev`.
 4. **[Reviewer](../prompts/reviewer.md)** → read-only pass against the
    [review checklist](../review-checklist.md) / PR; findings back to the
    Orchestrator, which dispatches any fixes. Human squash-merges.

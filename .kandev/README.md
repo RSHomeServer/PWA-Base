@@ -123,15 +123,18 @@ Key properties:
 
 - **The Orchestrator owns project flow.** It decides the next task from **project state**,
   not by walking a fixed sequence.
-- **Specialists are disposable workers.** They never talk to the user; they report to the
-  Orchestrator using the completion table + 9-item hand-off in
-  [`_shared.md`](./prompts/_shared.md), then signal `step_complete_kandev`.
+- **Specialists are disposable workers.** They report to the Orchestrator using the
+  completion table + hand-off in [`_shared.md`](./prompts/_shared.md), then signal
+  `step_complete_kandev`. **Exception:** Executors run the **human validation gate** in
+  the task chat (offer primary-local sync; open PR only when the human asks) — plain
+  messages, not clickable question cards.
 - **Multiple Executors may run simultaneously** when the work is genuinely independent
   (non-overlapping packages/files; sequence anything sharing `pnpm-lock.yaml`).
 - **Every specialist reports back to the Orchestrator**, which reviews the work against the
   original objective and presents the user-facing summary (including branch + PR URL).
-- **Remote Git Policy:** feature branch → PR → human squash-merge. See
-  [`prompts/_shared.md`](./prompts/_shared.md). No direct pushes/merges to `main`.
+- **Remote Git Policy:** feature branch → (human tests) → PR → human squash-merge. See
+  [`prompts/_shared.md`](./prompts/_shared.md). No direct pushes/merges to `main`. PR is
+  opened only after the human asks (Executor gate).
 - **KanDev `gh` + credential lease:** see [GitHub CLI on KanDev executors](#github-cli-on-kandev-executors) below — prefer the shim, use session-injected lease vars, never fabricate them.
 - **Start of every ticket:** sync to `origin/main`, then a dedicated feature branch —
   [`prompts/_shared.md`](./prompts/_shared.md). Ticket briefs must include the commands.
