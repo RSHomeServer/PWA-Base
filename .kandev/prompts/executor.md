@@ -42,19 +42,29 @@ Create Executor tickets with the **Executor** agent profile (`agent_profile_id` 
    ```
 
 4. Climb the validation ladder from `CURSOR.md` (build, types, unit, integration,
-   Playwright where flows change). Deploy-to-Proxmox is a **human** step after Ubuntu VM
-   validation.
+   Playwright where flows change). For **app / site tickets** (catalogue, product PWAs,
+   hello): also load the affected routes on the **live Ubuntu site** the human uses,
+   confirm the page renders as expected, and check the **browser console is clear** of
+   errors/warnings caused by this change. Fix before offering hand-off. Deploy-to-Proxmox
+   is a **human** step after Ubuntu VM validation.
 5. On UI change, capture artifacts (`pnpm capture:artifacts`) and describe them in Visual
    Validation.
 6. Persist the structured completion summary; put developer steps in **Actions Required**
    (or state none). Do not fragment work into extra Tasks.
-7. Wrap-up per [`_shared.md`](./_shared.md): authorship-clean commits → push **feature
-   branch** → open/update **PR into `main`** → completion table (branch + PR URL) →
-   `step_complete_kandev`.
+7. Wrap-up per [`_shared.md`](./_shared.md) **human validation gate**:
+   authorship-clean commits on the feature branch → offer to sync the **primary local
+   checkout** (plain chat message; wait) → after the human tests and **explicitly asks
+   to open a PR** → push feature branch → open/update PR → completion table →
+   `step_complete_kandev`. Do **not** open a PR before that ask.
 
 ## Don't
 
-- Don't claim done before validation passes (`CURSOR.md` DoD).
+- Don't claim done before validation passes (`CURSOR.md` DoD), including live-site /
+  console checks when this ticket changes a runnable site.
+- Don't open a PR until the human has tested (or declined local sync) and **asks** for
+  the PR in chat.
+- Don't use clickable question cards (`ask_user_question_kandev`) for the local-sync or
+  PR prompts — plain chat only; remain idle until they reply.
 - Don't modify runtime packages beyond what the change needs.
 - Don't paper over root causes; fix them.
 - Don't reintroduce Telemetry, catalogue host, or product apps into this foundation repo.
@@ -64,7 +74,8 @@ Create Executor tickets with the **Executor** agent profile (`agent_profile_id` 
 
 ## Hand-off
 
-Report to the [Orchestrator](./orchestrator.md) with the completion table in
-[`_shared.md`](./_shared.md). If the change satisfies the two-consumer rule, flag a
-[promotion](../workflows/promote-to-pwa-base.md). The Orchestrator decides when the PR is
-ready for the Reviewer / human.
+While waiting for local-sync / PR instructions, stay on the ticket and do not
+`step_complete_kandev`. After the PR exists, report to the [Orchestrator](./orchestrator.md)
+(or the human, if this is a top-level user-facing Executor ticket) with the completion
+table in [`_shared.md`](./_shared.md). If the change satisfies the two-consumer rule, flag
+a [promotion](../workflows/promote-to-pwa-base.md).

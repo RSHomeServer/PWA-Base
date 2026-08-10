@@ -28,9 +28,13 @@ the work, and you report back to it. (The Orchestrator itself is the sole except
 - **Do not treat the editor tooling as a collaborator.** No co-authors, no "Generated
   with …", no tool branding in commits, PRs, or reports. Authorship is the human account
   only.
-- **Report to the Orchestrator, never directly to the user.** The Orchestrator owns all
-  user-facing communication and presents the summary. Send it your progress, completion,
-  blockers, and recommendations.
+- **Report to the Orchestrator, never directly to the user** — except the **Executor human
+  validation gate** below (local-sync offer + wait for “open a PR”), which is posted as
+  plain messages in **this task’s chat**. Nested specialists still copy the Orchestrator
+  on blockers and final completion; the Orchestrator remains the programme hub.
+- **No clickable question cards** for that gate: do **not** use `ask_user_question_kandev`
+  (or similar forced-choice UI). Ask in normal chat prose and **remain idle** until the
+  human replies.
 
 ## Remote Git Policy (mandatory)
 
@@ -52,9 +56,9 @@ details: [`CONTRIBUTING.md`](../../CONTRIBUTING.md). Authorship rules below stil
   feature branch) when needed to keep the PR current — still **no** push or merge to
   `main`.
 
-Opening a PR is part of **normal ticket wrap-up** once the work is validated (same moment
-we previously prepared a human publish). The human remains the **approval and merge** gate
-— agents do not approve or merge.
+Opening a PR is **not** automatic after implementation. Executors follow the **human
+validation gate** (local sync offer → human tests → human asks for PR). The human remains
+the **approval and merge** gate — agents do not approve or merge.
 
 ### Never perform automatically
 
@@ -157,9 +161,10 @@ Profile IDs live in [`.kandev/README.md`](../README.md).
 
 ## At completion — report to the Orchestrator
 
-When the task has been pushed (feature branch + PR), report **all** of the following
+When the task has a **PR** (or genuinely no remote change), report **all** of the following
 (state "N/A" where it genuinely does not apply). The Orchestrator confirms the original
-objective and presents a concise summary to the user.
+objective and presents a concise summary to the user. Do **not** send this table or
+`step_complete_kandev` while still waiting on local-sync / “open a PR” replies.
 
 ### Completion table (required)
 
@@ -169,17 +174,18 @@ objective and presents a concise summary to the user.
 | Pull request URL | … (or N/A — no remote change) |
 | Summary of work completed | … |
 | Architectural rationale | … |
-| Validation performed | … |
+| Validation performed | … (include live-site + console when applicable) |
 | Visual validation instructions | … |
 | Functional validation instructions | … |
-| Console / log validation | … |
+| Console / log validation | … (errors/warnings observed or “clear on affected routes”) |
 | Remaining review items | … |
 | Recommended next task | … |
 
 ### Completed flag
 
-After the completion table is ready, signal `step_complete_kandev` (summary = one paragraph
-of outcome; handoff = next-step note for the Orchestrator).
+After the completion table is ready **and** the PR step is done (or N/A), signal
+`step_complete_kandev` (summary = one paragraph of outcome; handoff = next-step note for
+the Orchestrator).
 
 This hand-off **complements** the structured `RunCompletionSummary` — shape SoT:
 [`packages/completion-report/src/types.ts`](../../packages/completion-report/src/types.ts)
@@ -188,22 +194,50 @@ workspace completion-summary channel when available (`@songara/pwa-base/completi
 
 ## Git wrap-up (when the ticket changed the repo)
 
-Default path (unless the ticket says otherwise) — run this when the ticket work is done
-and validated (**wrap-up**), without waiting for a second human “please open a PR” message:
+Default path for **Executor** implementation tickets (unless the ticket explicitly says
+otherwise). Docs-only / non-site tickets still commit on a feature branch; skip live-site
+steps that do not apply, but still wait for an explicit human “open a PR” (or “skip PR”)
+before `gh pr create` / `step_complete_kandev`.
 
-1. Commit on the **feature branch** (authorship rules above).
-2. Push the **feature branch** to origin.
-3. Open or update a **pull request** into `main` (squash-merge workflow).
-4. **Do not** merge the PR, approve it, or push to `main` — that is the human’s gate.
-5. Fill the completion table (branch + PR URL required when git changed) and
-   `step_complete_kandev`.
+### A. Implement and validate (no PR yet)
+
+1. Commit on the **feature branch** (authorship rules above). Do **not** open a PR yet.
+2. Climb the [`CURSOR.md`](../../CURSOR.md) validation ladder.
+3. When the ticket affects a **runnable site** (Test-PWA catalogue, product PWA, hello,
+   etc.): load the affected routes on the Ubuntu site the human uses; confirm expected
+   UI/behaviour; confirm the **browser console is clear** of errors attributable to this
+   change. Fix regressions before continuing.
+4. Do **not** `step_complete_kandev` yet.
+
+### B. Offer primary local sync (plain chat; then idle)
+
+KanDev worktrees are not what the human’s website usually serves. After validation:
+
+1. Post a **plain chat message** in this task (not `ask_user_question_kandev`) offering to
+   update the **primary local checkout** so they can verify on their site — typically
+   `${SONGARA_PROJECTS_ROOT:-$HOME/projects}/<Repo>` — to this feature-branch tip
+   (checkout or fast-forward as appropriate), and restart the site service if this repo
+   documents one.
+2. **Remain idle** until they reply (yes / no / other instructions).
+3. If they say yes: perform the sync + any required service restart; confirm which path
+   and branch tip they are now serving. If they decline, continue without syncing.
+4. Still **do not** open a PR.
+
+### C. Open PR only when the human asks
+
+1. Wait until the human has tested (or explicitly waived testing) and **asks in chat to
+   raise / open a PR** (or equivalent). Merge alone is never this signal.
+2. Then: push the **feature branch** → open or update the **pull request** into `main`.
+3. **Do not** merge, approve, or push to `main`.
+4. Fill the completion table (branch + PR URL) and `step_complete_kandev`.
 
 For `gh` / lease setup on KanDev executors (shim `PATH`, managed
 `KANDEV_GITHUB_CREDENTIAL_*`, real `gh` binary), see
 [GitHub CLI on KanDev executors](../README.md#github-cli-on-kandev-executors). Do not
 fabricate lease env vars.
 
-The Orchestrator then presents the PR to the user for review/merge. After the human
-merges, subsequent tickets **sync to `origin/main`** before starting (see Before starting).
+The Orchestrator (or human on a top-level Executor ticket) then uses the PR for
+review/merge. After the human merges, subsequent tickets **sync to `origin/main`** before
+starting (see Before starting).
 
 Do **not** start the next ticket unless the Orchestrator (or human) explicitly approves.

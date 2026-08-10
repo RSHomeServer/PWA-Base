@@ -253,8 +253,10 @@ Every child `description` must include:
 6. **Objective**, **Deliverables**, **Must not / out of scope**, **Validation**.
 7. **SoT links** (ADR-008, preview-packages, consuming guide, catalogue docs as relevant).
 8. **Authorship / no editor attribution** (see below) — paste the block into every brief.
-9. **Wrap-up:** commit → push feature branch → `gh pr create` → completion table
-   (**branch + PR URL**) → `step_complete_kandev`. **Never merge or approve.**
+9. **Wrap-up:** human validation gate ([`_shared.md`](./_shared.md)): commit on feature
+   branch → offer primary-local sync in plain chat (idle until reply) → open PR **only
+   after the human asks** → completion table (**branch + PR URL**) → `step_complete_kandev`.
+   **Never merge or approve.**
 
 ### Authorship block (paste into every child brief)
 
@@ -275,10 +277,11 @@ Editor tooling (Cursor, Copilot, etc.) is not a collaborator.
 
 1. Sync to `origin/main` (correct repo).
 2. Branch `feat/…` or `docs/…`.
-3. Implement + validate (`CURSOR.md` ladder).
-4. Commit **without** AI/Cursor attribution.
-5. Push feature branch; open PR; **stop** (human merges).
-6. Completion table + `step_complete_kandev` to this Orchestrator.
+3. Implement + validate (`CURSOR.md` ladder; live site + clear console when applicable).
+4. Commit **without** AI/Cursor attribution (no PR yet).
+5. Offer primary-local sync in plain chat; idle until reply; sync only if asked.
+6. Open PR **only after** the human asks; then completion table + `step_complete_kandev`.
+7. Human merges.
 
 ---
 
