@@ -47,10 +47,21 @@ Lifecycle and Wave 1 plan: [preview-packages.md](./preview-packages.md),
 | `@songara/pwa-base/preview/motion` | **Live** | Thin Motion integration + reduced-motion-aware helpers (`packages/preview-motion`) |
 | `@songara/pwa-base/preview/dexie` | **Live** | Dexie core factory / migration helpers (no Cloud; `packages/preview-dexie`) |
 | `@songara/pwa-base/preview/lottie` | **Live** | Narrow `lottie-react` player + reduced-motion freeze (`packages/preview-lottie`) |
+| `@songara/pwa-base/preview/rive` | **Live** | Thin `@rive-app/react-canvas` + reduced-motion pause (`packages/preview-rive`) |
+| `@songara/pwa-base/preview/gsap` | **Live** | Thin GSAP + reduced-motion timeline helpers (`packages/preview-gsap`) |
+| `@songara/pwa-base/preview/tsparticles` | **Live** | Thin tsparticles slim/React + reduced-motion freeze (`packages/preview-tsparticles`) |
+| `@songara/pwa-base/preview/rapier2d` | **Live** | Rapier2D WASM/compat world bootstrap (`packages/preview-rapier2d`) |
+| `@songara/pwa-base/preview/matter` | **Live** | Thin Matter.js engine helpers (`packages/preview-matter`) |
+| `@songara/pwa-base/preview/planck` | **Live** | Thin Planck.js world bootstrap (`packages/preview-planck`) |
+| `@songara/pwa-base/preview/cannon` | **Live** | Thin cannon-es world bootstrap (`packages/preview-cannon`) |
+| `@songara/pwa-base/preview/react-webcam` | **Live** | Thin react-webcam constraints helpers (`packages/preview-react-webcam`) |
+| `@songara/pwa-base/preview/tone` | **Live** | Thin Tone.js transport helpers — does not replace `/audio` (`packages/preview-tone`) |
+| `@songara/pwa-base/preview/howler` | **Live** | Thin Howler SFX façade — does not replace `AudioEngineProvider` (`packages/preview-howler`) |
+| `@songara/pwa-base/preview/idb` | **Live** | Thin idb helpers + Songara naming (`packages/preview-idb`) |
+| `@songara/pwa-base/preview/localforage` | **Live** | Thin localForage instance helpers + Songara naming (`packages/preview-localforage`) |
 
-Rows above become live when an Executor lands `packages/preview-*` and wires `exports`.
-Until then, apps may use catalogue OSS **app-locally**; do not invent parallel wrapper
-APIs that diverge from the planned Preview paths.
+Rows above are live when `packages/preview-*` exists and root `exports` wires the path.
+Install declared peers in the consumer; do not invent parallel wrapper APIs.
 
 ### Root / contract / UI
 
@@ -104,6 +115,56 @@ import {
   useSongaraLottiePlayback,
 } from "@songara/pwa-base/preview/lottie";
 // Peer: pnpm add lottie-react
+
+import {
+  useRive,
+  useSongaraRivePlayback,
+} from "@songara/pwa-base/preview/rive";
+// Peer: pnpm add @rive-app/react-canvas
+
+import { gsap, useSongaraGsapPlayback } from "@songara/pwa-base/preview/gsap";
+// Peer: pnpm add gsap
+
+import {
+  Particles,
+  ParticlesProvider,
+  loadSlim,
+  useSongaraParticlesMotion,
+} from "@songara/pwa-base/preview/tsparticles";
+// Peers: pnpm add @tsparticles/react @tsparticles/slim
+
+import {
+  createSongaraRapierWorld,
+  songaraFixedStepSeconds,
+} from "@songara/pwa-base/preview/rapier2d";
+// Peer: pnpm add @dimforge/rapier2d-compat
+
+import { Matter, createSongaraMatterEngine } from "@songara/pwa-base/preview/matter";
+// Peer: pnpm add matter-js
+
+import { createSongaraPlanckWorld } from "@songara/pwa-base/preview/planck";
+// Peer: pnpm add planck
+
+import { createSongaraCannonWorld } from "@songara/pwa-base/preview/cannon";
+// Peer: pnpm add cannon-es
+
+import {
+  Webcam,
+  songaraWebcamConstraints,
+} from "@songara/pwa-base/preview/react-webcam";
+// Peer: pnpm add react-webcam
+
+import { Transport, resolveToneTransport } from "@songara/pwa-base/preview/tone";
+// Peer: pnpm add tone — does not replace @songara/pwa-base/audio
+
+import { createSongaraSfx } from "@songara/pwa-base/preview/howler";
+// Peer: pnpm add howler — does not replace AudioEngineProvider
+
+import { openSongaraDb } from "@songara/pwa-base/preview/idb";
+// Peer: pnpm add idb
+
+import { createSongaraLocalforage } from "@songara/pwa-base/preview/localforage";
+// Peer: pnpm add localforage
 ```
 
 Preview surfaces never appear on the root `@songara/pwa-base` barrel.

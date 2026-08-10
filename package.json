@@ -87,6 +87,66 @@
       "import": "./packages/preview-lottie/src/index.ts",
       "default": "./packages/preview-lottie/src/index.ts"
     },
+    "./preview/rive": {
+      "types": "./packages/preview-rive/src/index.ts",
+      "import": "./packages/preview-rive/src/index.ts",
+      "default": "./packages/preview-rive/src/index.ts"
+    },
+    "./preview/gsap": {
+      "types": "./packages/preview-gsap/src/index.ts",
+      "import": "./packages/preview-gsap/src/index.ts",
+      "default": "./packages/preview-gsap/src/index.ts"
+    },
+    "./preview/tsparticles": {
+      "types": "./packages/preview-tsparticles/src/index.ts",
+      "import": "./packages/preview-tsparticles/src/index.ts",
+      "default": "./packages/preview-tsparticles/src/index.ts"
+    },
+    "./preview/rapier2d": {
+      "types": "./packages/preview-rapier2d/src/index.ts",
+      "import": "./packages/preview-rapier2d/src/index.ts",
+      "default": "./packages/preview-rapier2d/src/index.ts"
+    },
+    "./preview/matter": {
+      "types": "./packages/preview-matter/src/index.ts",
+      "import": "./packages/preview-matter/src/index.ts",
+      "default": "./packages/preview-matter/src/index.ts"
+    },
+    "./preview/planck": {
+      "types": "./packages/preview-planck/src/index.ts",
+      "import": "./packages/preview-planck/src/index.ts",
+      "default": "./packages/preview-planck/src/index.ts"
+    },
+    "./preview/cannon": {
+      "types": "./packages/preview-cannon/src/index.ts",
+      "import": "./packages/preview-cannon/src/index.ts",
+      "default": "./packages/preview-cannon/src/index.ts"
+    },
+    "./preview/react-webcam": {
+      "types": "./packages/preview-react-webcam/src/index.ts",
+      "import": "./packages/preview-react-webcam/src/index.ts",
+      "default": "./packages/preview-react-webcam/src/index.ts"
+    },
+    "./preview/tone": {
+      "types": "./packages/preview-tone/src/index.ts",
+      "import": "./packages/preview-tone/src/index.ts",
+      "default": "./packages/preview-tone/src/index.ts"
+    },
+    "./preview/howler": {
+      "types": "./packages/preview-howler/src/index.ts",
+      "import": "./packages/preview-howler/src/index.ts",
+      "default": "./packages/preview-howler/src/index.ts"
+    },
+    "./preview/idb": {
+      "types": "./packages/preview-idb/src/index.ts",
+      "import": "./packages/preview-idb/src/index.ts",
+      "default": "./packages/preview-idb/src/index.ts"
+    },
+    "./preview/localforage": {
+      "types": "./packages/preview-localforage/src/index.ts",
+      "import": "./packages/preview-localforage/src/index.ts",
+      "default": "./packages/preview-localforage/src/index.ts"
+    },
     "./browser": {
       "types": "./packages/browser/src/index.ts",
       "import": "./packages/browser/src/index.ts",
@@ -110,6 +170,18 @@
     "packages/preview-motion/src",
     "packages/preview-dexie/src",
     "packages/preview-lottie/src",
+    "packages/preview-rive/src",
+    "packages/preview-gsap/src",
+    "packages/preview-tsparticles/src",
+    "packages/preview-rapier2d/src",
+    "packages/preview-matter/src",
+    "packages/preview-planck/src",
+    "packages/preview-cannon/src",
+    "packages/preview-react-webcam/src",
+    "packages/preview-tone/src",
+    "packages/preview-howler/src",
+    "packages/preview-idb/src",
+    "packages/preview-localforage/src",
     "packages/browser/src",
     "packages/audio/src",
     "packages/render/src",
@@ -144,7 +216,7 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "test": "pnpm test:unit && pnpm test:e2e",
-    "test:unit": "pnpm --filter @platform/math --filter @platform/physics --filter @platform/export --filter @platform/controls --filter @platform/markdown --filter @platform/animation --filter @platform/preview-motion --filter @platform/preview-dexie --filter @platform/preview-lottie --filter @platform/audio --filter @platform/browser --filter @platform/render --filter @platform/ui --filter @platform/runtime --filter @platform/completion-report test:unit",
+    "test:unit": "pnpm --filter @platform/math --filter @platform/physics --filter @platform/export --filter @platform/controls --filter @platform/markdown --filter @platform/animation --filter @platform/preview-motion --filter @platform/preview-dexie --filter @platform/preview-lottie --filter @platform/preview-rive --filter @platform/preview-gsap --filter @platform/preview-tsparticles --filter @platform/preview-rapier2d --filter @platform/preview-matter --filter @platform/preview-planck --filter @platform/preview-cannon --filter @platform/preview-react-webcam --filter @platform/preview-tone --filter @platform/preview-howler --filter @platform/preview-idb --filter @platform/preview-localforage --filter @platform/audio --filter @platform/browser --filter @platform/render --filter @platform/ui --filter @platform/runtime --filter @platform/completion-report test:unit",
     "test:e2e": "playwright test",
     "capture:artifacts": "node scripts/capture-artifacts.mjs",
     "version:bump": "node scripts/bump-version.mjs",

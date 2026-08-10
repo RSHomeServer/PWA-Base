@@ -26,7 +26,11 @@ packages/
   preview-motion/
   preview-dexie/
   preview-lottie/
-  # later: preview-howler/, preview-rapier2d/ if gates pass
+  preview-rive/ preview-gsap/ preview-tsparticles/
+  preview-rapier2d/ preview-matter/ preview-planck/ preview-cannon/
+  preview-react-webcam/
+  preview-tone/ preview-howler/   # thin; do not replace Stable /audio
+  preview-idb/ preview-localforage/
 ```
 
 | Rule | Detail |
@@ -127,8 +131,11 @@ Recommended **Executor order** (docs/ADR already done):
 | 1 | **Motion** | Yes | Peer `motion`; helpers that honour `@songara/pwa-base/animation` reduced-motion | Re-export Motion primitives + reduced-motion-aware wrappers; do **not** move `ParticleField` / viewport hooks into Preview |
 | 2 | **Dexie** | Yes | Peer `dexie` (core only) | DB factory + migration helpers; schemas app-owned; no Dexie Cloud; do not duplicate Content Pack `packStore` |
 | 3 | **Lottie** | Yes (narrow) | Peer player (`lottie-react` or chosen dotLottie binding) | Player component + reduced-motion freeze; assets via URL / Content Packs |
-| — | **Howler** | **Defer** | — | Overlaps Stable `@platform/audio`; revisit only as thin multi-format SFX façade that does **not** replace `AudioEngineProvider` |
-| — | **Rapier2D** | **Hold (Wave 1b)** | — | Open only when a product (e.g. Physics-PWA) commits to the Preview API; world bootstrap + fixed-step helpers; keep `@platform/physics` separate; peer `@dimforge/rapier2d-compat` |
+| 4+ | **Rive / GSAP / tsparticles** | Yes | Peers per package; reduced-motion helpers | Re-export + policy helpers only; assets/timelines app-owned |
+| 4+ | **Rapier2D / Matter / Planck / cannon-es** | Yes | World/engine bootstrap + `songaraFixedStepSeconds` | Keep `@platform/physics` SoA engine separate; peer heavy WASM/engines |
+| 4+ | **react-webcam** | Yes | Peer `react-webcam`; constraint helpers | Permission UX app-owned; graduate toward `/browser` |
+| 4+ | **Tone / Howler** | Yes (thin) | Peers `tone` / `howler` | Must **not** replace Stable `AudioEngineProvider`; SFX/Transport labs only |
+| 4+ | **idb / localForage** | Yes | Peers + `songaraDbName` / instance helpers | Prefer Dexie Preview for schema versions; not Content Pack `packStore` |
 
 ### Per-capability notes
 
@@ -142,12 +149,13 @@ animation kit. Implementation order: first.
 **Lottie** — Belongs as a **narrow** Preview after Motion policy exists. Missing:
 reduced-motion behaviour must be defined consistently with Motion Preview. Order: third.
 
-**Howler** — Not Wave 1. Prefer Stable audio kit for shared graphs; catalogue may still
-explore Howler app-locally until a Preview gate is re-run.
+**Howler / Tone** — Thin Preview only. Prefer Stable audio kit for shared graphs;
+catalogue may explore Howler/Tone via `/preview/howler` and `/preview/tone` without
+replacing `AudioEngineProvider`.
 
-**Rapier2D** — Not Wave 1. Engine/WASM cost and scene-shaped APIs fail the “thin
-multi-app” bar until a product commits. Catalogue explorations may use Rapier
-app-locally; Preview waits for Wave 1b + product commitment.
+**Rapier2D (+ Matter / Planck / cannon-es)** — Preview world/engine bootstrap is Live
+for catalogue validation. Keep `@platform/physics` separate. Product commitment still
+gates Stable graduation.
 
 ### Missing foundational capability (docs, not a new kit)
 
