@@ -68,11 +68,12 @@ Guides: [solo-packaging.md](./guides/solo-packaging.md), [content-packs.md](./gu
 | `apps/hello-web` | `site-hello`, `@platform/runtime`, `@platform/ui`, shared kits | Other product site packages (none in-tree) |
 | `packages/site-hello` | `@platform/site-registry/contract`, `@platform/runtime`, shared kits, React | App entry internals |
 | Shared Stable kits (`ui`, `runtime`, …) | Browser APIs; peers as declared; other Stable kits only when justified | Site packages; sibling app repos; Preview packages |
-| Preview kits (`preview-*`) | Declared OSS peers; Stable kits when justified | Site packages; product repos |
+| Preview kits (`preview-*`) | Declared OSS peers; Stable kits when justified | Site packages; product repos; root-barrel re-export of Preview |
 | Sibling product apps / Test-PWA | Documented `@songara/pwa-base` entry points only (incl. `/preview/*`) | Deep imports into `@platform/*` workspace paths; Test-PWA as a library |
 
 Inside the monorepo use `@platform/*`. In sibling apps import only from `@songara/pwa-base`
-documented exports.
+documented exports. Live Preview subpaths are listed in
+[consuming-pwa-base.md](./guides/consuming-pwa-base.md) (never on the root barrel).
 
 ## Reference app flow
 
