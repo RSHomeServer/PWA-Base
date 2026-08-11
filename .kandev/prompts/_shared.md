@@ -227,14 +227,36 @@ KanDev worktrees are not what the human’s website usually serves. After valida
 
 1. Wait until the human has tested (or explicitly waived testing) and **asks in chat to
    raise / open a PR** (or equivalent). Merge alone is never this signal.
-2. Then: push the **feature branch** → open or update the **pull request** into `main`.
-3. **Do not** merge, approve, or push to `main`.
-4. Fill the completion table (branch + PR URL) and `step_complete_kandev`.
+2. **GitHub CLI lease preflight (mandatory, before PR body):**
 
-For `gh` / lease setup on KanDev executors (shim `PATH`, managed
-`KANDEV_GITHUB_CREDENTIAL_*`, real `gh` binary), see
-[GitHub CLI on KanDev executors](../README.md#github-cli-on-kandev-executors). Do not
-fabricate lease env vars.
+   ```bash
+   export PATH="${KANDEV_GITHUB_CLI_SHIM_DIR}:$PATH"
+   bash .kandev/scripts/gh-preflight.sh
+   ```
+
+   On FAIL / broker HTTP 401 / missing lease vars: **stop once**. Report the exact error
+   and preflight output in this task’s chat. Do **not** retry alternate credential
+   sources (see bans below). On PASS: draft the PR body, then continue.
+3. Then: push the **feature branch** → open or update the **pull request** into `main`
+   (still with `$KANDEV_GITHUB_CLI_SHIM_DIR` first on `PATH`).
+4. **Do not** merge, approve, or push to `main`.
+5. Fill the completion table (branch + PR URL) and `step_complete_kandev`.
+
+Full symptoms → check → escalate table:
+[GitHub CLI on KanDev executors](../README.md#github-cli-on-kandev-executors)
+([LDR-0001](../decisions/0001-gh-lease-preflight-fail-fast.md)).
+
+### Hard bans — GitHub credentials on KanDev
+
+Never:
+
+- Decrypt KanDev databases / `master.key` / secrets tables to obtain GitHub tokens.
+- Invent or fabricate `KANDEV_GITHUB_CREDENTIAL_*` / shim paths / lease values.
+- Run multi-minute auth probe loops (alternate `PATH`s, temp PATs, repeated
+  `gh auth login`, secret-store fishing).
+- Draft a PR body **before** lease preflight PASS.
+- Prefer bare `~/.local/bin/gh` (or any non-shim `gh`) when the lease shim is available —
+  SSH `git push` succeeding does **not** mean `gh` is authenticated.
 
 The Orchestrator (or human on a top-level Executor ticket) then uses the PR for
 review/merge. After the human merges, subsequent tickets **sync to `origin/main`** before
