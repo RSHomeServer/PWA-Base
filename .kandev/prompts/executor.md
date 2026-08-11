@@ -54,8 +54,9 @@ Create Executor tickets with the **Executor** agent profile (`agent_profile_id` 
 7. Wrap-up per [`_shared.md`](./_shared.md) **human validation gate**:
    authorship-clean commits on the feature branch → offer to sync the **primary local
    checkout** (plain chat message; wait) → after the human tests and **explicitly asks
-   to open a PR** → push feature branch → open/update PR → completion table →
-   `step_complete_kandev`. Do **not** open a PR before that ask.
+   to open a PR** → **lease preflight PASS** → draft PR body → push feature branch →
+   open/update PR (shim-first `PATH`) → completion table → `step_complete_kandev`. Do
+   **not** open a PR before that ask; do **not** thrash credentials on auth failure.
 
 ## Don't
 
@@ -65,6 +66,12 @@ Create Executor tickets with the **Executor** agent profile (`agent_profile_id` 
   the PR in chat.
 - Don't use clickable question cards (`ask_user_question_kandev`) for the local-sync or
   PR prompts — plain chat only; remain idle until they reply.
+- Don't draft a PR body or run `gh pr create` until
+  [`.kandev/scripts/gh-preflight.sh`](../scripts/gh-preflight.sh) PASSes (shim first on
+  `PATH`). On broker 401 / preflight FAIL: stop once and report — see
+  [`_shared.md`](./_shared.md) hard bans.
+- Don't decrypt KanDev secrets DBs / `master.key`, mint temp PATs, invent lease env
+  vars, or thrash alternate `gh`/credential paths.
 - Don't modify runtime packages beyond what the change needs.
 - Don't paper over root causes; fix them.
 - Don't reintroduce Telemetry, catalogue host, or product apps into this foundation repo.

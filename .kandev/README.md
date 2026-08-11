@@ -18,7 +18,7 @@ or architecture rules — it links to their sources of truth:
 | [`docs/guides/consuming-pwa-base.md`](../docs/guides/consuming-pwa-base.md) | Public API entry points (root `exports`, kits, injectable chrome) + `file:../PWA-Base` consumption |
 | [`CONTRIBUTING.md`](../CONTRIBUTING.md) | Branch / PR workflow (feature → PR → squash merge); ownership |
 | [`prompts/_shared.md`](./prompts/_shared.md) | Remote Git Policy + completion table (all roles) |
-| [GitHub CLI on KanDev executors](#github-cli-on-kandev-executors) | KanDev `gh` shim + managed credential lease (runbook pointer) |
+| [GitHub CLI on KanDev executors](#github-cli-on-kandev-executors) | Lease-first `gh` preflight + fail-fast runbook (no credential thrash) |
 | [`review-checklist.md`](./review-checklist.md) | Living reviewer walkthrough |
 
 ## Environment
@@ -53,6 +53,8 @@ PWA-Base is the canonical **upstream** for both dimensions:
 .kandev/
 ├── README.md                     # this file
 ├── review-checklist.md           # living reviewer checklist
+├── scripts/
+│   └── gh-preflight.sh           #  lease/shim PASS/FAIL before gh pr create
 ├── prompts/                      # reusable role operating instructions
 │   ├── _shared.md                #  cross-cutting rules every role inherits
 │   ├── orchestrator.md           #  persistent coordinator; owns project flow & user contact
@@ -71,7 +73,8 @@ PWA-Base is the canonical **upstream** for both dimensions:
 │   └── promotion-ticket.md
 ├── decisions/                    # lightweight decision records (NOT formal ADRs)
 │   ├── README.md
-│   └── 0000-template.md
+│   ├── 0000-template.md
+│   └── 0001-gh-lease-preflight-fail-fast.md
 └── workflows/                    # human-readable "which role, when" guides
     ├── new-feature.md
     ├── bug-fix.md
@@ -135,7 +138,7 @@ Key properties:
 - **Remote Git Policy:** feature branch → (human tests) → PR → human squash-merge. See
   [`prompts/_shared.md`](./prompts/_shared.md). No direct pushes/merges to `main`. PR is
   opened only after the human asks (Executor gate).
-- **KanDev `gh` + credential lease:** see [GitHub CLI on KanDev executors](#github-cli-on-kandev-executors) below — prefer the shim, use session-injected lease vars, never fabricate them.
+- **KanDev `gh` + credential lease:** see [GitHub CLI on KanDev executors](#github-cli-on-kandev-executors) — preflight → fail-fast; never thrash alternate credentials.
 - **Start of every ticket:** sync to `origin/main`, then a dedicated feature branch —
   [`prompts/_shared.md`](./prompts/_shared.md). Ticket briefs must include the commands.
 - **Next ticket:** only after **explicit human approval**. A merged PR alone is not
@@ -173,17 +176,66 @@ sequences the Orchestrator adapts to project state.
 
 ## GitHub CLI on KanDev executors
 
-Thin runbook for opening PRs from a KanDev session. Policy substance stays in
-[`prompts/_shared.md`](./prompts/_shared.md) (Remote Git Policy + wrap-up).
+Runbook for opening PRs from a KanDev session. Policy substance stays in
+[`prompts/_shared.md`](./prompts/_shared.md) (Remote Git Policy + wrap-up + hard bans).
+Tactical decision: [LDR-0001](./decisions/0001-gh-lease-preflight-fail-fast.md).
 
-1. **Prefer the KanDev `gh` shim** — prepend `$KANDEV_GITHUB_CLI_SHIM_DIR` to `PATH` so
-   `gh` resolves to the lease-aware wrapper.
-2. **Managed credentials** — when `task_git_credentials_mode=managed`, the session injects
-   `KANDEV_GITHUB_CREDENTIAL_*` (and related lease vars) at start. Use them; do **not**
-   invent or paste fabricated lease env values.
-3. **Real `gh` binary required** — the shim wraps a real CLI on `PATH`. If apt/`/usr/bin/gh`
-   is unavailable on this host, install a user-local binary (e.g. `$HOME/.local/bin/gh`) and
-   keep that directory on `PATH` after the shim dir.
+### Correct first path (copy-paste)
+
+Do this **before** drafting a PR body or running `gh pr create`:
+
+```bash
+# 1) Lease-aware gh must win over any other gh on PATH (e.g. ~/.local/bin/gh)
+export PATH="${KANDEV_GITHUB_CLI_SHIM_DIR}:$PATH"
+
+# 2) Preflight — PASS/FAIL only; prints no secrets
+bash .kandev/scripts/gh-preflight.sh
+# If this repo has no copy yet: bash "${SONGARA_PROJECTS_ROOT:-$HOME/projects}/PWA-Base/.kandev/scripts/gh-preflight.sh"
+```
+
+On **PASS**: draft the PR body, then `gh pr create` (still with shim first on `PATH`).
+On **FAIL**: **stop immediately**. Paste the preflight output (and the single broker/`gh`
+error if any) into task chat for the Orchestrator/human. Do **not** retry other credential
+sources.
+
+### What “good” looks like
+
+| Check | Expected |
+| --- | --- |
+| `echo "$KANDEV_GITHUB_CLI_SHIM_DIR"` | Non-empty temp dir containing `gh` → `agentctl` |
+| `KANDEV_GITHUB_CREDENTIAL_*` | Present in the session env (broker URL, lease, host, owner, repo, session, task) |
+| `command -v gh` after PATH fix | Equals `$KANDEV_GITHUB_CLI_SHIM_DIR/gh` |
+| Preflight | Prints `PASS:` lines and exits 0 |
+
+Managed lease: when the session injects `KANDEV_GITHUB_CREDENTIAL_*`, use those values
+only. Do **not** invent, paste, or overwrite lease env vars.
+
+Real `gh` binary: the shim wraps a real CLI elsewhere on `PATH`. A user-local binary at
+`$HOME/.local/bin/gh` is fine **only after** the shim dir — never ahead of it.
+
+### Symptoms → check → fix / escalate
+
+| Symptom | Check | Fix / escalate |
+| --- | --- | --- |
+| `gh auth status` → not logged in; `git push` (SSH) still works | `type -a gh` — first hit is `~/.local/bin/gh` or `/usr/bin/gh`, not the shim | `export PATH="$KANDEV_GITHUB_CLI_SHIM_DIR:$PATH"` and re-run preflight. Split auth is normal: SSH ≠ lease HTTPS. |
+| `resolve GitHub credential: broker returned HTTP 401` | Lease/session binding; run preflight once | **Fail-fast.** Report exact error + preflight. Do not decrypt KanDev DBs or mint temp PATs. Platform/Orchestrator owns broker repair. |
+| `KANDEV_GITHUB_CLI_SHIM_DIR` unset / empty | Session not lease-injected | Stop; escalate — do not fabricate shim dirs or lease vars. |
+| Shim first but `gh` still fails | Single `gh api user -q .login` with shim on `PATH` | Report stdout/stderr once; escalate. No multi-minute probe loops. |
+| Agent wants a PAT from KanDev secrets / `master.key` | — | **Banned.** Never. |
+
+### Hard bans (all roles)
+
+- Decrypting KanDev DB / `master.key` / secrets tables for GitHub tokens
+- Writing temp PATs, inventing lease env vars, or pasting secrets into chat
+- Multi-minute auth probe loops (alternate `PATH`s, repeated `gh auth login`, secret stores)
+- Drafting a large PR body **before** preflight PASS
+
+### Platform note (escalate, do not workaround with secrets)
+
+If the session already sets `KANDEV_GITHUB_CLI_SHIM_DIR` but injects `PATH` with
+`~/.local/bin` **before** the shim, bare `gh` silently skips the lease. Agents must
+prepend the shim (above). Long-term: KanDev should put the shim directory first on
+`PATH` for Executor sessions so the default `gh` is lease-aware.
 
 ## Formal ADRs vs lightweight decisions
 
