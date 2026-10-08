@@ -98,6 +98,7 @@ node "${SONGARA_PROJECTS_ROOT:-$HOME/projects}/PWA-Base/scripts/ensure-sibling-f
 | Independent packaging | [docs/guides/solo-packaging.md](./docs/guides/solo-packaging.md) |
 | Content Packs (ADR-005) | [docs/guides/content-packs.md](./docs/guides/content-packs.md) |
 | Local development | [docs/guides/local-development.md](./docs/guides/local-development.md) |
+| Production Docker (sibling apps) | [docs/guides/production-docker.md](./docs/guides/production-docker.md) |
 | Testing | [docs/guides/testing.md](./docs/guides/testing.md) |
 | Architecture decisions (ADRs) | [docs/adr/](./docs/adr/) — start with [ADR-007](./docs/adr/007-pwa-base-reusable-foundation.md) |
 | Design system | [docs/design-system/](./docs/design-system/) |
@@ -113,6 +114,7 @@ node "${SONGARA_PROJECTS_ROOT:-$HOME/projects}/PWA-Base/scripts/ensure-sibling-f
 | `pnpm stop` | Stop the background demo server |
 | `pnpm new-app <name>` | Scaffold a solo PWA + Content Pack |
 | `node scripts/ensure-sibling-file-deps.mjs` | Link `file:../` siblings for KanDev/worktrees (run from consumer app) |
+| `node scripts/docker-build-consumer.mjs` | Parent-context production image for a sibling PWA |
 | `pnpm content-pack:sync` | Hash/mirror a Content Pack |
 | `pnpm build` | Build all packages that define `build` |
 | `pnpm lint` | ESLint across the repo |

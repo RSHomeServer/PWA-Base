@@ -60,6 +60,9 @@ docker compose up --build
 Serves the Hello nginx image for a production-like static check. Day-to-day work
 should use `pnpm dev`. Published ports are defined in `docker-compose.yml`.
 
+Sibling product PWAs (Recipe, FPL, …) use a **parent sibling build context**, not
+this Compose file. Guide: [production-docker.md](./production-docker.md).
+
 ## Workspace commands
 
 | Task                   | Command          |

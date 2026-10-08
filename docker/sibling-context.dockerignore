@@ -1,0 +1,32 @@
+# Template used by scripts/docker-build-consumer.mjs for parent-directory
+# build contexts (Option A: sibling checkouts). The helper substitutes
+# __APP_DIR__ and __PWA_BASE_DIR__ then writes a temporary parent .dockerignore.
+#
+# Deny everything, then allow only the two sibling trees needed for the build.
+
+*
+!__PWA_BASE_DIR__/
+!__PWA_BASE_DIR__/**
+!__APP_DIR__/
+!__APP_DIR__/**
+
+# Re-exclude heavy / non-source paths inside the allowed trees
+**/node_modules
+**/dist
+**/build
+**/coverage
+**/.git
+**/.tmp
+**/.tmp-visual
+**/.turbo
+**/.eslintcache
+**/*.tsbuildinfo
+**/e2e
+**/__tests__
+**/*.test.*
+**/*.spec.*
+**/.env
+**/.env.*
+**/.DS_Store
+**/playwright-report
+**/test-results

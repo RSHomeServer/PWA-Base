@@ -14,3 +14,4 @@ Current repository identity: [ADR-007](./007-pwa-base-reusable-foundation.md).
 | [006](./006-kandev-sibling-file-deps.md)  | Local sibling packages under KanDev worktrees    | Accepted |
 | [007](./007-pwa-base-reusable-foundation.md) | PWA-Base as a reusable foundation             | Accepted |
 | [008](./008-preview-stable-capability-lifecycle.md) | Preview / Stable capability lifecycle   | Accepted |
+| [009](./009-sibling-production-docker.md) | Sibling-context production Docker builds | Accepted |

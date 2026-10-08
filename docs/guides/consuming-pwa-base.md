@@ -407,3 +407,15 @@ gaps:
 Until those land, **`file:../PWA-Base` is the supported consumption path**.
 Isolated worktrees use the KanDev sibling layout +
 `scripts/ensure-sibling-file-deps.mjs` (see above), not published packages.
+
+## Production Docker images
+
+Sibling apps build production nginx images with the **parent directory** as the
+Docker context (so `file:../PWA-Base` remains valid). Prefer:
+
+```bash
+node ../PWA-Base/scripts/docker-build-consumer.mjs -t my-app:local
+```
+
+Full guide: [production-docker.md](./production-docker.md). Decision record:
+[ADR-009](../adr/009-sibling-production-docker.md).
