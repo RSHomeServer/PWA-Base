@@ -25,6 +25,7 @@ Product applications are **not** hosted in this repository.
 | [006 — KanDev sibling deps](./adr/006-kandev-sibling-file-deps.md) | `file:../` + linker for worktrees |
 | [007 — Reusable foundation](./adr/007-pwa-base-reusable-foundation.md) | **Current identity** — sibling product repos; hello reference only |
 | [008 — Preview / Stable lifecycle](./adr/008-preview-stable-capability-lifecycle.md) | Curated Preview integrations → Stable graduation |
+| [009 — Sibling production Docker](./adr/009-sibling-production-docker.md) | Parent-context Docker builds for `file:../PWA-Base` apps |
 
 Full index: [docs/adr/README.md](./adr/README.md).
 
@@ -112,6 +113,10 @@ describes how apps should consume tokens and components.
 
 - **Dev (Ubuntu VM)** — `pnpm dev` for the hello reference app; `pnpm lint` / `typecheck` /
   `test` for validation.
+- **Sibling product images** — parent-directory Docker context so `file:../PWA-Base`
+  stays valid; see [production-docker.md](./guides/production-docker.md) and
+  [ADR-009](./adr/009-sibling-production-docker.md). Domain routing / Traefik / GHCR
+  are deployment concerns outside this foundation pattern.
 - **Production (Proxmox)** — human-operated Website Hosting stack; not required for
   foundation Definition of Done on this VM.
 
