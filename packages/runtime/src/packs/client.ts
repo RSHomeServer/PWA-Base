@@ -18,6 +18,15 @@ function joinUrl(root: string, ...parts: string[]): string {
   return `${base}/${path}`;
 }
 
+/** Encode each segment so filenames with spaces, `#`, or non-ASCII fetch correctly. */
+function encodePackEntryPath(path: string): string {
+  return path
+    .split("/")
+    .filter(Boolean)
+    .map((segment) => encodeURIComponent(segment))
+    .join("/");
+}
+
 export function packBaseUrl(
   appId: string,
   packId: string,
@@ -136,7 +145,7 @@ export async function installContentPack(
       totalEntries: total,
       message: entry.path,
     });
-    const url = joinUrl(base, entry.path);
+    const url = joinUrl(base, encodePackEntryPath(entry.path));
     const res = await fetch(url, { signal: options.signal });
     if (!res.ok) {
       throw new Error(`Failed to fetch pack entry (${res.status}): ${url}`);
