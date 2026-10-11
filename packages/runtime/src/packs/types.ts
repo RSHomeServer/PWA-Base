@@ -40,8 +40,11 @@ export interface PackClientOptions {
   onProgress?: (progress: PackInstallProgress) => void;
   /**
    * Optional explicit version. When omitted, the client fetches
-   * `/packs/<appId>/<packId>/current.json` `{ "version": "…" }` if present,
-   * otherwise defaults to `1.0.0` for v1 static packs.
+   * `/packs/<appId>/<packId>/current.json` `{ "version": "…" }` if present.
+   * If that fetch fails because the network is unavailable, the client uses the
+   * already-installed active pack version when one exists for this app; otherwise
+   * Ready fails. When `current.json` is reachable but missing/invalid, v1 still
+   * defaults to `1.0.0`.
    */
   version?: string;
   signal?: AbortSignal;

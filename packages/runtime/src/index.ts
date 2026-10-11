@@ -7,6 +7,9 @@ export type {
 } from "./packs/types.js";
 export {
   packBaseUrl,
+  packCacheName,
+  resolvePackVersion,
+  isPackCacheUsable,
   fetchPackManifest,
   installContentPack,
   ensureRequiredPacks,
@@ -15,6 +18,7 @@ export {
   getPackEntryText,
   getPackEntryUrl,
 } from "./packs/client.js";
+export type { PackVersionResolution, PackVersionSource } from "./packs/client.js";
 export { sha256Hex, verifySha256 } from "./packs/hash.js";
 export type { ConnectivityStatus } from "./connectivity/types.js";
 export { getConnectivityStatus, subscribeConnectivity } from "./connectivity/connectivity.js";

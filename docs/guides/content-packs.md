@@ -69,6 +69,29 @@ Apps declare `requiredPackIds` on their `SiteDefinition`.
 The application must not present its product UI until required base packs are active.
 Use `PackReadyGate` from `@platform/runtime` / `@songara/pwa-base`.
 
+### Offline reload after a successful install
+
+Version resolution prefers `/packs/<appId>/<packId>/current.json` while online.
+If that fetch fails because the network is unavailable (offline reload / transient
+outage) and an **active** pack for the same `appId` is already recorded in IndexedDB
+with a usable Cache Storage install, Ready confirms that installed version instead of
+falling back to the static default `1.0.0` (which would force a failed re-download).
+
+First launch with no installed pack still fails clearly when the network cannot
+resolve `current.json`. Online updates via a newer `current.json` are unchanged.
+
+#### Manual browser check (offline reload)
+
+1. Serve an app that gates on a required pack (e.g. Birthday with `/packs/...` mounted).
+2. Open the app online; wait until the Ready gate clears and product UI appears.
+3. In DevTools → Application, confirm Cache Storage has `platform-pack:<packId>@<version>`
+   and IndexedDB `platform-runtime-packs` has an active record for that pack.
+4. DevTools → Network → Offline (or equivalent), then reload.
+5. Expect: Ready completes and product UI returns **without** “Failed to fetch” /
+   “could not finish installing”.
+6. Optional: clear the pack Cache Storage entry while leaving IndexedDB intact, reload
+   offline — Ready should fail clearly (unusable install, cannot re-download).
+
 ## Chrome capabilities
 
 Immersive apps declare layout preferences as capability tags on `SiteDefinition`
